@@ -1,0 +1,11 @@
+name: LegacyCraft
+main: com.pwnion.legacycraft.LegacyCraft
+version: 1.0
+api-version: 1.14
+commands:
+    class:
+        usage: /<command>
+    pillar:
+        usage: /<command>
+    test:
+        usage: /<command>
