@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="spigot-api-1.14.4-R0.1-20191204.234046-88-shaded.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
