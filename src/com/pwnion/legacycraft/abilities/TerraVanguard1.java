@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
@@ -59,18 +60,21 @@ public class TerraVanguard1 {
 		BukkitTask particleTask = Bukkit.getServer().getScheduler().runTaskTimer(LegacyCraft.getPlugin(), new Runnable() {
             @Override
             public void run() {
-            	ArrayList<Block> blocks = new Square(p.getLocation().getBlock()).get(3);
+            	ArrayList<Block> blocks = new Square(p.getLocation().getBlock()).get(4);
         		for(Block block : blocks) {
         			p.getWorld().spawnParticle(Particle.BLOCK_DUST, block.getLocation(), 2, 0, 0, 0, 1000, block.getRelative(BlockFace.DOWN, 1).getBlockData(), true);
+        			
+        			p.getWorld().playSound(block.getRelative(BlockFace.DOWN).getLocation(), block.getRelative(BlockFace.DOWN).getSoundGroup().getPlaceSound(), SoundCategory.BLOCKS, 0.2f, 1f);
         		}
             }
         }, 0, 0);
 		
-		ArrayList<Block> checkSafetyBlocks = new RectangularPrism(p.getLocation().getBlock()).get(radius + 1, 10);
-		for(Entity e : p.getNearbyEntities(5, 5, 10)) {
+		ArrayList<Block> checkSafetyBlocks = new RectangularPrism(p.getLocation().getBlock()).get(radius + 3, 10);
+		for(Entity e : p.getNearbyEntities(7, 7, 10)) {
 			if(checkSafetyBlocks.contains(e.getLocation().getBlock())) {
-				Vector launch = e.getLocation().toVector().subtract(p.getLocation().toVector());
-				launch.add(new Vector(-launch.getX() * 2, 1, -launch.getZ() * 2));
+				Vector launch = p.getLocation().toVector().subtract(e.getLocation().toVector());
+				launch.multiply(-((1 / launch.length()) * 1.5));
+				launch.setY(0.8);
 				
 				e.setVelocity(e.getVelocity().add(launch));
 			}
@@ -93,9 +97,13 @@ public class TerraVanguard1 {
 							createdBlocks.add(block);
 							block.setType(groundBlocks.get(j).getType(), true);
 							
+							p.getWorld().playSound(block.getLocation(), block.getSoundGroup().getPlaceSound(), SoundCategory.BLOCKS, 0.2f, 1f);
+
 							Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 							    public void run() {
 							    	if(!notSolidBlocks.contains(block) || !existingBlocks.contains(block)) {
+							    		p.getWorld().playSound(block.getLocation(), block.getSoundGroup().getBreakSound(), SoundCategory.BLOCKS, 0.2f, 1f);
+							    		
 							    		block.setType(Material.AIR, true);
 							    	}
 							    	
@@ -110,6 +118,7 @@ public class TerraVanguard1 {
 			    	switch(iThread) {
 			    	case 0:
 			    		p.setVelocity(new Vector(0, 1.5, 0));
+			    		particleTask.cancel();
 			    		break;
 			    	case 9:
 			    		if(createdBlocks.contains(p.getLocation().getBlock())) {
@@ -124,7 +133,6 @@ public class TerraVanguard1 {
 			    		p.setFallDistance(0);
 			    		
 			    		velocityTask.cancel();
-			    		particleTask.cancel();
 			    		break;
 			    	}
 			    }
