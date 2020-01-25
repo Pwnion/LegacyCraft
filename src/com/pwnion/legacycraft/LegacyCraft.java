@@ -12,6 +12,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import com.pwnion.legacycraft.commands.OnCommand;
+import com.pwnion.legacycraft.listeners.EntityDamage;
+import com.pwnion.legacycraft.listeners.InventoryClick;
+import com.pwnion.legacycraft.listeners.PlayerInteract;
+import com.pwnion.legacycraft.listeners.PlayerJoin;
+import com.pwnion.legacycraft.listeners.PlayerMove;
+import com.pwnion.legacycraft.listeners.PlayerToggleFlight;
  
 public class LegacyCraft extends JavaPlugin {
 
@@ -35,15 +43,15 @@ public class LegacyCraft extends JavaPlugin {
 		registerEvents(this,
 			new PlayerJoin(),
 			new PlayerMove(),
-			new PlayerJump(),
-			new PlayerFallDamage(),
-			new GUIFunctionality(),
+			new PlayerToggleFlight(),
+			new EntityDamage(),
+			new InventoryClick(),
 			new PlayerInteract()
 		);
 		
-		this.getCommand("class").setExecutor((CommandExecutor) new ClassCommand());
-		this.getCommand("pillar").setExecutor((CommandExecutor) new ClassCommand());
-		this.getCommand("test").setExecutor((CommandExecutor) new ClassCommand());
+		this.getCommand("class").setExecutor((CommandExecutor) new OnCommand());
+		this.getCommand("pillar").setExecutor((CommandExecutor) new OnCommand());
+		this.getCommand("test").setExecutor((CommandExecutor) new OnCommand());
 		
 		//Creates new instance of a BukkitRunnable, within which all code runs every game tick
 		new BukkitRunnable() {

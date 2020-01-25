@@ -17,7 +17,7 @@ public class ConfigAccessor {
 	private FileConfiguration customConfig = null;
 	private File customConfigFile = null;
 	
-	ConfigAccessor(String fileName) {
+	public ConfigAccessor(String fileName) {
 		this.customFileName = fileName;
 	}
 	
