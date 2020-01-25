@@ -8,6 +8,8 @@ import org.bukkit.potion.PotionEffectType;
 import com.pwnion.legacycraft.LegacyCraft;
 
 import java.util.UUID;
+
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 public class PlayerMove implements Listener {
@@ -24,7 +26,7 @@ public class PlayerMove implements Listener {
 					p.removePotionEffect(PotionEffectType.SLOW_FALLING);
 				}
 			}
-			if(!p.getAllowFlight() && p.getFallDistance() <= 6 && !LegacyCraft.getClass(playerUUID).equals("")) p.setAllowFlight(true);
+			if(p.getGameMode().equals(GameMode.ADVENTURE) && !p.getAllowFlight() && !LegacyCraft.getClass(playerUUID).equals("")) p.setAllowFlight(true);
 		}
 	}
 }

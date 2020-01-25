@@ -115,6 +115,28 @@ public class TerraVanguard1 {
 						}
 			    	}
 			    	
+			    	for(Entity e : p.getNearbyEntities(4, 4, 12)) {
+			    		if(createdBlocks.contains(e.getLocation().getBlock()) && !e.getUniqueId().equals(p.getUniqueId())) {
+			    			for(int i = 0; i < 10; i++) {
+			    				ArrayList<Block> checkSafetyBlocks = new RectangularPrism(e.getLocation().getBlock()).get(radius + i, i + 2);
+			    				for(Block block : checkSafetyBlocks) {
+			    					boolean safe = true;
+			    					for(Block surroundingBlock : new RectangularPrism(block).get(7, 2)) {
+			    						if(surroundingBlock.getType().isSolid()) {
+			    							safe = false;
+			    							break;
+			    						}
+			    					}
+			    					if(safe) {
+			    						e.teleport(block.getLocation());
+			    						i = 10;
+			    						break;
+			    					}
+			    				}
+			    			}
+			    		}
+			    	}
+			    	
 			    	switch(iThread) {
 			    	case 0:
 			    		p.setVelocity(new Vector(0, 1.5, 0));
