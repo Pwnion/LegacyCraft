@@ -31,7 +31,7 @@ public class OnCommand implements CommandExecutor {
 				cs.sendMessage(ChatColor.RED + "You do not have access to that command.");
 			}
 		} else if(lbl.equalsIgnoreCase("pillar")) {
-			p.sendMessage(new TerraVanguard1(p).activate(3));
+			p.sendMessage(new TerraVanguard1(p).activate(2));
 		} else if(lbl.equalsIgnoreCase("test")) {
 			Point.fromEntityInFacingDir(p, 7, 5).getBlock().setType(Material.GLOWSTONE);
 		}

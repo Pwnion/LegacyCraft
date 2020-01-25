@@ -25,7 +25,7 @@ import com.pwnion.legacycraft.abilities.targets.Point;
 public class PlayerToggleFlight implements Listener {
 	
 	@EventHandler
-	public void onFlightAttempt(PlayerToggleFlightEvent e) {
+	public void onPlayerToggleFlight(PlayerToggleFlightEvent e) {
 		Player p = e.getPlayer();
 		UUID playerUUID = p.getUniqueId();
 
@@ -78,7 +78,7 @@ public class PlayerToggleFlight implements Listener {
 							maxJumps = 2;
 							break;
 						case 40:
-							Location targetLoc = Point.fromEntityInFacingDir(p, 7, 5);
+							Location targetLoc = Point.fromEntityInFacingDir(p, 6, 4);
 							
 							ArrayList<Vector> dirs = new ArrayList<Vector>() {
 								private static final long serialVersionUID = 1L;
@@ -185,7 +185,7 @@ public class PlayerToggleFlight implements Listener {
 								}
 							}
 							
-							vMod = 0.4f;
+							vMod = 0.5f;
 							vModY = 0.4f;
 							maxJumps = 2;
 							break;

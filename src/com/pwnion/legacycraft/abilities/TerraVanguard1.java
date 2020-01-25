@@ -6,8 +6,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
@@ -23,7 +25,7 @@ public class TerraVanguard1 {
 		this.p = p;
 	}
 	
-	final int height = 20;
+	final int height = 10;
 	public String activate(int radius) {
 		Block startingBlock = p.getLocation().getBlock();
 		
@@ -32,8 +34,7 @@ public class TerraVanguard1 {
 		}
 		
 		ArrayList<Block> safetyRectangularPrism = new RectangularPrism(p.getLocation().getBlock().getRelative(BlockFace.UP, 1)).get(0, 4);
-		safetyRectangularPrism.addAll(new RectangularPrism(p.getLocation().getBlock().getRelative(BlockFace.UP, 6)).get(1, 20));
-		safetyRectangularPrism.addAll(new RectangularPrism(p.getLocation().getBlock().getRelative(BlockFace.UP, 27)).get(2, 9));
+		safetyRectangularPrism.addAll(new RectangularPrism(p.getLocation().getBlock().getRelative(BlockFace.UP, 6)).get(1, 10));
 		for(Block block : safetyRectangularPrism) {
 			if(block.getType().isSolid()) {
 				return ChatColor.RED + "Surrounding Area not Clear!";
@@ -46,7 +47,6 @@ public class TerraVanguard1 {
 		ArrayList<Block> notSolidBlocks = new ArrayList<Block>();
 		ArrayList<Block> existingBlocks = new ArrayList<Block>();
 		
-		p.setVelocity(new Vector(0, 2.6, 0));
 		p.setAllowFlight(false);
 		
 		BukkitTask velocityTask = Bukkit.getServer().getScheduler().runTaskTimer(LegacyCraft.getPlugin(), new Runnable() {
@@ -55,6 +55,26 @@ public class TerraVanguard1 {
             	p.setVelocity(new Vector(-p.getVelocity().getX(), p.getVelocity().getY(), -p.getVelocity().getZ()));
             }
         }, 0, 0);
+		
+		BukkitTask particleTask = Bukkit.getServer().getScheduler().runTaskTimer(LegacyCraft.getPlugin(), new Runnable() {
+            @Override
+            public void run() {
+            	ArrayList<Block> blocks = new Square(p.getLocation().getBlock()).get(3);
+        		for(Block block : blocks) {
+        			p.getWorld().spawnParticle(Particle.BLOCK_DUST, block.getLocation(), 2, 0, 0, 0, 1000, block.getRelative(BlockFace.DOWN, 1).getBlockData(), true);
+        		}
+            }
+        }, 0, 0);
+		
+		ArrayList<Block> checkSafetyBlocks = new RectangularPrism(p.getLocation().getBlock()).get(radius + 1, 10);
+		for(Entity e : p.getNearbyEntities(5, 5, 10)) {
+			if(checkSafetyBlocks.contains(e.getLocation().getBlock())) {
+				Vector launch = e.getLocation().toVector().subtract(p.getLocation().toVector());
+				launch.add(new Vector(-launch.getX() * 2, 1, -launch.getZ() * 2));
+				
+				e.setVelocity(e.getVelocity().add(launch));
+			}
+		}
 		
 		final int squareSize = rectangularPrism.size() / height;
 		for(int i = 0; i < height; i++) {
@@ -83,37 +103,32 @@ public class TerraVanguard1 {
 							    		p.setFallDistance(0);
 							    	}
 							    }
-							}, 200 + ((20 - (iThread + 1)) * 4));
+							}, 160 + ((10 - (iThread + 1)) * 4));
 						}
 			    	}
 			    	
-			    	for(Player player : p.getWorld().getPlayers()) {
-			    		if(createdBlocks.contains(player.getLocation().getBlock()) && !player.equals(p)) {
-			    			for(int i = 0; i < 10; i++) {
-			    				ArrayList<Block> checkSafetyBlocks = new RectangularPrism(p.getLocation().getBlock()).get(radius + i, 2 + i);
-			    				for(Block block : checkSafetyBlocks) {
-			    					if(!block.getType().isSolid() && !block.getRelative(BlockFace.UP, 1).getType().isSolid()) {
-			    						player.teleport(block.getLocation());
-			    						i = 10;
-			    						break;
-			    					}
-			    				}
-			    			}
-			    		}
-			    	}
-			    	
-			    	if((iThread + 1) * 2 == 40) {
+			    	switch(iThread) {
+			    	case 0:
+			    		p.setVelocity(new Vector(0, 1.5, 0));
+			    		break;
+			    	case 9:
 			    		if(createdBlocks.contains(p.getLocation().getBlock())) {
 			    			Location loc = startingBlock.getLocation();
-			    			loc.add(0, 20, 0);
+			    			loc.add(0, 10, 0);
+			    			loc.setPitch(p.getLocation().getPitch());
+			    			loc.setYaw(p.getLocation().getYaw());
+			    			
 			    			p.teleport(loc);
 				    	}
 			    		
 			    		p.setFallDistance(0);
+			    		
 			    		velocityTask.cancel();
+			    		particleTask.cancel();
+			    		break;
 			    	}
 			    }
-			}, (iThread + 1) * 2);
+			}, 20 + (iThread + 1) * 2);
 		}
 		
 		return ChatColor.DARK_GREEN + "Casted Earth Pillar!";

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.UUID;
 
+import org.bukkit.GameMode;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -26,6 +27,7 @@ public class PlayerJoin implements Listener {
 		LegacyCraft.setJumpCounter(playerUUID, 0);
 		LegacyCraft.setFallDistance(playerUUID, 0);
 		LegacyCraft.setPlayerInventorySave(playerUUID, new ArrayList<String>(Arrays.asList("", "")));
+		LegacyCraft.setPlayerAdventureMode(playerUUID, p.getGameMode().equals(GameMode.ADVENTURE) ? true : false);
 		
 		ConfigAccessor playerData = new ConfigAccessor("player-data.yml");
 		FileConfiguration playerDataFile = playerData.getCustomConfig();

@@ -16,6 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.pwnion.legacycraft.commands.OnCommand;
 import com.pwnion.legacycraft.listeners.EntityDamage;
 import com.pwnion.legacycraft.listeners.InventoryClick;
+import com.pwnion.legacycraft.listeners.PlayerGameModeChange;
 import com.pwnion.legacycraft.listeners.PlayerInteract;
 import com.pwnion.legacycraft.listeners.PlayerJoin;
 import com.pwnion.legacycraft.listeners.PlayerMove;
@@ -28,9 +29,10 @@ public class LegacyCraft extends JavaPlugin {
 	private static Plugin plugin;
 	private static Map<UUID, Integer> playerJumpCounters = new HashMap<>();
 	private static Map<UUID, Integer> playerJumpSlot = new HashMap<>();
-	private static Map<UUID, String> playerClass = new HashMap<>(); //0 = None, 1 = Striker, 2 = Vanguard, 3 = Rogue, 4 = Shaman
+	private static Map<UUID, String> playerClass = new HashMap<>();
 	private static Map<UUID, Float> playerFallDistance = new HashMap<>();
 	private static Map<UUID, ArrayList<String>> playerInventorySave = new HashMap<>();
+	private static Map<UUID, Boolean> playerAdventureMode = new HashMap<>();
 
 	//Called when the plugin is enabled
 	public void onEnable() {
@@ -46,7 +48,8 @@ public class LegacyCraft extends JavaPlugin {
 			new PlayerToggleFlight(),
 			new EntityDamage(),
 			new InventoryClick(),
-			new PlayerInteract()
+			new PlayerInteract(),
+			new PlayerGameModeChange()
 		);
 		
 		this.getCommand("class").setExecutor((CommandExecutor) new OnCommand());
@@ -139,5 +142,13 @@ public class LegacyCraft extends JavaPlugin {
 	
 	public static void setPlayerInventorySave(UUID playerUUID, ArrayList<String> list) {
 		playerInventorySave.put(playerUUID, list);
+	}
+	
+	public static boolean getPlayerAdventureMode(UUID playerUUID) {
+		return playerAdventureMode.get(playerUUID);
+	}
+	
+	public static void setPlayerAdventureMode(UUID playerUUID, boolean isInAdventureMode) {
+		playerAdventureMode.put(playerUUID, isInAdventureMode);
 	}
 }

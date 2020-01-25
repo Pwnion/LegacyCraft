@@ -14,7 +14,7 @@ import com.pwnion.legacycraft.LegacyCraft;
 public class EntityDamage implements Listener {
 	
 	@EventHandler
-	public void onPlayerTakingFallDamage(EntityDamageEvent e) {
+	public void onEntityDamage(EntityDamageEvent e) {
 		Entity entity = e.getEntity();
 		if(e.getEntityType() == EntityType.PLAYER && e.getCause() == DamageCause.FALL) {
 			Player p = (Player) entity;
