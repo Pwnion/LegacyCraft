@@ -1,9 +1,6 @@
 package com.pwnion.legacycraft;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
@@ -16,61 +13,78 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.pwnion.legacycraft.commands.OnCommand;
 import com.pwnion.legacycraft.listeners.EntityDamage;
 import com.pwnion.legacycraft.listeners.InventoryClick;
-import com.pwnion.legacycraft.listeners.PlayerInteract;
+import com.pwnion.legacycraft.listeners.PlayerGameModeChange;
 import com.pwnion.legacycraft.listeners.PlayerJoin;
 import com.pwnion.legacycraft.listeners.PlayerMove;
+import com.pwnion.legacycraft.listeners.PlayerQuit;
 import com.pwnion.legacycraft.listeners.PlayerToggleFlight;
  
 public class LegacyCraft extends JavaPlugin {
 
 	//Declare lots of variables that can be accessed by this classes getter and setter methods
 	//These variables facilitate the storing of values used to track players actions
+	private static final HashMap<UUID, HashMap<PlayerData, Object>> playerData = new HashMap<UUID, HashMap<PlayerData, Object>>();
 	private static Plugin plugin;
-	private static Map<UUID, Integer> playerJumpCounters = new HashMap<>();
-	private static Map<UUID, Integer> playerJumpSlot = new HashMap<>();
-	private static Map<UUID, String> playerClass = new HashMap<>(); //0 = None, 1 = Striker, 2 = Vanguard, 3 = Rogue, 4 = Shaman
-	private static Map<UUID, Float> playerFallDistance = new HashMap<>();
-	private static Map<UUID, ArrayList<String>> playerInventorySave = new HashMap<>();
-
+	
+	//Makes registering events in onEnable() simpler and cleaner
+	private void registerEvents(Listener... listeners) {
+		for (Listener listener : listeners) {
+			Bukkit.getServer().getPluginManager().registerEvents(listener, this);
+		}
+	}
+	
+	//Makes registering commands in onEnable() simpler and cleaner
+	private void registerCommands(String... commands) {
+		for (String command : commands) {
+			this.getCommand(command).setExecutor((CommandExecutor) new OnCommand());
+		}
+	}
+	
 	//Called when the plugin is enabled
 	public void onEnable() {
 		plugin = this;
 		
+		//Create and populate config files if needed
 		saveDefaultConfig();
 		new ConfigAccessor("inventory-gui.yml").saveDefaultConfig();
 		new ConfigAccessor("player-data.yml").saveDefaultConfig();
+		new ConfigAccessor("player-data-template.yml").saveDefaultConfig();
 		
-		registerEvents(this,
+		//Register listeners
+		registerEvents(
 			new PlayerJoin(),
 			new PlayerMove(),
 			new PlayerToggleFlight(),
 			new EntityDamage(),
 			new InventoryClick(),
-			new PlayerInteract()
+			new PlayerGameModeChange(),
+			new PlayerQuit()
 		);
 		
-		this.getCommand("class").setExecutor((CommandExecutor) new OnCommand());
-		this.getCommand("pillar").setExecutor((CommandExecutor) new OnCommand());
-		this.getCommand("test").setExecutor((CommandExecutor) new OnCommand());
+		//Register commands
+		registerCommands(
+		    "legacycraft",
+		    "test"
+		);
 		
-		//Creates new instance of a BukkitRunnable, within which all code runs every game tick
+		//Runs the run() method once per game tick
 		new BukkitRunnable() {
             @Override
             public void run() {
             	for(Player p : Bukkit.getOnlinePlayers()) {
             		UUID playerUUID = p.getUniqueId();
             		
+            		//Handles instances where the player hadn't used all of their ability jumps,
+            		//but still must take fall damage
             		if(p.isOnGround()) {
-            			//Handles instances where the player hadn't used all of their ability jumps,
-                		//but still must take fall damage
-                		float fallDistanceLastTick = getFallDistance(playerUUID);
+            			float fallDistanceLastTick = (float) getPlayerData(playerUUID, PlayerData.FALL_DISTANCE);
                 		float fallDistance = p.getFallDistance();
                 		
                 		if(fallDistanceLastTick > 6 && fallDistance == 0 && p.getAllowFlight()) {
                 			p.damage((fallDistanceLastTick / 4f - 1.5f) * 2f);
                 		}
             		}
-            		setFallDistance(playerUUID, p.getFallDistance());
+            		setPlayerData(playerUUID, PlayerData.FALL_DISTANCE, p.getFallDistance());
             	}
             }
 		}.runTaskTimer(this, 0L, 0L);
@@ -82,62 +96,31 @@ public class LegacyCraft extends JavaPlugin {
 		plugin = null;
 	}
 	
-	//Makes registering events in onEnable() simpler and cleaner
-	public static void registerEvents(org.bukkit.plugin.Plugin plugin, Listener... listeners) {
-		for (Listener listener : listeners) {
-			Bukkit.getServer().getPluginManager().registerEvents(listener, plugin);
-		}
-	}
-	
 	/*
 	 * GETTERS AND SETTERS
 	 */
 	
-	public static Plugin getPlugin() {
+	public static final Plugin getPlugin() {
 		return plugin;
 	}
 	
-	public static int getJumpCounter(UUID playerUUID) {
-		return playerJumpCounters.get(playerUUID);
+	public static final HashMap<PlayerData, Object> getPlayerData(UUID playerUUID) {
+		return playerData.get(playerUUID);
 	}
 	
-	public static void setJumpCounter(UUID playerUUID, int jumpCounter) {
-		playerJumpCounters.put(playerUUID, jumpCounter);
+	public static final Object getPlayerData(UUID playerUUID, PlayerData data) {
+		return playerData.get(playerUUID).get(data);
 	}
 	
-	public static int getJumpSlot(UUID playerUUID) {
-		return playerJumpSlot.get(playerUUID);
+	public static final void setPlayerData(UUID playerUUID, HashMap<PlayerData, Object> data) {
+		playerData.put(playerUUID, data);
 	}
 	
-	public static void setJumpSlot(UUID playerUUID, int jumpSlot) {
-		playerJumpSlot.put(playerUUID, jumpSlot);
+	public static final void setPlayerData(UUID playerUUID, PlayerData data, Object obj) {
+		playerData.get(playerUUID).put(data, obj);
 	}
 	
-	public static String getClass(UUID playerUUID) {
-		return playerClass.get(playerUUID);
-	}
-	
-	public static void setClass(UUID playerUUID, String className) {
-		playerClass.put(playerUUID, className);
-	}
-	
-	public static float getFallDistance(UUID playerUUID) {
-		return playerFallDistance.get(playerUUID);
-	}
-	
-	public static void setFallDistance(UUID playerUUID, float fallDamage) {
-		playerFallDistance.put(playerUUID, fallDamage);
-	}
-	
-	public static List<String> getPlayerInventorySave(UUID playerUUID) {
-		return playerInventorySave.get(playerUUID);
-	}
-	
-	public static void setPlayerInventorySave(UUID playerUUID, int index, String value) {
-		playerInventorySave.get(playerUUID).set(index, value);
-	}
-	
-	public static void setPlayerInventorySave(UUID playerUUID, ArrayList<String> list) {
-		playerInventorySave.put(playerUUID, list);
+	public static final void removePlayerData(UUID playerUUID) {
+		playerData.remove(playerUUID);
 	}
 }

@@ -34,23 +34,8 @@ import com.pwnion.legacycraft.abilities.inventory.holders.VacuousVanguard;
 import com.pwnion.legacycraft.abilities.inventory.holders.WeaponEnhancements;
 
 public class InventoryCreator {
-	private final int size;
-	private final String title;
-	private final List<Integer> slots;
-	private final List<String> names;
-	private final List<Material> materials;
-	private final List<List<String>> descriptions;
-	
-	InventoryCreator(int size, String title, List<Integer> slots, List<String> names, List<Material> materials, List<List<String>> descriptions) {
-		this.size = size;
-		this.title = title;
-		this.slots = slots;
-		this.names = names;
-		this.materials = materials;
-		this.descriptions = descriptions;
-	}
-	
-	private ItemStack createItem(String name, Material material, List<String> desc) {
+	//Builds and returns an ItemStack based on the parameters
+	private static final ItemStack createItem(String name, Material material, List<String> desc) {
         final ItemStack itemStack = new ItemStack(material, 1);
         final ItemMeta itemMeta = itemStack.getItemMeta();
         
@@ -61,12 +46,13 @@ public class InventoryCreator {
         return itemStack;
     }
 	
-	Inventory getInv() {
+	//Builds and returns an inventory based on the parameters
+	public static final Inventory getInv(int size, String title, List<Integer> slots, List<String> names, List<Material> materials, List<List<String>> descriptions) {
 		Inventory inv;
 		InventoryHolder holder;
 		
 		switch(title) {
-		case "Select an Option":
+		case "Character Build Menu":
 			holder = new SelectOption();
 			break;
 		case "Weapon Enhancements":

@@ -1,40 +1,51 @@
 package com.pwnion.legacycraft.commands;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.pwnion.legacycraft.abilities.TerraVanguard1;
-import com.pwnion.legacycraft.abilities.inventory.InventoryFromFile;
+import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
+import com.pwnion.legacycraft.abilities.proficiencies.TerraVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.targets.Point;
 
 public class OnCommand implements CommandExecutor {
+	private static String deniedMsg = ChatColor.DARK_RED + "I'm sorry, but you do not have permission to perform this command.";
 	
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String lbl, String[] args) {
 		Player p;
 		Point ep;
+		//Ensure the command sender is a player
 		if(cs instanceof Player) {
 			p = (Player) cs;
 		} else {
-			//If a player didn't execute the /class command, return false
 			return false; 
 		}
-
-		if(lbl.equalsIgnoreCase("class")) {
-			if(cs.hasPermission("destinymc.class")) {
-				p.openInventory(new InventoryFromFile("main", "inventory-gui.yml").inventory);
-			} else {
-				cs.sendMessage(ChatColor.RED + "You do not have access to that command.");
+		
+		//Manage legacy craft commands
+		if(p.hasPermission("legacycraft.op")) {
+			if(lbl.equals("legacycraft") || cmd.getAliases().contains(lbl)) {
+				if(args.length == 0) {
+					p.sendMessage(ChatColor.DARK_RED + "Try being more specific...");
+					return false;
+				} else {
+					switch(args[0]) {
+					case "class":
+						CharacterBuildMenuInv.load(p);
+						break;
+					default:
+						return false;
+					}
+				}
+			} else if(lbl.equals("test")) {
+				p.sendMessage(TerraVanguardProficiency1.activate(p, 2));
 			}
-		} else if(lbl.equalsIgnoreCase("pillar")) {
-			p.sendMessage(new TerraVanguard1(p).activate(3));
-		} else if(lbl.equalsIgnoreCase("test")) {
-			Point.fromEntityInFacingDir(p, 7, 5).getBlock().setType(Material.GLOWSTONE);
+			return true;
+		} else {
+			p.sendMessage(deniedMsg);
+			return false;
 		}
-		return true;
 	}
 }

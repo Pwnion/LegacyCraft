@@ -1,6 +1,7 @@
 package com.pwnion.legacycraft.listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -14,22 +15,25 @@ import com.pwnion.legacycraft.LegacyCraft;
 public class EntityDamage implements Listener {
 	
 	@EventHandler
-	public void onPlayerTakingFallDamage(EntityDamageEvent e) {
+	public void onEntityDamage(EntityDamageEvent e) {
 		Entity entity = e.getEntity();
-		if(e.getEntityType() == EntityType.PLAYER && e.getCause() == DamageCause.FALL) {
+		if(e.getEntityType().equals(EntityType.PLAYER) && e.getCause().equals(DamageCause.FALL)) {
 			Player p = (Player) entity;
 			
-			//Halves normal fall damage
-			e.setDamage((p.getFallDistance() / 4f - 1.5f));
+			//Divides normal fall damage by 4
+			e.setDamage(e.getDamage() / 4);
 			
 			//Schedules flight to be enabled one tick after taking fall damage
-			Bukkit.getScheduler().runTask(LegacyCraft.getPlugin(), new Runnable() {
+			if(p.getGameMode().equals(GameMode.ADVENTURE)) {
+				Bukkit.getScheduler().runTask(LegacyCraft.getPlugin(), new Runnable() {
 
-	            @Override
-	            public void run() {
-	                p.setAllowFlight(true);
-	            }
-	        });
+		            @Override
+		            public void run() {
+		                p.setAllowFlight(true);
+		            }
+		        });
+			}
+			
 		}	
 	}
 }

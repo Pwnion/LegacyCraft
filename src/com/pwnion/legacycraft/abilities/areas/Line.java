@@ -6,13 +6,8 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
 public class Line {
-	private Block block;
-	
-	public Line(Block block) {
-		this.block = block;
-	}
-	
-	public ArrayList<Block> get(BlockFace dir, int length, boolean centred) {
+	//Returns a list of blocks that represent a line
+	public static final ArrayList<Block> get(Block block, BlockFace dir, int length, boolean centred) {
 		if(length % 2 == 0 && centred) return null;
 		
 		ArrayList<Block> line = new ArrayList<Block>(length);
