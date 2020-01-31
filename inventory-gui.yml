@@ -1,6 +1,6 @@
-main:
+CHARACTER_BUILD_MENU:
     size: 5
-    title: "Select an Option"
+    title: "Character Build Menu"
     slots:
       - 1
       - 3
@@ -15,7 +15,7 @@ main:
           - Click to Equip/Edit a Class
         2:
           - Click Equip/View Weapon Enhancements
-weapon-enhancements:
+WEAPON_ENHANCEMENTS:
     size: 54
     title: Weapon Enhancements
     slots:
@@ -27,7 +27,7 @@ weapon-enhancements:
     descriptions:
         1:
           - Click for the Previous Inventory Menu
-class:
+SELECT_A_CLASS:
     size: 27
     title: "Select a Class"
     slots:
@@ -71,7 +71,7 @@ class:
           - 
           - Left-Click to Equip
           - Right-Click to Edit
-aspect:
+SELECT_AN_ASPECT:
     size: 27
     title: "Select an Aspect"
     slots:
@@ -115,7 +115,7 @@ aspect:
           - 
           - Left-Click to Equip
           - Right-Click to Edit
-ignis-striker:
+IGNIS_STRIKER:
     size: 45
     title: Ignis Striker
     slots:
@@ -186,7 +186,7 @@ ignis-striker:
           - (Placeholder)
         11:
           - (Placeholder)
-terra-striker:
+TERRA_STRIKER:
     size: 45
     title: Terra Striker
     slots:
@@ -257,7 +257,7 @@ terra-striker:
           - (Placeholder)
         11:
           - (Placeholder)
-vacuous-striker:
+VACUOUS_STRIKER:
     size: 45
     title: Vacuous Striker
     slots:
@@ -328,7 +328,7 @@ vacuous-striker:
           - (Placeholder)
         11:
           - (Placeholder)
-arctic-striker:
+ARCTIC_STRIKER:
     size: 45
     title: Arctic Striker
     slots:
@@ -399,7 +399,7 @@ arctic-striker:
           - (Placeholder)
         11:
           - (Placeholder)
-ignis-vanguard:
+IGNIS_VANGUARD:
     size: 45
     title: Ignis Vanguard
     slots:
@@ -470,7 +470,7 @@ ignis-vanguard:
           - (Placeholder)
         11:
           - (Placeholder)
-terra-vanguard:
+TERRA_VANGUARD:
     size: 45
     title: Terra Vanguard
     slots:
@@ -541,7 +541,7 @@ terra-vanguard:
           - (Placeholder)
         11:
           - (Placeholder)
-vacuous-vanguard:
+VACUOUS_VANGUARD:
     size: 45
     title: Vacuous Vanguard
     slots:
@@ -612,7 +612,7 @@ vacuous-vanguard:
           - (Placeholder)
         11:
           - (Placeholder)
-arctic-vanguard:
+ARCTIC_VANGUARD:
     size: 45
     title: Arctic Vanguard
     slots:
@@ -683,7 +683,7 @@ arctic-vanguard:
           - (Placeholder)
         11:
           - (Placeholder)
-ignis-rogue:
+IGNIS_ROGUE:
     size: 45
     title: Ignis Rogue
     slots:
@@ -754,7 +754,7 @@ ignis-rogue:
           - (Placeholder)
         11:
           - (Placeholder)
-terra-rogue:
+TERRA_ROGUE:
     size: 45
     title: Terra Rogue
     slots:
@@ -825,7 +825,7 @@ terra-rogue:
           - (Placeholder)
         11:
           - (Placeholder)
-vacuous-rogue:
+VACUOUS_ROGUE:
     size: 45
     title: Vacuous Rogue
     slots:
@@ -896,7 +896,7 @@ vacuous-rogue:
           - (Placeholder)
         11:
           - (Placeholder)
-arctic-rogue:
+ARCTIC_ROGUE:
     size: 45
     title: Arctic Rogue
     slots:
@@ -967,7 +967,7 @@ arctic-rogue:
           - (Placeholder)
         11:
           - (Placeholder)
-ignis-shaman:
+IGNIS_SHAMAN:
     size: 45
     title: Ignis Shaman
     slots:
@@ -1038,7 +1038,7 @@ ignis-shaman:
           - (Placeholder)
         11:
           - (Placeholder)
-terra-shaman:
+TERRA_SHAMAN:
     size: 45
     title: Terra Shaman
     slots:
@@ -1109,7 +1109,7 @@ terra-shaman:
           - (Placeholder)
         11:
           - (Placeholder)
-vacuous-shaman:
+VACUOUS_SHAMAN:
     size: 45
     title: Vacuous Shaman
     slots:
@@ -1180,7 +1180,7 @@ vacuous-shaman:
           - (Placeholder)
         11:
           - (Placeholder)
-arctic-shaman:
+ARCTIC_SHAMAN:
     size: 45
     title: Arctic Shaman
     slots:

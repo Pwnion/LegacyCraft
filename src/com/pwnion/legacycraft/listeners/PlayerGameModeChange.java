@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 
 import com.pwnion.legacycraft.LegacyCraft;
+import com.pwnion.legacycraft.PlayerData;
 
 public class PlayerGameModeChange implements Listener {
 	
@@ -18,13 +19,12 @@ public class PlayerGameModeChange implements Listener {
 		UUID playerUUID = p.getUniqueId();
 		GameMode gm = e.getNewGameMode();
 		
-		boolean wasInAdventure = LegacyCraft.getPlayerAdventureMode(playerUUID);
+		//Handles switching between adventure mode and other game modes
+		boolean wasInAdventure = (boolean) LegacyCraft.getPlayerData(playerUUID, PlayerData.ADVENTURE_MODE);
 		if(!wasInAdventure && gm.equals(GameMode.ADVENTURE)) {
-			LegacyCraft.setPlayerAdventureMode(playerUUID, true);
-			
-			
+			LegacyCraft.setPlayerData(playerUUID, PlayerData.ADVENTURE_MODE, true);
 		} else if(wasInAdventure) {
-			LegacyCraft.setPlayerAdventureMode(playerUUID, false);
+			LegacyCraft.setPlayerData(playerUUID, PlayerData.ADVENTURE_MODE, false);
 		}
 	}
 }

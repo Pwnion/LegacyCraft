@@ -4,8 +4,9 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
-public abstract class Point {
-	public static Location fromEntityInFacingDir(Entity e, int distance, int heightMod) {
+public class Point {
+	//Returns a location relative to the direction an entity is facing and the given parameters
+	public static final Location fromEntityInFacingDir(Entity e, int distance, int heightMod) {
 		float yaw = e.getLocation().getYaw();
 		yaw = (yaw < 0) ? (yaw + 360) : (yaw == 360) ? 0 : yaw;
 		

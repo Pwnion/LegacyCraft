@@ -1,0 +1,258 @@
+equipped:
+  CLASS: 'NONE'
+STRIKER:
+  ASPECT: 'NONE'
+  aptitudes:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  jumps:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+VANGUARD:
+  ASPECT: 'NONE'
+  aptitudes:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  jumps:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+ROGUE:
+  ASPECT: 'NONE'
+  aptitudes:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  jumps:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+SHAMAN:
+  ASPECT: 'NONE'
+  aptitudes:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  jumps:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+IGNIS_STRIKER:
+  proficiencies:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  masteries:
+    ONE:
+      unlocked: false
+      equipped: false
+TERRA_STRIKER:
+  proficiencies:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  masteries:
+    ONE:
+      unlocked: false
+      equipped: false
+VACUOUS_STRIKER:
+  proficiencies:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  masteries:
+    ONE:
+      unlocked: false
+      equipped: false
+ARCTIC_STRIKER:
+  proficiencies:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  masteries:
+    ONE:
+      unlocked: false
+      equipped: false
+IGNIS_VANGUARD:
+  proficiencies:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  masteries:
+    ONE:
+      unlocked: false
+      equipped: false
+TERRA_VANGUARD:
+  proficiencies:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  masteries:
+    ONE:
+      unlocked: false
+      equipped: false
+VACUOUS_VANGUARD:
+  proficiencies:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  masteries:
+    ONE:
+      unlocked: false
+      equipped: false
+ARCTIC_VANGUARD:
+  proficiencies:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  masteries:
+    ONE:
+      unlocked: false
+      equipped: false
+IGNIS_ROGUE:
+  proficiencies:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  masteries:
+    ONE:
+      unlocked: false
+      equipped: false
+TERRA_ROGUE:
+  proficiencies:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  masteries:
+    ONE:
+      unlocked: false
+      equipped: false
+VACUOUS_ROGUE:
+  proficiencies:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  masteries:
+    ONE:
+      unlocked: false
+      equipped: false
+ARCTIC_ROGUE:
+  proficiencies:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  masteries:
+    ONE:
+      unlocked: false
+      equipped: false
+IGNIS_SHAMAN:
+  proficiencies:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  masteries:
+    ONE:
+      unlocked: false
+      equipped: false
+TERRA_SHAMAN:
+  proficiencies:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  masteries:
+    ONE:
+      unlocked: false
+      equipped: false
+VACUOUS_SHAMAN:
+  proficiencies:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  masteries:
+    ONE:
+      unlocked: false
+      equipped: false
+ARCTIC_SHAMAN:
+  proficiencies:
+    ONE:
+      unlocked: false
+      equipped: false
+    TWO:
+      unlocked: false
+      equipped: false
+  masteries:
+    ONE:
+      unlocked: false
+      equipped: false

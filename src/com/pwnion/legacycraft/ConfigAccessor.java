@@ -7,10 +7,12 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
+//Class for accessing yml files
 public class ConfigAccessor {
 	private String customFileName;
 	private final Plugin plugin = LegacyCraft.getPlugin();
@@ -52,6 +54,10 @@ public class ConfigAccessor {
 	    }
 	    
 	    return customConfig;
+	}
+	
+	public ConfigurationSection getRoot() {
+		return getCustomConfig().getRoot();
 	}
 	
 	public void saveCustomConfig() {

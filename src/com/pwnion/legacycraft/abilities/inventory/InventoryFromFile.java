@@ -11,15 +11,8 @@ import org.bukkit.inventory.Inventory;
 import com.pwnion.legacycraft.ConfigAccessor;
 
 public class InventoryFromFile {
-	final int size;
-	final String title;
-	final List<Integer> slots;
-	final List<String> names;
-	final List<Material> materials;
-	final List<List<String>> descriptions;
-	public final Inventory inventory;
-	
-	private List<Material> stringsToMaterials(List<String> stringList) {
+	//Converts a given list of Strings to a list of Materials
+	private static final List<Material> stringsToMaterials(List<String> stringList) {
 		List<Material> materialList = new ArrayList<>();
 		for(String str : stringList) {
 			materialList.add(Material.getMaterial(str));
@@ -27,7 +20,8 @@ public class InventoryFromFile {
 		return materialList;
 	}
 	
-	private List<List<String>> getTwoBranches(String parentNode, ConfigurationSection targetCS) {
+	//Returns a list of a list of strings after going two layers deep into a yml file relative to a given parent node
+	private static final List<List<String>> getTwoBranches(String parentNode, ConfigurationSection targetCS) {
 		List<List<String>> returnList = new ArrayList<>();
 		ConfigurationSection section = targetCS.getConfigurationSection(parentNode);
 		Set<String> sectionKeys = section.getKeys(false);
@@ -35,15 +29,17 @@ public class InventoryFromFile {
 		return returnList;
 	}
 	
-	public InventoryFromFile(String targetRootKey, String targetFile) {
-		ConfigurationSection targetCS = new ConfigAccessor(targetFile).getCustomConfig().getConfigurationSection(targetRootKey);
+	//Returns an inventory based on the parameters given
+	public static final Inventory get(InvName invToOpen, String targetFile) {
+		ConfigurationSection targetCS = new ConfigAccessor(targetFile).getCustomConfig().getConfigurationSection(invToOpen.toString());
 		
-		this.size = targetCS.getInt("size");
-		this.title = targetCS.getString("title");
-		this.slots = targetCS.getIntegerList("slots");
-		this.names = targetCS.getStringList("names");
-		this.materials = stringsToMaterials(targetCS.getStringList("materials"));
-		this.descriptions = getTwoBranches("descriptions", targetCS);
-		this.inventory = new InventoryCreator(size, title, slots, names, materials, descriptions).getInv();
+		return InventoryCreator.getInv(
+			targetCS.getInt("size"),
+			targetCS.getString("title"),
+			targetCS.getIntegerList("slots"),
+			targetCS.getStringList("names"),
+			stringsToMaterials(targetCS.getStringList("materials")),
+			getTwoBranches("descriptions", targetCS)
+		);
 	}
 }
