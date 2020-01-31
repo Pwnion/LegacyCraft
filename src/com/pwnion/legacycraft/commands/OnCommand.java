@@ -1,11 +1,14 @@
 package com.pwnion.legacycraft.commands;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.pwnion.legacycraft.abilities.areas.Circle;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.proficiencies.TerraVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.targets.Point;
@@ -40,7 +43,10 @@ public class OnCommand implements CommandExecutor {
 					}
 				}
 			} else if(lbl.equals("test")) {
-				p.sendMessage(TerraVanguardProficiency1.activate(p, 2));
+				for(Block block : Circle.get(p.getLocation(), 5, false)) {
+					block.setType(Material.SMOOTH_STONE);
+				}
+				
 			}
 			return true;
 		} else {
