@@ -2,19 +2,18 @@ package com.pwnion.legacycraft.abilities.areas;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
 
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
 public class Circle {
-	public static final ArrayList<Block> get(World world, int x, int y, int z, int radius) {
+	public static final HashSet<Block> get(World world, int x, int y, int z, int radius) {
 		return get(new Location(world, x, y, z), radius);
 	}
 	
-	public static final ArrayList<Block> get(Location loc, int radius) {
-		ArrayList<Block> circle = new ArrayList<Block>();
+	public static final HashSet<Block> get(Location loc, int radius) {
+		HashSet<Block> circle = new HashSet<Block>();
 		if(radius == 0) {
 			return circle;
 		}
@@ -30,18 +29,16 @@ public class Circle {
   	  	    }
   	      }
   	   }
-		Set<Block> temp = new HashSet<Block>();
-		temp.addAll(circle);
-		circle.clear();
-		circle.addAll(temp);
+		
         return circle;
     }
 	
+	//Gets the block at a location plus x and z coords
 	private static Block blockAt(Location loc, int plusX, int plusZ) {
 		return loc.toBlockLocation().add(plusX, 0, plusZ).getBlock();
 	}
 	
-	//Old method of 
+	//Old method of getting circle
 	@SuppressWarnings("unused")
 	private static final ArrayList<Block> get1(Location loc, int radius, Boolean hollow) {
 		ArrayList<Location> circleloc = new ArrayList<Location>();

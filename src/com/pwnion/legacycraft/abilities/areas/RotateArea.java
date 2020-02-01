@@ -1,15 +1,16 @@
 package com.pwnion.legacycraft.abilities.areas;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 
 public class RotateArea {
-	public static ArrayList<Block> get(Location centre, ArrayList<Block> area, String type) {
+	public static ArrayList<Block> sphere(Location centre, HashSet<Block> area) {
 		ArrayList<Block> newArea = new ArrayList<Block>();
 		for (Block block : area) {
-			newArea.add(RotateLoc(centre, block.getLocation(), type).getBlock());
+			newArea.add(RotateLoc(centre, block.getLocation(), "sphere").getBlock());
 		}
 		return newArea;
 	}

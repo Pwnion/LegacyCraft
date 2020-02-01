@@ -15,8 +15,6 @@ import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 
 public class ArcticVanguardProficiency1 {
-	private static final HashMap<Location, Material> icecubeFinal = new HashMap<Location, Material>();
-
 	private static final HashMap<Location, Material> iceblock1 = Selection.load("iceblock1");
 	private static final HashMap<Location, Material> iceblock2 = Selection.load("iceblock2");
 	private static final HashMap<Location, Material> iceblock3 = Selection.load("iceblock3");
@@ -36,7 +34,7 @@ public class ArcticVanguardProficiency1 {
 		
 		ArrayList<Block> changing = new ArrayList<Block>();
 		
-		changing = ChangeBlocksToIce(centre, iceblock1, time);
+		changing = ChangeBlocksToIce(centre, iceblock1, delay);
 		changing.addAll(ChangeBlocksToIce(centre, iceblock2, delay * 2));
 		changing.addAll(ChangeBlocksToIce(centre, iceblock3, delay * 3));
 		
