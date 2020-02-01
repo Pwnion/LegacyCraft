@@ -51,7 +51,7 @@ public class ArcticVanguardProficiency1 {
 		return ChatColor.DARK_GREEN + "Casted Ice Block!";
 	}
 	
-	public ArrayList<Block> ChangeBlocksToIce(Location centre, HashMap<Location, String> blocks, int delay) {
+	private static final ArrayList<Block> ChangeBlocksToIce(Location centre, HashMap<Location, String> blocks, int delay) {
 		ArrayList<Block> changed = new ArrayList<Block>();
 		
 		for(Location loc : blocks.keySet()) {
