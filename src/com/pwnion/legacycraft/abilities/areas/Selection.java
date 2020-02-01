@@ -42,7 +42,7 @@ public class Selection {
         } else {
             //add to data (i.e. data.put(key, value))
         	for(Block block : RectangularPrism.get(pos1, pos2)) {
-        		if(block.isEmpty()) {
+        		if(!block.isEmpty()) {
         			data.put(block.getLocation(), block.getType());
         		}
         	}
