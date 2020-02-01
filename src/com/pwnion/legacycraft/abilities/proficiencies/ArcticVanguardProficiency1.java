@@ -8,7 +8,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 
 import com.pwnion.legacycraft.LegacyCraft;
@@ -26,7 +25,6 @@ public class ArcticVanguardProficiency1 {
 	public String activate(Player p) {
 		int time = 50;
 		int delay = 2;
-		int radius = 5;
 		
 		Location centre = p.getLocation();
 		
@@ -63,7 +61,7 @@ public class ArcticVanguardProficiency1 {
 		for(Location loc : blocks.keySet()) {
 			loc.add(centre);
 			Block block = loc.getBlock();
-			if(block.getType() == Material.AIR) {
+			if(block.isEmpty()) {
 				changed.add(block);
 			}
 		}
