@@ -58,7 +58,7 @@ public class ArcticVanguardProficiency1 {
 		
 		for(String dataS : blocksAsString) {
 			String data[] = dataS.split(",");
-			Location loc = new Location(centre.getWorld(), Float.valueOf(data[0]), Float.valueOf(data[1]), Float.valueOf(data[2]));
+			Location loc = new Location(centre.getWorld(), Float.valueOf(data[0]) - 1, Float.valueOf(data[1]), Float.valueOf(data[2]) - 1);
 			Material mat = Material.getMaterial(data[3]);
 			loc.add(centre);
 			Block block = loc.getBlock();
@@ -71,7 +71,6 @@ public class ArcticVanguardProficiency1 {
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 		    public void run() {
 		    	for (Block block : changed) {
-		    		Bukkit.getServer().broadcastMessage("Block:" + block + " blocks.get(block) " + blocks.get(block));
 		    		block.setType(blocks.get(block));
 		    	}
 		    }
