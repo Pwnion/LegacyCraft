@@ -80,8 +80,8 @@ public class LegacyCraft extends JavaPlugin {
             			float fallDistanceLastTick = (float) getPlayerData(playerUUID, PlayerData.FALL_DISTANCE);
                 		float fallDistance = p.getFallDistance();
                 		
-                		if(fallDistanceLastTick > 6 && fallDistance == 0 && p.getAllowFlight()) {
-                			p.damage((fallDistanceLastTick / 4f - 1.5f) * 2f);
+                		if(fallDistanceLastTick > 10 && fallDistance == 0 && p.getAllowFlight()) {
+                			p.damage((fallDistanceLastTick - 3) / 4);
                 		}
             		}
             		setPlayerData(playerUUID, PlayerData.FALL_DISTANCE, p.getFallDistance());

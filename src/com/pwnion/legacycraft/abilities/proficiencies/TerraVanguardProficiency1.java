@@ -1,6 +1,8 @@
 package com.pwnion.legacycraft.abilities.proficiencies;
 
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.function.Supplier;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -16,6 +18,8 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import com.pwnion.legacycraft.LegacyCraft;
+import com.pwnion.legacycraft.abilities.Movement;
+import com.pwnion.legacycraft.abilities.Pathfinding;
 import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 import com.pwnion.legacycraft.abilities.areas.Square;
 
@@ -26,8 +30,11 @@ public class TerraVanguardProficiency1 {
 	public static final String activate(Player p, int radius) {
 		Block startingBlock = p.getLocation().getBlock();
 		
-		if(!p.getLocation().getBlock().getRelative(BlockFace.DOWN, 1).getType().isSolid()) {
-			return ChatColor.RED + "Stand on Solid Ground!";
+		ArrayList<Block> smallGroundBlocks = Square.get(p.getLocation().add(0D, -0.25D, 0D).getBlock(), 1);
+		for(Block block : smallGroundBlocks) {
+			if(!block.getType().isSolid() || !block.getType().isOccluding()) {
+				return ChatColor.RED + "Stand on even ground!";
+			}
 		}
 		
 		ArrayList<Block> safetyRectangularPrism = RectangularPrism.get(p.getLocation().getBlock().getRelative(BlockFace.UP, 1), 0, 4);
@@ -45,6 +52,7 @@ public class TerraVanguardProficiency1 {
 		ArrayList<Block> existingBlocks = new ArrayList<Block>();
 		
 		p.setAllowFlight(false);
+		p.setWalkSpeed(0f);
 		
 		BukkitTask velocityTask = Bukkit.getServer().getScheduler().runTaskTimer(LegacyCraft.getPlugin(), new Runnable() {
             @Override
@@ -68,11 +76,7 @@ public class TerraVanguardProficiency1 {
 		ArrayList<Block> checkSafetyBlocks = RectangularPrism.get(p.getLocation().getBlock(), radius + 3, 10);
 		for(Entity e : p.getNearbyEntities(7, 7, 10)) {
 			if(checkSafetyBlocks.contains(e.getLocation().getBlock())) {
-				Vector launch = p.getLocation().toVector().subtract(e.getLocation().toVector());
-				launch.multiply(-((1 / launch.length()) * 1.5));
-				launch.setY(0.8);
-				
-				e.setVelocity(e.getVelocity().add(launch));
+				Movement.launch(e, p.getLocation(), 1.5f, 0.8f);
 			}
 		}
 		
@@ -85,13 +89,23 @@ public class TerraVanguardProficiency1 {
 			    	for(int j = 0; j < squareSize; j++) {
 			    		Block block = rectangularPrism.get(j + (iThread * squareSize));
 			    		
-		    			if(!groundBlocks.get(j).getType().isSolid()) {
+		    			if(!groundBlocks.get(j).getType().isSolid() || !groundBlocks.get(j).getType().isOccluding()) {
 							notSolidBlocks.add(block);
-						} else if(!block.getType().isAir()) {
+						} else if(!block.getType().isEmpty()) {
 							existingBlocks.add(block);
 						} else {
 							createdBlocks.add(block);
-							block.setType(groundBlocks.get(j).getType(), true);
+							
+							Supplier<Integer> getRandomGroundBlock = () -> {
+								Random rand = new Random();
+								int randIndex = rand.nextInt((int) Math.pow(radius * 2 + 1, 2));
+								while(!groundBlocks.get(randIndex).getType().isSolid() || !groundBlocks.get(randIndex).getType().isOccluding()) {
+									randIndex = rand.nextInt((int) Math.pow(radius * 2 + 1, 2));
+								}
+								return randIndex;
+							};
+
+							block.setType(groundBlocks.get(getRandomGroundBlock.get()).getType(), true);
 							
 							p.getWorld().playSound(block.getLocation(), block.getSoundGroup().getPlaceSound(), SoundCategory.BLOCKS, 0.2f, 1f);
 
@@ -113,30 +127,15 @@ public class TerraVanguardProficiency1 {
 			    	
 			    	for(Entity e : p.getNearbyEntities(4, 4, 12)) {
 			    		if(createdBlocks.contains(e.getLocation().getBlock()) && !e.getUniqueId().equals(p.getUniqueId())) {
-			    			for(int i = 0; i < 10; i++) {
-			    				ArrayList<Block> checkSafetyBlocks = RectangularPrism.get(e.getLocation().getBlock(), radius + i, i + 2);
-			    				for(Block block : checkSafetyBlocks) {
-			    					boolean safe = true;
-			    					for(Block surroundingBlock : RectangularPrism.get(block, 7, 2)) {
-			    						if(surroundingBlock.getType().isSolid()) {
-			    							safe = false;
-			    							break;
-			    						}
-			    					}
-			    					if(safe) {
-			    						e.teleport(block.getLocation());
-			    						i = 10;
-			    						break;
-			    					}
-			    				}
-			    			}
+			    			e.teleport(Pathfinding.nearestSafeLocation(e.getLocation()));
 			    		}
 			    	}
 			    	
 			    	switch(iThread) {
 			    	case 0:
-			    		p.setVelocity(new Vector(0, 1.5, 0));
 			    		particleTask.cancel();
+			    		p.setWalkSpeed(0.2f);
+			    		p.setVelocity(new Vector(0, 1.5, 0));
 			    		break;
 			    	case 9:
 			    		if(createdBlocks.contains(p.getLocation().getBlock())) {
