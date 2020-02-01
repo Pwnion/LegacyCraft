@@ -53,26 +53,25 @@ public class ArcticVanguardProficiency1 {
 	
 	private static final ArrayList<Block> ChangeBlocksToIce(Location centre, ArrayList<String> blocksAsString, int delay) {
 		ArrayList<Block> changed = new ArrayList<Block>();
-		HashMap<Location, Material> blocks = new HashMap<Location, Material>();
+		HashMap<Block, Material> blocks = new HashMap<Block, Material>();
 		
 		for(String dataS : blocksAsString) {
 			String data[] = dataS.split(",");
-			Bukkit.getServer().broadcastMessage(dataS);
 			Location loc = new Location(centre.getWorld(), Float.valueOf(data[0]), Float.valueOf(data[1]), Float.valueOf(data[2]));
 			Material mat = Material.getMaterial(data[3]);
-			Bukkit.getServer().broadcastMessage("Material: " + data[3] + "," + mat.toString());
 			loc.add(centre);
 			Block block = loc.getBlock();
 			if(block.isEmpty()) {
 				changed.add(block);
 			}
-			blocks.put(loc, mat);
+			blocks.put(loc.getBlock(), mat);
 		}
 		
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 		    public void run() {
 		    	for (Block block : changed) {
-		    		block.setType(blocks.get(block.getLocation()));
+		    		Bukkit.getServer().broadcastMessage("Block:" + block + " blocks.get(block) " + blocks.get(block));
+		    		block.setType(blocks.get(block));
 		    	}
 		    }
 		}, delay);
