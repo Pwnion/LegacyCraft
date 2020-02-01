@@ -48,7 +48,8 @@ public class Selection {
                 if(!block.isEmpty()) {
                 	Location RelBlockLoc = block.getLocation().subtract(p.getLocation());
                 	RelBlockLoc.setWorld(null);
-                    data.put(RelBlockLoc.toString(), block.getType().name());
+                	String key = RelBlockLoc.getBlockX() + "," + RelBlockLoc.getBlockY() + "," + RelBlockLoc.getBlockZ()
+                    data.put(key, block.getType().name());
                 }
             }
         }

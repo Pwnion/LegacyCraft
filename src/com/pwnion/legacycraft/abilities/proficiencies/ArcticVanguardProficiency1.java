@@ -54,9 +54,9 @@ public class ArcticVanguardProficiency1 {
 	private static final ArrayList<Block> ChangeBlocksToIce(Location centre, HashMap<String, String> blocks, int delay) {
 		ArrayList<Block> changed = new ArrayList<Block>();
 		
-		HashMap<Location, String> blocks1 = null;
-		for(Location loc : blocks1.keySet()) {
-			loc.setWorld(centre.getWorld());
+		for(String locString : blocks.keySet()) {
+			String xyz[] = locString.split(",");
+			Location loc = new Location(centre.getWorld(), Float.valueOf(xyz[1]), Float.valueOf(xyz[2]), Float.valueOf(xyz[3]));
 			loc.add(centre);
 			Block block = loc.getBlock();
 			if(block.isEmpty()) {
