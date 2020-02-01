@@ -35,7 +35,7 @@ public class RotateArea {
 		return new Location(centre.getWorld(), x, y, z);
 	}
 
-	private static Location getRelativeLoc(Location centre, Location pos) {
+	public static Location getRelativeLoc(Location centre, Location pos) {
 		if(centre.getWorld() != pos.getWorld()) {
 			return null;
 		}
