@@ -60,13 +60,26 @@ public class SelectAClassInv extends Inv {
 			LegacyCraft.setPlayerData(playerUUID, PlayerData.CLASS_INVENTORY_OPEN, clickedClass);
 			
 			if(clickType.isLeftClick()) {
+				p.closeInventory();
+				
+				if(!skillTree.getPlayerClass().equals(PlayerClass.NONE)) {
+					skillTree.saveClass(skillTree.getPlayerClass());
+				}
+				
+				skillTree.loadClass(clickedClass);
+				
 				skillTree.setPlayerClass(clickedClass);
 				
 				Jump jump = skillTree.getEquippedJump(clickedClass);
 				if(!jump.equals(Jump.NONE)) {
 					skillTree.setEquippedJump(clickedClass, jump);
 				}
-
+				
+				load(p);
+			}
+			
+			
+				/*
 				for(int slot : classToSlot.values()) {
 					inv.getItem(slot).removeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL);
 				}
@@ -86,6 +99,7 @@ public class SelectAClassInv extends Inv {
 			} else if(clickType.isRightClick()) {
 				SelectAnAspectInv.load(p);
 			}
+			*/
 			break;
 		}
 	}
