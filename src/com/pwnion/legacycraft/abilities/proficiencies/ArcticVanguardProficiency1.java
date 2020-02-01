@@ -15,9 +15,9 @@ import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 
 public class ArcticVanguardProficiency1 {
-	private static final HashMap<Location, String> iceblock1 = Selection.load("iceblock1");
-	private static final HashMap<Location, String> iceblock2 = Selection.load("iceblock2");
-	private static final HashMap<Location, String> iceblock3 = Selection.load("iceblock3");
+	private static final HashMap<String, String> iceblock1 = Selection.load("iceblock1");
+	private static final HashMap<String, String> iceblock2 = Selection.load("iceblock2");
+	private static final HashMap<String, String> iceblock3 = Selection.load("iceblock3");
 	
 	public static final String activate(Player p) {
 		int time = 50;
@@ -51,10 +51,11 @@ public class ArcticVanguardProficiency1 {
 		return ChatColor.DARK_GREEN + "Casted Ice Block!";
 	}
 	
-	private static final ArrayList<Block> ChangeBlocksToIce(Location centre, HashMap<Location, String> blocks, int delay) {
+	private static final ArrayList<Block> ChangeBlocksToIce(Location centre, HashMap<String, String> blocks, int delay) {
 		ArrayList<Block> changed = new ArrayList<Block>();
 		
-		for(Location loc : blocks.keySet()) {
+		HashMap<Location, String> blocks1 = null;
+		for(Location loc : blocks1.keySet()) {
 			loc.setWorld(centre.getWorld());
 			loc.add(centre);
 			Block block = loc.getBlock();

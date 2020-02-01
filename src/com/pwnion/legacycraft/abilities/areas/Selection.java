@@ -16,8 +16,8 @@ public class Selection {
     public static final ConfigurationSection structuresCS = structuresConfig.getRoot();
     
     @SuppressWarnings("unchecked")
-    public static final HashMap<Location, String> load(String name) {
-        return (HashMap<Location, String>) structuresCS.get("structures." + name);
+    public static final HashMap<String, String> load(String name) {
+        return (HashMap<String, String>) structuresCS.get("structures." + name);
     }
     
     private Player p;
@@ -39,7 +39,7 @@ public class Selection {
     }
     
     public final String export(String name) {
-        HashMap<Location, String> data = new HashMap<Location, String>();
+        HashMap<String, String> data = new HashMap<String, String>();
         if(pos1 == null || pos2 == null) {
             return ChatColor.DARK_RED + "You forgot to set both positions!";
         } else {
@@ -48,7 +48,7 @@ public class Selection {
                 if(!block.isEmpty()) {
                 	Location RelBlockLoc = block.getLocation().subtract(p.getLocation());
                 	RelBlockLoc.setWorld(null);
-                    data.put(RelBlockLoc, block.getType().name());
+                    data.put(RelBlockLoc.toString(), block.getType().name());
                 }
             }
         }
