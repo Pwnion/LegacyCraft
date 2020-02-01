@@ -190,8 +190,7 @@ VANGUARD:
     - null
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
-      type: AIR
-      amount: 0
+      type: COMPASS
     - null
     - null
     - null
@@ -212,11 +211,10 @@ VANGUARD:
     - null
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
-      type: AIR
-      amount: 0
+      type: LEATHER_BOOTS
       meta:
         ==: ItemMeta
-        meta-type: UNSPECIFIC
+        meta-type: LEATHER_ARMOR
         display-name: Vanguard Boots
         attribute-modifiers:
           GENERIC_ARMOR:
@@ -228,13 +226,17 @@ VANGUARD:
         ItemFlags:
         - HIDE_ATTRIBUTES
         Unbreakable: true
+        color:
+          ==: Color
+          RED: 0
+          BLUE: 255
+          GREEN: 0
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
-      type: AIR
-      amount: 0
+      type: LEATHER_LEGGINGS
       meta:
         ==: ItemMeta
-        meta-type: UNSPECIFIC
+        meta-type: LEATHER_ARMOR
         display-name: Vanguard Leggings
         attribute-modifiers:
           GENERIC_ARMOR:
@@ -246,13 +248,17 @@ VANGUARD:
         ItemFlags:
         - HIDE_ATTRIBUTES
         Unbreakable: true
+        color:
+          ==: Color
+          RED: 0
+          BLUE: 255
+          GREEN: 0
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
-      type: AIR
-      amount: 0
+      type: LEATHER_CHESTPLATE
       meta:
         ==: ItemMeta
-        meta-type: UNSPECIFIC
+        meta-type: LEATHER_ARMOR
         display-name: Vanguard Chestplate
         attribute-modifiers:
           GENERIC_ARMOR:
@@ -264,13 +270,17 @@ VANGUARD:
         ItemFlags:
         - HIDE_ATTRIBUTES
         Unbreakable: true
+        color:
+          ==: Color
+          RED: 0
+          BLUE: 255
+          GREEN: 0
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
-      type: AIR
-      amount: 0
+      type: LEATHER_HELMET
       meta:
         ==: ItemMeta
-        meta-type: UNSPECIFIC
+        meta-type: LEATHER_ARMOR
         display-name: Vanguard Helmet
         attribute-modifiers:
           GENERIC_ARMOR:
@@ -282,6 +292,11 @@ VANGUARD:
         ItemFlags:
         - HIDE_ATTRIBUTES
         Unbreakable: true
+        color:
+          ==: Color
+          RED: 0
+          BLUE: 255
+          GREEN: 0
     - null
     location:
       ==: org.bukkit.Location
@@ -328,8 +343,7 @@ ROGUE:
     - null
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
-      type: AIR
-      amount: 0
+      type: COMPASS
     - null
     - null
     - null
@@ -350,11 +364,10 @@ ROGUE:
     - null
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
-      type: AIR
-      amount: 0
+      type: LEATHER_BOOTS
       meta:
         ==: ItemMeta
-        meta-type: UNSPECIFIC
+        meta-type: LEATHER_ARMOR
         display-name: Rogue Boots
         attribute-modifiers:
           GENERIC_ARMOR:
@@ -366,13 +379,17 @@ ROGUE:
         ItemFlags:
         - HIDE_ATTRIBUTES
         Unbreakable: true
+        color:
+          ==: Color
+          RED: 0
+          BLUE: 0
+          GREEN: 0
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
-      type: AIR
-      amount: 0
+      type: LEATHER_LEGGINGS
       meta:
         ==: ItemMeta
-        meta-type: UNSPECIFIC
+        meta-type: LEATHER_ARMOR
         display-name: Rogue Leggings
         attribute-modifiers:
           GENERIC_ARMOR:
@@ -384,13 +401,17 @@ ROGUE:
         ItemFlags:
         - HIDE_ATTRIBUTES
         Unbreakable: true
+        color:
+          ==: Color
+          RED: 0
+          BLUE: 0
+          GREEN: 0
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
-      type: AIR
-      amount: 0
+      type: LEATHER_CHESTPLATE
       meta:
         ==: ItemMeta
-        meta-type: UNSPECIFIC
+        meta-type: LEATHER_ARMOR
         display-name: Rogue Chestplate
         attribute-modifiers:
           GENERIC_ARMOR:
@@ -402,13 +423,17 @@ ROGUE:
         ItemFlags:
         - HIDE_ATTRIBUTES
         Unbreakable: true
+        color:
+          ==: Color
+          RED: 0
+          BLUE: 0
+          GREEN: 0
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
-      type: AIR
-      amount: 0
+      type: LEATHER_HELMET
       meta:
         ==: ItemMeta
-        meta-type: UNSPECIFIC
+        meta-type: LEATHER_ARMOR
         display-name: Rogue Helmet
         attribute-modifiers:
           GENERIC_ARMOR:
@@ -420,6 +445,11 @@ ROGUE:
         ItemFlags:
         - HIDE_ATTRIBUTES
         Unbreakable: true
+        color:
+          ==: Color
+          RED: 0
+          BLUE: 0
+          GREEN: 0
     - null
     location:
       ==: org.bukkit.Location

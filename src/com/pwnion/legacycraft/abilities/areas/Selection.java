@@ -1,7 +1,6 @@
 package com.pwnion.legacycraft.abilities.areas;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
