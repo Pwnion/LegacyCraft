@@ -67,10 +67,14 @@ public class ArcticVanguardProficiency1 {
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 		    public void run() {
 		    	for (Block block : changed) {
-		    		block.setType(Material.getMaterial(blocks.get(block.getLocation().add(centre))));
+		    		block.setType(Material.getMaterial(blocks.get(LocationToString(block.getLocation().add(centre)))));
 		    	}
 		    }
 		}, delay);
 		return changed;
 	}
+	
+	private static String LocationToString(Location loc) {
+    	return loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ();
+    }
 }

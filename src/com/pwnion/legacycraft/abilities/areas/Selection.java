@@ -47,14 +47,16 @@ public class Selection {
             for(Block block : RectangularPrism.get(pos1, pos2)) {
                 if(!block.isEmpty()) {
                 	Location RelBlockLoc = block.getLocation().subtract(p.getLocation());
-                	RelBlockLoc.setWorld(null);
-                	String key = RelBlockLoc.getBlockX() + "," + RelBlockLoc.getBlockY() + "," + RelBlockLoc.getBlockZ()
-                    data.put(key, block.getType().name());
+                    data.put(LocationToString(RelBlockLoc), block.getType().name());
                 }
             }
         }
         structuresCS.set("structures." + name, data);
         structuresConfig.saveCustomConfig();
         return ChatColor.DARK_GREEN + "Saved to file!";
+    }
+    
+    private String LocationToString(Location loc) {
+    	return loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ();
     }
 }
