@@ -20,8 +20,8 @@ public class ArcticVanguardProficiency1 {
 	private static final ArrayList<String> iceblock3 = Selection.load("iceblock3");
 	
 	public static final String activate(Player p) {
-		int time = 50;
-		int delay = 2;
+		int time = 20 * 10;
+		int delay = 10;
 		
 		Location centre = p.getLocation();
 		
@@ -34,6 +34,7 @@ public class ArcticVanguardProficiency1 {
 		
 		ArrayList<Block> changing = new ArrayList<Block>();
 		
+		p.teleport(centre.toCenterLocation());
 		changing = ChangeBlocksToIce(centre, iceblock1, delay);
 		changing.addAll(ChangeBlocksToIce(centre, iceblock2, delay * 2));
 		changing.addAll(ChangeBlocksToIce(centre, iceblock3, delay * 3));
