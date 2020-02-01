@@ -21,4 +21,5 @@ public class Square {
 		
 		return square;
 	}
+	
 }
