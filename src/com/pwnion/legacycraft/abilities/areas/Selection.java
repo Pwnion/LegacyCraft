@@ -1,8 +1,10 @@
 package com.pwnion.legacycraft.abilities.areas;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -16,8 +18,8 @@ public class Selection {
     public static final ConfigurationSection structuresCS = structuresConfig.getRoot();
     
     @SuppressWarnings("unchecked")
-    public static final HashMap<String, String> load(String name) {
-        return (HashMap<String, String>) structuresCS.get("structures." + name);
+    public static final ArrayList<String> load(String name) {
+        return (ArrayList<String>) structuresCS.getList("structures." + name);
     }
     
     private Player p;
@@ -39,7 +41,7 @@ public class Selection {
     }
     
     public final String export(String name) {
-        HashMap<String, String> data = new HashMap<String, String>();
+        ArrayList<String> data = new ArrayList<String>();
         if(pos1 == null || pos2 == null) {
             return ChatColor.DARK_RED + "You forgot to set both positions!";
         } else {
@@ -47,7 +49,7 @@ public class Selection {
             for(Block block : RectangularPrism.get(pos1, pos2)) {
                 if(!block.isEmpty()) {
                 	Location RelBlockLoc = block.getLocation().subtract(p.getLocation());
-                    data.put(LocationToString(RelBlockLoc), block.getType().name());
+                    data.add(DataToString(RelBlockLoc, block.getType()));
                 }
             }
         }
@@ -56,7 +58,7 @@ public class Selection {
         return ChatColor.DARK_GREEN + "Saved to file!";
     }
     
-    private String LocationToString(Location loc) {
-    	return loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ();
+    private String DataToString(Location loc, Material material) {
+    	return loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ() + "," + material.name();
     }
 }

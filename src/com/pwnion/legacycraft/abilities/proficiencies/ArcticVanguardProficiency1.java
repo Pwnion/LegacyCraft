@@ -15,9 +15,9 @@ import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 
 public class ArcticVanguardProficiency1 {
-	private static final HashMap<String, String> iceblock1 = Selection.load("iceblock1");
-	private static final HashMap<String, String> iceblock2 = Selection.load("iceblock2");
-	private static final HashMap<String, String> iceblock3 = Selection.load("iceblock3");
+	private static final ArrayList<String> iceblock1 = Selection.load("iceblock1");
+	private static final ArrayList<String> iceblock2 = Selection.load("iceblock2");
+	private static final ArrayList<String> iceblock3 = Selection.load("iceblock3");
 	
 	public static final String activate(Player p) {
 		int time = 50;
@@ -51,30 +51,29 @@ public class ArcticVanguardProficiency1 {
 		return ChatColor.DARK_GREEN + "Casted Ice Block!";
 	}
 	
-	private static final ArrayList<Block> ChangeBlocksToIce(Location centre, HashMap<String, String> blocks, int delay) {
+	private static final ArrayList<Block> ChangeBlocksToIce(Location centre, ArrayList<String> blocksAsString, int delay) {
 		ArrayList<Block> changed = new ArrayList<Block>();
+		HashMap<Location, Material> blocks = new HashMap<Location, Material>();
 		
-		for(String locString : blocks.keySet()) {
-			String xyz[] = locString.split(",");
-			Location loc = new Location(centre.getWorld(), Float.valueOf(xyz[1]), Float.valueOf(xyz[2]), Float.valueOf(xyz[3]));
+		for(String dataS : blocksAsString) {
+			String data[] = dataS.split(",");
+			Location loc = new Location(centre.getWorld(), Float.valueOf(data[0]), Float.valueOf(data[1]), Float.valueOf(data[2]));
+			Material mat = Material.getMaterial(data[3]);
 			loc.add(centre);
 			Block block = loc.getBlock();
 			if(block.isEmpty()) {
 				changed.add(block);
 			}
+			blocks.put(loc, mat);
 		}
 		
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 		    public void run() {
 		    	for (Block block : changed) {
-		    		block.setType(Material.getMaterial(blocks.get(LocationToString(block.getLocation().add(centre)))));
+		    		block.setType(blocks.get(block.getLocation()));
 		    	}
 		    }
 		}, delay);
 		return changed;
 	}
-	
-	private static String LocationToString(Location loc) {
-    	return loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ();
-    }
 }
