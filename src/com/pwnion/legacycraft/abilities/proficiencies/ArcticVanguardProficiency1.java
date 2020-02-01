@@ -57,8 +57,10 @@ public class ArcticVanguardProficiency1 {
 		
 		for(String dataS : blocksAsString) {
 			String data[] = dataS.split(",");
+			Bukkit.getServer().broadcastMessage(dataS);
 			Location loc = new Location(centre.getWorld(), Float.valueOf(data[0]), Float.valueOf(data[1]), Float.valueOf(data[2]));
 			Material mat = Material.getMaterial(data[3]);
+			Bukkit.getServer().broadcastMessage("Material: " + data[3] + "," + mat.toString());
 			loc.add(centre);
 			Block block = loc.getBlock();
 			if(block.isEmpty()) {
