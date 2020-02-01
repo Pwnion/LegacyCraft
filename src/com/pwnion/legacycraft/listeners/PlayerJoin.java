@@ -25,7 +25,7 @@ public class PlayerJoin implements Listener {
 		LegacyCraft.setPlayerData(playerUUID, new HashMap<PlayerData, Object>() {
 			private static final long serialVersionUID = 1L;
 			{
-				put(PlayerData.SKILL_TREE, new SkillTree(playerUUID));
+				put(PlayerData.SKILL_TREE, new SkillTree(p));
 				put(PlayerData.JUMP_COUNTER, 0);
 				put(PlayerData.FALL_DISTANCE, 0f);
 				put(PlayerData.CLASS_INVENTORY_OPEN, PlayerClass.NONE);

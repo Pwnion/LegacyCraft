@@ -1,10 +1,13 @@
 package com.pwnion.legacycraft.abilities;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
+import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
@@ -81,15 +84,17 @@ public class SkillTree {
 	private static final ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
 	private static final ConfigurationSection playerDataCS = playerDataConfig.getRoot();
 	
-	private UUID playerUUID;
+	private Player p;
+	private String playerUUID;
 	private String nodePrefix;
 	private PlayerClass playerClass;
 	private Aspect aspect;
 	private Build build;
 	
-	public SkillTree(UUID playerUUID) {
-		this.playerUUID = playerUUID;
-		this.nodePrefix = "players." + playerUUID.toString() + ".";
+	public SkillTree(Player p) {
+		this.p = p;
+		this.playerUUID = p.getUniqueId().toString();
+		this.nodePrefix = "players." + playerUUID + ".";
 		
 		setup();
 	}
@@ -97,7 +102,7 @@ public class SkillTree {
 	//If the plugin hasn't seen this player before, add default entries for them to player-data.yml
 	private final void setup() {
 		Set<String> playerUUIDs = playerDataCS.getKeys(true);
-		if(!playerUUIDs.contains("players." + playerUUID.toString())) {
+		if(!playerUUIDs.contains("players." + playerUUID)) {
 			ConfigAccessor playerDataTemplate = new ConfigAccessor("player-data-template.yml");
 			ConfigurationSection playerDataTemplateCS = playerDataTemplate.getRoot();
 			
@@ -111,6 +116,27 @@ public class SkillTree {
 	//Save player-data.yml
 	private final void save() {
 		playerDataConfig.saveCustomConfig();
+	}
+	
+	//Save relevent player data for a class to a file
+	public final void saveClass(PlayerClass playerClass) {
+		String savePath = nodePrefix + playerClass.toString() + ".save.";
+		playerDataCS.set(savePath + "inventory", p.getInventory().getContents().clone());
+		playerDataCS.set(savePath + "location", p.getLocation().clone());
+		save();
+	}
+	
+	//Load relevent player data for a class from a file
+	@SuppressWarnings("unchecked")
+	public final void loadClass(PlayerClass playerClass) {
+		String savePath = nodePrefix + playerClass.toString() + ".save.";
+		
+		ItemStack contents[] = ((List<ItemStack>) playerDataCS.get(savePath + "inventory")).toArray(new ItemStack[0]);
+		Location loc = (Location) playerDataCS.get(savePath + "location");
+		
+        p.getInventory().setContents(contents);
+        
+        p.teleport(loc);
 	}
 	
 	/*
@@ -172,6 +198,21 @@ public class SkillTree {
 	
 	public final Build getBuild(PlayerClass playerClass, Aspect aspect) {
 		return Build.valueOf(aspect.toString() + "_" + playerClass.toString());
+	}
+	
+	public final boolean getBuildUnlocked(PlayerClass playerClass, Aspect aspect) {
+		Build build = getBuild(playerClass, aspect);
+		return playerDataCS.getBoolean(nodePrefix + playerUUID + "." + build.toString() + ".unlocked");
+	}
+	
+	/*
+	 * BUILD SETTERS
+	 */
+	
+	public final void setBuildUnlocked(PlayerClass playerClass, Aspect aspect, boolean value) {
+		Build build = getBuild(playerClass, aspect);
+		playerDataCS.set(nodePrefix + playerUUID + "." + build.toString() + ".unlocked", value);
+		save();
 	}
 	
 	/*
