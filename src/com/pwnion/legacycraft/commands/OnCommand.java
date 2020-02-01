@@ -44,10 +44,9 @@ public class OnCommand implements CommandExecutor {
 					}
 				}
 			} else if(lbl.equals("test")) {
-				for(Block block : Sphere.get(p.getLocation().add(0, 10, 0), 5)) {
+				for(Block block : Sphere.get(p.getLocation().add(0, 5, 0), 4)) {
 					block.setType(Material.STONE);
 				}
-				
 			}
 			return true;
 		} else {
