@@ -19,7 +19,7 @@ public class Circle {
 			return circle;
 		}
 		
-		for (double a = 0; a < 2 * Math.PI; a += (Math.PI) / (radius * 2 + 1)) {
+		for (double a = 0; a < 2 * Math.PI; a += (Math.PI) / (radius * 4)) {
   	      int x = (int) (Math.cos(a) * radius);
   	      int z = (int) (Math.sin(a) * radius);
   	      circle.add(blockAt(loc, x, z));

@@ -19,7 +19,7 @@ public class ArcticVanguardProficiency1 {
 		
 	}
 	
-	public void ChangeBlockToIce(Block block, int time) {
+	public void ChangeBlocksToIce(ArrayList<Block> blocks, int time) {
 		Material originalMaterial = block.getType();
 		block.setType(Material.ICE);
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {

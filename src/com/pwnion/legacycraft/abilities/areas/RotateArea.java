@@ -23,7 +23,7 @@ public class RotateArea {
 		int Ry = pos.getBlockY();
 		int Rz = pos.getBlockZ();
 		switch(type) {
-		case "sphere":
+		case "sphere": //Rotates around Z axis 90d + Y axis 90d
 			Rx = pos.getBlockZ();
 			Ry = pos.getBlockX();
 			Rz = pos.getBlockY();
