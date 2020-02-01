@@ -15,9 +15,9 @@ import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 
 public class ArcticVanguardProficiency1 {
-	private static final HashMap<Location, Material> iceblock1 = Selection.load("iceblock1");
-	private static final HashMap<Location, Material> iceblock2 = Selection.load("iceblock2");
-	private static final HashMap<Location, Material> iceblock3 = Selection.load("iceblock3");
+	private static final HashMap<Location, String> iceblock1 = Selection.load("iceblock1");
+	private static final HashMap<Location, String> iceblock2 = Selection.load("iceblock2");
+	private static final HashMap<Location, String> iceblock3 = Selection.load("iceblock3");
 	
 	public String activate(Player p) {
 		int time = 50;
@@ -51,10 +51,11 @@ public class ArcticVanguardProficiency1 {
 		return ChatColor.DARK_GREEN + "Casted Ice Block!";
 	}
 	
-	public ArrayList<Block> ChangeBlocksToIce(Location centre, HashMap<Location, Material> blocks, int delay) {
+	public ArrayList<Block> ChangeBlocksToIce(Location centre, HashMap<Location, String> blocks, int delay) {
 		ArrayList<Block> changed = new ArrayList<Block>();
 		
 		for(Location loc : blocks.keySet()) {
+			loc.setWorld(centre.getWorld());
 			loc.add(centre);
 			Block block = loc.getBlock();
 			if(block.isEmpty()) {
@@ -65,7 +66,7 @@ public class ArcticVanguardProficiency1 {
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 		    public void run() {
 		    	for (Block block : changed) {
-		    		block.setType(blocks.get(block.getLocation().add(centre)));
+		    		block.setType(Material.getMaterial(blocks.get(block.getLocation().add(centre))));
 		    	}
 		    }
 		}, delay);

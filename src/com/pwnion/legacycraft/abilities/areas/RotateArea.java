@@ -44,6 +44,7 @@ public class RotateArea {
 		int x = pos.getBlockX() - centre.getBlockX();
 		int y = pos.getBlockY() - centre.getBlockY();
 		int z = pos.getBlockZ() - centre.getBlockZ();
-		return new Location(centre.getWorld(), x, y, z);
+		
+		return new Location(null, x, y, z);
 	}
 }

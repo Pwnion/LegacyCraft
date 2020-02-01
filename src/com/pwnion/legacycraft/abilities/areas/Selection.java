@@ -3,7 +3,6 @@ package com.pwnion.legacycraft.abilities.areas;
 import java.util.HashMap;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -17,8 +16,8 @@ public class Selection {
     public static final ConfigurationSection structuresCS = structuresConfig.getRoot();
     
     @SuppressWarnings("unchecked")
-    public static final HashMap<Location, Material> load(String name) {
-        return (HashMap<Location, Material>) structuresCS.get("structures." + name);
+    public static final HashMap<Location, String> load(String name) {
+        return (HashMap<Location, String>) structuresCS.get("structures." + name);
     }
     
     private Player p;
@@ -40,14 +39,16 @@ public class Selection {
     }
     
     public final String export(String name) {
-        HashMap<Location, Material> data = new HashMap<Location, Material>();
+        HashMap<Location, String> data = new HashMap<Location, String>();
         if(pos1 == null || pos2 == null) {
             return ChatColor.DARK_RED + "You forgot to set both positions!";
         } else {
             //add to data (i.e. data.put(key, value))
             for(Block block : RectangularPrism.get(pos1, pos2)) {
                 if(!block.isEmpty()) {
-                    data.put(block.getLocation().subtract(p.getLocation()), block.getType());
+                	Location RelBlockLoc = block.getLocation().subtract(p.getLocation());
+                	RelBlockLoc.setWorld(null);
+                    data.put(RelBlockLoc, block.getType().name());
                 }
             }
         }
