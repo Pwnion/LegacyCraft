@@ -12,14 +12,14 @@ import org.bukkit.entity.Player;
 
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
+import com.pwnion.legacycraft.abilities.areas.Selection;
 
 public class ArcticVanguardProficiency1 {
 	private static final HashMap<Location, Material> icecubeFinal = new HashMap<Location, Material>();
 
-	private static final HashMap<Location, Material> iceblock1 = new HashMap<Location, Material>();
-	private static final HashMap<Location, Material> iceblock2 = new HashMap<Location, Material>();
-	private static final HashMap<Location, Material> iceblock3 = new HashMap<Location, Material>();
-	
+	private static final HashMap<Location, Material> iceblock1 = Selection.load("iceblock1");
+	private static final HashMap<Location, Material> iceblock2 = Selection.load("iceblock2");
+	private static final HashMap<Location, Material> iceblock3 = Selection.load("iceblock3");
 	
 	public String activate(Player p) {
 		int time = 50;

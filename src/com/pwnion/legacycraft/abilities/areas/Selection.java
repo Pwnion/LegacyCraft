@@ -13,8 +13,8 @@ import com.pwnion.legacycraft.ConfigAccessor;
 import net.md_5.bungee.api.ChatColor;
 
 public class Selection {
-    private static final ConfigAccessor structuresConfig = new ConfigAccessor("structures.yml");
-    private static final ConfigurationSection structuresCS = structuresConfig.getRoot();
+    public static final ConfigAccessor structuresConfig = new ConfigAccessor("structures.yml");
+    public static final ConfigurationSection structuresCS = structuresConfig.getRoot();
     
     @SuppressWarnings("unchecked")
     public static final HashMap<Location, Material> load(String name) {
