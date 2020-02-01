@@ -41,6 +41,8 @@ public class Circle {
 		return loc.toBlockLocation().add(plusX, 0, plusZ).getBlock();
 	}
 	
+	//Old method of 
+	@SuppressWarnings("unused")
 	private static final ArrayList<Block> get1(Location loc, int radius, Boolean hollow) {
 		ArrayList<Location> circleloc = new ArrayList<Location>();
 		ArrayList<Block> circle = new ArrayList<Block>();

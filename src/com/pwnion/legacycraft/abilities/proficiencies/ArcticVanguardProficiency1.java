@@ -8,7 +8,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 
 import com.pwnion.legacycraft.LegacyCraft;
@@ -17,16 +16,14 @@ import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 public class ArcticVanguardProficiency1 {
 	private static final HashMap<Location, Material> icecubeFinal = new HashMap<Location, Material>();
 
-	private static final HashMap<Location, Material> icecube1 = new HashMap<Location, Material>();
-	private static final HashMap<Location, Material> icecube2 = new HashMap<Location, Material>();
-	private static final HashMap<Location, Material> icecube3 = new HashMap<Location, Material>();
-	private static final HashMap<Location, Material> icecube4 = new HashMap<Location, Material>();
+	private static final HashMap<Location, Material> iceblock1 = new HashMap<Location, Material>();
+	private static final HashMap<Location, Material> iceblock2 = new HashMap<Location, Material>();
+	private static final HashMap<Location, Material> iceblock3 = new HashMap<Location, Material>();
 	
 	
 	public String activate(Player p) {
 		int time = 50;
 		int delay = 2;
-		int radius = 5;
 		
 		Location centre = p.getLocation();
 		
@@ -39,10 +36,9 @@ public class ArcticVanguardProficiency1 {
 		
 		ArrayList<Block> changing = new ArrayList<Block>();
 		
-		changing = ChangeBlocksToIce(centre, icecube1, time);
-		changing.addAll(ChangeBlocksToIce(centre, icecube2, delay * 2));
-		changing.addAll(ChangeBlocksToIce(centre, icecube3, delay * 3));
-		changing.addAll(ChangeBlocksToIce(centre, icecube4, delay * 4));
+		changing = ChangeBlocksToIce(centre, iceblock1, time);
+		changing.addAll(ChangeBlocksToIce(centre, iceblock2, delay * 2));
+		changing.addAll(ChangeBlocksToIce(centre, iceblock3, delay * 3));
 		
 		final ArrayList<Block> changed = changing;
 		
@@ -63,7 +59,7 @@ public class ArcticVanguardProficiency1 {
 		for(Location loc : blocks.keySet()) {
 			loc.add(centre);
 			Block block = loc.getBlock();
-			if(block.getType() == Material.AIR) {
+			if(block.isEmpty()) {
 				changed.add(block);
 			}
 		}
