@@ -35,6 +35,7 @@ public class RectangularPrism {
 			for(int y = 0; y <= pos2.getBlockY(); y++) {
 				for(int z = 0; z <= pos2.getBlockZ(); z++) {
 					temp = new Location(block1.getWorld(), x, y, z);
+					temp.add(pos1);
 					rectangularPrism.add(temp.getBlock());
 				}
 			}

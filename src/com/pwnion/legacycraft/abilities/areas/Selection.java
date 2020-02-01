@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 
 import com.pwnion.legacycraft.ConfigAccessor;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class Selection {
     private static final ConfigAccessor structuresConfig = new ConfigAccessor("structures.yml");
     private static final ConfigurationSection structuresCS = structuresConfig.getRoot();
@@ -23,29 +25,34 @@ public class Selection {
     private Block pos1;
     private Block pos2;
     
-    Selection(Player p) {
+    public Selection(Player p) {
         this.p = p;
     }
     
-    public final void setPos1() {
+    public final String setPos1() {
         pos1 = p.getTargetBlock(null, 100);
+        return ChatColor.GOLD + "Set position 1!";
     }
     
-    public final void setPos2() {
+    public final String setPos2() {
         pos2 = p.getTargetBlock(null, 100);
+        return ChatColor.GOLD + "Set position 2!";
     }
     
-    public final void export(String name) {
+    public final String export(String name) {
         HashMap<Location, Material> data = new HashMap<Location, Material>();
         if(pos1 == null || pos2 == null) {
-            return;
+            return ChatColor.DARK_RED + "You forgot to set both positions!";
         } else {
             //add to data (i.e. data.put(key, value))
-        	for(Block block : RectangularPrism.get(pos1, pos2)) {
-        		data.put(block.getLocation(), block.getType());
-        	}
+            for(Block block : RectangularPrism.get(pos1, pos2)) {
+                if(!block.isEmpty()) {
+                    data.put(block.getLocation(), block.getType());
+                }
+            }
         }
         structuresCS.set("structures." + name, data);
         structuresConfig.saveCustomConfig();
+        return ChatColor.DARK_GREEN + "Saved to file!";
     }
 }
