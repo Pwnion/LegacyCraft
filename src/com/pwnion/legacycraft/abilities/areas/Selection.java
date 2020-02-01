@@ -44,7 +44,6 @@ public class Selection {
         if(pos1 == null || pos2 == null) {
             return ChatColor.DARK_RED + "You forgot to set both positions!";
         } else {
-            //add to data (i.e. data.put(key, value))
             for(Block block : RectangularPrism.get(pos1, pos2)) {
                 if(!block.isEmpty()) {
                 	Location RelBlockLoc = block.getLocation().subtract(p.getLocation());

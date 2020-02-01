@@ -43,10 +43,15 @@ public class OnCommand implements CommandExecutor {
 						CharacterBuildMenuInv.load(p);
 						break;
 					case "pos1":
-						playerToSelection.put(playerUUID, new Selection(p));
+						if(!playerToSelection.keySet().contains(playerUUID)) {
+							playerToSelection.put(playerUUID, new Selection(p));
+						}
 						p.sendMessage(playerToSelection.get(playerUUID).setPos1());
 						break;
 					case "pos2":
+						if(!playerToSelection.keySet().contains(playerUUID)) {
+							playerToSelection.put(playerUUID, new Selection(p));
+						}
 						p.sendMessage(playerToSelection.get(playerUUID).setPos2());
 						break;
 					case "export":
