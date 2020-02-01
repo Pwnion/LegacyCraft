@@ -15,9 +15,14 @@ import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 
 public class ArcticVanguardProficiency1 {
-	private static final ArrayList<String> iceblock1 = Selection.load("iceblock1");
-	private static final ArrayList<String> iceblock2 = Selection.load("iceblock2");
-	private static final ArrayList<String> iceblock3 = Selection.load("iceblock3");
+	private static final ArrayList<ArrayList<String>> iceBlockLists = getIceBlockLists("iceblock", 3);
+	private static final ArrayList<ArrayList<String>> getIceBlockLists(String namePrefix, int num) {
+		final ArrayList<ArrayList<String>> iceBlocks = new ArrayList<ArrayList<String>>(num);
+		for(int i = 1; i < num + 1; i++) {
+			iceBlocks.add(Selection.load(namePrefix + String.valueOf(i)));
+		}
+		return iceBlocks;
+	}
 	
 	public static final String activate(Player p) {
 		int time = 20 * 10;
@@ -32,15 +37,14 @@ public class ArcticVanguardProficiency1 {
 			}
 		}
 		
-		ArrayList<Block> changing = new ArrayList<Block>();
-		
 		p.teleport(centre.toCenterLocation());
-		changing = ChangeBlocksToIce(centre, iceblock1, delay);
-		changing.addAll(ChangeBlocksToIce(centre, iceblock2, delay * 2));
-		changing.addAll(ChangeBlocksToIce(centre, iceblock3, delay * 3));
+		
+		ArrayList<Block> changing = new ArrayList<Block>();
+		for(int i = 0; i < iceBlockLists.size(); i++) {
+			changing.addAll(ChangeBlocksToIce(centre, iceBlockLists.get(i), delay * (i + 1)));
+		}
 		
 		final ArrayList<Block> changed = changing;
-		
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 			public void run() {
 				for(Block block : changed) {
