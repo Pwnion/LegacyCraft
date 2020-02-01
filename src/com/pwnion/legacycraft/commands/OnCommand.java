@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 import com.pwnion.legacycraft.abilities.areas.Sphere;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
+import com.pwnion.legacycraft.abilities.proficiencies.ArcticVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.targets.Point;
 
 public class OnCommand implements CommandExecutor {
@@ -59,9 +60,7 @@ public class OnCommand implements CommandExecutor {
 					}
 				}
 			} else if(lbl.equals("test")) {
-				for(Block block : Sphere.get(p.getLocation().add(0, 5, 0), 4)) {
-					block.setType(Material.STONE);
-				}
+				p.sendMessage(ArcticVanguardProficiency1.activate(p));
 			}
 			return true;
 		} else {

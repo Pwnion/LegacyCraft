@@ -19,7 +19,7 @@ public class ArcticVanguardProficiency1 {
 	private static final HashMap<Location, String> iceblock2 = Selection.load("iceblock2");
 	private static final HashMap<Location, String> iceblock3 = Selection.load("iceblock3");
 	
-	public String activate(Player p) {
+	public static final String activate(Player p) {
 		int time = 50;
 		int delay = 2;
 		
