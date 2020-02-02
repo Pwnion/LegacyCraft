@@ -64,6 +64,10 @@ public class SelectAnAspectInv extends Inv {
 			SkillTree.Aspect clickedAspect = SkillTree.Aspect.valueOf(clickedItem.getItemMeta().getDisplayName().toUpperCase());
 			
 			if(clickType.isLeftClick()) {
+				if(p.hasPermission("legacycraft.op")) {
+					skillTree.setUnlockedBuild(openedClass, clickedAspect);
+				}
+				
 				if(!skillTree.getUnlockedBuild(openedClass, clickedAspect)) return;
 				
 				skillTree.setAspect(openedClass, clickedAspect);

@@ -117,7 +117,7 @@ public class SkillTree {
 		playerDataConfig.saveCustomConfig();
 	}
 	
-	//Save relevent player data for a class to a file
+	//Save a state for a player to the player data file
 	private final void saveState(boolean classNotOther) {
 		String savePath;
 		if(classNotOther) {
@@ -137,7 +137,7 @@ public class SkillTree {
 		save();
 	}
 	
-	//Load relevent player data for a class from a file
+	//Load a state for a player from the player data file
 	private final void loadState(PlayerClass playerClass, boolean classNotOther) {
 		String savePath;
 		if(classNotOther) {
@@ -164,18 +164,22 @@ public class SkillTree {
         p.teleport(loc);
 	}
 	
+	//Save the equipped class state
 	public final void saveClass() {
 		saveState(true);
 	}
 	
+	//Load a class state
 	public final void loadClass(PlayerClass playerClass) {
 		loadState(playerClass, true);
 	}
 	
+	//Save the other state
 	public final void saveOther() {
 		saveState(false);
 	}
 	
+	//Load the other state
 	public final void loadOther() {
 		loadState(null, false);
 	}
@@ -250,9 +254,9 @@ public class SkillTree {
 	 * BUILD SETTERS
 	 */
 	
-	public final void setBuildUnlocked(PlayerClass playerClass, Aspect aspect, boolean value) {
+	public final void setUnlockedBuild(PlayerClass playerClass, Aspect aspect) {
 		Build build = getBuild(playerClass, aspect);
-		playerDataCS.set(nodePrefix + playerUUID + "." + build.toString() + ".unlocked", value);
+		playerDataCS.set(nodePrefix + playerUUID + "." + build.toString() + ".unlocked", true);
 		save();
 	}
 	
