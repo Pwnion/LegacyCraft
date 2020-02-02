@@ -47,6 +47,7 @@ public class Selection {
             for(Block block : RectangularPrism.get(pos1, pos2)) {
                 if(!block.isEmpty()) {
                 	Location RelBlockLoc = block.getLocation().subtract(p.getLocation());
+                	RelBlockLoc = floorLoc(RelBlockLoc);
                     data.add(DataToString(RelBlockLoc, block.getType()));
                 }
             }
@@ -58,5 +59,10 @@ public class Selection {
     
     private String DataToString(Location loc, Material material) {
     	return loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ() + "," + material.name();
+    }
+    
+    private Location floorLoc(Location loc) {
+    	loc.set(Math.floor(loc.getX()), Math.floor(loc.getY()), Math.floor(loc.getZ()));
+    	return loc;
     }
 }

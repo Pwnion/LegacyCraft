@@ -7,8 +7,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
@@ -29,6 +32,11 @@ public class ArcticVanguardProficiency1 {
 		int delay = 10;
 		
 		Location centre = p.getLocation();
+		World w = p.getWorld();
+		
+		if(!centre.clone().add(0, -1, 0).getBlock().getType().isSolid()) {
+			return ChatColor.RED + "Stand on Solid Ground!";
+		}
 		
 		ArrayList<Block> safetyRectangularPrism = RectangularPrism.get(centre.getBlock(), 1, 4);
 		for(Block block : safetyRectangularPrism) {
@@ -38,6 +46,7 @@ public class ArcticVanguardProficiency1 {
 		}
 		
 		p.teleport(centre.toCenterLocation());
+		w.spawnParticle(Particle.SNOWBALL, centre, 50, 3, 3, 3);
 		
 		ArrayList<Block> changing = new ArrayList<Block>();
 		for(int i = 0; i < iceBlockLists.size(); i++) {
@@ -48,6 +57,8 @@ public class ArcticVanguardProficiency1 {
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 			public void run() {
 				for(Block block : changed) {
+					ItemStack itemCrackData = new ItemStack(block.getType());
+		    		w.spawnParticle(Particle.BLOCK_CRACK, block.getLocation(), 10, itemCrackData);
 					block.setType(Material.AIR);
 				}
 			}
@@ -59,10 +70,11 @@ public class ArcticVanguardProficiency1 {
 	private static final ArrayList<Block> ChangeBlocksToIce(Location centre, ArrayList<String> blocksAsString, int delay) {
 		ArrayList<Block> changed = new ArrayList<Block>();
 		HashMap<Block, Material> blocks = new HashMap<Block, Material>();
+		World w = centre.getWorld();
 		
 		for(String dataS : blocksAsString) {
 			String data[] = dataS.split(",");
-			Location loc = new Location(centre.getWorld(), Float.valueOf(data[0]) - 1, Float.valueOf(data[1]), Float.valueOf(data[2]) - 1);
+			Location loc = new Location(w, Float.valueOf(data[0]) - 1, Float.valueOf(data[1]), Float.valueOf(data[2]) - 1);
 			Material mat = Material.getMaterial(data[3]);
 			loc.add(centre);
 			Block block = loc.getBlock();
@@ -75,7 +87,10 @@ public class ArcticVanguardProficiency1 {
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 		    public void run() {
 		    	for (Block block : changed) {
+		    		//Change Air blocks to Ice
 		    		block.setType(blocks.get(block));
+		    		ItemStack itemCrackData = new ItemStack(block.getType());
+		    		w.spawnParticle(Particle.BLOCK_CRACK, block.getLocation(), 10, itemCrackData);
 		    	}
 		    }
 		}, delay);
