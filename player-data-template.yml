@@ -153,6 +153,10 @@ STRIKER:
       z: 13.5
       pitch: -4.0500517
       yaw: 180.42847
+    health: 20.0
+    hunger: 20
+    level: 0
+    exp: 0.0
 VANGUARD:
   ASPECT: 'NONE'
   aptitudes:
@@ -306,6 +310,10 @@ VANGUARD:
       z: 13.5
       pitch: -4.0500517
       yaw: 180.42847
+    health: 20.0
+    hunger: 20
+    level: 0
+    exp: 0.0
 ROGUE:
   ASPECT: 'NONE'
   aptitudes:
@@ -459,6 +467,10 @@ ROGUE:
       z: 13.5
       pitch: -4.0500517
       yaw: 180.42847
+    health: 20.0
+    hunger: 20
+    level: 0
+    exp: 0.0
 SHAMAN:
   ASPECT: 'NONE'
   aptitudes:
@@ -612,6 +624,10 @@ SHAMAN:
       z: 13.5
       pitch: -4.0500517
       yaw: 180.42847
+    health: 20.0
+    hunger: 20
+    level: 0
+    exp: 0.0
 IGNIS_STRIKER:
   unlocked: true
   proficiencies:
@@ -820,3 +836,10 @@ ARCTIC_SHAMAN:
     ONE:
       unlocked: false
       equipped: false
+save:
+  inventory:
+  location:
+  health:
+  hunger:
+  level:
+  exp:

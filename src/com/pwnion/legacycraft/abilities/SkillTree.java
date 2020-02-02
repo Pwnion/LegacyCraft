@@ -118,27 +118,66 @@ public class SkillTree {
 	}
 	
 	//Save relevent player data for a class to a file
-	public final void saveClass(PlayerClass playerClass) {
-		String savePath = nodePrefix + playerClass.toString() + ".save.";
+	private final void saveState(boolean classNotOther) {
+		String savePath;
+		if(classNotOther) {
+			if(getPlayerClass().equals(PlayerClass.NONE)) return;
+			savePath = nodePrefix + playerClass.toString() + ".save.";
+		} else {
+			savePath = nodePrefix + "save.";
+		}
 		
 		playerDataCS.set(savePath + "inventory", p.getInventory().getContents());
 		playerDataCS.set(savePath + "location", p.getLocation());
+		playerDataCS.set(savePath + "health", p.getHealth());
+		playerDataCS.set(savePath + "hunger", p.getFoodLevel());
+		playerDataCS.set(savePath + "level", p.getLevel());
+		playerDataCS.set(savePath + "exp", p.getExp());
 		
 		save();
 	}
 	
 	//Load relevent player data for a class from a file
-	public final void loadClass(PlayerClass playerClass) {
-		String savePath = nodePrefix + playerClass.toString() + ".save.";
+	private final void loadState(PlayerClass playerClass, boolean classNotOther) {
+		String savePath;
+		if(classNotOther) {
+			savePath = nodePrefix + playerClass.toString() + ".save.";
+		} else {
+			savePath = nodePrefix + "save.";
+		}
 		
 		ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
 		ConfigurationSection playerDataCS = playerDataConfig.getRoot();
 		
-		ItemStack contents[] = playerDataCS.getList(savePath + "inventory").toArray(new ItemStack[0]);
+		ItemStack inv[] = playerDataCS.getList(savePath + "inventory").toArray(new ItemStack[0]);
 		Location loc = (Location) playerDataCS.get(savePath + "location");
+		double health = playerDataCS.getDouble(savePath + "health");
+		int hunger = playerDataCS.getInt(savePath + "hunger");
+		int level = playerDataCS.getInt(savePath + "level");
+		float exp = (float) playerDataCS.getDouble(savePath + "exp");
 		
-        p.getInventory().setContents(contents);
+        p.getInventory().setContents(inv);
+        p.setHealth(health);
+        p.setFoodLevel(hunger);
+        p.setLevel(level);
+        p.setExp(exp);
         p.teleport(loc);
+	}
+	
+	public final void saveClass() {
+		saveState(true);
+	}
+	
+	public final void loadClass(PlayerClass playerClass) {
+		loadState(playerClass, true);
+	}
+	
+	public final void saveOther() {
+		saveState(false);
+	}
+	
+	public final void loadOther() {
+		loadState(null, false);
 	}
 	
 	/*
@@ -202,7 +241,7 @@ public class SkillTree {
 		return Build.valueOf(aspect.toString() + "_" + playerClass.toString());
 	}
 	
-	public final boolean getBuildUnlocked(PlayerClass playerClass, Aspect aspect) {
+	public final boolean getUnlockedBuild(PlayerClass playerClass, Aspect aspect) {
 		Build build = getBuild(playerClass, aspect);
 		return playerDataCS.getBoolean(nodePrefix + playerUUID + "." + build.toString() + ".unlocked");
 	}

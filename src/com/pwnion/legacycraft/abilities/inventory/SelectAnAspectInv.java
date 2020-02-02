@@ -63,9 +63,9 @@ public class SelectAnAspectInv extends Inv {
 			PlayerClass openedClass = (PlayerClass) LegacyCraft.getPlayerData(playerUUID, PlayerData.CLASS_INVENTORY_OPEN);
 			SkillTree.Aspect clickedAspect = SkillTree.Aspect.valueOf(clickedItem.getItemMeta().getDisplayName().toUpperCase());
 			
-			LegacyCraft.setPlayerData(playerUUID, PlayerData.ASPECT_INVENTORY_OPEN, clickedAspect);
-			
 			if(clickType.isLeftClick()) {
+				if(!skillTree.getUnlockedBuild(openedClass, clickedAspect)) return;
+				
 				skillTree.setAspect(openedClass, clickedAspect);
 				
 				for(int slot : aspectToSlot.values()) {
@@ -86,6 +86,8 @@ public class SelectAnAspectInv extends Inv {
 				inv.getItem(aspectToSlot.get(clickedAspect) - 9).setType(Material.WHITE_STAINED_GLASS_PANE);
 				inv.getItem(aspectToSlot.get(clickedAspect) + 9).setType(Material.WHITE_STAINED_GLASS_PANE);
 			} else if(clickType.isRightClick()) {
+				LegacyCraft.setPlayerData(playerUUID, PlayerData.ASPECT_INVENTORY_OPEN, clickedAspect);
+				
 				BuildInv.load(p);
 			}
 			break;

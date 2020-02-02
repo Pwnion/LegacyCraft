@@ -3,7 +3,6 @@ package com.pwnion.legacycraft.listeners;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,8 +29,6 @@ public class PlayerJoin implements Listener {
 				put(PlayerData.FALL_DISTANCE, 0f);
 				put(PlayerData.CLASS_INVENTORY_OPEN, PlayerClass.NONE);
 				put(PlayerData.ASPECT_INVENTORY_OPEN, SkillTree.Aspect.NONE);
-				put(PlayerData.ADVENTURE_MODE, p.getGameMode().equals(GameMode.ADVENTURE) ? true : false);
-				put(PlayerData.UNDER_NO_FALL_DAMAGE_LIMIT, false);
 			}
 		});
 	}
