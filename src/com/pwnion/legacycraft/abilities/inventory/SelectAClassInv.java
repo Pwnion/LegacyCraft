@@ -2,8 +2,6 @@ package com.pwnion.legacycraft.abilities.inventory;
 
 import java.util.UUID;
 
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -63,11 +61,6 @@ public class SelectAClassInv extends Inv {
 				if(skillTree.getPlayerClass().equals(clickedClass)) return;
 				
 				p.closeInventory();
-				
-				if(!p.getGameMode().equals(GameMode.ADVENTURE)) {
-					p.sendMessage(ChatColor.DARK_RED + "You must be in adventure mode to do that!");
-					return;
-				}
 				
 				skillTree.saveClass();
 				skillTree.setPlayerClass(clickedClass);

@@ -5,7 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Supplier;
 
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,10 +18,14 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.ConfigAccessor;
+import com.pwnion.legacycraft.LegacyCraft;
+import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.abilities.inventory.InventoryFromFile;
 import com.pwnion.legacycraft.abilities.inventory.SelectAClassInv;
 import com.pwnion.legacycraft.abilities.inventory.SelectAnAspectInv;
 import com.pwnion.legacycraft.abilities.inventory.WeaponEnhancementsInv;
+import com.pwnion.legacycraft.abilities.SkillTree;
+import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
 import com.pwnion.legacycraft.abilities.inventory.BuildInv;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.inventory.Inv;
@@ -63,17 +71,39 @@ public class InventoryClick implements Listener {
         final ItemStack clickedItem = e.getCurrentItem();
         
         //Invokes the 'respond' method of the inventory class that matches the players open inventory
-        try {
-        	String currentHolder = currentInv.getHolder().toString();
-        	currentHolder = currentHolder.substring(0, currentHolder.indexOf("@"));
+        //Returns false if the player is not in the inventory GUI
+        Supplier<Boolean> handleGUI = () -> {
+        	try {
+            	String currentHolder = currentInv.getHolder().toString();
+            	currentHolder = currentHolder.substring(0, currentHolder.indexOf("@"));
+            	
+            	if(!holderToInvClass.keySet().contains(currentHolder)) return false;
+            	
+            	if(!p.getGameMode().equals(GameMode.ADVENTURE)) {
+            		p.closeInventory();
+            		p.sendMessage(ChatColor.DARK_RED + "You must be in adventure mode to do that!");
+            		return true;
+            	}
+            	
+            	e.setCancelled(true);
+            	
+            	holderToInvClass.get(currentHolder).getMethod("respond", new Class[] {InventoryClickEvent.class}).invoke(null, e);
+            } catch(Exception ex) {
+            	return false;
+            };
+            return true;
+        };
+        
+        if(!handleGUI.get()) {
+        	SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
         	
-        	if(!holderToInvClass.keySet().contains(currentHolder)) return;
-        	
-        	e.setCancelled(true);
-        	
-        	holderToInvClass.get(currentHolder).getMethod("respond", new Class[] {InventoryClickEvent.class}).invoke(null, e);
-        } catch(Exception ex) {
-        	return;
+        	if(p.getGameMode().equals(GameMode.ADVENTURE) && !skillTree.getPlayerClass().equals(PlayerClass.NONE)) {
+        		e.setCancelled(true);
+        		
+        		if(clickedItem.getType().equals(Material.COMPASS)) {
+        			CharacterBuildMenuInv.load(p);
+        		}
+        	}
         }
     }
 }
