@@ -49,6 +49,7 @@ public class LegacyCraft extends JavaPlugin {
 		new ConfigAccessor("inventory-gui.yml").saveDefaultConfig();
 		new ConfigAccessor("player-data.yml").saveDefaultConfig();
 		new ConfigAccessor("player-data-template.yml").saveDefaultConfig();
+		new ConfigAccessor("structures.yml").saveDefaultConfig();
 		
 		//Register listeners
 		registerEvents(

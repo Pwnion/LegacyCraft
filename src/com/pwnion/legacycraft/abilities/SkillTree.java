@@ -1,7 +1,6 @@
 package com.pwnion.legacycraft.abilities;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
 import org.bukkit.Location;
@@ -121,21 +120,24 @@ public class SkillTree {
 	//Save relevent player data for a class to a file
 	public final void saveClass(PlayerClass playerClass) {
 		String savePath = nodePrefix + playerClass.toString() + ".save.";
-		playerDataCS.set(savePath + "inventory", p.getInventory().getContents().clone());
-		playerDataCS.set(savePath + "location", p.getLocation().clone());
+		
+		playerDataCS.set(savePath + "inventory", p.getInventory().getContents());
+		playerDataCS.set(savePath + "location", p.getLocation());
+		
 		save();
 	}
 	
 	//Load relevent player data for a class from a file
-	@SuppressWarnings("unchecked")
 	public final void loadClass(PlayerClass playerClass) {
 		String savePath = nodePrefix + playerClass.toString() + ".save.";
 		
-		ItemStack contents[] = ((List<ItemStack>) playerDataCS.get(savePath + "inventory")).toArray(new ItemStack[0]);
+		ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
+		ConfigurationSection playerDataCS = playerDataConfig.getRoot();
+		
+		ItemStack contents[] = playerDataCS.getList(savePath + "inventory").toArray(new ItemStack[0]);
 		Location loc = (Location) playerDataCS.get(savePath + "location");
 		
         p.getInventory().setContents(contents);
-        
         p.teleport(loc);
 	}
 	

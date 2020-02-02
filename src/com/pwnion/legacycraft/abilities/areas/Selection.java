@@ -1,6 +1,6 @@
 package com.pwnion.legacycraft.abilities.areas;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -17,8 +17,8 @@ public class Selection {
     public static final ConfigurationSection structuresCS = structuresConfig.getRoot();
     
     @SuppressWarnings("unchecked")
-    public static final HashMap<Location, Material> load(String name) {
-        return (HashMap<Location, Material>) structuresCS.get("structures." + name);
+    public static final ArrayList<String> load(String name) {
+        return (ArrayList<String>) structuresCS.getList("structures." + name);
     }
     
     private Player p;
@@ -40,19 +40,29 @@ public class Selection {
     }
     
     public final String export(String name) {
-        HashMap<Location, Material> data = new HashMap<Location, Material>();
+        ArrayList<String> data = new ArrayList<String>();
         if(pos1 == null || pos2 == null) {
             return ChatColor.DARK_RED + "You forgot to set both positions!";
         } else {
-            //add to data (i.e. data.put(key, value))
             for(Block block : RectangularPrism.get(pos1, pos2)) {
                 if(!block.isEmpty()) {
-                    data.put(block.getLocation().subtract(p.getLocation()), block.getType());
+                	Location RelBlockLoc = block.getLocation().subtract(p.getLocation());
+                	RelBlockLoc = floorLoc(RelBlockLoc);
+                    data.add(DataToString(RelBlockLoc, block.getType()));
                 }
             }
         }
         structuresCS.set("structures." + name, data);
         structuresConfig.saveCustomConfig();
         return ChatColor.DARK_GREEN + "Saved to file!";
+    }
+    
+    private String DataToString(Location loc, Material material) {
+    	return loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ() + "," + material.name();
+    }
+    
+    private Location floorLoc(Location loc) {
+    	loc.set(Math.floor(loc.getX()), Math.floor(loc.getY()), Math.floor(loc.getZ()));
+    	return loc;
     }
 }

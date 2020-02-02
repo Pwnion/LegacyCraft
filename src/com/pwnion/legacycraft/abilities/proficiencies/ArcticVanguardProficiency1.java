@@ -7,23 +7,36 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 
 public class ArcticVanguardProficiency1 {
-	private static final HashMap<Location, Material> iceblock1 = Selection.load("iceblock1");
-	private static final HashMap<Location, Material> iceblock2 = Selection.load("iceblock2");
-	private static final HashMap<Location, Material> iceblock3 = Selection.load("iceblock3");
+	private static final ArrayList<ArrayList<String>> iceBlockLists = getIceBlockLists("iceblock", 3);
+	private static final ArrayList<ArrayList<String>> getIceBlockLists(String namePrefix, int num) {
+		final ArrayList<ArrayList<String>> iceBlocks = new ArrayList<ArrayList<String>>(num);
+		for(int i = 1; i < num + 1; i++) {
+			iceBlocks.add(Selection.load(namePrefix + String.valueOf(i)));
+		}
+		return iceBlocks;
+	}
 	
-	public String activate(Player p) {
-		int time = 50;
-		int delay = 2;
+	public static final String activate(Player p) {
+		int time = 20 * 10;
+		int delay = 10;
 		
 		Location centre = p.getLocation();
+		World w = p.getWorld();
+		
+		if(!centre.clone().add(0, -1, 0).getBlock().getType().isSolid()) {
+			return ChatColor.RED + "Stand on Solid Ground!";
+		}
 		
 		ArrayList<Block> safetyRectangularPrism = RectangularPrism.get(centre.getBlock(), 1, 4);
 		for(Block block : safetyRectangularPrism) {
@@ -32,17 +45,20 @@ public class ArcticVanguardProficiency1 {
 			}
 		}
 		
-		ArrayList<Block> changing = new ArrayList<Block>();
+		p.teleport(centre.toCenterLocation());
+		w.spawnParticle(Particle.SNOWBALL, centre, 50, 3, 3, 3);
 		
-		changing = ChangeBlocksToIce(centre, iceblock1, delay);
-		changing.addAll(ChangeBlocksToIce(centre, iceblock2, delay * 2));
-		changing.addAll(ChangeBlocksToIce(centre, iceblock3, delay * 3));
+		ArrayList<Block> changing = new ArrayList<Block>();
+		for(int i = 0; i < iceBlockLists.size(); i++) {
+			changing.addAll(ChangeBlocksToIce(centre, iceBlockLists.get(i), delay * (i + 1)));
+		}
 		
 		final ArrayList<Block> changed = changing;
-		
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 			public void run() {
 				for(Block block : changed) {
+					ItemStack itemCrackData = new ItemStack(block.getType());
+		    		w.spawnParticle(Particle.BLOCK_CRACK, block.getLocation(), 10, itemCrackData);
 					block.setType(Material.AIR);
 				}
 			}
@@ -51,21 +67,30 @@ public class ArcticVanguardProficiency1 {
 		return ChatColor.DARK_GREEN + "Casted Ice Block!";
 	}
 	
-	public ArrayList<Block> ChangeBlocksToIce(Location centre, HashMap<Location, Material> blocks, int delay) {
+	private static final ArrayList<Block> ChangeBlocksToIce(Location centre, ArrayList<String> blocksAsString, int delay) {
 		ArrayList<Block> changed = new ArrayList<Block>();
+		HashMap<Block, Material> blocks = new HashMap<Block, Material>();
+		World w = centre.getWorld();
 		
-		for(Location loc : blocks.keySet()) {
+		for(String dataS : blocksAsString) {
+			String data[] = dataS.split(",");
+			Location loc = new Location(w, Float.valueOf(data[0]) - 1, Float.valueOf(data[1]), Float.valueOf(data[2]) - 1);
+			Material mat = Material.getMaterial(data[3]);
 			loc.add(centre);
 			Block block = loc.getBlock();
 			if(block.isEmpty()) {
 				changed.add(block);
 			}
+			blocks.put(loc.getBlock(), mat);
 		}
 		
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 		    public void run() {
 		    	for (Block block : changed) {
-		    		block.setType(blocks.get(block.getLocation().add(centre)));
+		    		//Change Air blocks to Ice
+		    		block.setType(blocks.get(block));
+		    		ItemStack itemCrackData = new ItemStack(block.getType());
+		    		w.spawnParticle(Particle.BLOCK_CRACK, block.getLocation(), 10, itemCrackData);
 		    	}
 		    }
 		}, delay);
