@@ -36,9 +36,9 @@ public class ArcticVanguardProficiency1 {
 
 			double dist;
 			if(loc.getBlockY() > 0) {
-				dist = loc.distance(new Location(null, 0, 1, 0));
+				dist = distance(loc, 0, 1, 0);
 			} else {
-				dist = loc.distance(new Location(null, 0, 0, 0));
+				dist = distance(loc, 0, 0, 0);
 			}
 			
 			distances.put(loc, dist);
@@ -133,4 +133,13 @@ public class ArcticVanguardProficiency1 {
 		}, delay);
 		return changed;
 	}
+	
+	private static double distance(Location loc1, Location loc2) {
+		return Math.sqrt(Math.pow(loc1.getX() - loc2.getX(), 2) + Math.pow(loc1.getY() - loc2.getY(), 2) + Math.pow(loc1.getZ() - loc2.getZ(), 2));
+	}
+	
+	private static double distance(Location loc1, int x2, int y2, int z2) {
+		return distance(loc1, new Location(null, x2, y2, z2));
+	}
+
 }
