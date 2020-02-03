@@ -46,9 +46,11 @@ public class Selection {
         } else {
             for(Block block : RectangularPrism.get(pos1, pos2)) {
                 if(!block.isEmpty()) {
-                	Location RelBlockLoc = block.getLocation().subtract(p.getLocation());
-                	RelBlockLoc = floorLoc(RelBlockLoc);
-                    data.add(DataToString(RelBlockLoc, block.getType()));
+                	//Gets the location of the block that the player is at
+                	Location centre = p.getLocation().getBlock().getLocation();
+                	Location loc = block.getLocation().subtract(centre);
+                	loc = floorLoc(loc);
+                    data.add(DataToString(loc, block.getType()));
                 }
             }
         }

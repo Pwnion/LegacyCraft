@@ -18,14 +18,55 @@ import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 
 public class ArcticVanguardProficiency1 {
-	private static final ArrayList<ArrayList<String>> iceBlockLists = getIceBlockLists("iceblock", 3);
-	private static final ArrayList<ArrayList<String>> getIceBlockLists(String namePrefix, int num) {
-		final ArrayList<ArrayList<String>> iceBlocks = new ArrayList<ArrayList<String>>(num);
-		for(int i = 1; i < num + 1; i++) {
-			iceBlocks.add(Selection.load(namePrefix + String.valueOf(i)));
+	private static final ArrayList<HashMap<Location, Material>> iceBlockLists = getIceBlockLists(3);
+	
+	//splits the iceblock file into the requested amount of HashMaps 
+	private static final ArrayList<HashMap<Location, Material>> getIceBlockLists(int num) {
+		final ArrayList<String> iceblockUnproccessed = Selection.load("iceblock");
+		
+		HashMap<Location, Material> iceblockFull = new HashMap<Location, Material>(iceblockUnproccessed.size());
+		HashMap<Location, Double> distances = new HashMap<Location, Double>(iceblockUnproccessed.size());
+		double furthest = 0;
+		
+		for(String dataS : iceblockUnproccessed) {
+			String data[] = dataS.split(",");
+			Location loc = new Location(null, Float.valueOf(data[0]), Float.valueOf(data[1]), Float.valueOf(data[2]));
+			Material mat = Material.valueOf(data[3]);
+			iceblockFull.put(loc, mat);
+
+			double dist;
+			if(loc.getBlockY() > 0) {
+				dist = loc.distance(new Location(null, 0, 1, 0));
+			} else {
+				dist = loc.distance(new Location(null, 0, 0, 0));
+			}
+			
+			distances.put(loc, dist);
+			
+			if(dist > furthest) {
+				furthest = dist;
+			}
 		}
-		return iceBlocks;
+		
+		ArrayList<HashMap<Location, Material>> iceblockLists = new ArrayList<HashMap<Location, Material>>();
+		ArrayList<Location> checked = new ArrayList<Location>();
+		double split = furthest / num;
+		for(int i = 1; i <= num; i++) {
+			HashMap<Location, Material> iceblockSplit = new HashMap<Location, Material>();
+			for(Location loc : iceblockFull.keySet()) {
+				double dist = distances.get(loc);
+				if(dist < (split * i) && !checked.contains(loc)) {
+					iceblockSplit.put(loc, iceblockFull.get(loc));
+					checked.add(loc);
+				}
+				iceblockLists.add(iceblockSplit);
+			}
+		}
+		
+		return iceblockLists;
 	}
+	
+	
 	
 	public static final String activate(Player p) {
 		int time = 20 * 10;
@@ -67,30 +108,26 @@ public class ArcticVanguardProficiency1 {
 		return ChatColor.DARK_GREEN + "Casted Ice Block!";
 	}
 	
-	private static final ArrayList<Block> ChangeBlocksToIce(Location centre, ArrayList<String> blocksAsString, int delay) {
+	private static final ArrayList<Block> ChangeBlocksToIce(Location centre, HashMap<Location, Material> blocks, int delay) {
 		ArrayList<Block> changed = new ArrayList<Block>();
-		HashMap<Block, Material> blocks = new HashMap<Block, Material>();
 		World w = centre.getWorld();
 		
-		for(String dataS : blocksAsString) {
-			String data[] = dataS.split(",");
-			Location loc = new Location(w, Float.valueOf(data[0]) - 1, Float.valueOf(data[1]), Float.valueOf(data[2]) - 1);
-			Material mat = Material.getMaterial(data[3]);
+		for(Location loc : blocks.keySet()) {
+			loc.setWorld(w);
 			loc.add(centre);
 			Block block = loc.getBlock();
 			if(block.isEmpty()) {
 				changed.add(block);
 			}
-			blocks.put(loc.getBlock(), mat);
 		}
 		
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 		    public void run() {
 		    	for (Block block : changed) {
 		    		//Change Air blocks to Ice
-		    		block.setType(blocks.get(block));
+		    		block.setType(blocks.get(block.getLocation()));
 		    		ItemStack itemCrackData = new ItemStack(block.getType());
-		    		w.spawnParticle(Particle.BLOCK_CRACK, block.getLocation(), 10, itemCrackData);
+		    		w.spawnParticle(Particle.BLOCK_CRACK, block.getLocation(), 20, itemCrackData);
 		    	}
 		    }
 		}, delay);
