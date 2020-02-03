@@ -13,7 +13,6 @@ import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
@@ -105,7 +104,7 @@ public class ArcticVanguardProficiency1 {
 			public void run() {
 				for(Block block : changed) {
 					w.spawnParticle(Particle.BLOCK_DUST, block.getLocation(), 20, 1, 1, 1, 0, block.getBlockData(), true);
-		    		w.playSound(block.getLocation(), block.getSoundGroup().getBreakSound(), (float) 0.1, 1);
+		    		w.playSound(block.getLocation(), block.getSoundGroup().getBreakSound(), 0.05f, 1);
 					block.setType(Material.AIR);
 				}
 			}
