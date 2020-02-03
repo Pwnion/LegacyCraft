@@ -1,9 +1,10 @@
-package com.pwnion.legacycraft.commands;
+package com.pwnion.legacycraft;
 
 import java.util.HashMap;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -40,7 +41,11 @@ public class OnCommand implements CommandExecutor {
 				} else {
 					switch(args[0]) {
 					case "class":
-						CharacterBuildMenuInv.load(p);
+						if(p.getGameMode().equals(GameMode.ADVENTURE)) {
+							CharacterBuildMenuInv.load(p);
+						} else {
+							p.sendMessage(ChatColor.DARK_RED + "You must be in adventure mode to do that!");
+						}
 						break;
 					case "pos1":
 						if(!playerToSelection.keySet().contains(playerUUID)) {

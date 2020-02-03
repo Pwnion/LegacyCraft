@@ -6,27 +6,24 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.abilities.SkillTree;
+import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
 
-public class PlayerQuit implements Listener {
+public class PlayerDropItem implements Listener {
 	
 	@EventHandler
-	public void onPlayerQuit(PlayerQuitEvent e) {
+	public void onPlayerDropItem(PlayerDropItemEvent e) {
 		Player p = e.getPlayer();
 		UUID playerUUID = p.getUniqueId();
 		
 		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
-		if(p.getGameMode().equals(GameMode.ADVENTURE)) {
-			skillTree.saveClass();
-		} else {
-			skillTree.saveOther();
-		}
 		
-		//Remove the player data for the player that left the server
-		LegacyCraft.removePlayerData(playerUUID);
+		if(p.getGameMode().equals(GameMode.ADVENTURE) && !skillTree.getPlayerClass().equals(PlayerClass.NONE)) {
+			e.setCancelled(true);
+		}
 	}
 }

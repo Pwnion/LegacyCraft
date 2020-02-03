@@ -62,12 +62,8 @@ public class SelectAClassInv extends Inv {
 				
 				p.closeInventory();
 				
-				if(!skillTree.getPlayerClass().equals(PlayerClass.NONE)) {
-					skillTree.saveClass(skillTree.getPlayerClass());
-				}
-				
+				skillTree.saveClass();
 				skillTree.setPlayerClass(clickedClass);
-				
 				skillTree.loadClass(clickedClass);
 				
 				Jump jump = skillTree.getEquippedJump(clickedClass);
