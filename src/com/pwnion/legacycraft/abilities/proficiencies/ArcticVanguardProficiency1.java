@@ -57,10 +57,11 @@ public class ArcticVanguardProficiency1 {
 				double dist = distances.get(loc);
 				if(dist < (split * i) && !checked.contains(loc)) {
 					iceblockSplit.put(loc, iceblockFull.get(loc));
+					
 					checked.add(loc);
 				}
-				iceblockLists.add(iceblockSplit);
 			}
+			iceblockLists.add(iceblockSplit);
 		}
 		
 		return iceblockLists;
@@ -72,7 +73,7 @@ public class ArcticVanguardProficiency1 {
 		int time = 20 * 10;
 		int delay = 10;
 		
-		Location centre = p.getLocation();
+		Location centre = p.getLocation().toBlockLocation();
 		World w = p.getWorld();
 		
 		if(!centre.clone().add(0, -1, 0).getBlock().getType().isSolid()) {
@@ -91,15 +92,15 @@ public class ArcticVanguardProficiency1 {
 		
 		ArrayList<Block> changing = new ArrayList<Block>();
 		for(int i = 0; i < iceBlockLists.size(); i++) {
-			changing.addAll(ChangeBlocksToIce(centre, iceBlockLists.get(i), delay * (i + 1)));
+			if(iceBlockLists.get(i).size() > 0) {
+				changing.addAll(ChangeBlocksToIce(centre, iceBlockLists.get(i), delay * (i + 1)));
+			}
 		}
 		
 		final ArrayList<Block> changed = changing;
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 			public void run() {
 				for(Block block : changed) {
-					ItemStack itemCrackData = new ItemStack(block.getType());
-		    		w.spawnParticle(Particle.BLOCK_CRACK, block.getLocation(), 10, itemCrackData);
 					block.setType(Material.AIR);
 				}
 			}
@@ -109,9 +110,11 @@ public class ArcticVanguardProficiency1 {
 	}
 	
 	private static final ArrayList<Block> ChangeBlocksToIce(Location centre, HashMap<Location, Material> blocks, int delay) {
+		
 		ArrayList<Block> changed = new ArrayList<Block>();
 		World w = centre.getWorld();
-		
+
+		Bukkit.getServer().broadcastMessage(blocks.toString());
 		for(Location loc : blocks.keySet()) {
 			loc.setWorld(w);
 			loc.add(centre);
@@ -125,9 +128,10 @@ public class ArcticVanguardProficiency1 {
 		    public void run() {
 		    	for (Block block : changed) {
 		    		//Change Air blocks to Ice
-		    		block.setType(blocks.get(block.getLocation()));
-		    		ItemStack itemCrackData = new ItemStack(block.getType());
-		    		w.spawnParticle(Particle.BLOCK_CRACK, block.getLocation(), 20, itemCrackData);
+		    		Location loc = block.getLocation().subtract(centre);
+		    		loc.setWorld(null);
+		    		Bukkit.getServer().broadcastMessage(loc.toString());
+		    		block.setType(blocks.get(loc));
 		    	}
 		    }
 		}, delay);
