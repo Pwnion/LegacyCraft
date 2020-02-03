@@ -12,7 +12,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.pwnion.legacycraft.listeners.EntityDamage;
 import com.pwnion.legacycraft.listeners.InventoryClick;
+import com.pwnion.legacycraft.listeners.PlayerDropItem;
 import com.pwnion.legacycraft.listeners.PlayerGameModeChange;
+import com.pwnion.legacycraft.listeners.PlayerItemHeld;
 import com.pwnion.legacycraft.listeners.PlayerJoin;
 import com.pwnion.legacycraft.listeners.PlayerMove;
 import com.pwnion.legacycraft.listeners.PlayerQuit;
@@ -58,7 +60,9 @@ public class LegacyCraft extends JavaPlugin {
 			new EntityDamage(),
 			new InventoryClick(),
 			new PlayerGameModeChange(),
-			new PlayerQuit()
+			new PlayerQuit(),
+			new PlayerItemHeld(),
+			new PlayerDropItem()
 		);
 		
 		//Register commands
