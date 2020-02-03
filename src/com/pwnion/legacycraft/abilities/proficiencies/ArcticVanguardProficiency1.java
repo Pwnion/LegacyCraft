@@ -2,6 +2,8 @@ package com.pwnion.legacycraft.abilities.proficiencies;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,7 +20,7 @@ import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 
 public class ArcticVanguardProficiency1 {
-	private static final ArrayList<HashMap<Location, Material>> iceBlockLists = getIceBlockLists(3);
+	//private static final ArrayList<HashMap<Location, Material>> iceBlockLists = getIceBlockLists(3);
 	
 	//splits the iceblock file into the requested amount of HashMaps 
 	private static final ArrayList<HashMap<Location, Material>> getIceBlockLists(int num) {
@@ -71,7 +73,7 @@ public class ArcticVanguardProficiency1 {
 	
 	public static final String activate(Player p) {
 		int time = 20 * 10;
-		int delay = 10;
+		int delay = 4;
 		
 		Location centre = p.getLocation().toBlockLocation();
 		World w = p.getWorld();
@@ -80,7 +82,7 @@ public class ArcticVanguardProficiency1 {
 			return ChatColor.RED + "Stand on Solid Ground!";
 		}
 		
-		ArrayList<Block> safetyRectangularPrism = RectangularPrism.get(centre.getBlock(), 1, 4);
+		ArrayList<Block> safetyRectangularPrism = RectangularPrism.get(centre.getBlock(), 1, 3);
 		for(Block block : safetyRectangularPrism) {
 			if(block.getType().isSolid()) {
 				return ChatColor.RED + "Surrounding Area not Clear!";
@@ -88,19 +90,22 @@ public class ArcticVanguardProficiency1 {
 		}
 		
 		p.teleport(centre.toCenterLocation());
-		w.spawnParticle(Particle.SNOWBALL, centre, 50, 3, 3, 3);
+		//w.spawnParticle(Particle.BLOCK_DUST, centre, 1000, 2, 2, 2, 0, Material.SNOW_BLOCK.createBlockData(), true);
 		
-		ArrayList<Block> changing = new ArrayList<Block>();
+		final ArrayList<HashMap<Location, Material>> iceBlockLists = getIceBlockLists(3);
+		HashSet<Block> changing = new HashSet<Block>();
 		for(int i = 0; i < iceBlockLists.size(); i++) {
 			if(iceBlockLists.get(i).size() > 0) {
-				changing.addAll(ChangeBlocksToIce(centre, iceBlockLists.get(i), delay * (i + 1)));
+				changing.addAll(ChangeBlocksToIce(centre, iceBlockLists.get(i), delay * (i)));
 			}
 		}
 		
-		final ArrayList<Block> changed = changing;
+		final HashSet<Block> changed = changing;
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 			public void run() {
 				for(Block block : changed) {
+					w.spawnParticle(Particle.BLOCK_DUST, block.getLocation(), 20, 1, 1, 1, 0, block.getBlockData(), true);
+		    		w.playSound(block.getLocation(), block.getSoundGroup().getBreakSound(), (float) 0.1, 1);
 					block.setType(Material.AIR);
 				}
 			}
@@ -109,33 +114,32 @@ public class ArcticVanguardProficiency1 {
 		return ChatColor.DARK_GREEN + "Casted Ice Block!";
 	}
 	
-	private static final ArrayList<Block> ChangeBlocksToIce(Location centre, HashMap<Location, Material> blocks, int delay) {
+	private static final Set<Block> ChangeBlocksToIce(Location centre, HashMap<Location, Material> blocks, int delay) {
 		
-		ArrayList<Block> changed = new ArrayList<Block>();
+		HashMap<Block, Material> changed = new HashMap<Block, Material>();
 		World w = centre.getWorld();
 
-		Bukkit.getServer().broadcastMessage(blocks.toString());
 		for(Location loc : blocks.keySet()) {
+			Material mat = blocks.get(loc);
 			loc.setWorld(w);
 			loc.add(centre);
 			Block block = loc.getBlock();
 			if(block.isEmpty()) {
-				changed.add(block);
+				changed.put(block, mat);
 			}
 		}
 		
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 		    public void run() {
-		    	for (Block block : changed) {
+		    	for (Block block : changed.keySet()) {
 		    		//Change Air blocks to Ice
-		    		Location loc = block.getLocation().subtract(centre);
-		    		loc.setWorld(null);
-		    		Bukkit.getServer().broadcastMessage(loc.toString());
-		    		block.setType(blocks.get(loc));
+		    		block.setType(changed.get(block));
+		    		w.spawnParticle(Particle.BLOCK_DUST, block.getLocation(), 20, 1, 1, 1, 0, block.getBlockData(), true);
+		    		w.playSound(block.getLocation(), block.getSoundGroup().getPlaceSound(), (float) 0.2, 1);
 		    	}
 		    }
 		}, delay);
-		return changed;
+		return changed.keySet();
 	}
 	
 	private static double distance(Location loc1, Location loc2) {
