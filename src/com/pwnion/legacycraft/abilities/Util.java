@@ -1,14 +1,13 @@
 package com.pwnion.legacycraft.abilities;
 
-import java.util.ArrayList;
-
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 public class Util {
 
-	public Vector VectorCalc(Location centre, double yaw, double pitch, double radius) {
+	private static final Vector VectorCalc(Location centre, double yaw, double pitch, double radius) {
 		yaw += 180;
 		Vector vec = new Vector(0, 0, radius);
 		vec.rotateAroundY(yaw);
@@ -16,14 +15,13 @@ public class Util {
 		return vec;
 	}
 	
-	public void Spiral(Player p) {
-		//Player p = null;
+	public static final void Spiral(Player p) {
 		Location centre = p.getEyeLocation();
 		
 		int delay = 1;
 		int steps = 10;
 		double radius = 1;
-		double rotation = 360;
+		double rotation = 1080;
 		double distFromPlayer = 1;
 		
 		double radiusPerStep = radius / steps;
@@ -41,7 +39,9 @@ public class Util {
 		for(int i = 0; i < steps; i++) {
 			up.rotateAroundNonUnitAxis(vec, rotPerStep).normalize();
 			up.multiply(radiusPerStep);
-			Location particle = centre.clone().add(up);
+			Location particleLoc = centre.clone().add(up);
+			
+			p.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, particleLoc, steps, 0, 0, 0, 0, null, true);
 		}
 		
 	}

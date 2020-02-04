@@ -10,9 +10,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.pwnion.legacycraft.abilities.Util;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
-import com.pwnion.legacycraft.abilities.proficiencies.ArcticVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.targets.Point;
 
 public class OnCommand implements CommandExecutor {
@@ -67,7 +67,8 @@ public class OnCommand implements CommandExecutor {
 					}
 				}
 			} else if(lbl.equals("test")) {
-				p.sendMessage(ArcticVanguardProficiency1.activate(p));
+				//p.sendMessage(ArcticVanguardProficiency1.activate(p));
+				Util.Spiral(p);
 			}
 			return true;
 		} else {
