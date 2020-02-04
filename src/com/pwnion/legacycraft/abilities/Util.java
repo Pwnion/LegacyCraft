@@ -41,7 +41,7 @@ public class Util {
 		for(int i = 0; i < steps; i++) {
 			up.rotateAroundNonUnitAxis(vec, rotPerStep).normalize();
 			up.multiply(radiusPerStep);
-			
+			Location particle = centre.clone().add(up);
 		}
 		
 	}
