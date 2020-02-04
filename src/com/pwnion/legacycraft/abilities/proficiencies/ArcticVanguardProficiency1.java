@@ -13,7 +13,6 @@ import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
