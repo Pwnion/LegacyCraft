@@ -7,41 +7,45 @@ import org.bukkit.util.Vector;
 
 public class Util {
 
-	private static final Vector VectorCalc(Location centre, double yaw, double pitch, double radius) {
-		yaw += 180;
-		Vector vec = new Vector(0, 0, radius);
-		vec.rotateAroundY(yaw);
-		vec.rotateAroundNonUnitAxis(vec.getCrossProduct(new Vector(0, 1, 0)), pitch);
-		return vec;
+	private static final Vector VectorCalc(double yaw, double pitch, double radius) {
+		pitch = ((pitch + 90) * Math.PI) / 180;
+		yaw  = ((yaw + 90)  * Math.PI) / 180;
+		double x = Math.sin(pitch) * Math.cos(yaw);
+		double y = Math.cos(pitch);
+		double z = Math.sin(pitch) * Math.sin(yaw);
+		Vector vector = new Vector(x, y, z);
+		vector.multiply(radius);
+		return vector;
 	}
 	
 	public static final void Spiral(Player p) {
 		Location centre = p.getEyeLocation();
 		
 		int delay = 1;
-		int steps = 10;
+		int steps = 40;
 		double radius = 1;
 		double rotation = 1080;
-		double distFromPlayer = 1;
+		double distFromPlayer = 1.5;
 		
-		double radiusPerStep = radius / steps;
-		double rotPerStep = rotation / steps;
-		
-		Vector vec = VectorCalc(centre, centre.getYaw(), centre.getPitch(), distFromPlayer);
+		double radiusPerStep = radius / (steps - 1);
+		double rotPerStep = Math.toRadians(rotation / (steps - 1));
+
+		Vector vec = VectorCalc(centre.getYaw(), centre.getPitch(), distFromPlayer);
 		centre.add(vec);
 		Vector up = new Vector(0, 1, 0);
-		Vector cross = vec.crossProduct(up);
+		Vector cross = vec.clone().crossProduct(up);
 		if(cross.length() == 0) {
 			cross = new Vector(1, 0, 0);
 		}
-		up.rotateAroundNonUnitAxis(cross, 90 - Math.toDegrees(vec.angle(up)));
 		
-		for(int i = 0; i < steps; i++) {
-			up.rotateAroundNonUnitAxis(vec, rotPerStep).normalize();
-			up.multiply(radiusPerStep);
-			Location particleLoc = centre.clone().add(up);
+		up.rotateAroundAxis(cross, Math.toRadians(90) - vec.angle(up));
+		for(int i = 0; i <= steps; i++) {
+			Vector pointer = up.clone();
+			pointer.rotateAroundAxis(vec, rotPerStep * i);
+			pointer.multiply(radiusPerStep * i);
+			Location particleLoc = centre.clone().add(pointer);
 			
-			p.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, particleLoc, steps, 0, 0, 0, 0, null, true);
+			p.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, particleLoc, 4, 0, 0, 0, 0, null, true);
 		}
 		
 	}
