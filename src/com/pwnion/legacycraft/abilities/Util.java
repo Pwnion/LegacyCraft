@@ -1,15 +1,18 @@
 package com.pwnion.legacycraft.abilities;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+import com.pwnion.legacycraft.LegacyCraft;
+
 public class Util {
 
 	private static final Vector VectorCalc(double yaw, double pitch, double radius) {
-		pitch = ((pitch + 90) * Math.PI) / 180;
-		yaw  = ((yaw + 90)  * Math.PI) / 180;
+		pitch = Math.toRadians(pitch + 90);
+		yaw  = Math.toRadians(yaw + 90);
 		double x = Math.sin(pitch) * Math.cos(yaw);
 		double y = Math.cos(pitch);
 		double z = Math.sin(pitch) * Math.sin(yaw);
@@ -26,6 +29,9 @@ public class Util {
 		double radius = 1;
 		double rotation = 1080;
 		double distFromPlayer = 1.5;
+		
+		int count = 4;
+		Particle particle = Particle.ENCHANTMENT_TABLE;
 		
 		double radiusPerStep = radius / (steps - 1);
 		double rotPerStep = Math.toRadians(rotation / (steps - 1));
@@ -45,7 +51,16 @@ public class Util {
 			pointer.multiply(radiusPerStep * i);
 			Location particleLoc = centre.clone().add(pointer);
 			
-			p.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, particleLoc, 4, 0, 0, 0, 0, null, true);
+			if(i == 0) {
+				centre.getWorld().spawnParticle(particle, particleLoc, count, 0, 0, 0, 0, null, true);
+			} else {
+				Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
+					public void run() {
+						centre.getWorld().spawnParticle(particle, particleLoc, count, 0, 0, 0, 0, null, true);
+					}
+				}, delay * i);
+			}
+			
 		}
 		
 	}
