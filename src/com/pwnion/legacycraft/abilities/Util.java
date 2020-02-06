@@ -25,12 +25,12 @@ public class Util {
 		Location centre = p.getEyeLocation();
 		
 		int delay = 1;
-		int steps = 40;
-		double radius = 1;
-		double rotation = 1080;
+		int steps = 60;
+		double radius = 1.5;
+		double rotation = 720;
 		double distFromPlayer = 1.5;
 		
-		int count = 4;
+		int count = 5;
 		Particle particle = Particle.ENCHANTMENT_TABLE;
 		
 		double radiusPerStep = radius / (steps - 1);
@@ -60,9 +60,6 @@ public class Util {
 					}
 				}, delay * i);
 			}
-			
 		}
-		
 	}
-	
 }
