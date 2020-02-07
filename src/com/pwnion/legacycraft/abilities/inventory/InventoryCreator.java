@@ -12,10 +12,10 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.pwnion.legacycraft.abilities.inventory.holders.ArcticRogue;
-import com.pwnion.legacycraft.abilities.inventory.holders.ArcticShaman;
-import com.pwnion.legacycraft.abilities.inventory.holders.ArcticStriker;
-import com.pwnion.legacycraft.abilities.inventory.holders.ArcticVanguard;
+import com.pwnion.legacycraft.abilities.inventory.holders.AquaRogue;
+import com.pwnion.legacycraft.abilities.inventory.holders.AquaShaman;
+import com.pwnion.legacycraft.abilities.inventory.holders.AquaStriker;
+import com.pwnion.legacycraft.abilities.inventory.holders.AquaVanguard;
 import com.pwnion.legacycraft.abilities.inventory.holders.Aspect;
 import com.pwnion.legacycraft.abilities.inventory.holders.IgnisRogue;
 import com.pwnion.legacycraft.abilities.inventory.holders.IgnisShaman;
@@ -27,10 +27,10 @@ import com.pwnion.legacycraft.abilities.inventory.holders.TerraRogue;
 import com.pwnion.legacycraft.abilities.inventory.holders.TerraShaman;
 import com.pwnion.legacycraft.abilities.inventory.holders.TerraStriker;
 import com.pwnion.legacycraft.abilities.inventory.holders.TerraVanguard;
-import com.pwnion.legacycraft.abilities.inventory.holders.VacuousRogue;
-import com.pwnion.legacycraft.abilities.inventory.holders.VacuousShaman;
-import com.pwnion.legacycraft.abilities.inventory.holders.VacuousStriker;
-import com.pwnion.legacycraft.abilities.inventory.holders.VacuousVanguard;
+import com.pwnion.legacycraft.abilities.inventory.holders.AerRogue;
+import com.pwnion.legacycraft.abilities.inventory.holders.AerShaman;
+import com.pwnion.legacycraft.abilities.inventory.holders.AerStriker;
+import com.pwnion.legacycraft.abilities.inventory.holders.AerVanguard;
 import com.pwnion.legacycraft.abilities.inventory.holders.WeaponEnhancements;
 
 public class InventoryCreator {
@@ -71,10 +71,10 @@ public class InventoryCreator {
 			holder = new TerraStriker();
 			break;
 		case "Vacuous Striker":
-			holder = new VacuousStriker();
+			holder = new AerStriker();
 			break;
 		case "Arctic Striker":
-			holder = new ArcticStriker();
+			holder = new AquaStriker();
 			break;
 		case "Ignis Vanguard":
 			holder = new IgnisVanguard();
@@ -83,10 +83,10 @@ public class InventoryCreator {
 			holder = new TerraVanguard();
 			break;
 		case "Vacuous Vanguard":
-			holder = new VacuousVanguard();
+			holder = new AerVanguard();
 			break;
 		case "Arctic Vanguard":
-			holder = new ArcticVanguard();
+			holder = new AquaVanguard();
 			break;
 		case "Ignis Rogue":
 			holder = new IgnisRogue();
@@ -95,10 +95,10 @@ public class InventoryCreator {
 			holder = new TerraRogue();
 			break;
 		case "Vacuous Rogue":
-			holder = new VacuousRogue();
+			holder = new AerRogue();
 			break;
 		case "Arctic Rogue":
-			holder = new ArcticRogue();
+			holder = new AquaRogue();
 			break;
 		case "Ignis Shaman":
 			holder = new IgnisShaman();
@@ -107,10 +107,10 @@ public class InventoryCreator {
 			holder = new TerraShaman();
 			break;
 		case "Vacuous Shaman":
-			holder = new VacuousShaman();
+			holder = new AerShaman();
 			break;
 		case "Arctic Shaman":
-			holder = new ArcticShaman();
+			holder = new AquaShaman();
 			break;
 		default:
 			holder = null;
