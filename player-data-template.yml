@@ -654,7 +654,7 @@ TERRA_STRIKER:
     ONE:
       unlocked: false
       equipped: false
-VACUOUS_STRIKER:
+AER_STRIKER:
   unlocked: false
   proficiencies:
     ONE:
@@ -667,7 +667,7 @@ VACUOUS_STRIKER:
     ONE:
       unlocked: false
       equipped: false
-ARCTIC_STRIKER:
+AQUA_STRIKER:
   unlocked: false
   proficiencies:
     ONE:
@@ -706,7 +706,7 @@ TERRA_VANGUARD:
     ONE:
       unlocked: false
       equipped: false
-VACUOUS_VANGUARD:
+AER_VANGUARD:
   unlocked: false
   proficiencies:
     ONE:
@@ -719,7 +719,7 @@ VACUOUS_VANGUARD:
     ONE:
       unlocked: false
       equipped: false
-ARCTIC_VANGUARD:
+AQUA_VANGUARD:
   unlocked: false
   proficiencies:
     ONE:
@@ -758,7 +758,7 @@ TERRA_ROGUE:
     ONE:
       unlocked: false
       equipped: false
-VACUOUS_ROGUE:
+AER_ROGUE:
   unlocked: false
   proficiencies:
     ONE:
@@ -771,7 +771,7 @@ VACUOUS_ROGUE:
     ONE:
       unlocked: false
       equipped: false
-ARCTIC_ROGUE:
+AQUA_ROGUE:
   unlocked: false
   proficiencies:
     ONE:
@@ -810,7 +810,7 @@ TERRA_SHAMAN:
     ONE:
       unlocked: false
       equipped: false
-VACUOUS_SHAMAN:
+AER_SHAMAN:
   unlocked: false
   proficiencies:
     ONE:
@@ -823,7 +823,7 @@ VACUOUS_SHAMAN:
     ONE:
       unlocked: false
       equipped: false
-ARCTIC_SHAMAN:
+AQUA_SHAMAN:
   unlocked: false
   proficiencies:
     ONE:

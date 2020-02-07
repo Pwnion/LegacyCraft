@@ -28,8 +28,8 @@ public class SkillTree {
 		NONE,
 		IGNIS,
 		TERRA,
-		VACUOUS,
-		ARCTIC
+		AER,
+		AQUA
 	}
 	
 	//All possible builds a player can have equipped
@@ -37,20 +37,20 @@ public class SkillTree {
 		NONE,
 		IGNIS_STRIKER,
 		TERRA_STRIKER,
-		VACUOUS_STRIKER,
-		ARCTIC_STRIKER,
+		AER_STRIKER,
+		AQUA_STRIKER,
 		IGNIS_VANGUARD,
 		TERRA_VANGUARD,
-		VACUOUS_VANGUARD,
-		ARCTIC_VANGUARD,
+		AER_VANGUARD,
+		AQUA_VANGUARD,
 		IGNIS_ROGUE,
 		TERRA_ROGUE,
-		VACUOUS_ROGUE,
-		ARCTIC_ROGUE,
+		AER_ROGUE,
+		AQUA_ROGUE,
 		IGNIS_SHAMAN,
 		TERRA_SHAMAN,
-		VACUOUS_SHAMAN,
-		ARCTIC_SHAMAN,
+		AER_SHAMAN,
+		AQUA_SHAMAN,
 	}
 	
 	//All possible aptitudes a player can have equipped

@@ -29,8 +29,8 @@ public abstract class Inv {
 	static final ImmutableMap<Aspect, Integer> aspectToSlot = ImmutableMap.of(
 		Aspect.IGNIS, 11,
 		Aspect.TERRA, 13,
-		Aspect.VACUOUS, 15,
-		Aspect.ARCTIC, 17
+		Aspect.AER, 15,
+		Aspect.AQUA, 17
 	);
 	
 	static final ImmutableMap<Aptitude, Integer> aptitudeToSlot = ImmutableMap.of(

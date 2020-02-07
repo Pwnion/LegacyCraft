@@ -84,8 +84,8 @@ SELECT_AN_ASPECT:
       - Go Back
       - Ignis
       - Terra
-      - Vacuous
-      - Arctic
+      - Aer
+      - Aqua
     materials:
       - BARRIER
       - FIRE_CHARGE
@@ -132,10 +132,10 @@ IGNIS_STRIKER:
       - 43
     names:
       - Go Back
-      - Chi
+      - Mastery
       - Aptitudes
       - Jumps
-      - Aspect Abilities
+      - Proficiencies
       - (Placeholder)
       - (Placeholder)
       - (Placeholder)
@@ -203,10 +203,10 @@ TERRA_STRIKER:
       - 43
     names:
       - Go Back
-      - Chi
+      - Mastery
       - Aptitudes
       - Jumps
-      - Aspect Abilities
+      - Proficiencies
       - (Placeholder)
       - (Placeholder)
       - (Placeholder)
@@ -257,9 +257,9 @@ TERRA_STRIKER:
           - (Placeholder)
         11:
           - (Placeholder)
-VACUOUS_STRIKER:
+AER_STRIKER:
     size: 45
-    title: Vacuous Striker
+    title: Aer Striker
     slots:
       - 0
       - 4
@@ -274,10 +274,10 @@ VACUOUS_STRIKER:
       - 43
     names:
       - Go Back
-      - Chi
+      - Mastery
       - Aptitudes
       - Jumps
-      - Aspect Abilities
+      - Proficiencies
       - (Placeholder)
       - (Placeholder)
       - (Placeholder)
@@ -328,9 +328,9 @@ VACUOUS_STRIKER:
           - (Placeholder)
         11:
           - (Placeholder)
-ARCTIC_STRIKER:
+AQUA_STRIKER:
     size: 45
-    title: Arctic Striker
+    title: Aqua Striker
     slots:
       - 0
       - 4
@@ -345,10 +345,10 @@ ARCTIC_STRIKER:
       - 43
     names:
       - Go Back
-      - Chi
+      - Mastery
       - Aptitudes
       - Jumps
-      - Aspect Abilities
+      - Proficiencies
       - (Placeholder)
       - (Placeholder)
       - (Placeholder)
@@ -416,10 +416,10 @@ IGNIS_VANGUARD:
       - 43
     names:
       - Go Back
-      - Chi
+      - Mastery
       - Aptitudes
       - Jumps
-      - Aspect Abilities
+      - Proficiencies
       - (Placeholder)
       - (Placeholder)
       - (Placeholder)
@@ -487,10 +487,10 @@ TERRA_VANGUARD:
       - 43
     names:
       - Go Back
-      - Chi
+      - Mastery
       - Aptitudes
       - Jumps
-      - Aspect Abilities
+      - Proficiencies
       - (Placeholder)
       - (Placeholder)
       - (Placeholder)
@@ -541,9 +541,9 @@ TERRA_VANGUARD:
           - (Placeholder)
         11:
           - (Placeholder)
-VACUOUS_VANGUARD:
+AER_VANGUARD:
     size: 45
-    title: Vacuous Vanguard
+    title: Aer Vanguard
     slots:
       - 0
       - 4
@@ -558,10 +558,10 @@ VACUOUS_VANGUARD:
       - 43
     names:
       - Go Back
-      - Chi
+      - Mastery
       - Aptitudes
       - Jumps
-      - Aspect Abilities
+      - Proficiencies
       - (Placeholder)
       - (Placeholder)
       - (Placeholder)
@@ -612,9 +612,9 @@ VACUOUS_VANGUARD:
           - (Placeholder)
         11:
           - (Placeholder)
-ARCTIC_VANGUARD:
+AQUA_VANGUARD:
     size: 45
-    title: Arctic Vanguard
+    title: Aqua Vanguard
     slots:
       - 0
       - 4
@@ -629,10 +629,10 @@ ARCTIC_VANGUARD:
       - 43
     names:
       - Go Back
-      - Chi
+      - Mastery
       - Aptitudes
       - Jumps
-      - Aspect Abilities
+      - Proficiencies
       - (Placeholder)
       - (Placeholder)
       - (Placeholder)
@@ -700,10 +700,10 @@ IGNIS_ROGUE:
       - 43
     names:
       - Go Back
-      - Chi
+      - Mastery
       - Aptitudes
       - Jumps
-      - Aspect Abilities
+      - Proficiencies
       - (Placeholder)
       - (Placeholder)
       - (Placeholder)
@@ -771,10 +771,10 @@ TERRA_ROGUE:
       - 43
     names:
       - Go Back
-      - Chi
+      - Mastery
       - Aptitudes
       - Jumps
-      - Aspect Abilities
+      - Proficiencies
       - (Placeholder)
       - (Placeholder)
       - (Placeholder)
@@ -825,9 +825,9 @@ TERRA_ROGUE:
           - (Placeholder)
         11:
           - (Placeholder)
-VACUOUS_ROGUE:
+AER_ROGUE:
     size: 45
-    title: Vacuous Rogue
+    title: Aer Rogue
     slots:
       - 0
       - 4
@@ -842,10 +842,10 @@ VACUOUS_ROGUE:
       - 43
     names:
       - Go Back
-      - Chi
+      - Mastery
       - Aptitudes
       - Jumps
-      - Aspect Abilities
+      - Proficiencies
       - (Placeholder)
       - (Placeholder)
       - (Placeholder)
@@ -896,9 +896,9 @@ VACUOUS_ROGUE:
           - (Placeholder)
         11:
           - (Placeholder)
-ARCTIC_ROGUE:
+AQUA_ROGUE:
     size: 45
-    title: Arctic Rogue
+    title: Aqua Rogue
     slots:
       - 0
       - 4
@@ -913,10 +913,10 @@ ARCTIC_ROGUE:
       - 43
     names:
       - Go Back
-      - Chi
+      - Mastery
       - Aptitudes
       - Jumps
-      - Aspect Abilities
+      - Proficiencies
       - (Placeholder)
       - (Placeholder)
       - (Placeholder)
@@ -984,10 +984,10 @@ IGNIS_SHAMAN:
       - 43
     names:
       - Go Back
-      - Chi
+      - Mastery
       - Aptitudes
       - Jumps
-      - Aspect Abilities
+      - Proficiencies
       - (Placeholder)
       - (Placeholder)
       - (Placeholder)
@@ -1055,10 +1055,10 @@ TERRA_SHAMAN:
       - 43
     names:
       - Go Back
-      - Chi
+      - Mastery
       - Aptitudes
       - Jumps
-      - Aspect Abilities
+      - Proficiencies
       - (Placeholder)
       - (Placeholder)
       - (Placeholder)
@@ -1109,9 +1109,9 @@ TERRA_SHAMAN:
           - (Placeholder)
         11:
           - (Placeholder)
-VACUOUS_SHAMAN:
+AER_SHAMAN:
     size: 45
-    title: Vacuous Shaman
+    title: Aer Shaman
     slots:
       - 0
       - 4
@@ -1126,10 +1126,10 @@ VACUOUS_SHAMAN:
       - 43
     names:
       - Go Back
-      - Chi
+      - Mastery
       - Aptitudes
       - Jumps
-      - Aspect Abilities
+      - Proficiencies
       - (Placeholder)
       - (Placeholder)
       - (Placeholder)
@@ -1180,9 +1180,9 @@ VACUOUS_SHAMAN:
           - (Placeholder)
         11:
           - (Placeholder)
-ARCTIC_SHAMAN:
+AQUA_SHAMAN:
     size: 45
-    title: Arctic Shaman
+    title: Aqua Shaman
     slots:
       - 0
       - 4
@@ -1197,10 +1197,10 @@ ARCTIC_SHAMAN:
       - 43
     names:
       - Go Back
-      - Chi
+      - Mastery
       - Aptitudes
       - Jumps
-      - Aspect Abilities
+      - Proficiencies
       - (Placeholder)
       - (Placeholder)
       - (Placeholder)

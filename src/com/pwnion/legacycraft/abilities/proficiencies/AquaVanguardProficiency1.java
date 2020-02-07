@@ -18,7 +18,7 @@ import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 
-public class ArcticVanguardProficiency1 {
+public class AquaVanguardProficiency1 {
 	//private static final ArrayList<HashMap<Location, Material>> iceBlockLists = getIceBlockLists(3);
 	
 	//splits the iceblock file into the requested amount of HashMaps 
