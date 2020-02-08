@@ -52,7 +52,7 @@ public class Util {
 		double radius = 1.25;
 		double rotation = 360 * 9;
 		
-		double rotationSpiral = (stepsSpiral / (stepsSpiral + stepsCircle)) * rotation;
+		double rotationSpiral = ((double) stepsSpiral / (double) (stepsSpiral + stepsCircle)) * rotation;
 		double rotationCircle = rotation - rotationSpiral;
 
 		Location centre = p.getEyeLocation();
@@ -92,10 +92,12 @@ public class Util {
 	
 	public static final ArrayList<Location> Spiral(Location centre, double radius, double rotation, int steps) {
 
+		
+		
 		double radiusPerStep = radius / (steps - 1);
 		double rotPerStep = Math.toRadians(rotation / (steps - 1));
 
-		Vector axis = VectorCalc(centre.getYaw(), centre.getPitch(), 1);
+		Vector axis = VectorCalc(centre.getYaw(), centre.getPitch(), 1.5);
 		Vector up = new Vector(0, 1, 0);
 		Vector cross = axis.clone().crossProduct(up);
 		if(cross.length() == 0) {
@@ -111,7 +113,8 @@ public class Util {
 			pointer.rotateAroundAxis(axis, rotPerStep * i);
 			pointer.multiply(radiusPerStep * i);
 			
-			spiral.add(centre.clone().add(pointer));
+			Location point = centre.clone().add(pointer);
+			spiral.add(point);
 		}
 		return spiral;
 	}
