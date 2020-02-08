@@ -38,21 +38,7 @@ public class Util {
 		return vec.clone().add(new Vector(0, plusY, 0));
 	}
 
-	public static final void Portal(Player p) {
-		double distFromPlayer = 1.5;
-
-		int delay = 1;
-		int stepsSpiral = 40; //the amount of locations (not including the starting location)
-		int stepsCircle = 80;
-		double radius = 1.25;
-		double rotation = 360 * 9;
-
-		double rotationSpiral = ((double) stepsSpiral / (double) (stepsSpiral + stepsCircle)) * rotation;
-		double rotationCircle = rotation - rotationSpiral;
-
 	public static final ArrayList<Location> spiral(Location centre, double radius, double rotation, int steps) {
-
-
 
 		double radiusPerStep = radius / (steps - 1);
 		double rotPerStep = Math.toRadians(rotation / (steps - 1));
@@ -75,7 +61,7 @@ public class Util {
 
 			spiral.add(centre.clone().add(pointer));
 		}
-
+		
 		return spiral;
 	}
 
