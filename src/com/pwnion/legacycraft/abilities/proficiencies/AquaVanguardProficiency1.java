@@ -68,8 +68,6 @@ public class AquaVanguardProficiency1 {
 		return iceblockLists;
 	}
 	
-	
-	
 	public static final String activate(Player p) {
 		int time = 20 * 10;
 		int delay = 4;
@@ -89,7 +87,6 @@ public class AquaVanguardProficiency1 {
 		}
 		
 		p.teleport(centre.toCenterLocation());
-		//w.spawnParticle(Particle.BLOCK_DUST, centre, 1000, 2, 2, 2, 0, Material.SNOW_BLOCK.createBlockData(), true);
 		
 		final ArrayList<HashMap<Location, Material>> iceBlockLists = getIceBlockLists(3);
 		HashSet<Block> changing = new HashSet<Block>();

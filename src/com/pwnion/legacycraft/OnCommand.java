@@ -1,14 +1,19 @@
 package com.pwnion.legacycraft;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import com.pwnion.legacycraft.abilities.Util;
 import com.pwnion.legacycraft.abilities.areas.Selection;
@@ -68,7 +73,63 @@ public class OnCommand implements CommandExecutor {
 				}
 			} else if(lbl.equals("test")) {
 				//p.sendMessage(ArcticVanguardProficiency1.activate(p));
-				Util.Portal(p);
+				//Portal.activate(p);
+				
+				Location centre = p.getEyeLocation();
+				
+				int delay = 1;
+				int steps = 60;
+				double radius = 1.25;
+				double rotation = 1080;
+				double distFromPlayer = 1.5;
+				
+				int count = 5;
+				Particle particle = Particle.ENCHANTMENT_TABLE;
+				
+				double radiusPerStep = radius / (steps - 1);
+				double rotPerStep = Math.toRadians(rotation / (steps - 1));
+
+				Vector vec = Util.vectorCalc(centre.getYaw(), centre.getPitch(), distFromPlayer);
+				centre.add(vec);
+				Vector up = new Vector(0, 1, 0);
+				Vector cross = vec.clone().crossProduct(up);
+				if(cross.length() == 0) {
+					cross = new Vector(1, 0, 0);
+				}
+				
+				up.rotateAroundAxis(cross, Math.toRadians(90) - vec.angle(up));
+				for(int i = 0; i <= steps; i++) {
+					Vector pointer = up.clone();
+					pointer.rotateAroundAxis(vec, rotPerStep * i);
+					pointer.multiply(radiusPerStep * i);
+					Location particleLoc = centre.clone().add(pointer);
+					
+					if(i == 0) {
+						centre.getWorld().spawnParticle(particle, particleLoc, count, 0, 0, 0, 0, null, true);
+					} else {
+						Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
+							public void run() {
+								centre.getWorld().spawnParticle(particle, particleLoc, count, 0, 0, 0, 0, null, true);
+							}
+						}, delay * i);
+					}
+				}
+				
+				int stepsCircle = 60;
+				double rotationSpiral = (steps / (steps + stepsCircle)) * rotation;
+				double rotationCircle = rotation - rotationSpiral;
+				ArrayList<Location> spiral = Util.spiral(centre, radius, rotationSpiral, steps);
+				spiral.trimToSize();
+				ArrayList<Location> circle = Util.circle(centre, Util.vectorCalc(centre, spiral.get(spiral.size() - 1)), rotationCircle, stepsCircle);
+				int i = steps;
+				for(Location point : circle) {
+					Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
+						public void run() {
+							centre.getWorld().spawnParticle(particle, point, count, 0, 0, 0, 0, null, true);
+						}
+					}, delay * i);
+					i++;
+				}
 			}
 			return true;
 		} else {
