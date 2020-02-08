@@ -68,7 +68,7 @@ public class OnCommand implements CommandExecutor {
 				}
 			} else if(lbl.equals("test")) {
 				//p.sendMessage(ArcticVanguardProficiency1.activate(p));
-				Util.Spiral(p);
+				Util.Portal(p);
 			}
 			return true;
 		} else {
