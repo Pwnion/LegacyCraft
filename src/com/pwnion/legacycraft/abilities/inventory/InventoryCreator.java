@@ -70,10 +70,10 @@ public class InventoryCreator {
 		case "Terra Striker":
 			holder = new TerraStriker();
 			break;
-		case "Vacuous Striker":
+		case "Aer Striker":
 			holder = new AerStriker();
 			break;
-		case "Arctic Striker":
+		case "Aqua Striker":
 			holder = new AquaStriker();
 			break;
 		case "Ignis Vanguard":
@@ -82,10 +82,10 @@ public class InventoryCreator {
 		case "Terra Vanguard":
 			holder = new TerraVanguard();
 			break;
-		case "Vacuous Vanguard":
+		case "Aer Vanguard":
 			holder = new AerVanguard();
 			break;
-		case "Arctic Vanguard":
+		case "Aqua Vanguard":
 			holder = new AquaVanguard();
 			break;
 		case "Ignis Rogue":
@@ -94,10 +94,10 @@ public class InventoryCreator {
 		case "Terra Rogue":
 			holder = new TerraRogue();
 			break;
-		case "Vacuous Rogue":
+		case "Aer Rogue":
 			holder = new AerRogue();
 			break;
-		case "Arctic Rogue":
+		case "Aqua Rogue":
 			holder = new AquaRogue();
 			break;
 		case "Ignis Shaman":
@@ -106,10 +106,10 @@ public class InventoryCreator {
 		case "Terra Shaman":
 			holder = new TerraShaman();
 			break;
-		case "Vacuous Shaman":
+		case "Aer Shaman":
 			holder = new AerShaman();
 			break;
-		case "Arctic Shaman":
+		case "Aqua Shaman":
 			holder = new AquaShaman();
 			break;
 		default:
