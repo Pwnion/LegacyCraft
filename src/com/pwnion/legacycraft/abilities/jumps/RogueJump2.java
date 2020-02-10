@@ -11,7 +11,7 @@ import com.pwnion.legacycraft.abilities.targets.Point;
 public class RogueJump2 extends Jump {
 	//Initiates the second Rogue jump for a player
 	public static void activate(Player p) {
-		Location targetLoc = Point.fromEntityInFacingDir(p, 6, 4);
+		Location targetLoc = Point.fromLocationInYawDir(p, 6, 4);
 		Location finalLoc = Pathfinding.inFacingDir(p, targetLoc);
 
 		if(finalLoc.getBlock().equals(p.getLocation().getBlock())) {

@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -70,7 +69,7 @@ public class OnCommand implements CommandExecutor {
 			} else if(lbl.equals("test")) {
 				try {
 					Portal.activate(p, Portal.valueOf(args[0].toUpperCase()));
-				} catch(CommandException e) {
+				} catch(Exception e) {
 					p.sendMessage(ChatColor.DARK_RED + "Invalid portal type!");
 				}
 			}

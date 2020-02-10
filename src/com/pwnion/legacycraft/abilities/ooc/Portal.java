@@ -6,13 +6,19 @@ import java.util.function.Consumer;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.EulerAngle;
 import org.bukkit.util.Vector;
 
 import com.destroystokyo.paper.ParticleBuilder;
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.abilities.Util;
+import com.pwnion.legacycraft.abilities.targets.Point;
 
 public enum Portal {
 	NEUTRAL(new Location(Bukkit.getWorld("Neutral"), 0, 0, 0, 0, 0), Color.fromRGB(255, 255, 255), 1, 12),
@@ -39,12 +45,12 @@ public enum Portal {
 	}
 	
 	public static final void activate(Player p, Portal portal) {
-		int delay = 1;
 		int count = 4;
-		int stepsSpiral = 60;
-		int stepsCircle = 100;
+		float size = 1f;
+		int stepsSpiral = 120;
+		int stepsCircle = 200;
 		double radius = 1.25;
-		double rotation = 360 * 9;
+		double rotation = 360 * 12;
 		double distFromPlayer = 1.5;
 
 		double rotationSpiral = ((double) stepsSpiral / (double) (stepsSpiral + stepsCircle)) * rotation;
@@ -59,38 +65,91 @@ public enum Portal {
 		
 		ArrayList<Location> circle = Util.circle(centre, Util.vectorCalc(centre, spiral.get(spiral.size() - 1)), rotationCircle, stepsCircle);
 		
-		ParticleBuilder particle = new ParticleBuilder(Particle.REDSTONE);
-		particle.color(portal.colour, 0.7f);
-		particle.count(count);
-		particle.offset(0, 0, 0);
-		particle.force(true);
+		ParticleBuilder particles = new ParticleBuilder(Particle.REDSTONE);
+		particles.color(portal.colour, size);
+		particles.count(count);
+		particles.offset(0, 0, 0);
+		particles.force(true);
 		
-		Consumer<Location> spawnParticle = (point) -> {
-			particle.location(point);
-			particle.receivers(100);
-			particle.spawn();
+		ParticleBuilder ambientParticles = new ParticleBuilder(Particle.ENCHANTMENT_TABLE);
+		ambientParticles.count(count);
+		ambientParticles.extra(0D);
+		ambientParticles.offset(0, 0, 0);
+		ambientParticles.force(true);
+		
+		Consumer<Location> spawnParticles = (point) -> {
+			particles.location(point);
+			particles.receivers(100);
+			
+			ambientParticles.location(point);
+			ambientParticles.receivers(100);
+			
+			particles.spawn();
+			ambientParticles.spawn();
 		};
 		
 		int i = 0;
 		for(Location point : spiral) {
 			if(i == 0) {
-				spawnParticle.accept(point);
+				spawnParticles.accept(point);
 			} else {
 				Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 					public void run() {
-						spawnParticle.accept(point);
+						spawnParticles.accept(point);
 					}
-				}, delay * i);
+				}, i);
 			}
 			i++;
 		}
 		for(Location point : circle) {
 			Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 				public void run() {
-					spawnParticle.accept(point);
+					spawnParticles.accept(point);
 				}
-			}, delay * i);
+			}, i);
 			i++;
 		}
+		
+		ArrayList<ArmorStand> armourStands = new ArrayList<ArmorStand>(16);
+		float pitch = p.getLocation().getPitch();
+		Bukkit.broadcastMessage("Euler Pitch: " + String.valueOf(-pitch));
+		float fixedPitch = pitch + (pitch < 0 ? 90 : -90);
+		Bukkit.broadcastMessage("fixedPitch: " + String.valueOf(fixedPitch));
+		for(float vertical = 0.9375f; vertical >= -0.9375f; vertical = vertical - 0.625f) {
+			for(float horizontal = -0.9375f; horizontal <= 0.9375; horizontal = horizontal + 0.625f) {
+				Location point = Point.fromLocationInDir(p.getEyeLocation(), distFromPlayer);
+				
+				point = Point.fromLocationInYawDir(point, (vertical / 0.625) * 0.625 * (pitch < 0 ? -1 : 1) * (Math.cos(Math.toRadians(fixedPitch))), vertical);
+				
+				point.setYaw(point.getYaw() < 270 ? point.getYaw() + 90 : point.getYaw() - 270);
+				
+				point = Point.fromLocationInYawDir(point, horizontal, -(vertical / 0.625) * 0.625 * (1 - Math.abs(Math.sin(Math.toRadians(fixedPitch)))));
+				
+				armourStands.add(p.getWorld().spawn(point, ArmorStand.class, (e) -> {
+					e.setGravity(false);
+					e.setVisible(false);
+					e.setInvulnerable(true);
+					e.setRotation(p.getLocation().getYaw(), 0);
+					e.setHeadPose(new EulerAngle(Math.toRadians(pitch), 0, 0));
+				}));
+			}
+		}
+		
+		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
+			public void run() {
+				int i = 0;
+				for(ArmorStand e : armourStands) {
+					ItemStack portalPiece = new ItemStack(Material.ITEM_FRAME);
+					if(i != 6 && i != 7 && i != 10 && i != 11) {
+						ItemMeta portalPieceMeta = portalPiece.getItemMeta();
+						portalPieceMeta.setCustomModelData(i + 1);
+						portalPiece.setItemMeta(portalPieceMeta);
+						
+						i++;
+					}
+					e.setHelmet(portalPiece);
+				}
+			}
+		}, 1);
 	}
 }
