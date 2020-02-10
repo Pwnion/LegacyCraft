@@ -51,7 +51,7 @@ public enum Portal {
 		int stepsCircle = 200;
 		double radius = 1.25;
 		double rotation = 360 * 12;
-		double distFromPlayer = 1.5;
+		double distFromPlayer = 1.1;
 
 		double rotationSpiral = ((double) stepsSpiral / (double) (stepsSpiral + stepsCircle)) * rotation;
 		double rotationCircle = rotation - rotationSpiral;
@@ -118,10 +118,10 @@ public enum Portal {
 		
 		//the point at where the armour stand is when the head is in the centre
 		Location AScentre = centre.clone().subtract(0, 2, 0);
-		Vector back = Util.vectorCalc(yaw, pitch, 0.3125);
+		Vector back = Util.vectorCalc(yaw, pitch, 0.3125 - (1 - ((pitch + 90) / 180)) - 0.1875);
 		AScentre.subtract(back);
-		Vector up = Util.vectorCalc(yaw, pitch + 90, 0.24219);
-		AScentre.add(up);
+		Vector down = Util.vectorCalc(yaw, pitch + 90, 0.24219 + (0.5 * (Math.abs(pitch) / 90)));
+		AScentre.add(down);
 		
 		for(float vertical = 0.9375f; vertical >= -0.9375f; vertical = vertical - 0.625f) {
 			for(float horizontal = -0.9375f; horizontal <= 0.9375; horizontal = horizontal + 0.625f) {
@@ -137,7 +137,8 @@ public enum Portal {
 					e.setGravity(false);
 					e.setVisible(false);
 					e.setInvulnerable(true);
-					e.setHeadPose(new EulerAngle(Math.toRadians(pitch), Math.toRadians(yaw), 0));
+					e.setRotation(yaw, 0);
+					e.setHeadPose(new EulerAngle(Math.toRadians(pitch), 0, 0));
 				}));
 			}
 		}
