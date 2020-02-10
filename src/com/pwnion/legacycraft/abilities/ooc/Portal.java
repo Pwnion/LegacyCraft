@@ -112,12 +112,20 @@ public enum Portal {
 		
 		ArrayList<ArmorStand> armourStands = new ArrayList<ArmorStand>(16);
 		float pitch = p.getLocation().getPitch();
-		Bukkit.broadcastMessage("Euler Pitch: " + String.valueOf(-pitch));
 		float fixedPitch = pitch + (pitch < 0 ? 90 : -90);
-		Bukkit.broadcastMessage("fixedPitch: " + String.valueOf(fixedPitch));
+		
+		float yaw = p.getLocation().getYaw();
+		
+		//the point at where the armour stand is when the head is in the centre
+		Location AScentre = centre.clone().subtract(0, 2, 0);
+		Vector back = Util.vectorCalc(yaw, pitch, 0.3125);
+		AScentre.subtract(back);
+		Vector up = Util.vectorCalc(yaw, pitch + 90, 0.24219);
+		AScentre.add(up);
+		
 		for(float vertical = 0.9375f; vertical >= -0.9375f; vertical = vertical - 0.625f) {
 			for(float horizontal = -0.9375f; horizontal <= 0.9375; horizontal = horizontal + 0.625f) {
-				Location point = Point.fromLocationInDir(p.getEyeLocation(), distFromPlayer);
+				Location point = AScentre.clone();
 				
 				point = Point.fromLocationInYawDir(point, (vertical / 0.625) * 0.625 * (pitch < 0 ? -1 : 1) * (Math.cos(Math.toRadians(fixedPitch))), vertical);
 				
@@ -129,8 +137,7 @@ public enum Portal {
 					e.setGravity(false);
 					e.setVisible(false);
 					e.setInvulnerable(true);
-					e.setRotation(p.getLocation().getYaw(), 0);
-					e.setHeadPose(new EulerAngle(Math.toRadians(pitch), 0, 0));
+					e.setHeadPose(new EulerAngle(Math.toRadians(pitch), Math.toRadians(yaw), 0));
 				}));
 			}
 		}
