@@ -14,7 +14,8 @@ public class RogueJump2 extends Jump {
 		Location targetLoc = Point.fromLocationInYawDir(p, 6, 4);
 		Location finalLoc = Pathfinding.inFacingDir(p, targetLoc);
 
-		if(finalLoc.getBlock().equals(p.getLocation().getBlock())) {
+		
+		if(finalLoc.getBlock().equals(p.getLocation().getBlock()) || (p.getLocation().getBlock().getType().isSolid() && p.getTargetBlock(null, 100).getType().isSolid())) {
 			p.sendMessage(ChatColor.RED + "Not enough space to blink!");
 		} else {
 			finalLoc.setPitch(p.getLocation().getPitch());
