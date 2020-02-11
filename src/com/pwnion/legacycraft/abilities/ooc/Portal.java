@@ -10,8 +10,10 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.EulerAngle;
 import org.bukkit.util.Vector;
 
@@ -45,34 +47,33 @@ public enum Portal {
 	}
 	
 	public static final void activate(Player p, Portal portal) {
-		int count = 4;
-		float size = 1f;
-		int stepsSpiral = 120;
-		int stepsCircle = 200;
-		double radius = 1.25;
-		double rotation = 360 * 12;
-		double distFromPlayer = 1.1;
+		int countParticle = 4; //How many particles per point
+		float sizeParticle = 1f; //Size of redstone particle
+		
+		int stepsSpiral = 120; //The amount of points in the spiral
+		double rotationSpiral = 360 * 3; //The amount the spiral rotates
+		double radius = 1.25; //The radius of the spiral/circle
+		double distFromPlayer = 1.1; //The distance from the player that the portal spawns
 
-		double rotationSpiral = ((double) stepsSpiral / (double) (stepsSpiral + stepsCircle)) * rotation;
-		double rotationCircle = rotation - rotationSpiral;
-
+		int killDelay = Math.round(stepsSpiral / 2) + 30 * 20;
+		
+		//The centre of the portal
 		Location centre = p.getEyeLocation();
 		Vector vec = Util.vectorCalc(centre.getYaw(), centre.getPitch(), distFromPlayer);
 		centre.add(vec);
 
+		//Gets all the points on the spiral
 		ArrayList<Location> spiral = Util.spiral(centre, radius, rotationSpiral, stepsSpiral);
 		spiral.trimToSize();
 		
-		ArrayList<Location> circle = Util.circle(centre, Util.vectorCalc(centre, spiral.get(spiral.size() - 1)), rotationCircle, stepsCircle);
-		
 		ParticleBuilder particles = new ParticleBuilder(Particle.REDSTONE);
-		particles.color(portal.colour, size);
-		particles.count(count);
+		particles.color(portal.colour, sizeParticle);
+		particles.count(countParticle);
 		particles.offset(0, 0, 0);
 		particles.force(true);
 		
 		ParticleBuilder ambientParticles = new ParticleBuilder(Particle.ENCHANTMENT_TABLE);
-		ambientParticles.count(count);
+		ambientParticles.count(countParticle);
 		ambientParticles.extra(0D);
 		ambientParticles.offset(0, 0, 0);
 		ambientParticles.force(true);
@@ -88,27 +89,34 @@ public enum Portal {
 			ambientParticles.spawn();
 		};
 		
-		int i = 0;
-		for(Location point : spiral) {
-			if(i == 0) {
-				spawnParticles.accept(point);
-			} else {
-				Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
-					public void run() {
-						spawnParticles.accept(point);
-					}
-				}, i);
-			}
-			i++;
-		}
-		for(Location point : circle) {
-			Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
+		final int startTick = Bukkit.getServer().getCurrentTick();
+		final double rotPerStep = Math.toRadians(rotationSpiral / (stepsSpiral - 1));
+		
+		//A Vector that contains radius and yaw/pitch information
+		final Vector pointer = Util.vectorCalc(centre, spiral.get(spiral.size() - 1));
+		
+		//The axis that the circle will rotate around
+		final Vector axis = Util.vectorCalc(centre.getYaw(), centre.getPitch(), 1);
+		
+		BukkitTask portalTask = Bukkit.getServer().getScheduler().runTaskTimer(LegacyCraft.getPlugin(), new Runnable() {
 				public void run() {
-					spawnParticles.accept(point);
+					int i = (Bukkit.getServer().getCurrentTick() - startTick) * 2;
+					if(i < spiral.size() - 1) {
+						spawnParticles.accept(spiral.get(i));
+						spawnParticles.accept(spiral.get(i + 1));
+					}
+
+					if(i >= spiral.size() - 1) {
+						Vector pointerClone = pointer.clone();
+						
+						pointerClone.rotateAroundAxis(axis, rotPerStep * i);
+						spawnParticles.accept(centre.clone().add(pointerClone));
+						
+						pointerClone.rotateAroundAxis(axis, rotPerStep);
+						spawnParticles.accept(centre.clone().add(pointerClone));
+					}
 				}
-			}, i);
-			i++;
-		}
+		}, 0, 1);
 		
 		ArrayList<ArmorStand> armourStands = new ArrayList<ArmorStand>(16);
 		float pitch = p.getLocation().getPitch();
@@ -137,6 +145,9 @@ public enum Portal {
 					e.setGravity(false);
 					e.setVisible(false);
 					e.setInvulnerable(true);
+					e.setMarker(true);
+					e.setFireTicks(killDelay);
+					e.setDisabledSlots(EquipmentSlot.values());;
 					e.setRotation(yaw, 0);
 					e.setHeadPose(new EulerAngle(Math.toRadians(pitch), 0, 0));
 				}));
@@ -159,5 +170,15 @@ public enum Portal {
 				}
 			}
 		}, 1);
+		
+		//Cancels the portal 30 seconds after the spiral ends
+		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
+			public void run() {
+				portalTask.cancel();
+				for(ArmorStand e : armourStands) {
+					e.remove();
+				}
+			}
+		}, killDelay);
 	}
 }
