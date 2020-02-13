@@ -46,9 +46,13 @@ public enum Portal {
 		this.colour = colour;
 	}
 	
+	public static Location midLoc(Location loc1, Location loc2) {
+		return new Location(loc1.getWorld(), (loc1.getX() + loc2.getX()) / 2, (loc1.getY() + loc2.getY()) / 2, (loc1.getZ() + loc2.getZ()) / 2);
+	}
+	
 	public static final void activate(Player p, Portal portal) {
 		int countParticle = 4; //How many particles per point
-		float sizeParticle = 1f; //Size of redstone particle
+		float sizeParticle = 0.2f; //Size of redstone particle
 		
 		int stepsSpiral = 120; //The amount of points in the spiral
 		double rotationSpiral = 360 * 3; //The amount the spiral rotates
@@ -118,41 +122,52 @@ public enum Portal {
 				}
 		}, 0, 1);
 		
-		ArrayList<ArmorStand> armourStands = new ArrayList<ArmorStand>(16);
 		float pitch = p.getLocation().getPitch();
 		float fixedPitch = pitch + (pitch < 0 ? 90 : -90);
-		
 		float yaw = p.getLocation().getYaw();
 		
-		//the point at where the armour stand is when the head is in the centre
-		Location AScentre = centre.clone().subtract(0, 2, 0);
-		Vector back = Util.vectorCalc(yaw, pitch, 0.3125 - (1 - ((pitch + 90) / 180)) - 0.1875);
-		AScentre.subtract(back);
-		Vector down = Util.vectorCalc(yaw, pitch + 90, 0.24219 + (0.5 * (Math.abs(pitch) / 90)));
-		AScentre.add(down);
-		
+		ArrayList<Location> points = new ArrayList<Location>(16);
 		for(float vertical = 0.9375f; vertical >= -0.9375f; vertical = vertical - 0.625f) {
 			for(float horizontal = -0.9375f; horizontal <= 0.9375; horizontal = horizontal + 0.625f) {
-				Location point = AScentre.clone();
-				
-				point = Point.fromLocationInYawDir(point, (vertical / 0.625) * 0.625 * (pitch < 0 ? -1 : 1) * (Math.cos(Math.toRadians(fixedPitch))), vertical);
+				Location point = Point.fromLocationInYawDir(centre, (vertical / 0.625) * 0.625 * (pitch < 0 ? -1 : 1) * (Math.cos(Math.toRadians(fixedPitch))), vertical);
 				
 				point.setYaw(point.getYaw() < 270 ? point.getYaw() + 90 : point.getYaw() - 270);
 				
 				point = Point.fromLocationInYawDir(point, horizontal, -(vertical / 0.625) * 0.625 * (1 - Math.abs(Math.sin(Math.toRadians(fixedPitch)))));
 				
-				armourStands.add(p.getWorld().spawn(point, ArmorStand.class, (e) -> {
-					e.setGravity(false);
-					e.setVisible(false);
-					e.setInvulnerable(true);
-					e.setMarker(true);
-					e.setFireTicks(killDelay);
-					e.setDisabledSlots(EquipmentSlot.values());;
-					e.setRotation(yaw, 0);
-					e.setHeadPose(new EulerAngle(Math.toRadians(pitch), 0, 0));
-				}));
+				points.add(point);
 			}
 		}
+		
+		Location loc1 = points.get(0).clone().add(0, 1.5, 0);
+		Location loc2 = points.get(15).clone().add(0, 1.5, 0);
+		
+		loc1.setYaw(pitch < 0 ? (yaw < 180 ? yaw + 180 : yaw - 180) : yaw);
+		loc2.setYaw(pitch < 0 ? (yaw < 180 ? yaw + 180 : yaw - 180) : yaw);
+		
+		final double yawMod = -0.26953 * Math.cos(Math.toRadians(Math.abs(pitch))) + 0.75 * Math.cos(Math.toRadians(Math.abs(fixedPitch)));
+		final double vertMod = 0.26953 * Math.sin(Math.toRadians(Math.abs(pitch))) + 0.75 * Math.sin(Math.toRadians(Math.abs(fixedPitch)));
+		
+		loc1 = Point.fromLocationInYawDir(loc1, yawMod, vertMod);
+		loc2 = Point.fromLocationInYawDir(loc2, yawMod, vertMod);
+		
+		Location mid = midLoc(loc1, loc2);
+		
+		Vector mod = centre.toVector().subtract(mid.toVector());
+		
+		ArrayList<ArmorStand> armourStands = new ArrayList<ArmorStand>(16);
+		points.forEach((point) -> {
+			armourStands.add(p.getWorld().spawn(point.add(mod), ArmorStand.class, (e) -> {
+				e.setGravity(false);
+				//e.setVisible(false);
+				e.setInvulnerable(true);
+				e.setMarker(true);
+				e.setFireTicks(killDelay);
+				e.setDisabledSlots(EquipmentSlot.values());;
+				e.setRotation(pitch < 0 ? (yaw < 180 ? yaw + 180 : yaw - 180) : yaw, 0);
+				e.setHeadPose(new EulerAngle((pitch < 0 ? -1 : 1) * Math.toRadians(pitch), 0, 0));
+			}));
+		});
 		
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 			public void run() {
@@ -171,7 +186,7 @@ public enum Portal {
 			}
 		}, 1);
 		
-		//Cancels the portal 30 seconds after the spiral ends
+		//Cancels the portal (killDelay) ticks after the spiral ends
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 			public void run() {
 				portalTask.cancel();

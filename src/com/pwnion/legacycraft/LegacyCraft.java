@@ -96,6 +96,8 @@ public class LegacyCraft extends JavaPlugin {
 
 	//Called when the plugin is disabled
 	public void onDisable() {
+		Bukkit.getServer().getScheduler().cancelTasks(this);
+		
 		//Set plugin to null to prevent memory leaks
 		plugin = null;
 	}
