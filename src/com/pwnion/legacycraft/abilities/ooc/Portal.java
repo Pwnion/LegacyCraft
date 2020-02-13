@@ -171,13 +171,14 @@ public enum Portal {
 				int i = 0;
 				for(ArmorStand e : armourStands) {
 					ItemStack portalPiece = new ItemStack(Material.ITEM_FRAME);
+					ItemMeta portalPieceMeta = portalPiece.getItemMeta();
 					if(i != 6 && i != 7 && i != 10 && i != 11) {
-						ItemMeta portalPieceMeta = portalPiece.getItemMeta();
-						portalPieceMeta.setCustomModelData(i + 1);
-						portalPiece.setItemMeta(portalPieceMeta);
-						
+						portalPieceMeta.setCustomModelData(i + 2);
 						i++;
+					} else {
+						portalPieceMeta.setCustomModelData(1);
 					}
+					portalPiece.setItemMeta(portalPieceMeta);
 					e.setHelmet(portalPiece);
 				}
 			}
