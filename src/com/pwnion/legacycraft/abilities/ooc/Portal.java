@@ -139,27 +139,24 @@ public enum Portal {
 			}
 		}
 		
-		Location loc1 = points.get(0).clone().add(0, 1.5, 0);
-		Location loc2 = points.get(15).clone().add(0, 1.5, 0);
+		Location portalTopLeft = points.get(0).clone().add(0, 1.5, 0);
+		Location portalBottomRight = points.get(15).clone().add(0, 1.5, 0);
 		
-		loc1.setYaw(pitch < 0 ? (yaw < 180 ? yaw + 180 : yaw - 180) : yaw);
-		loc2.setYaw(pitch < 0 ? (yaw < 180 ? yaw + 180 : yaw - 180) : yaw);
+		portalTopLeft.setYaw(pitch < 0 ? (yaw < 180 ? yaw + 180 : yaw - 180) : yaw);
+		portalTopLeft.setYaw(pitch < 0 ? (yaw < 180 ? yaw + 180 : yaw - 180) : yaw);
 		
 		final double yawMod = -0.26953 * Math.cos(Math.toRadians(Math.abs(pitch))) + 0.75 * Math.cos(Math.toRadians(Math.abs(fixedPitch)));
 		final double vertMod = 0.26953 * Math.sin(Math.toRadians(Math.abs(pitch))) + 0.75 * Math.sin(Math.toRadians(Math.abs(fixedPitch)));
 		
-		loc1 = Point.fromLocationInYawDir(loc1, yawMod, vertMod);
-		loc2 = Point.fromLocationInYawDir(loc2, yawMod, vertMod);
+		Location portalMiddle = midLoc(Point.fromLocationInYawDir(portalTopLeft, yawMod, vertMod), Point.fromLocationInYawDir(portalBottomRight, yawMod, vertMod));
 		
-		Location mid = midLoc(loc1, loc2);
-		
-		Vector mod = centre.toVector().subtract(mid.toVector());
+		Vector portalMod = centre.toVector().subtract(portalMiddle.toVector());
 		
 		ArrayList<ArmorStand> armourStands = new ArrayList<ArmorStand>(16);
 		points.forEach((point) -> {
-			armourStands.add(p.getWorld().spawn(point.add(mod), ArmorStand.class, (e) -> {
+			armourStands.add(p.getWorld().spawn(point.add(portalMod), ArmorStand.class, (e) -> {
 				e.setGravity(false);
-				//e.setVisible(false);
+				e.setVisible(false);
 				e.setInvulnerable(true);
 				e.setMarker(true);
 				e.setFireTicks(killDelay);
