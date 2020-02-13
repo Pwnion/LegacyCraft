@@ -143,7 +143,7 @@ public enum Portal {
 		Location portalBottomRight = points.get(15).clone().add(0, 1.5, 0);
 		
 		portalTopLeft.setYaw(pitch < 0 ? (yaw < 180 ? yaw + 180 : yaw - 180) : yaw);
-		portalTopLeft.setYaw(pitch < 0 ? (yaw < 180 ? yaw + 180 : yaw - 180) : yaw);
+		portalBottomRight.setYaw(pitch < 0 ? (yaw < 180 ? yaw + 180 : yaw - 180) : yaw);
 		
 		final double yawMod = -0.26953 * Math.cos(Math.toRadians(Math.abs(pitch))) + 0.75 * Math.cos(Math.toRadians(Math.abs(fixedPitch)));
 		final double vertMod = 0.26953 * Math.sin(Math.toRadians(Math.abs(pitch))) + 0.75 * Math.sin(Math.toRadians(Math.abs(fixedPitch)));
@@ -168,18 +168,18 @@ public enum Portal {
 		
 		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 			public void run() {
-				int i = 0;
-				for(ArmorStand e : armourStands) {
+				int centreCounter = 0;
+				for(int i = 0; i < 16; i++) {
 					ItemStack portalPiece = new ItemStack(Material.ITEM_FRAME);
 					ItemMeta portalPieceMeta = portalPiece.getItemMeta();
 					if(i != 6 && i != 7 && i != 10 && i != 11) {
-						portalPieceMeta.setCustomModelData(i + 2);
-						i++;
+						portalPieceMeta.setCustomModelData(i + 2 - centreCounter);
 					} else {
 						portalPieceMeta.setCustomModelData(1);
+						centreCounter++;
 					}
 					portalPiece.setItemMeta(portalPieceMeta);
-					e.setHelmet(portalPiece);
+					armourStands.get(i).setHelmet(portalPiece);
 				}
 			}
 		}, 1);
