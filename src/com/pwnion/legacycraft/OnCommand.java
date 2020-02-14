@@ -68,7 +68,7 @@ public class OnCommand implements CommandExecutor {
 				}
 			} else if(lbl.equals("test")) {
 				try {
-					Portal.activate(p, Portal.valueOf(args[0].toUpperCase()));
+					Portal.valueOf(args[0].toUpperCase()).activate(p);
 				} catch(Exception e) {
 					p.sendMessage(ChatColor.DARK_RED + "Invalid portal type!");
 				}

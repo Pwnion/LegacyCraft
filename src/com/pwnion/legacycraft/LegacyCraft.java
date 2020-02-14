@@ -1,5 +1,6 @@
 package com.pwnion.legacycraft;
 
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.UUID;
 import org.bukkit.Bukkit;
@@ -9,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import com.pwnion.legacycraft.listeners.EntityDamage;
 import com.pwnion.legacycraft.listeners.InventoryClick;
@@ -25,6 +27,7 @@ public class LegacyCraft extends JavaPlugin {
 	//Declare lots of variables that can be accessed by this classes getter and setter methods
 	//These variables facilitate the storing of values used to track players actions
 	private static final HashMap<UUID, HashMap<PlayerData, Object>> playerData = new HashMap<UUID, HashMap<PlayerData, Object>>();
+	private static final HashMap<BukkitTask, Integer> tasksToBeCancelled = new HashMap<BukkitTask, Integer>();
 	private static Plugin plugin;
 	
 	//Makes registering events in onEnable() simpler and cleaner
@@ -90,6 +93,18 @@ public class LegacyCraft extends JavaPlugin {
             		}
             		setPlayerData(playerUUID, PlayerData.FALL_DISTANCE, p.getFallDistance());
             	}
+            	
+            	try {
+            		for(BukkitTask task : tasksToBeCancelled.keySet()) {
+                		int timer = tasksToBeCancelled.get(task);
+                		if(timer < 0) {
+                			task.cancel();
+                			tasksToBeCancelled.remove(task);
+                		} else {
+                			tasksToBeCancelled.put(task, timer - 1);
+                		}
+                	}
+            	} catch(ConcurrentModificationException e) {};
             }
 		}.runTaskTimer(this, 0L, 0L);
 	}
@@ -128,5 +143,9 @@ public class LegacyCraft extends JavaPlugin {
 	
 	public static final void removePlayerData(UUID playerUUID) {
 		playerData.remove(playerUUID);
+	}
+	
+	public static final void addTaskToBeCancelled(BukkitTask task, int ticksUntilCancellation) {
+		tasksToBeCancelled.put(task, ticksUntilCancellation);
 	}
 }

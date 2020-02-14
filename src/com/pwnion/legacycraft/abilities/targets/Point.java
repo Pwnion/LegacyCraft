@@ -8,23 +8,24 @@ public class Point {
 	
 	//Returns a location relative to a given location
 	public static final Location fromLocationInYawDir(Location loc, double distance, double heightMod) {
-		float yaw = loc.getYaw();
+		Location locClone = loc.clone();
+		float yaw = locClone.getYaw();
 		yaw = (yaw < 0) ? (yaw + 360) : (yaw == 360) ? 0 : yaw;
 		
 		switch(Math.round((yaw / 90) - 0.5f)) {
 		case 0:
-			return loc.clone().add(new Vector(-distance * Math.sin(Math.toRadians(yaw)), heightMod, distance * Math.cos(Math.toRadians(yaw))));
+			return locClone.add(new Vector(-distance * Math.sin(Math.toRadians(yaw)), heightMod, distance * Math.cos(Math.toRadians(yaw))));
 		case 1:
 			yaw -= 90;
-			return loc.clone().add(new Vector(-distance * Math.cos(Math.toRadians(yaw)), heightMod, -distance * Math.sin(Math.toRadians(yaw))));
+			return locClone.add(new Vector(-distance * Math.cos(Math.toRadians(yaw)), heightMod, -distance * Math.sin(Math.toRadians(yaw))));
 		case 2:
 			yaw -= 180;
-			return loc.clone().add(new Vector(distance * Math.sin(Math.toRadians(yaw)), heightMod, -distance * Math.cos(Math.toRadians(yaw))));
+			return locClone.add(new Vector(distance * Math.sin(Math.toRadians(yaw)), heightMod, -distance * Math.cos(Math.toRadians(yaw))));
 		case 3:
 			yaw -= 270;
-			return loc.clone().add(new Vector(distance * Math.cos(Math.toRadians(yaw)), heightMod, distance * Math.sin(Math.toRadians(yaw))));
+			return locClone.add(new Vector(distance * Math.cos(Math.toRadians(yaw)), heightMod, distance * Math.sin(Math.toRadians(yaw))));
 		default:
-			return loc.clone();
+			return locClone;
 		}
 	}
 	
