@@ -3,6 +3,10 @@ package com.pwnion.legacycraft.abilities.inventory;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
+import org.bukkit.entity.Player;
+
 import com.google.common.collect.ImmutableMap;
 import com.pwnion.legacycraft.abilities.SkillTree.Aptitude;
 import com.pwnion.legacycraft.abilities.SkillTree.Aspect;
@@ -18,6 +22,10 @@ public abstract class Inv {
 	static final List<Integer> aptitudeSlots = Arrays.asList(28, 37);
 	static final List<Integer> jumpSlots = Arrays.asList(31, 40);
 	static final List<Integer> proficiencySlots = Arrays.asList(34, 43);
+	
+	static final void click(Player p) {
+		p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, SoundCategory.PLAYERS, 0.5f, 1f);
+	}
 	
 	static final ImmutableMap<PlayerClass, Integer> classToSlot = ImmutableMap.of(
 		PlayerClass.STRIKER, 11,

@@ -20,7 +20,7 @@ import org.bukkit.inventory.ItemStack;
 import com.pwnion.legacycraft.ConfigAccessor;
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
-import com.pwnion.legacycraft.abilities.inventory.InventoryFromFile;
+import com.pwnion.legacycraft.abilities.inventory.SerialiseInventory;
 import com.pwnion.legacycraft.abilities.inventory.SelectAClassInv;
 import com.pwnion.legacycraft.abilities.inventory.SelectAnAspectInv;
 import com.pwnion.legacycraft.abilities.inventory.WeaponEnhancementsInv;
@@ -51,7 +51,7 @@ public class InventoryClick implements Listener {
 		
 		Set<String> keys = new ConfigAccessor(fileName).getCustomConfig().getKeys(false);
 		for(String key : keys) {
-			inventories.add(InventoryFromFile.get(InvName.valueOf(key), fileName));
+			inventories.add(SerialiseInventory.get(InvName.valueOf(key), fileName));
 		}
 
 		for(int i = 0; i < 20; i++) {

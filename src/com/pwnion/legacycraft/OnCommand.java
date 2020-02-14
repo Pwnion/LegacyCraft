@@ -62,16 +62,19 @@ public class OnCommand implements CommandExecutor {
 					case "export":
 						p.sendMessage(playerToSelection.get(playerUUID).export(args[1]));
 						break;
+					case "portal":
+						try {
+							Portal.valueOf(args[1].toUpperCase()).activate(p);
+						} catch(Exception e) {
+							p.sendMessage(ChatColor.DARK_RED + "Invalid portal type!");
+						}
+						break;
 					default:
 						return false;
 					}
 				}
 			} else if(lbl.equals("test")) {
-				try {
-					Portal.valueOf(args[0].toUpperCase()).activate(p);
-				} catch(Exception e) {
-					p.sendMessage(ChatColor.DARK_RED + "Invalid portal type!");
-				}
+				
 			}
 			return true;
 		} else {

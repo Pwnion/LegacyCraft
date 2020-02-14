@@ -32,15 +32,22 @@ public class LegacyCraft extends JavaPlugin {
 	
 	//Makes registering events in onEnable() simpler and cleaner
 	private void registerEvents(Listener... listeners) {
-		for (Listener listener : listeners) {
+		for(Listener listener : listeners) {
 			Bukkit.getServer().getPluginManager().registerEvents(listener, this);
 		}
 	}
 	
 	//Makes registering commands in onEnable() simpler and cleaner
 	private void registerCommands(String... commands) {
-		for (String command : commands) {
+		for(String command : commands) {
 			this.getCommand(command).setExecutor((CommandExecutor) new OnCommand());
+		}
+	}
+	
+	//Allows the creation and population of config files with default values
+	private void saveDefaultConfigs(String... fileNames) {
+		for(String fileName : fileNames) {
+			new ConfigAccessor(fileName).saveDefaultConfig();
 		}
 	}
 	
@@ -48,12 +55,13 @@ public class LegacyCraft extends JavaPlugin {
 	public void onEnable() {
 		plugin = this;
 		
-		//Create and populate config files if needed
 		saveDefaultConfig();
-		new ConfigAccessor("inventory-gui.yml").saveDefaultConfig();
-		new ConfigAccessor("player-data.yml").saveDefaultConfig();
-		new ConfigAccessor("player-data-template.yml").saveDefaultConfig();
-		new ConfigAccessor("structures.yml").saveDefaultConfig();
+		saveDefaultConfigs(
+			"inventory-gui.yml",
+			"player-data.yml",
+			"player-data-template.yml",
+			"structures.yml"
+		);
 		
 		//Register listeners
 		registerEvents(
