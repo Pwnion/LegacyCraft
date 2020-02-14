@@ -3,7 +3,10 @@ package com.pwnion.legacycraft.abilities;
 import java.util.ArrayList;
 
 import org.bukkit.Location;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 public class Util {
@@ -82,6 +85,36 @@ public class Util {
 		return circle;
 	}
 
-
-
+	public static final void playSoundWithoutConflict(Location centre, Sound sound, SoundCategory soundCategory, float volume, float pitch, double radius) {
+		centre.getNearbyEntities(radius, radius, radius).forEach((e) -> {
+			if(e instanceof Player) {
+				((Player) e).playSound(centre, sound, soundCategory, volume, pitch);
+			}
+		});
+	}
+	
+	public static final void playSoundWithoutConflict(Location centre, Sound sound, SoundCategory soundCategory, float volume, float pitch) {
+		double radius = volume < 1f ? 16D : 16D * volume;
+		playSoundWithoutConflict(centre, sound, soundCategory, volume, pitch, radius);
+	}
+	
+	public static final void playSoundWithoutConflict(Location centre, Sound sound, float volume, float pitch) {
+		playSoundWithoutConflict(centre, sound, SoundCategory.PLAYERS, volume, pitch);
+	}
+	
+	public static final void stopSurroundingSound(Sound sound, SoundCategory soundCategory, Location centre, double radius) {
+		centre.getNearbyEntities(radius, radius, radius).forEach((e) -> {
+			if(e instanceof Player) {
+				((Player) e).stopSound(sound, soundCategory);
+			}
+		});
+	}
+	
+	public static final void stopSurroundingSound(Location centre, Sound sound, double radius) {
+		stopSurroundingSound(sound, SoundCategory.PLAYERS, centre, radius);
+	}
+	
+	public static final void stopSurroundingSound(Location centre, Sound sound) {
+		stopSurroundingSound(sound, SoundCategory.PLAYERS, centre, 16);
+	}
 }

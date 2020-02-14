@@ -9,7 +9,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
@@ -136,7 +135,7 @@ public enum Portal {
 			enchantParticles.force(true);
 			enchantParticles.extra(circleNotSpiral ? 10D : 0D);
 			enchantParticles.count(circleNotSpiral ? 5 : 1);
-			enchantParticles.location(circleNotSpiral ? centre.clone().add(0, radius, 0) : point);
+			enchantParticles.location(circleNotSpiral ? centre.clone().add(0, 1.25, 0) : point);
 			enchantParticles.receivers(100);
 			enchantParticles.spawn();
 		};
@@ -148,9 +147,17 @@ public enum Portal {
 					if(i < spiral.size() - 1) {
 						spawnParticles.accept(spiral.get(i), false);
 						spawnParticles.accept(spiral.get(i + 1), false);
+						
+						if(i % 12 == 0) {
+							Util.playSoundWithoutConflict(centre, Sound.BLOCK_END_PORTAL_FRAME_FILL, 0.5f, 1 + (i / 240f));
+						}
+						
+						if(i == spiral.size() - 9) {
+							Util.playSoundWithoutConflict(centre, Sound.BLOCK_END_PORTAL_SPAWN, 0.5f, 0.001f);
+						}
 					}
 
-					if(i >= spiral.size() - 1) {
+					if(i >= spiral.size() - 4) {
 						Vector pointerClone = pointer.clone();
 						
 						pointerClone.rotateAroundAxis(axis, rotPerStep * i);
@@ -158,6 +165,8 @@ public enum Portal {
 						
 						pointerClone.rotateAroundAxis(axis, rotPerStep);
 						spawnParticles.accept(centre.clone().add(pointerClone), true);
+						
+						Util.playSoundWithoutConflict(centre, Sound.AMBIENT_UNDERWATER_LOOP_ADDITIONS_ULTRA_RARE, 0.5f, 0.1f);
 					}
 				}
 		}, 0, 1);
@@ -169,7 +178,15 @@ public enum Portal {
 				for(ArmorStand e : armourStands) {
 					e.remove();
 				}
-				p.getWorld().playSound(centre, Sound.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.MASTER, 1f, 1f);
+				
+				Util.stopSurroundingSound(centre, Sound.AMBIENT_UNDERWATER_LOOP_ADDITIONS_ULTRA_RARE);
+				
+				Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
+					public void run() {
+						//Util.playSoundWithoutConflict(centre, Sound.ITEM_TRIDENT_THUNDER, 0.3f, 0.1f);
+						Util.playSoundWithoutConflict(centre, Sound.BLOCK_BEACON_DEACTIVATE, 2f, 0.8f);
+					}
+				}, 2);
 			}
 		}, killDelay);
 		
@@ -206,14 +223,13 @@ public enum Portal {
 					portalPiece.setItemMeta(portalPieceMeta);
 					armourStands.get(i - 1).setHelmet(portalPiece);
 				}
-				p.getWorld().playSound(centre, Sound.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.MASTER, 1f, 1f);
 				
 				LegacyCraft.addTaskToBeCancelled(Bukkit.getServer().getScheduler().runTaskTimer(LegacyCraft.getPlugin(), new Runnable() {
 					public void run() {
 						if(dest.getWorld() != null) {
 							for(int i = 0; i < portalMidSectionPoints.size(); i++) {
 								if(p.getBoundingBox().contains(portalMidSectionPoints.get(i).toVector())) {
-									p.getWorld().playSound(centre, Sound.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.MASTER, 1f, 1f);
+									Util.playSoundWithoutConflict(centre, Sound.ITEM_CHORUS_FRUIT_TELEPORT, 1f, 1f);
 									
 									p.teleport(dest);
 											
