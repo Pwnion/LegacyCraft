@@ -42,14 +42,42 @@ public class Circle {
 		return loc.toBlockLocation().add(plusX, 0, plusZ).getBlock();
 	}
 	
+	public static void spawn(Location pos, int radius, boolean hollow) {
+		Util.spawnBlocks(get(pos, radius, hollow));
+	}
+	
+	public static final HashSet<Block> get(Location pos, int radius, boolean hollow) {
+		pos = pos.toBlockLocation();
+		
+		HashSet<Block> circle = new HashSet<Block>();
+		ArrayList<Vector> circleVectors = get(radius, new Vector(0, 1, 0));
+		
+		for(Vector blockVec : circleVectors) {
+			circle.add(pos.clone().add(blockVec).getBlock());
+		}
+		
+		if(!hollow) {
+			HashSet<Block> circleInside = new HashSet<Block>();
+			for(Vector point : circleVectors) {
+				for(int i = radius - 1; i > 0; i -= 1) {
+					circleInside.add(pos.clone().add(point.clone().normalize().multiply(i).toBlockVector()).getBlock());
+				}
+			}
+			circleInside.add(pos.clone().add(new BlockVector(0, 0, 0)).getBlock());
+			circle.addAll(circleInside);
+		}
+		
+		return circle;
+	}
+	
 	//Gets a circle outline
-	public static final ArrayList<BlockVector> get(int radius, Vector axis) {
-		ArrayList<BlockVector> circle = new ArrayList<BlockVector>();
-		int steps = (int) Math.ceil(2 * Math.PI * radius);
+	public static final ArrayList<Vector> get(int radius, Vector axis) {
+		ArrayList<Vector> circle = new ArrayList<Vector>();
+		int steps = (int) Math.ceil(2 * Math.PI * radius) * 5;
 		Vector pointer = Util.vectorCalc(Util.getYaw(axis), Util.getPitch(axis) + 90, radius);
 		
 		for(double circleRot = 0; circleRot < 360; circleRot += 360 / steps) {
-			circle.add(pointer.clone().rotateAroundAxis(axis, circleRot).toBlockVector());
+			circle.add(pointer.clone().rotateAroundAxis(axis, circleRot));
 		}
 		
         return circle;

@@ -11,7 +11,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.pwnion.legacycraft.abilities.Util;
+import com.pwnion.legacycraft.abilities.areas.Circle;
 import com.pwnion.legacycraft.abilities.areas.Selection;
+import com.pwnion.legacycraft.abilities.areas.Sphere;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.ooc.Portal;
 import com.pwnion.legacycraft.abilities.targets.Point;
@@ -68,11 +71,8 @@ public class OnCommand implements CommandExecutor {
 					}
 				}
 			} else if(lbl.equals("test")) {
-				try {
-					Portal.activate(p, Portal.valueOf(args[0].toUpperCase()));
-				} catch(CommandException e) {
-					p.sendMessage(ChatColor.DARK_RED + "Invalid portal type!");
-				}
+				Sphere.spawn(Util.addY(p.getLocation(), 6), 4, true);
+				Circle.spawn(p.getLocation(), 4, true);
 			}
 			return true;
 		} else {

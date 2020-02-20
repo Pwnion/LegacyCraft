@@ -1,12 +1,21 @@
 package com.pwnion.legacycraft.abilities;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
 public class Util {
+	
+	public static final void spawnBlocks(HashSet<Block> blocks) {
+		for(Block block : blocks) {
+			block.setType(Material.STONE);
+		}
+	}
 
 	public static final Vector vectorCalc(double yaw, double pitch, double dist) {
 		pitch = Math.toRadians(pitch + 90);
