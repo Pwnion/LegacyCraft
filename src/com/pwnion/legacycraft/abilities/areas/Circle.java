@@ -38,26 +38,16 @@ public class Circle {
 		return loc.toBlockLocation().add(plusX, 0, plusZ).getBlock();
 	}
 	
-	//Old method of getting circle
-	@SuppressWarnings("unused")
-	private static final ArrayList<Block> get1(Location loc, int radius, Boolean hollow) {
-		ArrayList<Location> circleloc = new ArrayList<Location>();
-		ArrayList<Block> circle = new ArrayList<Block>();
-		int centreX = loc.getBlockX();
-		int centreY = loc.getBlockY();
-        int centreZ = loc.getBlockZ();
-        for (int x = centreX - radius; x <= centreX + radius; x++) {
-            for (int z = centreZ - radius; z <= centreZ + radius; z++) {
-                double dist = Math.pow((centreX - x), 2) + Math.pow((centreZ - z), 2);
-                if (dist < radius * radius && !(hollow && dist < (radius - 1) * (radius - 1))) {
-                	Location l = new Location(loc.getWorld(), x, centreY, z);
-                	circleloc.add(l);
-                }
-            }
-        }
-        for(Location l: circleloc) {
-        	circle.add(l.getBlock());
-        }
+	//Gets a circle outline
+	private static final ArrayList<BlockVector> get(int radius, Vector axis) {
+		ArrayList<BlockVector> circle = new ArrayList<BlockVector>();
+		int steps = Math.ceil(2 * Math.PI() * radius);
+		Vector pointer = Util.vectorCalc(Util.getYaw(axis), Util.getPitch(axis) + 90, radius);
+		
+		for(double = circleRot; circleRot < 360; circleRot += 360 / steps) {
+			circle.add(pointer.clone().rotateAroundAxis(axis, circleRot));
+		}
+		
         return circle;
     }
 }

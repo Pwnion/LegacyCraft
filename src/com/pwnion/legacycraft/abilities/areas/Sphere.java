@@ -21,4 +21,28 @@ public class Sphere {
 
         return sphere;
     }
+    
+    public static final HashSet<BlockVector> generate(int radius, boolean hollow) {
+    		HashSet<BlockVector> sphere = new HashSet<BlockVector>();
+    
+    		Vector axis = new Vector(0, radius, 0);
+    		ArrayList<BlockVector> circle = Circle.get(radius, axis);
+    		
+    		for(BlockVector newAxis : circle) {
+    			sphere.add(Circle.get(radius, newAxis);
+    		}
+    		
+    		if(!hollow) {
+    			HashSet<BlockVector> sphereInside = new HashSet<BlockVector>();
+    			for(BlockVector point : sphere) {
+    				for(int i = radius - 1; i > 0; i -= 1) {
+    					sphereInside.add(point.clone().normalise().multiply(i));
+    				}
+    			}
+    			sphereInside.add(new BlockVector(0, 0, 0));
+    			sphere.addAll(sphereInside);
+    		}
+    		
+    		return sphere;
+    }
 }

@@ -29,6 +29,14 @@ public class Util {
 		}
 		return new Vector(pos2.getX() - pos1.getX(), pos2.getY() - pos1.getY(), pos2.getZ() - pos1.getZ());
 	}
+	
+	public static final double getYaw(Vector vec) {
+		
+	}
+	
+	public static final double getPitch(Vector vec) {
+	
+	}
 
 	public static final Location addY(Location loc, double plusY) {
 		return loc.clone().add(0, plusY, 0);
