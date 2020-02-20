@@ -1,9 +1,12 @@
 package com.pwnion.legacycraft.abilities.areas;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.util.BlockVector;
+import org.bukkit.util.Vector;
 
 public class Sphere {
 	public static HashSet<Block> get(Location pos, int radius) {
@@ -29,14 +32,14 @@ public class Sphere {
     		ArrayList<BlockVector> circle = Circle.get(radius, axis);
     		
     		for(BlockVector newAxis : circle) {
-    			sphere.add(Circle.get(radius, newAxis);
+    			sphere.addAll(Circle.get(radius, newAxis));
     		}
     		
     		if(!hollow) {
     			HashSet<BlockVector> sphereInside = new HashSet<BlockVector>();
     			for(BlockVector point : sphere) {
     				for(int i = radius - 1; i > 0; i -= 1) {
-    					sphereInside.add(point.clone().normalise().multiply(i));
+    					sphereInside.add(point.clone().normalize().multiply(i).toBlockVector());
     				}
     			}
     			sphereInside.add(new BlockVector(0, 0, 0));

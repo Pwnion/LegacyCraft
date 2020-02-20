@@ -31,11 +31,17 @@ public class Util {
 	}
 	
 	public static final double getYaw(Vector vec) {
-		
+		double yaw = 0;
+		if(vec.getX() > 0) {
+			yaw = Math.toDegrees(vec.angle(new Vector(0, 0, -1))) + 180;
+		} else {
+			yaw = Math.toDegrees(vec.angle(new Vector(0, 0, 1)));
+		}
+		return yaw;
 	}
 	
 	public static final double getPitch(Vector vec) {
-	
+		return Math.toDegrees(vec.angle(new Vector(0, 1, 0))) - 90;
 	}
 
 	public static final Location addY(Location loc, double plusY) {

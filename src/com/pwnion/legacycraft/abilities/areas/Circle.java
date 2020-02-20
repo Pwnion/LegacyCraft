@@ -6,6 +6,10 @@ import java.util.HashSet;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.util.BlockVector;
+import org.bukkit.util.Vector;
+
+import com.pwnion.legacycraft.abilities.Util;
 
 public class Circle {
 	public static final HashSet<Block> get(World world, int x, int y, int z, int radius) {
@@ -39,13 +43,13 @@ public class Circle {
 	}
 	
 	//Gets a circle outline
-	private static final ArrayList<BlockVector> get(int radius, Vector axis) {
+	public static final ArrayList<BlockVector> get(int radius, Vector axis) {
 		ArrayList<BlockVector> circle = new ArrayList<BlockVector>();
-		int steps = Math.ceil(2 * Math.PI() * radius);
+		int steps = (int) Math.ceil(2 * Math.PI * radius);
 		Vector pointer = Util.vectorCalc(Util.getYaw(axis), Util.getPitch(axis) + 90, radius);
 		
-		for(double = circleRot; circleRot < 360; circleRot += 360 / steps) {
-			circle.add(pointer.clone().rotateAroundAxis(axis, circleRot));
+		for(double circleRot = 0; circleRot < 360; circleRot += 360 / steps) {
+			circle.add(pointer.clone().rotateAroundAxis(axis, circleRot).toBlockVector());
 		}
 		
         return circle;
