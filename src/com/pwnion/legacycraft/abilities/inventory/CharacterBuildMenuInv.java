@@ -26,5 +26,4 @@ public class CharacterBuildMenuInv extends Inv {
 			break;
 		}
 	}
-
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 
 import com.google.common.collect.ImmutableMap;
 import com.pwnion.legacycraft.abilities.SkillTree.Aptitude;
@@ -69,4 +70,7 @@ public abstract class Inv {
 		34, Proficiency.ONE,
 		43, Proficiency.TWO
 	);
+	
+	static void load(Player p) {}
+	static void respond(InventoryClickEvent e) {}
 }

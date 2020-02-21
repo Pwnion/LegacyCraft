@@ -16,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.pwnion.legacycraft.ConfigAccessor;
 import com.pwnion.legacycraft.LegacyCraft;
@@ -23,6 +24,7 @@ import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.abilities.inventory.DeserialiseInventory;
 import com.pwnion.legacycraft.abilities.inventory.SelectAClassInv;
 import com.pwnion.legacycraft.abilities.inventory.SelectAnAspectInv;
+import com.pwnion.legacycraft.abilities.inventory.WarpGatesInv;
 import com.pwnion.legacycraft.abilities.inventory.WeaponEnhancementsInv;
 import com.pwnion.legacycraft.abilities.SkillTree;
 import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
@@ -34,8 +36,9 @@ import com.pwnion.legacycraft.abilities.inventory.InvName;
 public class InventoryClick implements Listener {
 	private static final HashMap<String, Class<? extends Inv>> holderToInvClass = getHolderToInvClass();
 	private static final HashMap<String, Class<? extends Inv>> getHolderToInvClass() {
-		HashMap<String, Class<? extends Inv>> holderToInvClass = new HashMap<String, Class<? extends Inv>>(20);
-		List<Inventory> inventories = new ArrayList<>(20);
+		int invCount = InvName.values().length;
+		HashMap<String, Class<? extends Inv>> holderToInvClass = new HashMap<String, Class<? extends Inv>>(invCount);
+		List<Inventory> inventories = new ArrayList<>(invCount);
 		String fileName = "inventory-menus.yml";
 		
 		ArrayList<Class<? extends Inv>> invClasses = new ArrayList<Class<? extends Inv>>() {
@@ -46,6 +49,7 @@ public class InventoryClick implements Listener {
 				add(SelectAClassInv.class);
 				add(SelectAnAspectInv.class);
 				add(BuildInv.class);
+				add(WarpGatesInv.class);
 			}
 		};
 		
@@ -54,9 +58,10 @@ public class InventoryClick implements Listener {
 			inventories.add(DeserialiseInventory.get(InvName.valueOf(key)));
 		}
 
-		for(int i = 0; i < 20; i++) {
+		for(int i = 0; i < invCount; i++) {
 			String invHolder = inventories.get(i).getHolder().toString();
-			holderToInvClass.put(invHolder.substring(0, invHolder.indexOf("@")), invClasses.get(i < 4 ? i : 4));
+			int index = i < 4 ? i : i < 20 ? 4 : i - 15;
+			holderToInvClass.put(invHolder.substring(0, invHolder.indexOf("@")), invClasses.get(index));
 		}
 		
 		return holderToInvClass;
@@ -81,7 +86,7 @@ public class InventoryClick implements Listener {
             	
             	if(!p.getGameMode().equals(GameMode.ADVENTURE)) {
             		p.closeInventory();
-            		p.sendMessage(ChatColor.DARK_RED + "You must be in adventure mode to do that!");
+            		p.sendMessage(ChatColor.RED + "You must be in adventure mode to do that!");
             		return true;
             	}
             	
@@ -100,8 +105,13 @@ public class InventoryClick implements Listener {
         	if(p.getGameMode().equals(GameMode.ADVENTURE) && !skillTree.getPlayerClass().equals(PlayerClass.NONE)) {
         		e.setCancelled(true);
         		
-        		if(clickedItem.getType().equals(Material.COMPASS)) {
+        		Material itemMaterial = clickedItem.getType();
+        		ItemMeta itemMeta = clickedItem.getItemMeta();
+        		
+        		if(itemMaterial.equals(Material.COMPASS)) {
         			CharacterBuildMenuInv.load(p);
+        		} else if(itemMaterial.equals(Material.GLASS_PANE) && itemMeta.getCustomModelData() == 1) {
+        			WarpGatesInv.load(p);
         		}
         	}
         }

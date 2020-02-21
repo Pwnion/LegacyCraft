@@ -27,6 +27,7 @@ import com.pwnion.legacycraft.abilities.inventory.holders.TerraRogue;
 import com.pwnion.legacycraft.abilities.inventory.holders.TerraShaman;
 import com.pwnion.legacycraft.abilities.inventory.holders.TerraStriker;
 import com.pwnion.legacycraft.abilities.inventory.holders.TerraVanguard;
+import com.pwnion.legacycraft.abilities.inventory.holders.WarpGates;
 import com.pwnion.legacycraft.abilities.inventory.holders.WeaponEnhancements;
 
 public class DeserialiseInventory {
@@ -39,7 +40,7 @@ public class DeserialiseInventory {
 		ItemStack contents[] = targetCS.getList("contents").toArray(new ItemStack[0]);
 		InventoryHolder holder;
 		
-		switch(title.replace("§1§l", "")) {
+		switch(title.replace("§5§l", "")) {
 		case "Character Build Menu":
 			holder = new SelectOption();
 			break;
@@ -99,6 +100,9 @@ public class DeserialiseInventory {
 			break;
 		case "Aqua Shaman":
 			holder = new AquaShaman();
+			break;
+		case "Warp Gates":
+			holder = new WarpGates();
 			break;
 		default:
 			holder = null;

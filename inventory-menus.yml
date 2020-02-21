@@ -1,5 +1,5 @@
 CHARACTER_BUILD_MENU:
-  title: §1§lCharacter Build Menu
+  title: §5§lCharacter Build Menu
   size: 5
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -34,7 +34,7 @@ CHARACTER_BUILD_MENU:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 WEAPON_ENHANCEMENTS:
-  title: §1§lWeapon Enhancements
+  title: §5§lWeapon Enhancements
   size: 54
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -208,7 +208,7 @@ WEAPON_ENHANCEMENTS:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 SELECT_A_CLASS:
-  title: §1§lSelect a Class
+  title: §5§lSelect a Class
   size: 27
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -342,7 +342,7 @@ SELECT_A_CLASS:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 SELECT_AN_ASPECT:
-  title: §1§lSelect an Aspect
+  title: §5§lSelect an Aspect
   size: 27
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -475,7 +475,7 @@ SELECT_AN_ASPECT:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 IGNIS_STRIKER:
-  title: §1§lIgnis Striker
+  title: §5§lIgnis Striker
   size: 45
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -708,7 +708,7 @@ IGNIS_STRIKER:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 TERRA_STRIKER:
-  title: §1§lTerra Striker
+  title: §5§lTerra Striker
   size: 45
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -941,7 +941,7 @@ TERRA_STRIKER:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 AER_STRIKER:
-  title: §1§lAer Striker
+  title: §5§lAer Striker
   size: 45
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -1174,7 +1174,7 @@ AER_STRIKER:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 AQUA_STRIKER:
-  title: §1§lAqua Striker
+  title: §5§lAqua Striker
   size: 45
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -1407,7 +1407,7 @@ AQUA_STRIKER:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 IGNIS_VANGUARD:
-  title: §1§lIgnis Vanguard
+  title: §5§lIgnis Vanguard
   size: 45
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -1640,7 +1640,7 @@ IGNIS_VANGUARD:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 TERRA_VANGUARD:
-  title: §1§lTerra Vanguard
+  title: §5§lTerra Vanguard
   size: 45
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -1873,7 +1873,7 @@ TERRA_VANGUARD:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 AER_VANGUARD:
-  title: §1§lAer Vanguard
+  title: §5§lAer Vanguard
   size: 45
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -2106,7 +2106,7 @@ AER_VANGUARD:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 AQUA_VANGUARD:
-  title: §1§lAqua Vanguard
+  title: §5§lAqua Vanguard
   size: 45
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -2339,7 +2339,7 @@ AQUA_VANGUARD:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 IGNIS_ROGUE:
-  title: §1§lIgnis Rogue
+  title: §5§lIgnis Rogue
   size: 45
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -2572,7 +2572,7 @@ IGNIS_ROGUE:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 TERRA_ROGUE:
-  title: §1§lTerra Rogue
+  title: §5§lTerra Rogue
   size: 45
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -2805,7 +2805,7 @@ TERRA_ROGUE:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 AER_ROGUE:
-  title: §1§lAer Rogue
+  title: §5§lAer Rogue
   size: 45
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -3038,7 +3038,7 @@ AER_ROGUE:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 AQUA_ROGUE:
-  title: §1§lAqua Rogue
+  title: §5§lAqua Rogue
   size: 45
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -3271,7 +3271,7 @@ AQUA_ROGUE:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 IGNIS_SHAMAN:
-  title: §1§lIgnis Shaman
+  title: §5§lIgnis Shaman
   size: 45
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -3504,7 +3504,7 @@ IGNIS_SHAMAN:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 TERRA_SHAMAN:
-  title: §1§lTerra Shaman
+  title: §5§lTerra Shaman
   size: 45
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -3737,7 +3737,7 @@ TERRA_SHAMAN:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 AER_SHAMAN:
-  title: §1§lAer Shaman
+  title: §5§lAer Shaman
   size: 45
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -3970,7 +3970,7 @@ AER_SHAMAN:
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
 AQUA_SHAMAN:
-  title: §1§lAqua Shaman
+  title: §5§lAqua Shaman
   size: 45
   contents:
   - ==: org.bukkit.inventory.ItemStack
@@ -4202,3 +4202,58 @@ AQUA_SHAMAN:
   - ==: org.bukkit.inventory.ItemStack
     v: 1976
     type: BLACK_STAINED_GLASS_PANE
+WARP_GATES:
+  title: §5§lWarp Gates
+  size: 9
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: GLASS_PANE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §fNeutral
+      custom-model-data: 2
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: GLASS_PANE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §cIgnis
+      custom-model-data: 3
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: GLASS_PANE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §aTerra
+      custom-model-data: 4
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: GLASS_PANE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §eAer
+      custom-model-data: 5
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: GLASS_PANE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §9Aqua
+      custom-model-data: 6
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: GLASS_PANE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §dCustom
+      custom-model-data: 7
+  - null
+  - null
+  - null
