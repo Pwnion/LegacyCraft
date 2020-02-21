@@ -22,7 +22,7 @@ import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
 public class SelectAnAspectInv extends Inv {
 	//Loads the 'Select An Aspect' inventory for a player
 	public static void load(Player p) {
-		InventoryView inv = p.openInventory(SerialiseInventory.get(InvName.SELECT_AN_ASPECT, FILE));
+		InventoryView inv = p.openInventory(DeserialiseInventory.get(InvName.SELECT_AN_ASPECT));
 		UUID playerUUID = p.getUniqueId();
 		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
 		PlayerClass openedClass = (PlayerClass) LegacyCraft.getPlayerData(playerUUID, PlayerData.CLASS_INVENTORY_OPEN);

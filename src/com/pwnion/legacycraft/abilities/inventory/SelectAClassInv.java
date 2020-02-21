@@ -22,7 +22,7 @@ import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
 public class SelectAClassInv extends Inv {
 	//Loads the 'Select A Class' inventory for a player
 	public static void load(Player p) {
-		InventoryView inv = p.openInventory(SerialiseInventory.get(InvName.SELECT_A_CLASS, FILE));
+		InventoryView inv = p.openInventory(DeserialiseInventory.get(InvName.SELECT_A_CLASS));
 		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.SKILL_TREE);
 		
     	if(!skillTree.getPlayerClass().equals(PlayerClass.NONE)) {

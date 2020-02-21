@@ -1,17 +1,17 @@
 package com.pwnion.legacycraft.abilities.inventory;
 
-import java.util.List;
-
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
+import com.pwnion.legacycraft.ConfigAccessor;
+import com.pwnion.legacycraft.abilities.inventory.holders.AerRogue;
+import com.pwnion.legacycraft.abilities.inventory.holders.AerShaman;
+import com.pwnion.legacycraft.abilities.inventory.holders.AerStriker;
+import com.pwnion.legacycraft.abilities.inventory.holders.AerVanguard;
 import com.pwnion.legacycraft.abilities.inventory.holders.AquaRogue;
 import com.pwnion.legacycraft.abilities.inventory.holders.AquaShaman;
 import com.pwnion.legacycraft.abilities.inventory.holders.AquaStriker;
@@ -27,31 +27,19 @@ import com.pwnion.legacycraft.abilities.inventory.holders.TerraRogue;
 import com.pwnion.legacycraft.abilities.inventory.holders.TerraShaman;
 import com.pwnion.legacycraft.abilities.inventory.holders.TerraStriker;
 import com.pwnion.legacycraft.abilities.inventory.holders.TerraVanguard;
-import com.pwnion.legacycraft.abilities.inventory.holders.AerRogue;
-import com.pwnion.legacycraft.abilities.inventory.holders.AerShaman;
-import com.pwnion.legacycraft.abilities.inventory.holders.AerStriker;
-import com.pwnion.legacycraft.abilities.inventory.holders.AerVanguard;
 import com.pwnion.legacycraft.abilities.inventory.holders.WeaponEnhancements;
 
-public class InventoryCreator {
-	//Builds and returns an ItemStack based on the parameters
-	private static final ItemStack createItem(String name, Material material, List<String> desc) {
-        final ItemStack itemStack = new ItemStack(material, 1);
-        final ItemMeta itemMeta = itemStack.getItemMeta();
-        
-        itemMeta.setDisplayName(name);
-        itemMeta.setLore(desc);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        itemStack.setItemMeta(itemMeta);
-        return itemStack;
-    }
-	
-	//Builds and returns an inventory based on the parameters
-	public static final Inventory getInv(int size, String title, List<Integer> slots, List<String> names, List<Material> materials, List<List<String>> descriptions) {
-		Inventory inv;
+public class DeserialiseInventory {
+	//Returns an inventory saved in a file
+	public static final Inventory get(InvName invToOpen) {
+		ConfigurationSection targetCS = new ConfigAccessor("inventory-menus.yml").getCustomConfig().getConfigurationSection(invToOpen.toString());
+		
+		String title = targetCS.getString("title");
+		int size = targetCS.getInt("size");
+		ItemStack contents[] = targetCS.getList("contents").toArray(new ItemStack[0]);
 		InventoryHolder holder;
 		
-		switch(title) {
+		switch(title.replace("§1§l", "")) {
 		case "Character Build Menu":
 			holder = new SelectOption();
 			break;
@@ -116,20 +104,14 @@ public class InventoryCreator {
 			holder = null;
 		}
 		
-		if(size == 5) {
-			inv = Bukkit.createInventory(holder, InventoryType.HOPPER, ChatColor.DARK_BLUE + "" + ChatColor.BOLD + title); 
+		Inventory inv;
+		if(size % 9 == 0) {
+			inv = Bukkit.createInventory(holder, size, title);
 		} else {
-			inv = Bukkit.createInventory(holder, size, ChatColor.DARK_BLUE + "" + ChatColor.BOLD + title); 
+			inv = Bukkit.createInventory(holder, InventoryType.HOPPER, title);
 		}
+		inv.setContents(contents);
 		
-		for(int i = 0; i < size; i++) {
-			inv.setItem(i, new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1));
-		}
-
-		for(int i = 0; i < slots.size(); i++) {
-			inv.setItem(slots.get(i), createItem(names.get(i), materials.get(i), descriptions.get(i)));
-		}
 		return inv;
 	}
 }
-

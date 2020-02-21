@@ -57,7 +57,7 @@ public class LegacyCraft extends JavaPlugin {
 		
 		saveDefaultConfig();
 		saveDefaultConfigs(
-			"inventory-gui.yml",
+			"inventory-menus.yml",
 			"player-data.yml",
 			"player-data-template.yml",
 			"structures.yml"

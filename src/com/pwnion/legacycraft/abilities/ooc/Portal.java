@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -228,20 +229,26 @@ public enum Portal {
 					public void run() {
 						if(dest.getWorld() != null) {
 							for(int i = 0; i < portalMidSectionPoints.size(); i++) {
-								if(p.getBoundingBox().contains(portalMidSectionPoints.get(i).toVector())) {
-									Util.playSoundWithoutConflict(centre, Sound.ITEM_CHORUS_FRUIT_TELEPORT, 1f, 1f);
-									
-									p.teleport(dest);
+								for(Entity e : centre.getNearbyEntities(2, 2, 2)) {
+									if(e instanceof Player) {
+										Player p = (Player) e;
+										
+										if(p.getBoundingBox().contains(portalMidSectionPoints.get(i).toVector())) {
+											Util.playSoundWithoutConflict(centre, Sound.ITEM_CHORUS_FRUIT_TELEPORT, 1f, 1f);
 											
-									cleanupTask.cancel();
+											p.teleport(dest);
+													
+											cleanupTask.cancel();
+													
+											portalTask.cancel();
+											for(ArmorStand as : armourStands) {
+												as.remove();
+											}
+											portalMidSectionPoints.clear();
 											
-									portalTask.cancel();
-									for(ArmorStand e : armourStands) {
-										e.remove();
+											return;
+										}
 									}
-									portalMidSectionPoints.clear();
-									
-									return;
 								}
 							}
 						}

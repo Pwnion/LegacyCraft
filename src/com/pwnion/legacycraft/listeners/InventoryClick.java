@@ -20,7 +20,7 @@ import org.bukkit.inventory.ItemStack;
 import com.pwnion.legacycraft.ConfigAccessor;
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
-import com.pwnion.legacycraft.abilities.inventory.SerialiseInventory;
+import com.pwnion.legacycraft.abilities.inventory.DeserialiseInventory;
 import com.pwnion.legacycraft.abilities.inventory.SelectAClassInv;
 import com.pwnion.legacycraft.abilities.inventory.SelectAnAspectInv;
 import com.pwnion.legacycraft.abilities.inventory.WeaponEnhancementsInv;
@@ -36,7 +36,7 @@ public class InventoryClick implements Listener {
 	private static final HashMap<String, Class<? extends Inv>> getHolderToInvClass() {
 		HashMap<String, Class<? extends Inv>> holderToInvClass = new HashMap<String, Class<? extends Inv>>(20);
 		List<Inventory> inventories = new ArrayList<>(20);
-		String fileName = "inventory-gui.yml";
+		String fileName = "inventory-menus.yml";
 		
 		ArrayList<Class<? extends Inv>> invClasses = new ArrayList<Class<? extends Inv>>() {
 			private static final long serialVersionUID = 1L;
@@ -51,7 +51,7 @@ public class InventoryClick implements Listener {
 		
 		Set<String> keys = new ConfigAccessor(fileName).getCustomConfig().getKeys(false);
 		for(String key : keys) {
-			inventories.add(SerialiseInventory.get(InvName.valueOf(key), fileName));
+			inventories.add(DeserialiseInventory.get(InvName.valueOf(key)));
 		}
 
 		for(int i = 0; i < 20; i++) {

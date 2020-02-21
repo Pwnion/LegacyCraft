@@ -6,7 +6,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 public class CharacterBuildMenuInv extends Inv {
 	//Loads the 'Character Build Menu' inventory for a player
 	public static void load(Player p) {
-		p.openInventory(SerialiseInventory.get(InvName.CHARACTER_BUILD_MENU, FILE));
+		p.openInventory(DeserialiseInventory.get(InvName.CHARACTER_BUILD_MENU));
 		click(p);
 	}
 	

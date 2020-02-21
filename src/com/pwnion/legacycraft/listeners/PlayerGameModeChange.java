@@ -13,6 +13,8 @@ import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.abilities.SkillTree;
 import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class PlayerGameModeChange implements Listener {
 	
 	@EventHandler
@@ -32,11 +34,14 @@ public class PlayerGameModeChange implements Listener {
 				skillTree.loadClass(skillTree.getPlayerClass());
 			}
 			
+			p.sendMessage(ChatColor.GREEN + "Entered " + ChatColor.GOLD + "Legacy" + ChatColor.WHITE + "Craft " + ChatColor.GREEN + "Player Mode!");
 		} else if(oldGameMode.equals(GameMode.ADVENTURE)) {
 			if(!skillTree.getPlayerClass().equals(PlayerClass.NONE)) {
 				skillTree.saveClass();
 				skillTree.loadOther();
 			}
+			
+			p.sendMessage(ChatColor.RED + "Exited " + ChatColor.GOLD + "Legacy" + ChatColor.WHITE + "Craft " + ChatColor.RED + "Player Mode!");
 		}
 	}
 }

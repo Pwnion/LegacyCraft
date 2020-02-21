@@ -1,7 +1,7 @@
 equipped:
-  CLASS: 'NONE'
+  CLASS: NONE
 STRIKER:
-  ASPECT: 'NONE'
+  ASPECT: NONE
   aptitudes:
     ONE:
       unlocked: false
@@ -18,16 +18,36 @@ STRIKER:
       equipped: false
   save:
     inventory:
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: IRON_SWORD
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Sword
+        attribute-modifiers:
+          GENERIC_ATTACK_DAMAGE:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 10.0
+            name: generic.attackDamage
+            uuid: 00000000-0000-0001-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BOW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        enchants:
+          ARROW_INFINITE: 1
+        ItemFlags:
+        - HIDE_ENCHANTS
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
     - null
     - null
     - null
@@ -37,7 +57,32 @@ STRIKER:
     - null
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
+      type: NETHER_STAR
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Warp Gates
+        custom-model-data: 1
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: ARROW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Your last arrow. Use it wisely.
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
       type: COMPASS
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Character Build Menu
     - null
     - null
     - null
@@ -72,6 +117,7 @@ STRIKER:
             operation: 0
         ItemFlags:
         - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
         Unbreakable: true
         color:
           ==: Color
@@ -94,6 +140,7 @@ STRIKER:
             operation: 0
         ItemFlags:
         - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
         Unbreakable: true
         color:
           ==: Color
@@ -116,6 +163,7 @@ STRIKER:
             operation: 0
         ItemFlags:
         - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
         Unbreakable: true
         color:
           ==: Color
@@ -138,6 +186,7 @@ STRIKER:
             operation: 0
         ItemFlags:
         - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
         Unbreakable: true
         color:
           ==: Color
@@ -151,14 +200,14 @@ STRIKER:
       x: 98.5
       y: 60.0
       z: 81.5
-      yaw: 180.0
       pitch: 0.0
+      yaw: 180.0
     health: 20.0
     hunger: 20
     level: 0
     exp: 0.0
 VANGUARD:
-  ASPECT: 'NONE'
+  ASPECT: NONE
   aptitudes:
     ONE:
       unlocked: false
@@ -175,16 +224,36 @@ VANGUARD:
       equipped: false
   save:
     inventory:
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: IRON_SWORD
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Sword
+        attribute-modifiers:
+          GENERIC_ATTACK_DAMAGE:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 10.0
+            name: generic.attackDamage
+            uuid: 00000000-0000-0001-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BOW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        enchants:
+          ARROW_INFINITE: 1
+        ItemFlags:
+        - HIDE_ENCHANTS
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
     - null
     - null
     - null
@@ -194,7 +263,32 @@ VANGUARD:
     - null
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
+      type: NETHER_STAR
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Warp Gates
+        custom-model-data: 1
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: ARROW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Your last arrow. Use it wisely.
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
       type: COMPASS
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Character Build Menu
     - null
     - null
     - null
@@ -229,11 +323,12 @@ VANGUARD:
             operation: 0
         ItemFlags:
         - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
         Unbreakable: true
         color:
           ==: Color
           RED: 0
-          BLUE: 255
+          BLUE: 139
           GREEN: 0
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
@@ -251,11 +346,12 @@ VANGUARD:
             operation: 0
         ItemFlags:
         - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
         Unbreakable: true
         color:
           ==: Color
           RED: 0
-          BLUE: 255
+          BLUE: 139
           GREEN: 0
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
@@ -273,11 +369,12 @@ VANGUARD:
             operation: 0
         ItemFlags:
         - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
         Unbreakable: true
         color:
           ==: Color
           RED: 0
-          BLUE: 255
+          BLUE: 139
           GREEN: 0
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
@@ -295,11 +392,12 @@ VANGUARD:
             operation: 0
         ItemFlags:
         - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
         Unbreakable: true
         color:
           ==: Color
           RED: 0
-          BLUE: 255
+          BLUE: 139
           GREEN: 0
     - null
     location:
@@ -308,14 +406,14 @@ VANGUARD:
       x: 98.5
       y: 60.0
       z: 81.5
-      yaw: 180.0
       pitch: 0.0
+      yaw: 180.0
     health: 20.0
     hunger: 20
     level: 0
     exp: 0.0
 ROGUE:
-  ASPECT: 'NONE'
+  ASPECT: NONE
   aptitudes:
     ONE:
       unlocked: false
@@ -332,16 +430,36 @@ ROGUE:
       equipped: false
   save:
     inventory:
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: IRON_SWORD
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Sword
+        attribute-modifiers:
+          GENERIC_ATTACK_DAMAGE:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 10.0
+            name: generic.attackDamage
+            uuid: 00000000-0000-0001-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BOW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        enchants:
+          ARROW_INFINITE: 1
+        ItemFlags:
+        - HIDE_ENCHANTS
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
     - null
     - null
     - null
@@ -351,7 +469,32 @@ ROGUE:
     - null
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
+      type: NETHER_STAR
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Warp Gates
+        custom-model-data: 1
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: ARROW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Your last arrow. Use it wisely.
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
       type: COMPASS
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Character Build Menu
     - null
     - null
     - null
@@ -386,6 +529,7 @@ ROGUE:
             operation: 0
         ItemFlags:
         - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
         Unbreakable: true
         color:
           ==: Color
@@ -408,6 +552,7 @@ ROGUE:
             operation: 0
         ItemFlags:
         - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
         Unbreakable: true
         color:
           ==: Color
@@ -430,6 +575,7 @@ ROGUE:
             operation: 0
         ItemFlags:
         - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
         Unbreakable: true
         color:
           ==: Color
@@ -452,6 +598,7 @@ ROGUE:
             operation: 0
         ItemFlags:
         - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
         Unbreakable: true
         color:
           ==: Color
@@ -465,14 +612,14 @@ ROGUE:
       x: 98.5
       y: 60.0
       z: 81.5
-      yaw: 180.0
       pitch: 0.0
+      yaw: 180.0
     health: 20.0
     hunger: 20
     level: 0
     exp: 0.0
 SHAMAN:
-  ASPECT: 'NONE'
+  ASPECT: NONE
   aptitudes:
     ONE:
       unlocked: false
@@ -489,16 +636,36 @@ SHAMAN:
       equipped: false
   save:
     inventory:
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: IRON_SWORD
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Sword
+        attribute-modifiers:
+          GENERIC_ATTACK_DAMAGE:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 10.0
+            name: generic.attackDamage
+            uuid: 00000000-0000-0001-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BOW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        enchants:
+          ARROW_INFINITE: 1
+        ItemFlags:
+        - HIDE_ENCHANTS
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
     - null
     - null
     - null
@@ -508,7 +675,32 @@ SHAMAN:
     - null
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
+      type: NETHER_STAR
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Warp Gates
+        custom-model-data: 1
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: ARROW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Your last arrow. Use it wisely.
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
       type: COMPASS
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Character Build Menu
     - null
     - null
     - null
@@ -543,6 +735,7 @@ SHAMAN:
             operation: 0
         ItemFlags:
         - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
         Unbreakable: true
         color:
           ==: Color
@@ -565,6 +758,7 @@ SHAMAN:
             operation: 0
         ItemFlags:
         - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
         Unbreakable: true
         color:
           ==: Color
@@ -587,6 +781,7 @@ SHAMAN:
             operation: 0
         ItemFlags:
         - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
         Unbreakable: true
         color:
           ==: Color
@@ -609,6 +804,7 @@ SHAMAN:
             operation: 0
         ItemFlags:
         - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
         Unbreakable: true
         color:
           ==: Color
@@ -622,8 +818,8 @@ SHAMAN:
       x: 98.5
       y: 60.0
       z: 81.5
-      yaw: 180.0
       pitch: 0.0
+      yaw: 180.0
     health: 20.0
     hunger: 20
     level: 0

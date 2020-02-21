@@ -17,7 +17,6 @@ import com.pwnion.legacycraft.abilities.SkillTree.Proficiency;
 //Super class for inventory classes
 //Also acts as a tagging class for safety in the InventoryClick class
 public abstract class Inv {
-	static final String FILE = "inventory-gui.yml";
 	static final List<Integer> selectedSlots = Arrays.asList(2, 4, 6, 8, 20, 22, 24, 26);
 	static final List<Integer> aptitudeSlots = Arrays.asList(28, 37);
 	static final List<Integer> jumpSlots = Arrays.asList(31, 40);

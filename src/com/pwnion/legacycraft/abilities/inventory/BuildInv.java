@@ -29,7 +29,7 @@ public class BuildInv extends Inv {
 		Aspect openedAspect = (Aspect) LegacyCraft.getPlayerData(playerUUID, PlayerData.ASPECT_INVENTORY_OPEN);
 		
 		InvName buildInvName = InvName.valueOf(skillTree.getBuild(openedClass, openedAspect).toString());
-		InventoryView inv = p.openInventory(SerialiseInventory.get(buildInvName, FILE));
+		InventoryView inv = p.openInventory(DeserialiseInventory.get(buildInvName));
 		
 		HashMap<Aptitude, Boolean> aptitudes = skillTree.getEquippedAptitudes(openedClass);
 		for(Aptitude aptitude : aptitudes.keySet()) {

@@ -6,7 +6,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 public class WeaponEnhancementsInv extends Inv {
 	//Loads the 'Weapon Enhancements' inventory for the player
 	public static void load(Player p) {
-		p.openInventory(SerialiseInventory.get(InvName.WEAPON_ENHANCEMENTS, FILE));
+		p.openInventory(DeserialiseInventory.get(InvName.WEAPON_ENHANCEMENTS));
 	}
 	
 	//Responds to a player clicking an item in the 'Weapon Enhancements' inventory
