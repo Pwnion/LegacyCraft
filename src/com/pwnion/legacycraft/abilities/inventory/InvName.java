@@ -21,5 +21,5 @@ public enum InvName {
 	IGNIS_SHAMAN,
 	TERRA_SHAMAN,
 	AER_SHAMAN,
-	AQUA_SHAMAN,
+	AQUA_SHAMAN
 }

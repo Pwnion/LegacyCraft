@@ -1,5 +1,6 @@
 package com.pwnion.legacycraft;
 
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -11,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import com.pwnion.legacycraft.listeners.EntityDamage;
 import com.pwnion.legacycraft.listeners.InventoryClick;
@@ -31,19 +33,27 @@ public class LegacyCraft extends JavaPlugin {
 	//Declare lots of variables that can be accessed by this classes getter and setter methods
 	//These variables facilitate the storing of values used to track players actions
 	private static final HashMap<UUID, HashMap<PlayerData, Object>> playerData = new HashMap<UUID, HashMap<PlayerData, Object>>();
+	private static final HashMap<BukkitTask, Integer> tasksToBeCancelled = new HashMap<BukkitTask, Integer>();
 	private static Plugin plugin;
 	
 	//Makes registering events in onEnable() simpler and cleaner
 	private void registerEvents(Listener... listeners) {
-		for (Listener listener : listeners) {
+		for(Listener listener : listeners) {
 			Bukkit.getServer().getPluginManager().registerEvents(listener, this);
 		}
 	}
 	
 	//Makes registering commands in onEnable() simpler and cleaner
 	private void registerCommands(String... commands) {
-		for (String command : commands) {
+		for(String command : commands) {
 			this.getCommand(command).setExecutor((CommandExecutor) new OnCommand());
+		}
+	}
+	
+	//Allows the creation and population of config files with default values
+	private void saveDefaultConfigs(String... fileNames) {
+		for(String fileName : fileNames) {
+			new ConfigAccessor(fileName).saveDefaultConfig();
 		}
 	}
 	
@@ -51,12 +61,13 @@ public class LegacyCraft extends JavaPlugin {
 	public void onEnable() {
 		plugin = this;
 		
-		//Create and populate config files if needed
 		saveDefaultConfig();
-		new ConfigAccessor("inventory-gui.yml").saveDefaultConfig();
-		new ConfigAccessor("player-data.yml").saveDefaultConfig();
-		new ConfigAccessor("player-data-template.yml").saveDefaultConfig();
-		new ConfigAccessor("structures.yml").saveDefaultConfig();
+		saveDefaultConfigs(
+			"inventory-gui.yml",
+			"player-data.yml",
+			"player-data-template.yml",
+			"structures.yml"
+		);
 		
 		//Register listeners
 		registerEvents(
@@ -96,6 +107,18 @@ public class LegacyCraft extends JavaPlugin {
             		}
             		setPlayerData(playerUUID, PlayerData.FALL_DISTANCE, p.getFallDistance());
             	}
+            	
+            	try {
+            		for(BukkitTask task : tasksToBeCancelled.keySet()) {
+                		int timer = tasksToBeCancelled.get(task);
+                		if(timer < 0) {
+                			task.cancel();
+                			tasksToBeCancelled.remove(task);
+                		} else {
+                			tasksToBeCancelled.put(task, timer - 1);
+                		}
+                	}
+            	} catch(ConcurrentModificationException e) {};
             }
 		}.runTaskTimer(this, 0L, 0L);
 		
@@ -112,6 +135,8 @@ public class LegacyCraft extends JavaPlugin {
 
 	//Called when the plugin is disabled
 	public void onDisable() {
+		Bukkit.getServer().getScheduler().cancelTasks(this);
+		
 		//Set plugin to null to prevent memory leaks
 		plugin = null;
 	}
@@ -142,5 +167,9 @@ public class LegacyCraft extends JavaPlugin {
 	
 	public static final void removePlayerData(UUID playerUUID) {
 		playerData.remove(playerUUID);
+	}
+	
+	public static final void addTaskToBeCancelled(BukkitTask task, int ticksUntilCancellation) {
+		tasksToBeCancelled.put(task, ticksUntilCancellation);
 	}
 }

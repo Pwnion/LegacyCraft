@@ -10,7 +10,7 @@ import org.bukkit.inventory.Inventory;
 
 import com.pwnion.legacycraft.ConfigAccessor;
 
-public class InventoryFromFile {
+public class SerialiseInventory {
 	//Converts a given list of Strings to a list of Materials
 	private static final List<Material> stringsToMaterials(List<String> stringList) {
 		List<Material> materialList = new ArrayList<>();
