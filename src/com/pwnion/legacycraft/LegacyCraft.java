@@ -21,7 +21,6 @@ import com.pwnion.legacycraft.listeners.PlayerJoin;
 import com.pwnion.legacycraft.listeners.PlayerMove;
 import com.pwnion.legacycraft.listeners.PlayerQuit;
 import com.pwnion.legacycraft.listeners.PlayerToggleFlight;
-import com.pwnion.legacycraft.npcs.HomesAndJobs;
 import com.pwnion.legacycraft.npcs.SimpleNPC;
 
 import net.citizensnpcs.api.CitizensAPI;
@@ -58,8 +57,6 @@ public class LegacyCraft extends JavaPlugin {
 		new ConfigAccessor("player-data.yml").saveDefaultConfig();
 		new ConfigAccessor("player-data-template.yml").saveDefaultConfig();
 		new ConfigAccessor("structures.yml").saveDefaultConfig();
-		new ConfigAccessor("NPChomes.yml").saveDefaultConfig();
-		new ConfigAccessor("NPCjobs.yml").saveDefaultConfig();
 		
 		//Register listeners
 		registerEvents(

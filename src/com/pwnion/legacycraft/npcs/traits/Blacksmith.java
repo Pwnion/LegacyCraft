@@ -1,4 +1,4 @@
-package com.pwnion.legacycraft.npcs;
+package com.pwnion.legacycraft.npcs.traits;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -7,14 +7,15 @@ import org.bukkit.event.EventHandler;
 import com.pwnion.legacycraft.LegacyCraft;
 
 import net.citizensnpcs.api.event.NPCRightClickEvent;
+import net.citizensnpcs.api.event.NPCTraitCommandAttachEvent;
 import net.citizensnpcs.api.persistence.Persist;
 import net.citizensnpcs.api.trait.Trait;
 import net.citizensnpcs.api.util.DataKey;
 
-public class SimpleNPC extends Trait {
+public class Blacksmith extends Trait {
 
-	public SimpleNPC() {
-		super("simple");
+	public Blacksmith() {
+		super("blacksmith");
 		legacycraft = LegacyCraft.getPlugin(LegacyCraft.class);
 	}
 
@@ -22,7 +23,6 @@ public class SimpleNPC extends Trait {
 
 	@Persist Location homeLocation = null;
 	@Persist Location workLocation = null;
-	@Persist String workType = null;
         
     // see the 'Persistence API' section
     //@Persist("mysettingname") boolean automaticallyPersistedSetting = false;
@@ -32,7 +32,7 @@ public class SimpleNPC extends Trait {
     // This is called AFTER onAttach so you can load defaults in onAttach and they will be overridden here.
     // This is called BEFORE onSpawn, npc.getBukkitEntity() will return null.
 	public void load(DataKey key) {
-		npc.getTrait(SimpleNPC.class).homeLocation = new Location();
+		
 	}
 
 	// Save settings for this NPC (optional). These values will be persisted to the Citizens saves file
@@ -49,6 +49,18 @@ public class SimpleNPC extends Trait {
 			Player p = event.getClicker();
 			//If close to work do work related stuff
 			//Else do other stuff
+			
+		}
+	}
+	
+	@EventHandler
+	public void onNPCTraitCommandAttachEvent(NPCTraitCommandAttachEvent e) {
+		if(!(e.getCommandSender() instanceof Player)) {
+			return;
+		}
+		
+		if(e.getNPC() == this.getNPC()) {
+			Player p = (Player) e.getCommandSender();
 			
 		}
 	}
