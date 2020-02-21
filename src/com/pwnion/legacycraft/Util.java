@@ -1,4 +1,4 @@
-package com.pwnion.legacycraft.abilities;
+package com.pwnion.legacycraft;
 
 import java.util.ArrayList;
 import java.util.HashSet;

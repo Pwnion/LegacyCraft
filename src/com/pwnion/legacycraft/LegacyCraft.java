@@ -21,7 +21,11 @@ import com.pwnion.legacycraft.listeners.PlayerJoin;
 import com.pwnion.legacycraft.listeners.PlayerMove;
 import com.pwnion.legacycraft.listeners.PlayerQuit;
 import com.pwnion.legacycraft.listeners.PlayerToggleFlight;
-import com.pwnion.legacycraft.npcs.Blacksmith;
+import com.pwnion.legacycraft.npcs.HomesAndJobs;
+import com.pwnion.legacycraft.npcs.SimpleNPC;
+
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.trait.TraitInfo;
  
 public class LegacyCraft extends JavaPlugin {
 
@@ -54,6 +58,8 @@ public class LegacyCraft extends JavaPlugin {
 		new ConfigAccessor("player-data.yml").saveDefaultConfig();
 		new ConfigAccessor("player-data-template.yml").saveDefaultConfig();
 		new ConfigAccessor("structures.yml").saveDefaultConfig();
+		new ConfigAccessor("NPChomes.yml").saveDefaultConfig();
+		new ConfigAccessor("NPCjobs.yml").saveDefaultConfig();
 		
 		//Register listeners
 		registerEvents(
@@ -97,15 +103,14 @@ public class LegacyCraft extends JavaPlugin {
 		}.runTaskTimer(this, 0L, 0L);
 		
 		//check if Citizens is present and enabled.
+		if(getServer().getPluginManager().getPlugin("Citizens") == null || getServer().getPluginManager().getPlugin("Citizens").isEnabled() == false) {
+			getLogger().log(Level.SEVERE, "Citizens 2.0 not found or not enabled");
+			getServer().getPluginManager().disablePlugin(this);	
+			return;
+		}	
 
-				if(getServer().getPluginManager().getPlugin("Citizens") == null || getServer().getPluginManager().getPlugin("Citizens").isEnabled() == false) {
-					getLogger().log(Level.SEVERE, "Citizens 2.0 not found or not enabled");
-					getServer().getPluginManager().disablePlugin(this);	
-					return;
-				}	
-
-				//Register your trait with Citizens.        
-				net.citizensnpcs.api.CitizensAPI.getTraitFactory().registerTrait(net.citizensnpcs.api.trait.TraitInfo.create(Blacksmith.class).withName("blacksmith"));
+		//Register your trait with Citizens.        
+		CitizensAPI.getTraitFactory().registerTrait(TraitInfo.create(SimpleNPC.class).withName("simple"));
 	}
 
 	//Called when the plugin is disabled

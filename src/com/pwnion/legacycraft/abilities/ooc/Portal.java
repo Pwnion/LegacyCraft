@@ -12,7 +12,7 @@ import org.bukkit.util.Vector;
 
 import com.destroystokyo.paper.ParticleBuilder;
 import com.pwnion.legacycraft.LegacyCraft;
-import com.pwnion.legacycraft.abilities.Util;
+import com.pwnion.legacycraft.Util;
 
 public enum Portal {
 	NEUTRAL(new Location(Bukkit.getWorld("Neutral"), 0, 0, 0, 0, 0), Color.fromRGB(255, 255, 255), 1, 12),

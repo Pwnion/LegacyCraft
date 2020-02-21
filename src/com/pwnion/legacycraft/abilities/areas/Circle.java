@@ -9,7 +9,7 @@ import org.bukkit.block.Block;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
 
-import com.pwnion.legacycraft.abilities.Util;
+import com.pwnion.legacycraft.Util;
 
 public class Circle {
 	public static final HashSet<Block> get(World world, int x, int y, int z, int radius) {

@@ -52,7 +52,7 @@ public class Selection {
                 	Location centre = p.getLocation().getBlock().getLocation();
                 	Location loc = block.getLocation().subtract(centre);
                 	
-                	loc = floorLoc(loc);
+                	loc = loc.toBlockLocation();
                     data.add(DataToString(loc, block.getType()));
                 }
             }
@@ -65,9 +65,5 @@ public class Selection {
     private String DataToString(Location loc, Material material) {
     	return loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ() + "," + material.name();
     }
-    
-    private Location floorLoc(Location loc) {
-    	loc.set(Math.floor(loc.getX()), Math.floor(loc.getY()), Math.floor(loc.getZ()));
-    	return loc;
-    }
+
 }

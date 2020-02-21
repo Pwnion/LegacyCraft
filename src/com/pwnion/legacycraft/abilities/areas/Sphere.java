@@ -9,7 +9,7 @@ import org.bukkit.block.Block;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
 
-import com.pwnion.legacycraft.abilities.Util;
+import com.pwnion.legacycraft.Util;
 
 public class Sphere {
 	
