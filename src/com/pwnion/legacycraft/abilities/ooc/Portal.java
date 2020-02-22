@@ -9,6 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -180,6 +181,7 @@ public enum Portal {
 					e.remove();
 				}
 				
+				p.stopSound(Sound.AMBIENT_UNDERWATER_LOOP_ADDITIONS_ULTRA_RARE, SoundCategory.PLAYERS);
 				Util.stopSurroundingSound(centre, Sound.AMBIENT_UNDERWATER_LOOP_ADDITIONS_ULTRA_RARE);
 				
 				Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {

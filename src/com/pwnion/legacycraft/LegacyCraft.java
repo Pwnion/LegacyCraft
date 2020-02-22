@@ -20,6 +20,7 @@ import com.pwnion.legacycraft.listeners.PlayerItemHeld;
 import com.pwnion.legacycraft.listeners.PlayerJoin;
 import com.pwnion.legacycraft.listeners.PlayerMove;
 import com.pwnion.legacycraft.listeners.PlayerQuit;
+import com.pwnion.legacycraft.listeners.PlayerResourcePackStatus;
 import com.pwnion.legacycraft.listeners.PlayerToggleFlight;
  
 public class LegacyCraft extends JavaPlugin {
@@ -73,7 +74,8 @@ public class LegacyCraft extends JavaPlugin {
 			new PlayerGameModeChange(),
 			new PlayerQuit(),
 			new PlayerItemHeld(),
-			new PlayerDropItem()
+			new PlayerDropItem(),
+			new PlayerResourcePackStatus()
 		);
 		
 		//Register commands
