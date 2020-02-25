@@ -32,7 +32,7 @@ public class SimpleNPC extends Trait {
     // This is called AFTER onAttach so you can load defaults in onAttach and they will be overridden here.
     // This is called BEFORE onSpawn, npc.getBukkitEntity() will return null.
 	public void load(DataKey key) {
-		npc.getTrait(SimpleNPC.class).homeLocation = new Location();
+		//npc.getTrait(SimpleNPC.class).homeLocation = new Location();
 	}
 
 	// Save settings for this NPC (optional). These values will be persisted to the Citizens saves file

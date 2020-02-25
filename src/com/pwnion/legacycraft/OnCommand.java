@@ -17,6 +17,7 @@ import com.pwnion.legacycraft.abilities.areas.Sphere;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.ooc.Portal;
 import com.pwnion.legacycraft.abilities.targets.Point;
+import com.pwnion.legacycraft.npcs.HomeWorkData;
 
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
@@ -24,6 +25,7 @@ import net.citizensnpcs.api.npc.NPC;
 public class OnCommand implements CommandExecutor {
 	private static final String deniedMsg = ChatColor.DARK_RED + "I'm sorry, but you do not have permission to perform this command.";
 	private static final HashMap<UUID, Selection> playerToSelection = new HashMap<UUID, Selection>();
+	public static final HashMap<UUID, HomeWorkData> playerToNPCdata = new HashMap<UUID, HomeWorkData>();
 	
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String lbl, String[] args) {
@@ -45,7 +47,7 @@ public class OnCommand implements CommandExecutor {
 					p.sendMessage(ChatColor.DARK_RED + "Try being more specific...");
 					return false;
 				} else {
-					switch(args[0]) {
+					switch(args[0].toLowerCase()) {
 					case "class":
 						if(p.getGameMode().equals(GameMode.ADVENTURE)) {
 							CharacterBuildMenuInv.load(p);
@@ -70,10 +72,22 @@ public class OnCommand implements CommandExecutor {
 						break;
 					case "portal":
 						try {
-							//Portal.valueOf(args[1].toUpperCase()).activate(p);
+							Portal.valueOf(args[1].toUpperCase()).activate(p);
 						} catch(Exception e) {
 							p.sendMessage(ChatColor.DARK_RED + "Invalid portal type!");
 						}
+						break;
+					case "home":
+						if(!playerToNPCdata.keySet().contains(playerUUID)) {
+							playerToNPCdata.put(playerUUID, new HomeWorkData(p));
+						}
+						p.sendMessage(playerToNPCdata.get(playerUUID).setHome());
+						break;
+					case "work":
+						if(!playerToNPCdata.keySet().contains(playerUUID)) {
+							playerToNPCdata.put(playerUUID, new HomeWorkData(p));
+						}
+						p.sendMessage(playerToNPCdata.get(playerUUID).setWork());
 						break;
 					default:
 						return false;
