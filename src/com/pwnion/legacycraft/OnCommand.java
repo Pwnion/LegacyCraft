@@ -94,8 +94,7 @@ public class OnCommand implements CommandExecutor {
 					}
 				}
 			} else if(lbl.equals("test")) {
-				Sphere.spawn(Util.addY(p.getLocation(), 6), 4, true);
-				Circle.spawn(p.getLocation(), 4, true);
+				Sphere.spawn(p.getTargetBlock(120).getLocation(), Integer.parseInt(args[0]), false);
 			}
 			return true;
 		} else {

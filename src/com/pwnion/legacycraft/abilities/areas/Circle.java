@@ -73,7 +73,7 @@ public class Circle {
 	//Gets a circle outline
 	public static final ArrayList<Vector> get(int radius, Vector axis) {
 		ArrayList<Vector> circle = new ArrayList<Vector>();
-		int steps = (int) Math.ceil(2 * Math.PI * radius) * 5;
+		int steps = (int) Math.ceil(2 * Math.PI * radius) * 1;
 		Vector pointer = Util.vectorCalc(Util.getYaw(axis), Util.getPitch(axis) + 90, radius);
 		
 		for(double circleRot = 0; circleRot < 360; circleRot += 360 / steps) {
