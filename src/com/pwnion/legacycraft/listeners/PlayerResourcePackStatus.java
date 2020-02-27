@@ -22,7 +22,7 @@ public class PlayerResourcePackStatus implements Listener {
 		Player p = e.getPlayer();
 		Status status = e.getStatus();
 		
-		if(p.getName().equals("Pwnion_01A4")) return;
+		if(p.isOp()) return;
 		
 		switch(status) {
 		case SUCCESSFULLY_LOADED:
