@@ -2,8 +2,10 @@ package com.pwnion.legacycraft.abilities.areas;
 
 import java.util.ArrayList;
 
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.util.Vector;
 
 public class Line {
 	//Returns a list of blocks that represent a line
@@ -21,15 +23,15 @@ public class Line {
 	}
 	
 	public static final ArrayList<Vector> get(Vector vector) {
-		double length = vector.length();
-		ArrayList<Vector> line = new ArrayList<Vector>(length);
-		for(int i = length; i => 0; i -= 1) {
+		int length = (int) Math.ceil(vector.length());
+		ArrayList<Vector> line = new ArrayList<Vector>();
+		for(int i = length; i >= 0; i -= 1) {
    			line.add(vector.clone().normalize().multiply(i));
     		}
     		return line;
 	}
 	
-	public static final Arraylist<Block> get(Location centre, Vector vector) {
+	public static final ArrayList<Block> get(Location centre, Vector vector) {
 		ArrayList<Block> line = new ArrayList<Block>();
 		
 		for(Vector pointOnLine : get(vector)) {
