@@ -8,19 +8,14 @@ import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
-import com.pwnion.legacycraft.abilities.areas.Circle;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 import com.pwnion.legacycraft.abilities.areas.Sphere;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.ooc.Portal;
 import com.pwnion.legacycraft.abilities.targets.Point;
 import com.pwnion.legacycraft.npcs.HomeWorkData;
-
-import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.npc.NPC;
 
 public class OnCommand implements CommandExecutor {
 	private static final String deniedMsg = ChatColor.DARK_RED + "I'm sorry, but you do not have permission to perform this command.";

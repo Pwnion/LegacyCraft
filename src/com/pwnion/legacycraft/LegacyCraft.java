@@ -23,7 +23,6 @@ import com.pwnion.legacycraft.listeners.PlayerJoin;
 import com.pwnion.legacycraft.listeners.PlayerMove;
 import com.pwnion.legacycraft.listeners.PlayerQuit;
 import com.pwnion.legacycraft.listeners.PlayerToggleFlight;
-import com.pwnion.legacycraft.npcs.SimpleNPC;
 import com.pwnion.legacycraft.npcs.traits.Blacksmith;
 
 import net.citizensnpcs.api.CitizensAPI;

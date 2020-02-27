@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
