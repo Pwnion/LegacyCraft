@@ -25,6 +25,7 @@ public class Selection {
     private Block pos1;
     private Block pos2;
     
+    //This method has seperate instances for each player that are generated in onCommand
     public Selection(Player p) {
         this.p = p;
     }
@@ -46,10 +47,13 @@ public class Selection {
         } else {
             for(Block block : RectangularPrism.get(pos1, pos2)) {
                 if(!block.isEmpty()) {
+                
+                //these two lines get relative block location
                 	//Gets the location of the block that the player is at
                 	Location centre = p.getLocation().getBlock().getLocation();
                 	Location loc = block.getLocation().subtract(centre);
-                	loc = floorLoc(loc);
+                	
+                	loc = loc.toBlockLocation();
                     data.add(DataToString(loc, block.getType()));
                 }
             }
@@ -59,12 +63,10 @@ public class Selection {
         return ChatColor.DARK_GREEN + "Saved to file!";
     }
     
+    //formats data into the string
+    //x,y,z,Material
     private String DataToString(Location loc, Material material) {
     	return loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ() + "," + material.name();
     }
-    
-    private Location floorLoc(Location loc) {
-    	loc.set(Math.floor(loc.getX()), Math.floor(loc.getY()), Math.floor(loc.getZ()));
-    	return loc;
-    }
+
 }

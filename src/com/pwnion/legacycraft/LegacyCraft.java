@@ -3,6 +3,8 @@ package com.pwnion.legacycraft;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.logging.Level;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
@@ -22,6 +24,11 @@ import com.pwnion.legacycraft.listeners.PlayerMove;
 import com.pwnion.legacycraft.listeners.PlayerQuit;
 import com.pwnion.legacycraft.listeners.PlayerResourcePackStatus;
 import com.pwnion.legacycraft.listeners.PlayerToggleFlight;
+import com.pwnion.legacycraft.npcs.SimpleNPC;
+import com.pwnion.legacycraft.npcs.traits.Blacksmith;
+
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.trait.TraitInfo;
  
 public class LegacyCraft extends JavaPlugin {
 
@@ -117,6 +124,16 @@ public class LegacyCraft extends JavaPlugin {
             	} catch(ConcurrentModificationException e) {};
             }
 		}.runTaskTimer(this, 0L, 0L);
+		
+		//check if Citizens is present and enabled.
+		if(getServer().getPluginManager().getPlugin("Citizens") == null || getServer().getPluginManager().getPlugin("Citizens").isEnabled() == false) {
+			getLogger().log(Level.SEVERE, "Citizens 2.0 not found or not enabled");
+			//getServer().getPluginManager().disablePlugin(this);	
+			return;
+		}	
+
+		//Register your trait with Citizens.        
+		CitizensAPI.getTraitFactory().registerTrait(TraitInfo.create(Blacksmith.class).withName("blacksmith"));
 	}
 
 	//Called when the plugin is disabled

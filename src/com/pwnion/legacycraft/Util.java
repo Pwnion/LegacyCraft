@@ -1,8 +1,12 @@
-package com.pwnion.legacycraft.abilities;
+package com.pwnion.legacycraft;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Entity;
@@ -10,6 +14,52 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 public class Util {
+	
+	public static final void spawnBlocks(HashSet<Block> blocks) {
+		for(Block block : blocks) {
+			block.setType(Material.STONE);
+		}
+	}
+	
+	public static final Vector getRelativeVec(Location centre, Location pos) {
+		if(centre.getWorld() != pos.getWorld()) {
+			return null;
+		}
+
+		return new Vector(pos.getX() - centre.getX(), pos.getY() - centre.getY(), pos.getZ() - centre.getZ());
+	}
+	
+	public static final HashSet<Vector> getRelativeVecArea(Location centre, Collection<Location> area) {
+		HashSet<Vector> relativeArea = new HashSet<Vector>();
+		for(Location loc : area) {
+			relativeArea.add(getRelativeVec(centre, loc));
+		}
+		return relativeArea;
+	}
+	
+	public static final Location getRelativeLoc(Location centre, Location pos) {
+		if(centre.getWorld() != pos.getWorld()) {
+			return null;
+		}
+
+		return new Location(pos.getWorld(), pos.getX() - centre.getX(), pos.getY() - centre.getY(), pos.getZ() - centre.getZ());
+	}
+	
+	public static final HashSet<Block> getBlocks(Collection<Location> area) {
+		HashSet<Block> output = new HashSet<Block>();
+		for(Location loc : area) {
+			output.add(loc.getBlock());
+		}
+		return output;
+	}
+	
+	public static final HashSet<Location> getLocations(Collection<Block> area) {
+		HashSet<Location> output = new HashSet<Location>();
+		for(Block loc : area) {
+			output.add(loc.getLocation());
+		}
+		return output;
+	}
 
 	public static final Vector vectorCalc(double yaw, double pitch, double dist) {
 		pitch = Math.toRadians(pitch + 90);
@@ -31,6 +81,20 @@ public class Util {
 			return null;
 		}
 		return new Vector(pos2.getX() - pos1.getX(), pos2.getY() - pos1.getY(), pos2.getZ() - pos1.getZ());
+	}
+	
+	public static final double getYaw(Vector vec) {
+		double yaw = 0;
+		if(vec.getX() > 0) {
+			yaw = Math.toDegrees(vec.angle(new Vector(0, 0, -1))) + 180;
+		} else {
+			yaw = Math.toDegrees(vec.angle(new Vector(0, 0, 1)));
+		}
+		return yaw;
+	}
+	
+	public static final double getPitch(Vector vec) {
+		return Math.toDegrees(vec.angle(new Vector(0, 1, 0))) - 90;
 	}
 
 	public static final Location addY(Location loc, double plusY) {

@@ -1,50 +1,33 @@
 package com.pwnion.legacycraft.abilities.areas;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.util.Vector;
+
+import com.pwnion.legacycraft.Util;
 
 public class RotateArea {
-	public static ArrayList<Block> sphere(Location centre, HashSet<Block> area) {
-		ArrayList<Block> newArea = new ArrayList<Block>();
-		for (Block block : area) {
-			newArea.add(RotateLoc(centre, block.getLocation(), "sphere").getBlock());
-		}
-		return newArea;
-	}
 	
-	private static Location RotateLoc(Location centre, Location pos, String type) {
-		if(centre.getWorld() != pos.getWorld()) {
-			return null;
+	//angle is in degrees
+	public static final HashSet<Location> LocArea(Location centre, Collection<Location> area, Vector axis, double angle) {
+		HashSet<Vector> relativeArea = Util.getRelativeVecArea(centre, area);
+		HashSet<Location> rotatedArea = new HashSet<Location>();
+		angle = Math.toRadians(angle);
+		
+		for(Vector vec : relativeArea) {
+			Vector rotated = vec.rotateAroundAxis(axis, angle);
+			rotatedArea.add(rotated.toLocation(centre.getWorld()).add(centre));
 		}
-		pos = getRelativeLoc(centre, pos);
-		int Rx = pos.getBlockX();
-		int Ry = pos.getBlockY();
-		int Rz = pos.getBlockZ();
-		switch(type) {
-		case "sphere": //Rotates around Z axis 90d + Y axis 90d
-			Rx = pos.getBlockZ();
-			Ry = pos.getBlockX();
-			Rz = pos.getBlockY();
-			break;
-		}
-		int x = Rx + centre.getBlockX();
-		int y = Ry + centre.getBlockY();
-		int z = Rz + centre.getBlockZ();
-		return new Location(centre.getWorld(), x, y, z);
+		
+		return rotatedArea;
 	}
 
-	public static Location getRelativeLoc(Location centre, Location pos) {
-		if(centre.getWorld() != pos.getWorld()) {
-			return null;
-		}
-		
-		int x = pos.getBlockX() - centre.getBlockX();
-		int y = pos.getBlockY() - centre.getBlockY();
-		int z = pos.getBlockZ() - centre.getBlockZ();
-		
-		return new Location(null, x, y, z);
+	//Please note that this may not work very well if not done in multiples of 90
+	// This does not keep material or block data and only rotates the area/shape
+	public static final HashSet<Block> BlockArea(Location centre, Collection<Block> area, Vector axis, double angle) {
+		return Util.getBlocks(LocArea(centre, Util.getLocations(area), axis, angle));
 	}
 }

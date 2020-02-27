@@ -6,6 +6,8 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
+import com.pwnion.legacycraft.Util;
+
 public class RectangularPrism {
 	//Returns a list of blocks that represent a rectangular prism
 	//Uses the Square class to generate the list of blocks
@@ -28,7 +30,7 @@ public class RectangularPrism {
 		ArrayList<Block> rectangularPrism = new ArrayList<Block>();
 		
 		Location pos1 = block1.getLocation();
-		Location pos2 = RotateArea.getRelativeLoc(block1.getLocation(), block2.getLocation());
+		Location pos2 = Util.getRelativeLoc(block1.getLocation(), block2.getLocation());
 		Location temp;
 		
 		for(int x = 0; x <= pos2.getBlockX(); x++) {

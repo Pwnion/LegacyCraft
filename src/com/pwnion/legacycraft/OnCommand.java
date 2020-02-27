@@ -9,24 +9,31 @@ import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
+import com.pwnion.legacycraft.abilities.areas.Circle;
 import com.pwnion.legacycraft.abilities.areas.Selection;
+import com.pwnion.legacycraft.abilities.areas.Sphere;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.ooc.Portal;
 import com.pwnion.legacycraft.abilities.proficiencies.AquaVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.proficiencies.TerraVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.targets.Point;
+import com.pwnion.legacycraft.npcs.HomeWorkData;
+
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
 
 public class OnCommand implements CommandExecutor {
 	private static final String deniedMsg = ChatColor.RED + "I'm sorry, but you do not have permission to perform this command.";
 	private static final HashMap<UUID, Selection> playerToSelection = new HashMap<UUID, Selection>();
-	
+	public static final HashMap<UUID, HomeWorkData> playerToNPCdata = new HashMap<UUID, HomeWorkData>();
+
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String lbl, String[] args) {
 		Player p;
@@ -39,7 +46,7 @@ public class OnCommand implements CommandExecutor {
 		} else {
 			return false;
 		}
-		
+
 		//Manage legacy craft commands
 		if(p.hasPermission("legacycraft.op")) {
 			if(lbl.equals("legacycraft") || cmd.getAliases().contains(lbl)) {
@@ -47,7 +54,7 @@ public class OnCommand implements CommandExecutor {
 					p.sendMessage(ChatColor.RED + "Try being more specific...");
 					return false;
 				} else {
-					switch(args[0]) {
+					switch(args[0].toLowerCase()) {
 					case "class":
 						if(p.getGameMode().equals(GameMode.ADVENTURE)) {
 							CharacterBuildMenuInv.load(p);
@@ -80,7 +87,7 @@ public class OnCommand implements CommandExecutor {
 					case "save":
 						ConfigAccessor configSave = new ConfigAccessor(args[1]);
 						ConfigurationSection csSave = configSave.getRoot();
-						
+
 						switch(args[1]) {
 						case "config.yml":
 							p.sendMessage(ChatColor.GOLD + "You have 10 seconds to open the inventory that will be saved!");
@@ -88,80 +95,85 @@ public class OnCommand implements CommandExecutor {
 								Bukkit.getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 									public void run() {
 										csSave.set(args[2].toUpperCase(), null);
-										
+
 										InventoryView invView = p.getOpenInventory();
 										Inventory inv = invView.getTopInventory();
 										csSave.set(args[2].toUpperCase() + ".title", invView.getTitle());
 										csSave.set(args[2].toUpperCase() + ".size", inv.getSize());
 										csSave.set(args[2].toUpperCase() + ".contents", inv.getContents());
 										configSave.saveCustomConfig();
-										
+
 										p.sendMessage(ChatColor.GREEN + "Successfully saved inventory to file!");
 									}
 								}, 200);
 							} catch(Exception ex) {
 								p.sendMessage(ChatColor.RED + "Invalid command!");
 							}
-							
+
 							break;
 						case "player-data-template.yml":
 							try {
 								ItemStack contents[] = p.getInventory().getContents();
 								csSave.set(args[2].toUpperCase() + ".save.inventory", contents);
 								configSave.saveCustomConfig();
-								
+
 								p.sendMessage(ChatColor.GREEN + "Successfully saved inventory to file!");
 							} catch(Exception ex) {
 								p.sendMessage(ChatColor.RED + "Invalid command!");
 							}
-							
+
 							break;
 						}
-						
+
 						break;
 					case "load":
 						ConfigAccessor configLoad = new ConfigAccessor(args[1]);
 						ConfigurationSection csLoad = configLoad.getRoot();
-						
+
 						switch(args[1]) {
 						case "config.yml":
 							String title = csLoad.getString(args[2].toUpperCase() + ".title");
 							int size = csLoad.getInt(args[2].toUpperCase() + ".size");
 							ItemStack contents[] = csLoad.getList(args[2].toUpperCase() + ".contents").toArray(new ItemStack[0]);
-							
+
 							Inventory invToOpen;
 							if(size % 9 == 0) {
 								invToOpen = Bukkit.createInventory(null, size, title);
 							} else {
 								invToOpen = Bukkit.createInventory(null, InventoryType.HOPPER, title);
 							}
-							
+
 							invToOpen.setContents(contents);
-							
+
 							p.openInventory(invToOpen);
-							
+
 							break;
 						case "player-data-template.yml":
 							ItemStack inv[] = csLoad.getList(args[2].toUpperCase() + ".save.inventory").toArray(new ItemStack[0]);
 							p.getInventory().setContents(inv);
-							
+
 							break;
 						}
-						
+
+						break;
+					case "home":
+						if(!playerToNPCdata.keySet().contains(playerUUID)) {
+							playerToNPCdata.put(playerUUID, new HomeWorkData(p));
+						}
+						p.sendMessage(playerToNPCdata.get(playerUUID).setHome());
+						break;
+					case "work":
+						if(!playerToNPCdata.keySet().contains(playerUUID)) {
+							playerToNPCdata.put(playerUUID, new HomeWorkData(p));
+						}
+						p.sendMessage(playerToNPCdata.get(playerUUID).setWork());
 						break;
 					default:
 						return false;
 					}
 				}
 			} else if(lbl.equals("test")) {
-				switch(args[0]) {
-				case "pillar":
-					p.sendMessage(TerraVanguardProficiency1.activate(p, 2));
-					break;
-				case "iceblock":
-					p.sendMessage(AquaVanguardProficiency1.activate(p));
-					break;
-				}
+				Sphere.spawn(p.getTargetBlock(120).getLocation(), Integer.parseInt(args[0]), false);
 			}
 			return true;
 		} else {
