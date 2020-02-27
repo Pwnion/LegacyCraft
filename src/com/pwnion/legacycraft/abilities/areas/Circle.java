@@ -13,29 +13,8 @@ import com.pwnion.legacycraft.Util;
 
 public class Circle {
 	public static final HashSet<Block> get(World world, int x, int y, int z, int radius) {
-		return get(new Location(world, x, y, z), radius);
+		return get(new Location(world, x, y, z), radius, true);
 	}
-	
-	public static final HashSet<Block> get(Location loc, int radius) {
-		HashSet<Block> circle = new HashSet<Block>();
-		if(radius == 0) {
-			return circle;
-		}
-		
-		for (double a = 0; a < 2 * Math.PI; a += (Math.PI) / (radius * 4)) {
-  	      int x = (int) (Math.cos(a) * radius);
-  	      int z = (int) (Math.sin(a) * radius);
-  	      circle.add(blockAt(loc, x, z));
-  	      for (int ix = -x; ix < x; ix++) {
-  	    	circle.add(blockAt(loc, ix, z));
-  	    	for (int iz = 0; iz < z; iz++) {
-  	  	    	circle.add(blockAt(loc, ix, iz));
-  	  	    }
-  	      }
-  	   }
-		
-        return circle;
-    }
 	
 	//Gets the block at a location plus x and z coords
 	private static Block blockAt(Location loc, int plusX, int plusZ) {
@@ -70,7 +49,8 @@ public class Circle {
 		return circle;
 	}
 	
-	//Gets a circle outline
+	//Gets a circle outline for any given axis
+	//the amount of points on the circle is calculated by 2πr
 	public static final ArrayList<Vector> get(int radius, Vector axis) {
 		ArrayList<Vector> circle = new ArrayList<Vector>();
 		int steps = (int) Math.ceil(2 * Math.PI * radius) * 1;

@@ -19,4 +19,23 @@ public class Line {
 		
 		return line;
 	}
+	
+	public static final ArrayList<Vector> get(Vector vector) {
+		double length = vector.length();
+		ArrayList<Vector> line = new ArrayList<Vector>(length);
+		for(int i = length; i => 0; i -= 1) {
+   			line.add(vector.clone().normalize().multiply(i));
+    		}
+    		return line;
+	}
+	
+	public static final Arraylist<Block> get(Location centre, Vector vector) {
+		ArrayList<Block> line = new ArrayList<Block>();
+		
+		for(Vector pointOnLine : get(vector)) {
+			line.add(centre.clone().add(pointOnLine).getBlock());
+		}
+		
+		return line;
+	}
 }

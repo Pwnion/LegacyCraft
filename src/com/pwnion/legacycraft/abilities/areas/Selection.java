@@ -25,6 +25,7 @@ public class Selection {
     private Block pos1;
     private Block pos2;
     
+    //This method has seperate instances for each player that are generated in onCommand
     public Selection(Player p) {
         this.p = p;
     }
@@ -62,6 +63,8 @@ public class Selection {
         return ChatColor.DARK_GREEN + "Saved to file!";
     }
     
+    //formats data into the string
+    //x,y,z,Material
     private String DataToString(Location loc, Material material) {
     	return loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ() + "," + material.name();
     }

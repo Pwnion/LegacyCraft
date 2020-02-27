@@ -26,6 +26,7 @@ public class RotateArea {
 	}
 
 	//Please note that this may not work very well if not done in multiples of 90
+	// This does not keep material or block data and only rotates the area/shape
 	public static final HashSet<Block> BlockArea(Location centre, Collection<Block> area, Vector axis, double angle) {
 		return Util.getBlocks(LocArea(centre, Util.getLocations(area), axis, angle));
 	}

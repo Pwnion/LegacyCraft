@@ -18,6 +18,7 @@ public class Sphere {
 	static HashMap<Integer, HashSet<Vector>> savedSolid = new HashMap<Integer, HashSet<Vector>>();
 	static HashMap<Integer, HashSet<Vector>> savedHollow = new HashMap<Integer, HashSet<Vector>>();
 	
+	//prefers saved spheres
 	public static final HashSet<Block> get(Location centre, int radius, boolean hollow) {
 		centre = centre.toBlockLocation();
 		
@@ -53,10 +54,16 @@ public class Sphere {
 		}
 	}
 	
+	//spawns in a stone sphere for testing purposes 
+	//(this method is destructive to surrounding blocks)
 	public static void spawn(Location pos, int radius, boolean hollow) {
 		Util.spawnBlocks(get(pos, radius, hollow));
 	}
     
+    //generates a sphere relative to 0,0    uses the circle class to create a sphere out of vertically aligned circles
+    //this method may be heavy if called for large radiuses
+    //for large radiuses try pre-generate before user use
+    //this will always return the same values for the given parameters as there is no randomness, if the sphere is deformed force generating will not fix
     public static final HashSet<Vector> generate(int radius, boolean hollow) {
     		HashSet<Vector> sphere = new HashSet<Vector>();
     
