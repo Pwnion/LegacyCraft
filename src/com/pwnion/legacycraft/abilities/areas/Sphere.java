@@ -6,7 +6,6 @@ import java.util.HashSet;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
 
 import com.pwnion.legacycraft.Util;
@@ -74,13 +73,11 @@ public class Sphere {
     		}
     		
     		if(!hollow) {
-    			HashSet<BlockVector> sphereInside = new HashSet<BlockVector>();
+    			HashSet<Vector> sphereInside = new HashSet<Vector>();
     			for(Vector point : sphere) {
-    				for(int i = radius - 1; i > 0; i -= 1) {
-    					sphereInside.add(point.clone().normalize().multiply(i).toBlockVector());
-    				}
+    				sphereInside.addAll(Line.getBlockVectors(point));
     			}
-    			sphereInside.add(new BlockVector(0, 0, 0));
+    			sphereInside.add(new Vector(0, 0, 0));
     			sphere.addAll(sphereInside);
     			savedSolid.put(radius, sphere);
     		} else {

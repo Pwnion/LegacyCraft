@@ -97,7 +97,7 @@ public class Blacksmith extends Trait {
     //This would be a good place to load configurable defaults for new NPCs.
 	@Override
 	public void onAttach() {
-		legacycraft.getServer().getLogger().info(npc.getName() + "has been assigned SimpleNPC!");
+		legacycraft.getServer().getLogger().info(npc.getName() + " has been assigned SimpleNPC!");
 		Bukkit.broadcastMessage("onAttach");
 	}
 

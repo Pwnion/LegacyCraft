@@ -3,14 +3,17 @@ package com.pwnion.legacycraft;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.function.BiConsumer;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
 
 public class Util {
@@ -43,6 +46,112 @@ public class Util {
 		}
 
 		return new Location(pos.getWorld(), pos.getX() - centre.getX(), pos.getY() - centre.getY(), pos.getZ() - centre.getZ());
+	}
+	
+	public static final HashSet<Block> approxBlock(World world, Vector vector) {
+		HashSet<Block> output = new HashSet<Block>();
+		for(BlockVector blockVec : approxBlock(vector)) {
+			output.add(blockVec.toLocation(world).getBlock());
+		}
+		return output;
+	}
+	
+	public static final HashSet<Block> approxBlocks(World world, Collection<Vector> vectors) {
+		HashSet<Block> output = new HashSet<Block>();
+		for(Vector vector : vectors) {
+			output.addAll(approxBlock(world, vector));
+		}
+		return output;
+	}
+	
+	public static final HashSet<BlockVector> approxBlocks(Collection<Vector> vectors) {
+		HashSet<BlockVector> output = new HashSet<BlockVector>();
+		for(Vector vector : vectors) {
+			output.addAll(approxBlock(vector));
+		}
+		return output;
+	}
+	
+	public static final HashSet<BlockVector> approxBlock(Vector vector) {
+		HashSet<BlockVector> output = new HashSet<BlockVector>();
+		
+		double overlapAmount = 0.2;
+		
+		double x = vector.getX();
+		double y = vector.getY();
+		double z = vector.getZ();
+		
+		int blockX = vector.getBlockX();
+		int blockY = vector.getBlockY();
+		int blockZ = vector.getBlockZ();
+		
+		double localX = x - blockX;
+		double localY = y - blockY;
+		double localZ = z - blockZ;
+		
+		int modX = 1;
+		int modY = 1;
+		int modZ = 1;
+		
+		if(x < 0) {
+			localX -= blockX * 2;
+			modX = -1;
+		}
+		
+		if(y < 0) {
+			localY -= blockY * 2;
+			modY = -1;
+		}
+		
+		if(z < 0) {
+			localZ -= blockZ * 2;
+			modZ = -1;
+		}
+		
+		output.add(new BlockVector(blockX, blockY, blockZ));
+		BiConsumer<String, Integer> addToOutput = (modifier, amount) -> {
+			switch(modifier) {
+			case "x":
+				output.add(new BlockVector(blockX + amount, blockY, blockZ));
+				break;
+			case "y":
+				output.add(new BlockVector(blockX, blockY + amount, blockZ));
+				break;
+			case "z":
+				output.add(new BlockVector(blockX, blockY, blockZ + amount));
+				break;
+			}
+		};
+		
+		if(localX > 1 - overlapAmount) {
+			addToOutput.accept("x", modX);
+		}
+		
+		if(localY > 1 - overlapAmount) {
+			addToOutput.accept("y", modY);
+		}
+		
+		if(localZ > 1 - overlapAmount) {
+			addToOutput.accept("z", modZ);
+		}
+		
+		modX *= -1;
+		modY *= -1;
+		modZ *= -1;
+		
+		if(localX < overlapAmount) {
+			addToOutput.accept("x", modX);
+		}
+		
+		if(localY < overlapAmount) {
+			addToOutput.accept("y", modY);
+		}
+		
+		if(localZ < overlapAmount) {
+			addToOutput.accept("z", modZ);
+		}
+		
+		return output;
 	}
 	
 	public static final HashSet<Block> getBlocks(Collection<Location> area) {

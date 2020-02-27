@@ -1,11 +1,15 @@
 package com.pwnion.legacycraft.abilities.areas;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
+
+import com.pwnion.legacycraft.Util;
 
 public class Line {
 	//Returns a list of blocks that represent a line
@@ -27,8 +31,12 @@ public class Line {
 		ArrayList<Vector> line = new ArrayList<Vector>();
 		for(int i = length; i >= 0; i -= 1) {
    			line.add(vector.clone().normalize().multiply(i));
-    		}
-    		return line;
+    	}
+    	return line;
+	}
+	
+	public static final HashSet<BlockVector> getBlockVectors(Vector vector) {
+		return Util.approxBlocks(get(vector));
 	}
 	
 	public static final ArrayList<Block> get(Location centre, Vector vector) {
