@@ -66,6 +66,7 @@ public class Blacksmith extends Trait {
 		
 		if(e.getNPC() == this.getNPC()) {
 			Player p = (Player) e.getCommandSender();
+			legacycraft.getServer().getLogger().info(npc.getName() + " has been assigned " + this.getName().toUpperCase() + " by " + p.getName());
 			
 			HomeWorkData data = OnCommand.playerToNPCdata.get(p.getUniqueId());
 			
@@ -78,18 +79,13 @@ public class Blacksmith extends Trait {
 			homeLocation = data.getHome();
 			workLocation = data.getWork();
 			p.sendMessage(ChatColor.GOLD + "Transfered Home/Work locations successfully!");
-		
-			npc.addTrait(VillagerTrait.class);
 		}
 	}
       
     // Called every tick
     @Override
     public void run() {
-        if(homeLocation == null || workLocation == null) {
-        	npc.removeTrait(Blacksmith.class);
-        }
-        
+    	//npc.getDefaultGoalController().do stuff
     }
 
 	//Run code when your trait is attached to a NPC. 
@@ -97,7 +93,6 @@ public class Blacksmith extends Trait {
     //This would be a good place to load configurable defaults for new NPCs.
 	@Override
 	public void onAttach() {
-		legacycraft.getServer().getLogger().info(npc.getName() + " has been assigned SimpleNPC!");
 		Bukkit.broadcastMessage("onAttach");
 	}
 
