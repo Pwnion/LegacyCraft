@@ -167,12 +167,17 @@ public class OnCommand implements CommandExecutor {
 					}
 				}
 			} else if(lbl.equals("test")) {
-				Sphere.spawn(p.getTargetBlock(120).getLocation(), Integer.parseInt(args[0]), true);
+				br(p.getWorld().getTime() + "");
+				br(p.getWorld().getFullTime() + "");
 			}
 			return true;
 		} else {
 			p.sendMessage(deniedMsg);
 			return false;
 		}
+	}
+	
+	private int br(String message) {
+		return Bukkit.broadcastMessage(message);
 	}
 }
