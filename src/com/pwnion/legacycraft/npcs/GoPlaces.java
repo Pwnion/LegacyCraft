@@ -15,20 +15,21 @@ public class GoPlaces implements Goal {
 
 	//Hashmap of time and place
 	NPC npc;
-	private HashMap<Integer, Location> placesToGo;
+	private HashMap<Long, Location> placesToGo;
 	
 	public GoPlaces(NPC npc, HashMap<Integer, Location> placesToGo) {
-		this.placesToGo = placesToGo;
+		for(int time : placesToGo.keySet()) {
+			this.placesToGo.put((long) time, placesToGo.get(time));
+		}
 		this.npc = npc;
 	}
 
 	@Override
 	public void run(GoalSelector sel) {
-		for(int time : placesToGo.keySet()) {
-			if(npc.getEntity().getWorld().getTime() == time) {
-				Bukkit.getLogger().log(Level.INFO, "Moving NPC '" + npc.getName() + "' to " + placesToGo.get(time));
-				npc.getDefaultGoalController().addGoal(new MoveToGoal(npc, placesToGo.get(time)), 1);
-			}
+		if(placesToGo.containsKey(npc.getEntity().getWorld().getTime())) {
+			long time = npc.getEntity().getWorld().getTime();
+			Bukkit.getLogger().log(Level.INFO, "Moving NPC '" + npc.getName() + "' to " + placesToGo.get(time));
+			npc.getDefaultGoalController().addGoal(new MoveToGoal(npc, placesToGo.get(time)), 1);
 		}
 	}
 

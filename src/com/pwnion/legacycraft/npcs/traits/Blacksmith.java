@@ -39,6 +39,11 @@ public class Blacksmith extends Trait {
     // This is called BEFORE onSpawn, npc.getBukkitEntity() will return null.
 	public void load(DataKey key) {
 		Bukkit.getLogger().log(Level.FINE, "NPC '" + npc.getName() + "' is loading");
+		if(places.isEmpty()) {
+			Bukkit.getLogger().log(Level.WARNING, "INVALID SETUP: NPC '" + npc.getName() + "' has no places. Removing '" + this.getName() + "' trait");
+			npc.removeTrait(this.getClass());
+			return;
+		}
 		npc.getDefaultGoalController().addGoal(new GoPlaces(npc, places), 1);
 	}
 
@@ -95,7 +100,7 @@ public class Blacksmith extends Trait {
     // Called every tick
     @Override
     public void run() {
-    	//npc.getDefaultGoalController().do stuff
+    	
     }
 
 	//Run code when your trait is attached to a NPC. 
