@@ -3,7 +3,6 @@ package com.pwnion.legacycraft;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.function.BiConsumer;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -108,31 +107,18 @@ public class Util {
 			modZ = -1;
 		}
 		
-		output.add(new BlockVector(blockX, blockY, blockZ));
-		BiConsumer<String, Integer> addToOutput = (modifier, amount) -> {
-			switch(modifier) {
-			case "x":
-				output.add(new BlockVector(blockX + amount, blockY, blockZ));
-				break;
-			case "y":
-				output.add(new BlockVector(blockX, blockY + amount, blockZ));
-				break;
-			case "z":
-				output.add(new BlockVector(blockX, blockY, blockZ + amount));
-				break;
-			}
-		};
+		output.add(vector.toBlockVector());
 		
 		if(localX > 1 - overlapAmount) {
-			addToOutput.accept("x", modX);
+			output.add(new BlockVector(blockX + modX, blockY, blockZ));
 		}
 		
 		if(localY > 1 - overlapAmount) {
-			addToOutput.accept("y", modY);
+			output.add(new BlockVector(blockX, blockY + modY, blockZ));
 		}
 		
 		if(localZ > 1 - overlapAmount) {
-			addToOutput.accept("z", modZ);
+			output.add(new BlockVector(blockX, blockY, blockZ + modZ));
 		}
 		
 		modX *= -1;
@@ -140,15 +126,15 @@ public class Util {
 		modZ *= -1;
 		
 		if(localX < overlapAmount) {
-			addToOutput.accept("x", modX);
+			output.add(new BlockVector(blockX + modX, blockY, blockZ));
 		}
 		
 		if(localY < overlapAmount) {
-			addToOutput.accept("y", modY);
+			output.add(new BlockVector(blockX, blockY + modY, blockZ));
 		}
 		
 		if(localZ < overlapAmount) {
-			addToOutput.accept("z", modZ);
+			output.add(new BlockVector(blockX, blockY, blockZ + modZ));
 		}
 		
 		return output;

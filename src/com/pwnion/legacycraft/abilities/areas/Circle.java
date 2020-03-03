@@ -12,13 +12,9 @@ import org.bukkit.util.Vector;
 import com.pwnion.legacycraft.Util;
 
 public class Circle {
+	
 	public static final HashSet<Block> get(World world, int x, int y, int z, int radius) {
 		return get(new Location(world, x, y, z), radius, true);
-	}
-	
-	//Gets the block at a location plus x and z coords
-	private static Block blockAt(Location loc, int plusX, int plusZ) {
-		return loc.toBlockLocation().add(plusX, 0, plusZ).getBlock();
 	}
 	
 	public static void spawn(Location pos, int radius, boolean hollow) {
@@ -50,7 +46,7 @@ public class Circle {
 	}
 	
 	//Gets a circle outline for any given axis
-	//the amount of points on the circle is calculated by 2πr
+	//the amount of points on the circle is calculated by circumference (2 * pi * r)
 	public static final ArrayList<Vector> get(int radius, Vector axis) {
 		ArrayList<Vector> circle = new ArrayList<Vector>();
 		int steps = (int) Math.ceil(2 * Math.PI * radius) * 1;

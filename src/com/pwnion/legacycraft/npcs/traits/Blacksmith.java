@@ -74,7 +74,7 @@ public class Blacksmith extends Trait {
 			
 			if(data == null || !data.hasLocations()) {
 				p.sendMessage(ChatColor.RED + "No Home/Work found, please add a Home and Work before adding this trait.");
-				npc.removeTrait(Blacksmith.class);
+				npc.removeTrait(this.getClass());
 				return;
 			}
 			
