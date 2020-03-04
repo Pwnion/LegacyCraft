@@ -28,23 +28,36 @@ public class Blacksmith extends Trait {
 	@Persist Location homeLocation = null;
 	@Persist Location workLocation = null;
 	
-	HashMap<Integer, Location> places = new HashMap<Integer, Location>();
-        
+	  
     // see the 'Persistence API' section
     //@Persist("mysettingname") boolean automaticallyPersistedSetting = false;
 
+	private void setupGoals() {
+		HashMap<Integer, Location> places = new HashMap<Integer, Location>();
+		
+		places.clear();
+		
+		//at 5PM go home (11000 ticks)
+		places.put(((5 + 12) - 6) * 1000, homeLocation);
+		//at 7AM go to work (1000 ticks)
+		places.put(((7) - 6) * 1000, workLocation);
+		
+		npc.getDefaultGoalController().addGoal(new GoPlaces(npc, places), 1);
+	}
+	
+	
 	// Here you should load up any values you have previously saved (optional). 
     // This does NOT get called when applying the trait for the first time, only loading onto an existing npc at server start.
     // This is called AFTER onAttach so you can load defaults in onAttach and they will be overridden here.
     // This is called BEFORE onSpawn, npc.getBukkitEntity() will return null.
 	public void load(DataKey key) {
 		Bukkit.getLogger().log(Level.FINE, "NPC '" + npc.getName() + "' is loading");
-		if(places.isEmpty()) {
+		if(homeLocation == null || workLocation == null) {
 			Bukkit.getLogger().log(Level.WARNING, "INVALID SETUP: NPC '" + npc.getName() + "' has no places. Removing '" + this.getName() + "' trait");
 			npc.removeTrait(this.getClass());
 			return;
 		}
-		npc.getDefaultGoalController().addGoal(new GoPlaces(npc, places), 1);
+		setupGoals();
 	}
 
 	// Save settings for this NPC (optional). These values will be persisted to the Citizens saves file
@@ -87,13 +100,7 @@ public class Blacksmith extends Trait {
 			workLocation = data.getWork();
 			p.sendMessage(ChatColor.GOLD + "Transfered Home/Work locations successfully!");
 		
-			places.clear();
-			
-			//at 5PM go home (11000 ticks)
-			places.put(((5 + 12) - 6) * 1000, homeLocation);
-			//at 7AM go to work (1000 ticks)
-			places.put(((7) - 6) * 1000, workLocation);
-			npc.getDefaultGoalController().addGoal(new GoPlaces(npc, places), 1);
+			setupGoals();
 		}
 	}
       
