@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -16,6 +17,10 @@ import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
 
 public class Util {
+	
+	public static final void b(String message) {
+		Bukkit.broadcastMessage(message);
+	}
 	
 	public static final void spawnBlocks(HashSet<Block> blocks) {
 		for(Block block : blocks) {

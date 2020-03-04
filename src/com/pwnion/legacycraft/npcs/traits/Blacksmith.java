@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 
 import com.pwnion.legacycraft.OnCommand;
+import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.npcs.GoPlaces;
 import com.pwnion.legacycraft.npcs.HomeWorkData;
 
@@ -42,7 +43,7 @@ public class Blacksmith extends Trait {
 		//at 7AM go to work (1000 ticks)
 		places.put(((7) - 6) * 1000, workLocation);
 		
-		npc.getDefaultGoalController().addGoal(new GoPlaces(npc, places), 1);
+		GoPlaces.run(npc, places);
 	}
 	
 	
@@ -51,18 +52,12 @@ public class Blacksmith extends Trait {
     // This is called AFTER onAttach so you can load defaults in onAttach and they will be overridden here.
     // This is called BEFORE onSpawn, npc.getBukkitEntity() will return null.
 	public void load(DataKey key) {
-		Bukkit.getLogger().log(Level.FINE, "NPC '" + npc.getName() + "' is loading");
-		if(homeLocation == null || workLocation == null) {
-			Bukkit.getLogger().log(Level.WARNING, "INVALID SETUP: NPC '" + npc.getName() + "' has no places. Removing '" + this.getName() + "' trait");
-			npc.removeTrait(this.getClass());
-			return;
-		}
-		setupGoals();
+		Bukkit.getLogger().log(Level.INFO, "NPC '" + npc.getName() + "' is loading for trait " + this.getName());
 	}
 
 	// Save settings for this NPC (optional). These values will be persisted to the Citizens saves file
 	public void save(DataKey key) {
-		Bukkit.getLogger().log(Level.FINE, "NPC '" + npc.getName() + "' is saving");
+		Bukkit.getLogger().log(Level.INFO, "NPC '" + npc.getName() + "' is saving for trait " + this.getName());
 	}
 
     // An example event handler. All traits will be registered automatically as Bukkit Listeners.
@@ -74,7 +69,7 @@ public class Blacksmith extends Trait {
 			Player p = event.getClicker();
 			//If close to work do work related stuff
 			//Else do other stuff
-			Bukkit.getLogger().log(Level.FINE, "NPC '" + npc.getName() + "' has been clicked by " + p.getName());
+			Bukkit.getLogger().log(Level.INFO, "NPC '" + npc.getName() + "' has been clicked by " + p.getName());
 		}
 	}
 	
@@ -86,7 +81,7 @@ public class Blacksmith extends Trait {
 		
 		if(e.getNPC() == this.getNPC()) {
 			Player p = (Player) e.getCommandSender();
-			Bukkit.getLogger().info(npc.getName() + " has been assigned " + this.getName().toUpperCase() + " by " + p.getName());
+			Bukkit.getLogger().info("NPC '" + npc.getName() + "' has been assigned trait " + this.getName().toUpperCase() + " by " + p.getName());
 			
 			HomeWorkData data = OnCommand.playerToNPCdata.get(p.getUniqueId());
 			
@@ -115,26 +110,34 @@ public class Blacksmith extends Trait {
     //This would be a good place to load configurable defaults for new NPCs.
 	@Override
 	public void onAttach() {
-		Bukkit.getLogger().log(Level.FINE, "NPC '" + npc.getName() + "' has called onAttach event");
+		Bukkit.getLogger().log(Level.INFO, "NPC '" + npc.getName() + "' has called onAttach event for trait " + this.getName());
 	}
 
     // Run code when the NPC is despawned. This is called before the entity actually despawns so npc.getBukkitEntity() is still valid.
 	@Override
 	public void onDespawn() {
-		Bukkit.getLogger().log(Level.FINE, "NPC '" + npc.getName() + "' has called onDespawn event");
+		Bukkit.getLogger().log(Level.INFO, "NPC '" + npc.getName() + "' has called onDespawn event for trait " + this.getName());
+		GoPlaces.remove(npc);
 	}
 
 	//Run code when the NPC is spawned. Note that npc.getBukkitEntity() will be null until this method is called.
     //This is called AFTER onAttach and AFTER Load when the server is started.
 	@Override
 	public void onSpawn() {
-		Bukkit.getLogger().log(Level.FINE, "NPC '" + npc.getName() + "' has called onSpawn event");
+		Bukkit.getLogger().log(Level.INFO, "NPC '" + npc.getName() + "' has called onSpawn event for trait " + this.getName());
+		if(homeLocation == null || workLocation == null) {
+			Bukkit.getLogger().log(Level.WARNING, "INVALID SETUP: NPC '" + npc.getName() + "' has no places. Removing '" + this.getName() + "' trait");
+			npc.removeTrait(this.getClass());
+			return;
+		}
+		setupGoals();
 	}
 
     //run code when the NPC is removed. Use this to tear down any repeating tasks.
 	@Override
 	public void onRemove() {
-		Bukkit.getLogger().log(Level.FINE, "NPC '" + npc.getName() + "' has called onRemove event for trait " + this.getName());
+		Bukkit.getLogger().log(Level.INFO, "NPC '" + npc.getName() + "' has called onRemove event for trait " + this.getName());
+		GoPlaces.remove(npc);
 	}
 
 }
