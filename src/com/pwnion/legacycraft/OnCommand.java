@@ -21,12 +21,11 @@ import com.pwnion.legacycraft.abilities.areas.Sphere;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.ooc.Portal;
 import com.pwnion.legacycraft.abilities.targets.Point;
-import com.pwnion.legacycraft.npcs.HomeWorkData;
+import com.pwnion.legacycraft.npcs.NPCHomeWork;
 
 public class OnCommand implements CommandExecutor {
 	private static final String deniedMsg = ChatColor.RED + "I'm sorry, but you do not have permission to perform this command.";
 	private static final HashMap<UUID, Selection> playerToSelection = new HashMap<UUID, Selection>();
-	public static final HashMap<UUID, HomeWorkData> playerToNPCdata = new HashMap<UUID, HomeWorkData>();
 
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String lbl, String[] args) {
@@ -151,16 +150,10 @@ public class OnCommand implements CommandExecutor {
 
 						break;
 					case "home":
-						if(!playerToNPCdata.keySet().contains(playerUUID)) {
-							playerToNPCdata.put(playerUUID, new HomeWorkData(p));
-						}
-						p.sendMessage(playerToNPCdata.get(playerUUID).setHome());
+						p.sendMessage(NPCHomeWork.setHome(p, p.getLocation()));
 						break;
 					case "work":
-						if(!playerToNPCdata.keySet().contains(playerUUID)) {
-							playerToNPCdata.put(playerUUID, new HomeWorkData(p));
-						}
-						p.sendMessage(playerToNPCdata.get(playerUUID).setWork());
+						p.sendMessage(NPCHomeWork.setWork(p, p.getLocation()));
 						break;
 					default:
 						return false;
@@ -168,7 +161,6 @@ public class OnCommand implements CommandExecutor {
 				}
 			} else if(lbl.equals("test")) {
 				br(p.getWorld().getTime() + "");
-				br(p.getWorld().getFullTime() + "");
 			}
 			return true;
 		} else {

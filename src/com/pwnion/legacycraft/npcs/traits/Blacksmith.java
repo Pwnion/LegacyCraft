@@ -7,11 +7,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 
-import com.pwnion.legacycraft.OnCommand;
-import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.npcs.GoPlaces;
-import com.pwnion.legacycraft.npcs.HomeWorkData;
+import com.pwnion.legacycraft.npcs.NPCHomeWork;
 
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.event.NPCTraitCommandAttachEvent;
@@ -35,8 +37,6 @@ public class Blacksmith extends Trait {
 
 	private void setupGoals() {
 		HashMap<Integer, Location> places = new HashMap<Integer, Location>();
-		
-		places.clear();
 		
 		//at 5PM go home (11000 ticks)
 		places.put(((5 + 12) - 6) * 1000, homeLocation);
@@ -69,8 +69,20 @@ public class Blacksmith extends Trait {
 			Player p = event.getClicker();
 			//If close to work do work related stuff
 			//Else do other stuff
+			p.sendMessage(ChatColor.ITALIC + "" + ChatColor.GRAY + "REPAIR ITEMS?");
+			PlayerInventory inv = p.getInventory();
+			inv.setItemInMainHand(repairItem(inv.getItemInMainHand()));
 			Bukkit.getLogger().log(Level.INFO, "NPC '" + npc.getName() + "' has been clicked by " + p.getName());
 		}
+	}
+	
+	public ItemStack repairItem(ItemStack item) {
+		if(item.getItemMeta() instanceof Damageable) {
+			Damageable dmg = (Damageable) item.getItemMeta();
+			dmg.setDamage(0);
+			item.setItemMeta((ItemMeta) dmg);
+		}
+		return item;
 	}
 	
 	@EventHandler
@@ -83,16 +95,14 @@ public class Blacksmith extends Trait {
 			Player p = (Player) e.getCommandSender();
 			Bukkit.getLogger().info("NPC '" + npc.getName() + "' has been assigned trait " + this.getName().toUpperCase() + " by " + p.getName());
 			
-			HomeWorkData data = OnCommand.playerToNPCdata.get(p.getUniqueId());
-			
-			if(data == null || !data.hasLocations()) {
+			if(!NPCHomeWork.hasLocations(p)) {
 				p.sendMessage(ChatColor.RED + "No Home/Work found, please add a Home and Work before adding this trait.");
 				npc.removeTrait(this.getClass());
 				return;
 			}
 			
-			homeLocation = data.getHome();
-			workLocation = data.getWork();
+			homeLocation = NPCHomeWork.getHome(p);
+			workLocation = NPCHomeWork.getWork(p);
 			p.sendMessage(ChatColor.GOLD + "Transfered Home/Work locations successfully!");
 		
 			setupGoals();
