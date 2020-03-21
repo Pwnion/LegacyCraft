@@ -18,8 +18,8 @@ import org.bukkit.util.Vector;
 
 public class Util {
 	
-	public static final void b(String message) {
-		Bukkit.broadcastMessage(message);
+	public static final void br(String message) {
+		Bukkit.broadcastMessage("[C] " + message);
 	}
 	
 	public static final void spawnBlocks(HashSet<Block> blocks) {

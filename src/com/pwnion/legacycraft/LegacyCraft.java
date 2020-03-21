@@ -133,6 +133,7 @@ public class LegacyCraft extends JavaPlugin {
 
 		//Register your trait with Citizens.        
 		CitizensAPI.getTraitFactory().registerTrait(TraitInfo.create(Blacksmith.class).withName("blacksmith"));
+		CitizensAPI.registerEvents(new Blacksmith());
 	}
 
 	//Called when the plugin is disabled
