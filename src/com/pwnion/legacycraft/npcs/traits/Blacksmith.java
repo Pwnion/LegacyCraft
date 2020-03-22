@@ -16,6 +16,10 @@ import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.npcs.GoPlaces;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
 import com.pwnion.legacycraft.npcs.Speech;
+import com.pwnion.legacycraft.LegacyCraft;
+import com.pwnion.legacycraft.OnCommand;
+import com.pwnion.legacycraft.abilities.inventory.BlacksmithInv;
+import com.pwnion.legacycraft.npcs.HomeWorkData;
 
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
@@ -79,6 +83,8 @@ public class Blacksmith extends Trait {
 			PlayerInventory inv = p.getInventory();
 			inv.setItemInMainHand(repairItem(inv.getItemInMainHand()));
 			Util.br("NPC '" + npc.getName() + "' has been clicked by " + p.getName());
+			
+			BlacksmithInv.load(p);
 		}
 	}
 	

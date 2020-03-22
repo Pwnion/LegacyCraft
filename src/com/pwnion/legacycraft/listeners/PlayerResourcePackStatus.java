@@ -14,8 +14,8 @@ public class PlayerResourcePackStatus implements Listener {
 	private static final ConfigurationSection configCS = configConfig.getRoot();
 	
 	private static final String successfullyLoadedMessage = configCS.getString("resourcepack.successfully-loaded-message");
-	private static final String declinedMessage = configCS.getString("resourcepack.declined-message");
-	private static final String failedDownloadMessage = configCS.getString("resourcepack.failed-download-message");
+	//private static final String declinedMessage = configCS.getString("resourcepack.declined-message");
+	//private static final String failedDownloadMessage = configCS.getString("resourcepack.failed-download-message");
 	
 	@EventHandler
 	public void onPlayerResourcePackStatus(PlayerResourcePackStatusEvent e) {
@@ -29,10 +29,10 @@ public class PlayerResourcePackStatus implements Listener {
 			p.sendMessage(successfullyLoadedMessage);
 			break;
 		case DECLINED:
-			p.kickPlayer(declinedMessage);
+			//p.kickPlayer(declinedMessage);
 			break;
 		case FAILED_DOWNLOAD:
-			p.kickPlayer(failedDownloadMessage);
+			//p.kickPlayer(failedDownloadMessage);
 			break;
 		default:
 			break;

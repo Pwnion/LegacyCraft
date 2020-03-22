@@ -28,6 +28,7 @@ import com.pwnion.legacycraft.abilities.inventory.WarpGatesInv;
 import com.pwnion.legacycraft.abilities.inventory.WeaponEnhancementsInv;
 import com.pwnion.legacycraft.abilities.SkillTree;
 import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
+import com.pwnion.legacycraft.abilities.inventory.BlacksmithInv;
 import com.pwnion.legacycraft.abilities.inventory.BuildInv;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.inventory.Inv;
@@ -50,6 +51,7 @@ public class InventoryClick implements Listener {
 				add(SelectAnAspectInv.class);
 				add(BuildInv.class);
 				add(WarpGatesInv.class);
+				add(BlacksmithInv.class);
 			}
 		};
 		
