@@ -16,13 +16,9 @@ import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.npcs.GoPlaces;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
 import com.pwnion.legacycraft.npcs.Speech;
-import com.pwnion.legacycraft.LegacyCraft;
-import com.pwnion.legacycraft.OnCommand;
 import com.pwnion.legacycraft.abilities.inventory.BlacksmithInv;
 
-import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
-import net.citizensnpcs.api.event.NPCTraitCommandAttachEvent;
 import net.citizensnpcs.api.persistence.Persist;
 import net.citizensnpcs.api.trait.Trait;
 import net.citizensnpcs.api.util.DataKey;

@@ -1,10 +1,6 @@
 package com.pwnion.legacycraft.npcs;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.UUID;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
