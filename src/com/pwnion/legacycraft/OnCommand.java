@@ -172,12 +172,10 @@ public class OnCommand implements CommandExecutor {
 						count += items.getAmount();
 					}
 					quest.setProgress(p, 0, count);
-					Util.br(count + "");
 				}
 				
 				Util.br(quest.name);
 				Util.br(quest.desc);
-				Util.br(quest.getQuestPercentOverall(p) + "");
 				Util.br(quest.getQuestPercent(p, 0) + "");
 			}
 			return true;

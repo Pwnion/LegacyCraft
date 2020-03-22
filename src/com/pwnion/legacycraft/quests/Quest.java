@@ -8,8 +8,6 @@ import java.util.UUID;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import com.pwnion.legacycraft.Util;
-
 public class Quest {
 	
 	public Quest(String quest) {
@@ -102,17 +100,16 @@ public class Quest {
 	}
 	
 	public double getQuestPercent(Player p, int index) {
-		return (getQuestProgress(p, index) / finishCondition.get(index)) * 100;
+		return ((double) getQuestProgress(p, index) / (double) finishCondition.get(index)) * 100;
 	}
 	
 	public double getQuestPercentOverall(Player p) { 
 		ArrayList<Integer> progress = getQuestProgress(p);
-		int progressTotal = 0;
-		int finalTotal = 0;
+		double progressTotal = 0;
+		double finalTotal = 0;
 		for(int i = 0; i < triggers.size(); i++) {
 			progressTotal += progress.get(i);
 			finalTotal += finishCondition.get(i);
-			Util.br(progressTotal + " / " + finalTotal);
 		}
 		return (progressTotal / finalTotal) * 100;
 	}

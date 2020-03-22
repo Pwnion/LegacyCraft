@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -14,10 +15,7 @@ import com.pwnion.legacycraft.quests.Trigger;
 
 public class GetItem implements Listener {
 	
-	@EventHandler
-	private static void onInventoryInteract(InventoryInteractEvent e) {
-		Player p = (Player) e.getWhoClicked();
-		Util.br(p.getName() + " has called onInventoryInteract");
+	private static void updateQuests(Player p) {
 		for(Quest quest : QuestManager.getActiveQuests(p)) {
 			if(quest.hasTrigger("item")) {
 				for(Trigger trigger : quest.triggers) {
@@ -31,6 +29,22 @@ public class GetItem implements Listener {
 					}
 				}
 			}
+		}
+	}
+	
+	@EventHandler
+	private static void onInventoryInteract(InventoryInteractEvent e) {
+		Player p = (Player) e.getWhoClicked();
+		Util.br(p.getName() + " has called onInventoryInteract");
+		updateQuests(p);
+	}
+	
+	@EventHandler
+	private static void onEntityPickupItem(EntityPickupItemEvent e) {
+		if(e.getEntity() instanceof Player) {
+			Player p = (Player) e.getEntity();
+			Util.br(p.getName() + " has called onEntityPickupItem");
+			updateQuests(p);
 		}
 	}
 }
