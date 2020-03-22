@@ -32,7 +32,8 @@ public class Blacksmith extends Trait {
 
 	@Persist Location homeLocation = null;
 	@Persist Location workLocation = null;
-	@Persist boolean first = true;
+	boolean first = true;
+	Trait trait;
 	
 	  
     // see the 'Persistence API' section
@@ -73,8 +74,10 @@ public class Blacksmith extends Trait {
 			Player p = event.getClicker();
 			//If close to work do work related stuff
 			//Else do other stuff
-			p.sendMessage(ChatColor.ITALIC + "" + ChatColor.GRAY + "REPAIR ITEMS?");
-			p.sendMessage(Speech.getRnd(npc, npc.getTrait(Blacksmith.class), p));
+			p.sendMessage(ChatColor.GRAY + "REPAIR ITEMS?");
+			
+			p.sendMessage(Speech.getRnd(npc, this.getName(), p));
+			
 			PlayerInventory inv = p.getInventory();
 			inv.setItemInMainHand(repairItem(inv.getItemInMainHand()));
 			Util.br("NPC '" + npc.getName() + "' has been clicked by " + p.getName());
@@ -104,8 +107,6 @@ public class Blacksmith extends Trait {
     @Override
 	public void onAttach() {
 		Util.br("NPC '" + npc.getName() + "' has called onAttach event for trait " + this.getName());
-		
-		
 	}
 
     // Run code when the NPC is despawned. This is called before the entity actually despawns so npc.getBukkitEntity() is still valid.
@@ -129,8 +130,6 @@ public class Blacksmith extends Trait {
 				npc.removeTrait(this.getClass());
 				return;
 			}
-			
-			
 			
 			homeLocation = NPCHomeWork.getHome();
 			workLocation = NPCHomeWork.getWork();

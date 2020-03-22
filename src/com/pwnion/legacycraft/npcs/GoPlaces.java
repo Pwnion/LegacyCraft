@@ -16,7 +16,7 @@ public class GoPlaces {
 	private static BukkitTask allGoPlaces = null;
 	private static HashMap<NPC, HashMap<Integer, Location>> data = new HashMap<NPC, HashMap<Integer, Location>>();
 	
-	private final static int roundingConstant = 20;
+	private final static int roundingConstant = 5;
 
 	private static HashMap<Integer, Location> format(HashMap<Integer, Location> placesToGo) {
 		HashMap<Integer, Location> formatted = new HashMap<Integer, Location>();

@@ -26,6 +26,8 @@ import com.pwnion.legacycraft.listeners.PlayerResourcePackStatus;
 import com.pwnion.legacycraft.listeners.PlayerToggleFlight;
 import com.pwnion.legacycraft.npcs.Speech;
 import com.pwnion.legacycraft.npcs.traits.Blacksmith;
+import com.pwnion.legacycraft.quests.QuestManager;
+import com.pwnion.legacycraft.quests.triggers.GetItem;
 
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.trait.TraitInfo;
@@ -82,7 +84,8 @@ public class LegacyCraft extends JavaPlugin {
 			new PlayerQuit(),
 			new PlayerItemHeld(),
 			new PlayerDropItem(),
-			new PlayerResourcePackStatus()
+			new PlayerResourcePackStatus(),
+			new GetItem()
 		);
 		
 		//Register commands
@@ -137,6 +140,7 @@ public class LegacyCraft extends JavaPlugin {
 		CitizensAPI.registerEvents(new Blacksmith());
 		
 		Speech.loadFiles();
+		QuestManager.load();
 	}
 
 	//Called when the plugin is disabled

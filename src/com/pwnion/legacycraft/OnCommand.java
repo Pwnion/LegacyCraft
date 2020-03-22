@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,6 +23,8 @@ import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.ooc.Portal;
 import com.pwnion.legacycraft.abilities.targets.Point;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
+import com.pwnion.legacycraft.quests.Quest;
+import com.pwnion.legacycraft.quests.QuestManager;
 
 public class OnCommand implements CommandExecutor {
 	private static final String deniedMsg = ChatColor.RED + "I'm sorry, but you do not have permission to perform this command.";
@@ -160,16 +163,27 @@ public class OnCommand implements CommandExecutor {
 					}
 				}
 			} else if(lbl.equals("test")) {
-				br(p.getWorld().getTime() + "");
+				Quest quest = QuestManager.getActiveQuests(p).get(0);
+				
+				Material mat = Material.DIAMOND;
+				if(p.getInventory().contains(mat)) {
+					int count = 0;
+					for(ItemStack items : p.getInventory().all(mat).values()) {
+						count += items.getAmount();
+					}
+					quest.setProgress(p, 0, count);
+					Util.br(count + "");
+				}
+				
+				Util.br(quest.name);
+				Util.br(quest.desc);
+				Util.br(quest.getQuestPercentOverall(p) + "");
+				Util.br(quest.getQuestPercent(p, 0) + "");
 			}
 			return true;
 		} else {
 			p.sendMessage(deniedMsg);
 			return false;
 		}
-	}
-	
-	private int br(String message) {
-		return Bukkit.broadcastMessage(message);
 	}
 }

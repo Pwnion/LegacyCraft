@@ -4,37 +4,37 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import com.pwnion.legacycraft.Util;
 
-import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.api.trait.Trait;
 
 public class Speech {
 	
-	private static HashMap<Trait, ArrayList<String>> lines = new HashMap<Trait, ArrayList<String>>();
+	private static HashMap<String, ArrayList<String>> lines = new HashMap<String, ArrayList<String>>();
 	
 	public static void loadFiles() {
 		ArrayList<String> temp = new ArrayList<String>();
 		temp.add("Hello [PLAYER], I am [NPC]");
-		lines.put(CitizensAPI.getTraitFactory().getTrait("blacksmith"), temp);
+		lines.put("blacksmith", temp);
 		
 		Util.br(lines.keySet().toString());
 		Util.br(lines.values().toString());
+		Bukkit.getLogger().info(lines.toString());
 	}
 	
 	public static void save() {
 		
 	}
 	
-	public static String getRnd(NPC npc, Trait trait, Player p) {
+	public static String getRnd(NPC npc, String traitName, Player p) {
 		Random rand = new Random(); 
-		ArrayList<String> list = lines.get(trait);
+		ArrayList<String> list = lines.get(traitName.toLowerCase());
 		String line = list.get(rand.nextInt(list.size()));
-		line.replaceAll("[PLAYER]", p.getName());
-		line.replaceAll("[NPC]", npc.getName());
+		line = line.replace("[PLAYER]", p.getName());
+		line = line.replace("[NPC]", npc.getName());
 		return line;
 	}
 }
