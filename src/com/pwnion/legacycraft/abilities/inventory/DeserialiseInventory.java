@@ -17,6 +17,7 @@ import com.pwnion.legacycraft.abilities.inventory.holders.AquaShaman;
 import com.pwnion.legacycraft.abilities.inventory.holders.AquaStriker;
 import com.pwnion.legacycraft.abilities.inventory.holders.AquaVanguard;
 import com.pwnion.legacycraft.abilities.inventory.holders.Aspect;
+import com.pwnion.legacycraft.abilities.inventory.holders.Blacksmith;
 import com.pwnion.legacycraft.abilities.inventory.holders.IgnisRogue;
 import com.pwnion.legacycraft.abilities.inventory.holders.IgnisShaman;
 import com.pwnion.legacycraft.abilities.inventory.holders.IgnisStriker;
@@ -103,6 +104,9 @@ public class DeserialiseInventory {
 			break;
 		case "Warp Gates":
 			holder = new WarpGates();
+			break;
+		case "Blacksmith":
+			holder = new Blacksmith();
 			break;
 		default:
 			holder = null;

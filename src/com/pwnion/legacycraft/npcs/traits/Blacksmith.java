@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.OnCommand;
+import com.pwnion.legacycraft.abilities.inventory.BlacksmithInv;
 import com.pwnion.legacycraft.npcs.HomeWorkData;
 
 import net.citizensnpcs.api.event.NPCRightClickEvent;
@@ -55,6 +56,8 @@ public class Blacksmith extends Trait {
 			//If close to work do work related stuff
 			//Else do other stuff
 			Bukkit.broadcastMessage("click");
+			
+			BlacksmithInv.load(p);
 		}
 	}
 	
