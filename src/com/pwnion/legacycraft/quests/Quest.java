@@ -23,7 +23,7 @@ public class Quest {
 	public String name;
 	public String desc;
 	
-	public ArrayList<Trigger> triggers = new ArrayList<Trigger>();
+	ArrayList<Trigger> triggers = new ArrayList<Trigger>();
 	
 	HashMap<UUID, ArrayList<Integer>> questHolders = new HashMap<UUID, ArrayList<Integer>>();
 	HashSet<UUID> finishedQuest = new HashSet<UUID>();
@@ -73,8 +73,22 @@ public class Quest {
 		setProgress(p, getIndex(trigger), value);
 	}
 	
+	public ArrayList<Trigger> getTriggers() {
+		return triggers;
+	}
+	
+	public ArrayList<Trigger> getTriggers(String name) {
+		ArrayList<Trigger> output = new ArrayList<Trigger>();
+		for(Trigger trigger : triggers) {
+			if(trigger.name == name) {
+				output.add(trigger);
+			}
+		}
+		return output;
+	}
+	
 	public int getIndex(Trigger trigger) {
-		for(int i = 0; i < triggers.size(); i++) {
+		for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
 			if(trigger.equals(triggers.get(i))) {
 				return i;
 			}
@@ -93,7 +107,7 @@ public class Quest {
 			return finishCondition;
 		}
 		ArrayList<Integer> output = new ArrayList<Integer>();
-		for(int i = 0; i < triggers.size(); i++) {
+		for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
 			output.add(0);
 		}
 		return output;
@@ -107,7 +121,7 @@ public class Quest {
 		ArrayList<Integer> progress = getQuestProgress(p);
 		double progressTotal = 0;
 		double finalTotal = 0;
-		for(int i = 0; i < triggers.size(); i++) {
+		for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
 			progressTotal += progress.get(i);
 			finalTotal += finishCondition.get(i);
 		}
@@ -116,6 +130,10 @@ public class Quest {
 	
 	public boolean hasQuestActive(Player p) {
 		return questHolders.containsKey(p.getUniqueId());
+	}
+	
+	public boolean hasQuestActive(UUID playerUUID) {
+		return questHolders.containsKey(playerUUID);
 	}
 	
 	public boolean hasQuestFinished(Player p) {

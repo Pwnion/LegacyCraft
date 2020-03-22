@@ -21,7 +21,7 @@ public class EntityDamageByEntity {
 		Entity attacker = e.getDamager();
 		
 		if(activeEnhancments.containsKey(attacker)) {
-			
+			e.setDamage(10);
 		}
 	}
 }

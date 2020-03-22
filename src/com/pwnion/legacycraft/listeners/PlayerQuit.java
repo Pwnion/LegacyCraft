@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.abilities.SkillTree;
+import com.pwnion.legacycraft.quests.triggers.NearLocation;
 
 public class PlayerQuit implements Listener {
 	
@@ -18,6 +19,8 @@ public class PlayerQuit implements Listener {
 	public void onPlayerQuit(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
 		UUID playerUUID = p.getUniqueId();
+		
+		NearLocation.playerQuit(playerUUID);
 		
 		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
 		if(p.getGameMode().equals(GameMode.ADVENTURE)) {
