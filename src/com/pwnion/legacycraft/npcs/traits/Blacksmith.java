@@ -19,7 +19,6 @@ import com.pwnion.legacycraft.npcs.Speech;
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.OnCommand;
 import com.pwnion.legacycraft.abilities.inventory.BlacksmithInv;
-import com.pwnion.legacycraft.npcs.HomeWorkData;
 
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
