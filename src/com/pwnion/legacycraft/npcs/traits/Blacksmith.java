@@ -15,7 +15,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.npcs.GoPlaces;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
+import com.pwnion.legacycraft.npcs.Speech;
 
+import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.event.NPCTraitCommandAttachEvent;
 import net.citizensnpcs.api.persistence.Persist;
@@ -55,6 +57,7 @@ public class Blacksmith extends Trait {
     // This is called BEFORE onSpawn, npc.getBukkitEntity() will return null.
 	public void load(DataKey key) {
 		Util.br("NPC '" + npc.getName() + "' is loading for trait " + this.getName());
+		first = false;
 	}
 
 	// Save settings for this NPC (optional). These values will be persisted to the Citizens saves file
@@ -72,6 +75,7 @@ public class Blacksmith extends Trait {
 			//If close to work do work related stuff
 			//Else do other stuff
 			p.sendMessage(ChatColor.ITALIC + "" + ChatColor.GRAY + "REPAIR ITEMS?");
+			p.sendMessage(Speech.getRnd(npc, npc.getTrait(Blacksmith.class), p));
 			PlayerInventory inv = p.getInventory();
 			inv.setItemInMainHand(repairItem(inv.getItemInMainHand()));
 			Util.br("NPC '" + npc.getName() + "' has been clicked by " + p.getName());
@@ -85,17 +89,6 @@ public class Blacksmith extends Trait {
 			item.setItemMeta((ItemMeta) dmg);
 		}
 		return item;
-	}
-	
-	@EventHandler
-	public void onNPCTraitCommandAttachEvent(NPCTraitCommandAttachEvent e) {
-		if(!(e.getCommandSender() instanceof Player)) {
-			return;
-		}
-		
-		if(e.getNPC() == this.getNPC()) {
-			
-		}
 	}
       
     // Called every tick
@@ -111,30 +104,7 @@ public class Blacksmith extends Trait {
 	public void onAttach() {
 		Util.br("NPC '" + npc.getName() + "' has called onAttach event for trait " + this.getName());
 		
-		if(first) {
-			Player p = NPCHomeWork.editPlayer;
-			
-			if(!NPCHomeWork.hasLocations()) {
-				p.sendMessage(ChatColor.RED + "No Home/Work found, please add a Home and Work before adding this trait.");
-				npc.removeTrait(this.getClass());
-				return;
-			}
-			
-			homeLocation = NPCHomeWork.getHome();
-			workLocation = NPCHomeWork.getWork();
-			p.sendMessage(ChatColor.GOLD + "Transfered Home/Work locations successfully!");
 		
-			Util.br("NPC '" + npc.getName() + "' has been assigned trait " + this.getName().toUpperCase() + " by " + p.getName());
-			first = false;
-		}
-		
-		if(homeLocation == null || workLocation == null) {
-			Bukkit.getLogger().log(Level.WARNING, "INVALID SETUP: NPC '" + npc.getName() + "' has no places. Removing '" + this.getName() + "' trait");
-			npc.removeTrait(this.getClass());
-			return;
-		}
-		
-		setupGoals();
 	}
 
     // Run code when the NPC is despawned. This is called before the entity actually despawns so npc.getBukkitEntity() is still valid.
@@ -149,6 +119,32 @@ public class Blacksmith extends Trait {
 	@Override
 	public void onSpawn() {
 		Util.br("NPC '" + npc.getName() + "' has called onSpawn event for trait " + this.getName());
+		
+		if(first) {
+			Player p = NPCHomeWork.editPlayer;
+			
+			if(!NPCHomeWork.hasLocations()) {
+				p.sendMessage(ChatColor.RED + "No Home/Work found, please add a Home and Work before adding this trait.");
+				npc.removeTrait(this.getClass());
+				return;
+			}
+			
+			
+			
+			homeLocation = NPCHomeWork.getHome();
+			workLocation = NPCHomeWork.getWork();
+			p.sendMessage(ChatColor.GOLD + "Transfered Home/Work locations successfully!");
+		
+			Util.br("NPC '" + npc.getName() + "' has been assigned trait " + this.getName().toUpperCase() + " by " + p.getName());
+		}
+		
+		if(homeLocation == null || workLocation == null) {
+			Bukkit.getLogger().log(Level.WARNING, "INVALID SETUP: NPC '" + npc.getName() + "' has no places. Removing '" + this.getName() + "' trait");
+			npc.removeTrait(this.getClass());
+			return;
+		}
+		
+		setupGoals();
 	}
 
     //run code when the NPC is removed. Use this to tear down any repeating tasks.

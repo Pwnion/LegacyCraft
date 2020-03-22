@@ -35,7 +35,7 @@ public class GoPlaces {
 					HashMap<Integer, Location> placesToGo = data.get(npc);
 					if(placesToGo.containsKey(Math.round(npc.getEntity().getWorld().getTime() / roundingConstant))) {
 						int time = Math.round(npc.getEntity().getWorld().getTime() / roundingConstant);
-						Bukkit.getLogger().log(Level.INFO, "Moving NPC '" + npc.getName() + "' to " + placesToGo.get(time) + " approx time is " + (time * roundingConstant));
+						Util.br("Moving NPC '" + npc.getName() + "' to " + placesToGo.get(time) + " approx time is " + (time * roundingConstant));
 						npc.getDefaultGoalController().addGoal(new MoveToGoal(npc, placesToGo.get(time)), 2);
 						//sel.selectAdditional(new MoveToGoal(npc, placesToGo.get(time)));
 					}

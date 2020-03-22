@@ -24,6 +24,7 @@ import com.pwnion.legacycraft.listeners.PlayerMove;
 import com.pwnion.legacycraft.listeners.PlayerQuit;
 import com.pwnion.legacycraft.listeners.PlayerResourcePackStatus;
 import com.pwnion.legacycraft.listeners.PlayerToggleFlight;
+import com.pwnion.legacycraft.npcs.Speech;
 import com.pwnion.legacycraft.npcs.traits.Blacksmith;
 
 import net.citizensnpcs.api.CitizensAPI;
@@ -134,11 +135,14 @@ public class LegacyCraft extends JavaPlugin {
 		//Register your trait with Citizens.        
 		CitizensAPI.getTraitFactory().registerTrait(TraitInfo.create(Blacksmith.class).withName("blacksmith"));
 		CitizensAPI.registerEvents(new Blacksmith());
+		
+		Speech.loadFiles();
 	}
 
 	//Called when the plugin is disabled
 	public void onDisable() {
 		Bukkit.getServer().getScheduler().cancelTasks(this);
+		Speech.save();
 		
 		//Set plugin to null to prevent memory leaks
 		plugin = null;

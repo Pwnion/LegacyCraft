@@ -33,7 +33,7 @@ public class EntityDamage implements Listener {
 		            }
 		        });
 			}
-			
-		}	
+			return;
+		}
 	}
 }
