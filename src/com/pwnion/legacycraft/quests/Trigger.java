@@ -37,7 +37,7 @@ public class Trigger {
 	}
 	
 	public EntityType getKillEntity() {
-		if(name == "killentity") {
+		if(name == "kill") {
 			return (EntityType) type;
 		}
 		return null;

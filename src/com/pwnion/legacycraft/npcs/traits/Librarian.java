@@ -16,6 +16,8 @@ import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.npcs.GoPlaces;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
 import com.pwnion.legacycraft.npcs.Speech;
+import com.pwnion.legacycraft.quests.Quest;
+import com.pwnion.legacycraft.quests.QuestManager;
 import com.pwnion.legacycraft.quests.triggers.SpeakToNPC;
 import com.pwnion.legacycraft.abilities.inventory.BlacksmithInv;
 
@@ -25,20 +27,21 @@ import net.citizensnpcs.api.trait.Trait;
 import net.citizensnpcs.api.util.DataKey;
 import net.md_5.bungee.api.ChatColor;
 
-public class Blacksmith extends Trait {
+public class Librarian extends Trait {
 
-	public Blacksmith() {
-		super("blacksmith");
+	public Librarian() {
+		super("librarian");
 	}
 
-	@Persist Location homeLocation = null;
-	@Persist Location workLocation = null;
-	boolean first = true;
+	//@Persist Location homeLocation = null;
+	//@Persist Location workLocation = null;
+	//boolean first = true;
 	
 	  
     // see the 'Persistence API' section
     //@Persist("mysettingname") boolean automaticallyPersistedSetting = false;
 
+	/*
 	private void setupGoals() {
 		HashMap<Integer, Location> places = new HashMap<Integer, Location>();
 		
@@ -48,7 +51,7 @@ public class Blacksmith extends Trait {
 		places.put(((7) - 6) * 1000, workLocation);
 		
 		GoPlaces.run(npc, places);
-	}
+	} //*/
 	
 	
 	// Here you should load up any values you have previously saved (optional). 
@@ -57,7 +60,7 @@ public class Blacksmith extends Trait {
     // This is called BEFORE onSpawn, npc.getBukkitEntity() will return null.
 	public void load(DataKey key) {
 		Util.br("NPC '" + npc.getName() + "' is loading for trait " + this.getName());
-		first = false;
+		//first = false;
 	}
 
 	// Save settings for this NPC (optional). These values will be persisted to the Citizens saves file
@@ -74,27 +77,20 @@ public class Blacksmith extends Trait {
 			Player p = event.getClicker();
 			SpeakToNPC.onSpeakToNPC(p, npc.getName());
 			
+			QuestManager.getQuest("1").addPlayer(p);
+			QuestManager.getQuest("2").addPlayer(p);
+			QuestManager.getQuest("3").addPlayer(p);
+			QuestManager.getQuest("4").addPlayer(p);
+			
 			//If close to work do work related stuff
 			//Else do other stuff
-			p.sendMessage(ChatColor.GRAY + "REPAIR ITEMS?");
+			//p.sendMessage(ChatColor.GRAY + "REPAIR ITEMS?");
 			
 			p.sendMessage(Speech.getRnd(npc, this.getName(), p));
 			
-			PlayerInventory inv = p.getInventory();
-			inv.setItemInMainHand(repairItem(inv.getItemInMainHand()));
 			Util.br("NPC '" + npc.getName() + "' has been clicked by " + p.getName());
 			
-			BlacksmithInv.load(p);
 		}
-	}
-	
-	public ItemStack repairItem(ItemStack item) {
-		if(item.getItemMeta() instanceof Damageable) {
-			Damageable dmg = (Damageable) item.getItemMeta();
-			dmg.setDamage(0);
-			item.setItemMeta((ItemMeta) dmg);
-		}
-		return item;
 	}
       
     // Called every tick
@@ -115,7 +111,7 @@ public class Blacksmith extends Trait {
 	@Override
 	public void onDespawn() {
 		Util.br("NPC '" + npc.getName() + "' has called onDespawn event for trait " + this.getName());
-		GoPlaces.remove(npc);
+		//GoPlaces.remove(npc);
 	}
 
 	//Run code when the NPC is spawned. Note that npc.getBukkitEntity() will be null until this method is called.
@@ -124,6 +120,7 @@ public class Blacksmith extends Trait {
 	public void onSpawn() {
 		Util.br("NPC '" + npc.getName() + "' has called onSpawn event for trait " + this.getName());
 		
+		/*
 		if(first) {
 			Player p = NPCHomeWork.editPlayer;
 			
@@ -133,9 +130,9 @@ public class Blacksmith extends Trait {
 				return;
 			}
 			
-			homeLocation = NPCHomeWork.getHome();
-			workLocation = NPCHomeWork.getWork();
-			p.sendMessage(ChatColor.GOLD + "Transfered Home/Work locations successfully!");
+			//homeLocation = NPCHomeWork.getHome();
+			//workLocation = NPCHomeWork.getWork();
+			//p.sendMessage(ChatColor.GOLD + "Transfered Home/Work locations successfully!");
 		
 			Util.br("NPC '" + npc.getName() + "' has been assigned trait " + this.getName().toUpperCase() + " by " + p.getName());
 		}
@@ -146,7 +143,7 @@ public class Blacksmith extends Trait {
 			return;
 		}
 		
-		setupGoals();
+		setupGoals(); //*/
 	}
 
     //run code when the NPC is removed. Use this to tear down any repeating tasks.

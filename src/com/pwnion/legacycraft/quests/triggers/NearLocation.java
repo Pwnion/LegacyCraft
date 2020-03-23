@@ -32,7 +32,7 @@ public class NearLocation implements Listener {
 							for(Location loc : LocationData.keySet()) {
 								if(loc.getWorld() == playerLoc.getWorld()) {
 									int requiredDistance = LocationData.get(loc);
-									if(requiredDistance <= loc.distance(playerLoc)) {
+									if(requiredDistance >= loc.distance(playerLoc)) {
 										quest.addProgress(p, i);
 										break;
 									}

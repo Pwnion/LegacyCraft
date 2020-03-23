@@ -3,6 +3,7 @@ package com.pwnion.legacycraft;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.function.BiConsumer;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
@@ -29,10 +30,11 @@ import com.pwnion.legacycraft.listeners.PlayerToggleFlight;
 import com.pwnion.legacycraft.listeners.InventoryDrag;
 import com.pwnion.legacycraft.npcs.Speech;
 import com.pwnion.legacycraft.npcs.traits.Blacksmith;
+import com.pwnion.legacycraft.npcs.traits.Librarian;
 import com.pwnion.legacycraft.quests.QuestManager;
-import com.pwnion.legacycraft.quests.triggers.GetItem;
 
 import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.trait.Trait;
 import net.citizensnpcs.api.trait.TraitInfo;
  
 public class LegacyCraft extends JavaPlugin {
@@ -62,6 +64,10 @@ public class LegacyCraft extends JavaPlugin {
 		for(String fileName : fileNames) {
 			new ConfigAccessor(fileName).saveDefaultConfig();
 		}
+	}
+	
+	private void registerTrait(Class<? extends Trait> trait, String traitName) {
+		CitizensAPI.getTraitFactory().registerTrait(TraitInfo.create(trait).withName(traitName));
 	}
 	
 	//Called when the plugin is enabled
@@ -139,15 +145,15 @@ public class LegacyCraft extends JavaPlugin {
 			//getServer().getPluginManager().disablePlugin(this);	
 			return;
 		}	
-
+		
 		//Register your trait with Citizens.        
-		CitizensAPI.getTraitFactory().registerTrait(TraitInfo.create(Blacksmith.class).withName("blacksmith"));
-		CitizensAPI.registerEvents(new Blacksmith());
+		registerTrait(Blacksmith.class, "blacksmith");
+		registerTrait(Librarian.class, "Librarian");
 		
 		Speech.loadFiles();
 		QuestManager.load();
 	}
-
+	
 	//Called when the plugin is disabled
 	public void onDisable() {
 		Bukkit.getServer().getScheduler().cancelTasks(this);

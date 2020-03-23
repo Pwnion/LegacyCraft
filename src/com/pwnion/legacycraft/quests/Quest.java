@@ -10,14 +10,11 @@ import org.bukkit.entity.Player;
 
 public class Quest {
 	
-	public Quest(String quest) {
-		name = "Get a stack of diamonds";
-		desc = "lol";
-		triggers.add(new Trigger("item", Material.DIAMOND));
-		finishCondition.add(64);
-		ArrayList<Integer> currentProgress = new ArrayList<Integer>();
-		currentProgress.add(0);
-		questHolders.put(UUID.fromString("d1584c2b-8baa-401d-ab76-e237d543a23e"), currentProgress);
+	public Quest(String name, String desc, Trigger trigger, Integer finishCondition) {
+		this.name = name;
+		this.desc = desc;
+		triggers.add(trigger);
+		this.finishCondition.add(finishCondition);
 	}
 	
 	public String name;
@@ -35,7 +32,9 @@ public class Quest {
 	}
 	
 	public void addPlayer(Player p) {
-		questHolders.put(p.getUniqueId(), new ArrayList<Integer>(triggers.size()));
+		ArrayList<Integer> progress = new ArrayList<Integer>(triggers.size());
+		progress.add(0);
+		questHolders.put(p.getUniqueId(), progress);
 	}
 	
 	public void addProgress(Player p, int index, int amount) {
@@ -94,6 +93,10 @@ public class Quest {
 			}
 		}
 		return -1;
+	}
+	
+	public int getCondition(Player p, int index) {
+		return finishCondition.get(index);
 	}
 	
 	public int getQuestProgress(Player p, int index) {

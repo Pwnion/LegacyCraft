@@ -1,8 +1,13 @@
 package com.pwnion.legacycraft.quests;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 public class QuestManager {
@@ -14,7 +19,14 @@ public class QuestManager {
 		//for(String quest : file) {
 		//	quests.add(new Quest(quest));
 		//}
-		quests.add(new Quest("test"));
+		
+		quests.add(new Quest("1", "Get 32 of oak logs", new Trigger("item", Material.OAK_WOOD), 32));
+		quests.add(new Quest("3", "Get a stack of diamonds", new Trigger("item", Material.DIAMOND), 64));
+		
+		HashMap<Location, Integer> hash = new HashMap<Location, Integer>();
+		hash.put(new Location(Bukkit.getWorld("Neutral"), 0, 0, 0), 10);
+		quests.add(new Quest("2", "Go to 0, 0, 0", new Trigger("location", hash), 1));
+		quests.add(new Quest("4", "Kill some Zombies", new Trigger("kill", EntityType.ZOMBIE), 16));
 	}
 	
 	public static void save() {

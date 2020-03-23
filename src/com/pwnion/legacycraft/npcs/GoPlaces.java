@@ -1,15 +1,21 @@
 package com.pwnion.legacycraft.npcs;
 
+import java.util.Collection;
 import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.util.Vector;
 
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.Util;
 
+import net.citizensnpcs.api.ai.NavigatorParameters;
+import net.citizensnpcs.api.ai.PathStrategy;
 import net.citizensnpcs.api.ai.goals.MoveToGoal;
+import net.citizensnpcs.api.astar.pathfinder.Path;
 import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.npc.ai.AStarNavigationStrategy;
 import net.citizensnpcs.npc.ai.CitizensNavigator;
 
 public class GoPlaces {
@@ -36,12 +42,13 @@ public class GoPlaces {
 						int time = Math.round(npc.getEntity().getWorld().getTime() / roundingConstant);
 						Util.br("Moving NPC '" + npc.getName() + "' to " + placesToGo.get(time) + " time is " + npc.getEntity().getWorld().getTime());
 						
-						npc.getDefaultGoalController().addGoal(new MoveToGoal(npc, placesToGo.get(time)), 2);
+						//npc.getDefaultGoalController().addGoal(new MoveToGoal(npc, placesToGo.get(time)), 2);
 						
-						/* navigator with options
+						/* Astar?
 						CitizensNavigator nav = new CitizensNavigator(npc);
-						nav.setTarget(placesToGo.get(time));
-						nav.run(); //*/
+						PathStrategy pathStrat = new AStarNavigationStrategy(npc, placesToGo.get(time), nav.getDefaultParameters());
+						Path path = new Path((Collection<Vector>) pathStrat.getPath());
+						path.run(npc); //*/
 					}
 				}
 				
