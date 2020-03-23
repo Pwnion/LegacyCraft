@@ -10,6 +10,7 @@ import com.pwnion.legacycraft.Util;
 
 import net.citizensnpcs.api.ai.goals.MoveToGoal;
 import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.npc.ai.CitizensNavigator;
 
 public class GoPlaces {
 	
@@ -33,9 +34,14 @@ public class GoPlaces {
 					HashMap<Integer, Location> placesToGo = data.get(npc);
 					if(placesToGo.containsKey(Math.round(npc.getEntity().getWorld().getTime() / roundingConstant))) {
 						int time = Math.round(npc.getEntity().getWorld().getTime() / roundingConstant);
-						Util.br("Moving NPC '" + npc.getName() + "' to " + placesToGo.get(time) + " approx time is " + (time * roundingConstant));
+						Util.br("Moving NPC '" + npc.getName() + "' to " + placesToGo.get(time) + " time is " + npc.getEntity().getWorld().getTime());
+						
 						npc.getDefaultGoalController().addGoal(new MoveToGoal(npc, placesToGo.get(time)), 2);
-						//sel.selectAdditional(new MoveToGoal(npc, placesToGo.get(time)));
+						
+						/* navigator with options
+						CitizensNavigator nav = new CitizensNavigator(npc);
+						nav.setTarget(placesToGo.get(time));
+						nav.run(); //*/
 					}
 				}
 				
