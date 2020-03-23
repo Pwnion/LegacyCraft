@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
+import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.quests.Quest;
 import com.pwnion.legacycraft.quests.QuestManager;
 import com.pwnion.legacycraft.quests.Trigger;
@@ -14,6 +15,7 @@ public class KillEntity {
 	private final static String triggerName = "killentity";
 	
 	public static void onPlayerKilledEntity(Player p, EntityType dead) {
+		Util.br(p.getName() + " has called onPlayerKilledEntity for " + dead.getName());
 		for(Quest quest : QuestManager.getActiveQuests(p)) {
 			if(quest.hasTrigger(triggerName)) {
 				ArrayList<Trigger> triggers = quest.getTriggers();

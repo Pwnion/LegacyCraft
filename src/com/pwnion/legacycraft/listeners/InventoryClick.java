@@ -26,6 +26,7 @@ import com.pwnion.legacycraft.abilities.inventory.SelectAClassInv;
 import com.pwnion.legacycraft.abilities.inventory.SelectAnAspectInv;
 import com.pwnion.legacycraft.abilities.inventory.WarpGatesInv;
 import com.pwnion.legacycraft.abilities.inventory.WeaponEnhancementsInv;
+import com.pwnion.legacycraft.quests.triggers.GetItem;
 import com.pwnion.legacycraft.abilities.SkillTree;
 import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
 import com.pwnion.legacycraft.abilities.inventory.BlacksmithInv;
@@ -76,6 +77,9 @@ public class InventoryClick implements Listener {
         final UUID playerUUID = p.getUniqueId();
         final int clickedSlot = e.getRawSlot();
         final ItemStack clickedItem = e.getCurrentItem();
+        
+        //Handles Quest Updates for items in inventory
+        GetItem.updateItemQuests(p);
         
         //Invokes the 'respond' method of the inventory class that matches the players open inventory
         //Returns false if the player is not in the inventory GUI

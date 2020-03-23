@@ -165,15 +165,6 @@ public class OnCommand implements CommandExecutor {
 			} else if(lbl.equals("test")) {
 				Quest quest = QuestManager.getActiveQuests(p).get(0);
 				
-				Material mat = Material.DIAMOND;
-				if(p.getInventory().contains(mat)) {
-					int count = 0;
-					for(ItemStack items : p.getInventory().all(mat).values()) {
-						count += items.getAmount();
-					}
-					quest.setProgress(p, 0, count);
-				}
-				
 				Util.br(quest.name);
 				Util.br(quest.desc);
 				Util.br(quest.getQuestPercent(p, 0) + "");

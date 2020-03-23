@@ -18,7 +18,6 @@ import com.pwnion.legacycraft.listeners.EntityDamage;
 import com.pwnion.legacycraft.listeners.EntityDeath;
 import com.pwnion.legacycraft.listeners.EntityPickupItem;
 import com.pwnion.legacycraft.listeners.InventoryClick;
-import com.pwnion.legacycraft.listeners.InventoryMoveItem;
 import com.pwnion.legacycraft.listeners.PlayerDropItem;
 import com.pwnion.legacycraft.listeners.PlayerGameModeChange;
 import com.pwnion.legacycraft.listeners.PlayerItemHeld;
@@ -27,6 +26,7 @@ import com.pwnion.legacycraft.listeners.PlayerMove;
 import com.pwnion.legacycraft.listeners.PlayerQuit;
 import com.pwnion.legacycraft.listeners.PlayerResourcePackStatus;
 import com.pwnion.legacycraft.listeners.PlayerToggleFlight;
+import com.pwnion.legacycraft.listeners.InventoryDrag;
 import com.pwnion.legacycraft.npcs.Speech;
 import com.pwnion.legacycraft.npcs.traits.Blacksmith;
 import com.pwnion.legacycraft.quests.QuestManager;
@@ -88,9 +88,9 @@ public class LegacyCraft extends JavaPlugin {
 			new PlayerItemHeld(),
 			new PlayerDropItem(),
 			new PlayerResourcePackStatus(),
-			new InventoryMoveItem(),
 			new EntityPickupItem(),
-			new EntityDeath()
+			new EntityDeath(),
+			new InventoryDrag()
 		);
 		
 		//Register commands

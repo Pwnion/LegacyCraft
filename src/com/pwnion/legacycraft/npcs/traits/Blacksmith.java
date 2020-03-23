@@ -16,6 +16,7 @@ import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.npcs.GoPlaces;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
 import com.pwnion.legacycraft.npcs.Speech;
+import com.pwnion.legacycraft.quests.triggers.SpeakToNPC;
 import com.pwnion.legacycraft.abilities.inventory.BlacksmithInv;
 
 import net.citizensnpcs.api.event.NPCRightClickEvent;
@@ -72,6 +73,8 @@ public class Blacksmith extends Trait {
 		//Be sure to check event.getNPC() == this.getNPC() so you only handle clicks on this NPC!
 		if(event.getNPC() == this.getNPC()) {
 			Player p = event.getClicker();
+			SpeakToNPC.onSpeakToNPC(p, npc.getName());
+			
 			//If close to work do work related stuff
 			//Else do other stuff
 			p.sendMessage(ChatColor.GRAY + "REPAIR ITEMS?");
