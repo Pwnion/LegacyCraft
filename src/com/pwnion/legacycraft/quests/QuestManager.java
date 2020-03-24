@@ -21,20 +21,20 @@ public class QuestManager {
 		//	quests.add(new Quest(quest));
 		//}
 		
-		quests.add(new Quest("Get 32 oak logs", "mine some trees", new Trigger("item", Material.OAK_LOG, 32)));
+		quests.add(new Quest("Get 32 oak logs", "mine some trees", new Trigger(TriggerType.ITEM, Material.OAK_LOG, 32)));
 		addLastQuestToQuestLine("Starter");
-		quests.add(new Quest("Get a stack of diamonds", "you'll need an iron pick for this", new Trigger("item", Material.DIAMOND, 64)));
+		quests.add(new Quest("Get a stack of diamonds", "you'll need an iron pick for this", new Trigger(TriggerType.ITEM, Material.DIAMOND, 64)));
 		addLastQuestToQuestLine("Starter");
 		
 		HashMap<Location, Integer> hash = new HashMap<Location, Integer>();
 		hash.put(new Location(Bukkit.getWorld("Neutral"), 0, 0, 0), 5);
-		quests.add(new Quest("Go to 0, 0, 0", "remember the y-level", new Trigger("location", hash, 1)));
+		quests.add(new Quest("Go to 0, 0, 0", "remember the y-level", new Trigger(TriggerType.LOCATION, hash, 1)));
 		addLastQuestToQuestLine("Starter");
 		
-		quests.add(new Quest("Kill some Zombies", "not a lot just 16", new Trigger("kill", EntityType.ZOMBIE, 16)));
+		quests.add(new Quest("Kill some Zombies", "not a lot just 16", new Trigger(TriggerType.KILLENTITY, EntityType.ZOMBIE, 16)));
 		addLastQuestToQuestLine("Starter");
 		
-		quests.add(new Quest("Speak to the Librarian", "brag to the librarian about your achivements", new Trigger("npc", "Librarian", 1)));
+		quests.add(new Quest("Speak to the Librarian", "brag to the librarian about your achivements", new Trigger(TriggerType.NPC, "Librarian", 1)));
 		addLastQuestToQuestLine("Starter");
 	}
 	
@@ -107,7 +107,7 @@ public class QuestManager {
 		return getQuest(getQuestLine(questLineName).get(index));
 	}
 	
-	public static boolean hasActiveTrigger(UUID playerUUID, String name) {
+	public static boolean hasActiveTrigger(UUID playerUUID, TriggerType name) {
 		for(Quest quest : getActiveQuests(playerUUID)) {
 			for(Trigger trigger : quest.getTriggers()) {
 				if(trigger.getName() == name) {

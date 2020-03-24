@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import com.pwnion.legacycraft.quests.triggers.FinishQuest;
@@ -97,7 +96,7 @@ public class Quest {
 		return triggers;
 	}
 	
-	public ArrayList<Trigger> getTriggers(String name) {
+	public ArrayList<Trigger> getTriggers(TriggerType name) {
 		ArrayList<Trigger> output = new ArrayList<Trigger>();
 		for(Trigger trigger : triggers) {
 			if(trigger.name == name) {
@@ -176,12 +175,13 @@ public class Quest {
 		return hasQuestActive(p) || hasQuestFinished(p);
 	}
 	
-	public boolean hasTrigger(String name) {
+	public boolean hasTrigger(TriggerType item) {
 		for(Trigger trigger : triggers) {
-			if(trigger.getName() == name) {
+			if(trigger.getName() == item) {
 				return true;
 			}
 		}
+		
 		return false;
 	}
 
