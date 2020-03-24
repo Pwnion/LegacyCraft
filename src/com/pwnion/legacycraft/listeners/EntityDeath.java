@@ -6,7 +6,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 
-import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.quests.triggers.KillEntity;
 
 public class EntityDeath implements Listener {

@@ -1,22 +1,14 @@
 package com.pwnion.legacycraft.npcs;
 
-import java.util.Collection;
 import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.util.Vector;
 
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.Util;
 
-import net.citizensnpcs.api.ai.NavigatorParameters;
-import net.citizensnpcs.api.ai.PathStrategy;
-import net.citizensnpcs.api.ai.goals.MoveToGoal;
-import net.citizensnpcs.api.astar.pathfinder.Path;
 import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.npc.ai.AStarNavigationStrategy;
-import net.citizensnpcs.npc.ai.CitizensNavigator;
 
 public class GoPlaces {
 	

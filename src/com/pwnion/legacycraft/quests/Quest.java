@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import com.pwnion.legacycraft.quests.triggers.FinishQuest;

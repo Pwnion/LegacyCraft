@@ -1,31 +1,17 @@
 package com.pwnion.legacycraft.npcs.traits;
 
-import java.util.HashMap;
-import java.util.logging.Level;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.npcs.GoPlaces;
-import com.pwnion.legacycraft.npcs.NPCHomeWork;
 import com.pwnion.legacycraft.npcs.Speech;
-import com.pwnion.legacycraft.quests.Quest;
 import com.pwnion.legacycraft.quests.QuestManager;
 import com.pwnion.legacycraft.quests.triggers.SpeakToNPC;
-import com.pwnion.legacycraft.abilities.inventory.BlacksmithInv;
 
 import net.citizensnpcs.api.event.NPCRightClickEvent;
-import net.citizensnpcs.api.persistence.Persist;
 import net.citizensnpcs.api.trait.Trait;
 import net.citizensnpcs.api.util.DataKey;
-import net.md_5.bungee.api.ChatColor;
 
 public class Librarian extends Trait {
 

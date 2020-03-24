@@ -2,7 +2,6 @@ package com.pwnion.legacycraft.quests.triggers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.UUID;
 
 import org.bukkit.Location;
