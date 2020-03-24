@@ -14,6 +14,7 @@ public class KillEntity {
 	
 	private final static String triggerName = "kill";
 	
+	//Called from EntityDamageFromEntity in Listeners
 	public static void onPlayerKilledEntity(Player p, EntityType dead) {
 		Util.br(p.getName() + " has called onPlayerKilledEntity for " + dead.toString());
 		for(Quest quest : QuestManager.getActiveQuests(p)) {

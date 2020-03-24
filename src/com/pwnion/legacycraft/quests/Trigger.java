@@ -19,6 +19,17 @@ public class Trigger {
 
 	public Trigger(String name, Object type, int finishCondition) {
 		this.name = name;
+		
+		switch(name) {
+		case "npc":
+			if(type instanceof String) {
+				HashMap<String, Boolean> npcData = new HashMap<String, Boolean>();
+				npcData.put((String) type, false);
+				type = npcData;
+			}
+			break;
+		}
+		
 		this.type = type;
 		this.finishCondition = finishCondition;
 	}

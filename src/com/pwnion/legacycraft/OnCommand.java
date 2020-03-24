@@ -158,6 +158,14 @@ public class OnCommand implements CommandExecutor {
 					case "work":
 						p.sendMessage(NPCHomeWork.setWork(p, p.getLocation()));
 						break;
+					case "complete":
+						for(Quest quest : QuestManager.getActiveQuests(p)) {
+							quest.forceComplete(p);
+						}
+						break;
+					case "reset":
+						QuestManager.resetQuests(p, true);
+						break;
 					default:
 						return false;
 					}
@@ -169,8 +177,6 @@ public class OnCommand implements CommandExecutor {
 					p.sendMessage(quest.getProgress(p, 0) + " / " + quest.getCondition(0));
 					p.sendMessage(quest.getPercent(p, 0) + "% complete");
 				}
-
-				
 			}
 			return true;
 		} else {

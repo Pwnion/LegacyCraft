@@ -19,6 +19,7 @@ public class NearLocation implements Listener {
 	private final static String triggerName = "location";
 	//static HashSet<UUID> activePlayers = new HashSet<UUID>();
 	
+	//Called from onMove in Listeners
 	public static void onPlayerMove(Player p) {
 		//if(activePlayers.contains(p.getUniqueId())) {
 			for(Quest quest : QuestManager.getActiveQuests(p)) {
@@ -45,6 +46,7 @@ public class NearLocation implements Listener {
 		//}
 	}
 	
+	//Possible resource / speed improvement methods
 	public static void playerJoin(UUID playerUUID) {
 		//if(QuestManager.hasActiveTrigger(playerUUID, triggerName)) {
 		//	activePlayers.add(playerUUID);

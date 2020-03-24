@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.UUID;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -40,6 +41,7 @@ public class Quest {
 			progress.add(0);
 		}
 		questHolders.put(p.getUniqueId(), progress);
+		p.sendMessage(ChatColor.GRAY + "You have recieved the '" + name + "' quest");
 		GetItem.updateItemQuests(p);
 	}
 	
@@ -69,6 +71,8 @@ public class Quest {
 		progress.set(index, value);
 		if(getPercentOverall(p) >= 100) {
 			
+			//Give Quest Rewards?
+			
 			//Remove player as active quest Holder and move to finished list
 			finishedQuest.add(p.getUniqueId());
 			questHolders.remove(p.getUniqueId());
@@ -81,6 +85,12 @@ public class Quest {
 	
 	public void setProgress(Player p, Trigger trigger, int value) {
 		setProgress(p, getIndex(trigger), value);
+	}
+	
+	public void forceComplete(Player p) {
+		for(Trigger trigger : triggers) {
+			setProgress(p, trigger, trigger.finishCondition);
+		}
 	}
 	
 	public ArrayList<Trigger> getTriggers() {
@@ -158,6 +168,14 @@ public class Quest {
 		return finishedQuest.contains(p.getUniqueId());
 	}
 	
+	public boolean hasQuestFinished(UUID playerUUID) {
+		return finishedQuest.contains(playerUUID);
+	}
+	
+	public boolean gotQuest(Player p) {
+		return hasQuestActive(p) || hasQuestFinished(p);
+	}
+	
 	public boolean hasTrigger(String name) {
 		for(Trigger trigger : triggers) {
 			if(trigger.getName() == name) {
@@ -167,5 +185,16 @@ public class Quest {
 		return false;
 	}
 
-	
+	public void resetProgress(Player p, boolean fullRemoval) {
+		if(fullRemoval) {
+			this.questHolders.remove(p.getUniqueId());
+			this.finishedQuest.remove(p.getUniqueId());
+		} else {
+			if(hasQuestActive(p.getUniqueId())) {
+				for(int i = 0; i < triggers.size(); i++) { 
+					setProgress(p, i, 0);
+				}
+			}
+		}
+	}
 }

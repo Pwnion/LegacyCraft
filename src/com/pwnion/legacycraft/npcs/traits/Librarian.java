@@ -77,11 +77,12 @@ public class Librarian extends Trait {
 			Player p = event.getClicker();
 			SpeakToNPC.onSpeakToNPC(p, npc.getName());
 			
-			QuestManager.giveQuestLine(p, "starter");
+			if(!QuestManager.gotQuestLine(p, "starter")) {
+				QuestManager.giveQuestLine(p, "starter");
+			}
 			
 			//If close to work do work related stuff
 			//Else do other stuff
-			//p.sendMessage(ChatColor.GRAY + "REPAIR ITEMS?");
 			
 			p.sendMessage(Speech.getRnd(npc, this.getName(), p));
 			

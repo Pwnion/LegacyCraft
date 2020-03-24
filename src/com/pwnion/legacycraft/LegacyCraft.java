@@ -148,7 +148,7 @@ public class LegacyCraft extends JavaPlugin {
 		
 		//Register your trait with Citizens.        
 		registerTrait(Blacksmith.class, "blacksmith");
-		registerTrait(Librarian.class, "Librarian");
+		registerTrait(Librarian.class, "librarian");
 		
 		Speech.loadFiles();
 		QuestManager.load();

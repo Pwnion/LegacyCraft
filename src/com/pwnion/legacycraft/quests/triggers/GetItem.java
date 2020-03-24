@@ -17,6 +17,7 @@ public class GetItem implements Listener {
 
 	private final static String triggerName = "item";
 	
+	//Called from InventoryClick, InventoryDrag, EntityPickupItem, and when a quest is given to a player
 	public static void updateItemQuests(Player p) {
 		Bukkit.getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 			@Override

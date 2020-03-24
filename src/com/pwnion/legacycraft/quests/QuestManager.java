@@ -21,7 +21,7 @@ public class QuestManager {
 		//	quests.add(new Quest(quest));
 		//}
 		
-		quests.add(new Quest("Get 32 oak logs", "mine some trees", new Trigger("item", Material.OAK_WOOD, 32)));
+		quests.add(new Quest("Get 32 oak logs", "mine some trees", new Trigger("item", Material.OAK_LOG, 32)));
 		addLastQuestToQuestLine("Starter");
 		quests.add(new Quest("Get a stack of diamonds", "you'll need an iron pick for this", new Trigger("item", Material.DIAMOND, 64)));
 		addLastQuestToQuestLine("Starter");
@@ -32,6 +32,9 @@ public class QuestManager {
 		addLastQuestToQuestLine("Starter");
 		
 		quests.add(new Quest("Kill some Zombies", "not a lot just 16", new Trigger("kill", EntityType.ZOMBIE, 16)));
+		addLastQuestToQuestLine("Starter");
+		
+		quests.add(new Quest("Speak to the Librarian", "brag to the librarian about your achivements", new Trigger("npc", "Librarian", 1)));
 		addLastQuestToQuestLine("Starter");
 	}
 	
@@ -60,8 +63,36 @@ public class QuestManager {
 		return output;
 	}
 	
+	public static ArrayList<Quest> getCompletedQuests(UUID playerUUID) {
+		ArrayList<Quest> output = new ArrayList<Quest>();
+		for(Quest quest : quests) {
+			if(quest.hasQuestFinished(playerUUID)) {
+				output.add(quest);
+			}
+		}
+		return output;
+	}
+	
+	public static ArrayList<Quest> getQuests(UUID playerUUID) {
+		ArrayList<Quest> output = new ArrayList<Quest>();
+		for(Quest quest : quests) {
+			if(quest.hasQuestActive(playerUUID) || quest.hasQuestFinished(playerUUID)) {
+				output.add(quest);
+			}
+		}
+		return output;
+	}
+	
 	public static ArrayList<Quest> getActiveQuests(Player p) {
 		return getActiveQuests(p.getUniqueId());
+	}
+	
+	public static ArrayList<Quest> getCompletedQuests(Player p) {
+		return getCompletedQuests(p.getUniqueId());
+	}
+	
+	public static ArrayList<Quest> getQuests(Player p) {
+		return getQuests(p.getUniqueId());
 	}
 	
 	public static ArrayList<Integer> getQuestProgress(Player p, String name) {
@@ -100,5 +131,15 @@ public class QuestManager {
 		getQuest(questName).addToQuestLine(questLineName, questLineArray.size());
 		questLineArray.add(questName);
 		questLines.put(questLineName.toLowerCase(), questLineArray);
+	}
+	
+	public static boolean gotQuestLine(Player p, String questLineName) {
+		return getQuestLineQuest(questLineName, 0).gotQuest(p);
+	}
+	
+	public static void resetQuests(Player p, boolean fullRemoval) {
+		for(Quest quest : getQuests(p)) {
+			quest.resetProgress(p, fullRemoval);
+		}
 	}
 }
