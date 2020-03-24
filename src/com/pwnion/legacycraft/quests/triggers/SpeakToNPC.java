@@ -11,21 +11,20 @@ import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.quests.Quest;
 import com.pwnion.legacycraft.quests.QuestManager;
 import com.pwnion.legacycraft.quests.Trigger;
+import com.pwnion.legacycraft.quests.TriggerType;
 
 public class SpeakToNPC {
-	
-	private final static String triggerName = "npc";
 	
 	//Called manually when a player speaks to an npc
 	public static void onSpeakToNPC(Player p, String npcName) {
 		Util.br(p.getName() + " has called onSpeakToNPC for NPC " + npcName);
 		
 		for(Quest quest : QuestManager.getActiveQuests(p)) {
-			if(quest.hasTrigger(triggerName)) {
+			if(quest.hasTrigger(TriggerType.NPC)) {
 				ArrayList<Trigger> triggers = quest.getTriggers();
 				for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
 					Trigger trigger = triggers.get(i);
-					if(trigger.getName() == triggerName) {
+					if(trigger.getName() == TriggerType.NPC) {
 						String name = trigger.getNPCName();
 						if(name.equalsIgnoreCase(npcName)) {
 							//Check if this is a submit to npc quest
