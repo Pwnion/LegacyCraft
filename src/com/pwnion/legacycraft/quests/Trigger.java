@@ -6,20 +6,33 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import com.pwnion.legacycraft.quests.triggers.GetItem;
 
 public class Trigger {
 	
 	String name;
 	Object type;
+	int finishCondition;
 
-	public Trigger(String name, Object type) {
+	public Trigger(String name, Object type, int finishCondition) {
 		this.name = name;
 		this.type = type;
+		this.finishCondition = finishCondition;
 	}
 
 	public String getName() {
 		return name;
+	}
+	
+	public int getFinishCondition() {
+		return finishCondition;
+	}
+	
+	public void setFinishCondition(int value) {
+		finishCondition = value;
 	}
 	
 	public Material getItem() {
@@ -29,6 +42,7 @@ public class Trigger {
 		return null;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public HashMap<Location, Integer> getLocationData() {
 		if(name == "location") {
 			return (HashMap<Location, Integer>) type;

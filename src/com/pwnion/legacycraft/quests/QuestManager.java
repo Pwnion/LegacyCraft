@@ -12,7 +12,8 @@ import org.bukkit.entity.Player;
 
 public class QuestManager {
 
-	static ArrayList<Quest> quests = new ArrayList<Quest>();;
+	static ArrayList<Quest> quests = new ArrayList<Quest>();
+	static HashMap<String, ArrayList<String>> questLines = new HashMap<String, ArrayList<String>>();
 	
 	public static void load() {
 		//Load
@@ -20,13 +21,18 @@ public class QuestManager {
 		//	quests.add(new Quest(quest));
 		//}
 		
-		quests.add(new Quest("1", "Get 32 of oak logs", new Trigger("item", Material.OAK_WOOD), 32));
-		quests.add(new Quest("3", "Get a stack of diamonds", new Trigger("item", Material.DIAMOND), 64));
+		quests.add(new Quest("Get 32 oak logs", "mine some trees", new Trigger("item", Material.OAK_WOOD, 32)));
+		addLastQuestToQuestLine("Starter");
+		quests.add(new Quest("Get a stack of diamonds", "you'll need an iron pick for this", new Trigger("item", Material.DIAMOND, 64)));
+		addLastQuestToQuestLine("Starter");
 		
 		HashMap<Location, Integer> hash = new HashMap<Location, Integer>();
-		hash.put(new Location(Bukkit.getWorld("Neutral"), 0, 0, 0), 10);
-		quests.add(new Quest("2", "Go to 0, 0, 0", new Trigger("location", hash), 1));
-		quests.add(new Quest("4", "Kill some Zombies", new Trigger("kill", EntityType.ZOMBIE), 16));
+		hash.put(new Location(Bukkit.getWorld("Neutral"), 0, 0, 0), 5);
+		quests.add(new Quest("Go to 0, 0, 0", "remember the y-level", new Trigger("location", hash, 1)));
+		addLastQuestToQuestLine("Starter");
+		
+		quests.add(new Quest("Kill some Zombies", "not a lot just 16", new Trigger("kill", EntityType.ZOMBIE, 16)));
+		addLastQuestToQuestLine("Starter");
 	}
 	
 	public static void save() {
@@ -59,7 +65,15 @@ public class QuestManager {
 	}
 	
 	public static ArrayList<Integer> getQuestProgress(Player p, String name) {
-		return getQuest(name).getQuestProgress(p);
+		return getQuest(name).getProgress(p);
+	}
+	
+	public static ArrayList<String> getQuestLine(String name) {
+		return questLines.getOrDefault(name.toLowerCase(), new ArrayList<String>());
+	}
+	
+	public static Quest getQuestLineQuest(String questLineName, int index) {
+		return getQuest(getQuestLine(questLineName).get(index));
 	}
 	
 	public static boolean hasActiveTrigger(UUID playerUUID, String name) {
@@ -71,5 +85,20 @@ public class QuestManager {
 			}
 		}
 		return false;
+	}
+	
+	public static void giveQuestLine(Player p, String questLine) {
+		getQuestLineQuest(questLine, 0).addPlayer(p);
+	}
+	
+	public static void addLastQuestToQuestLine(String questLineName) {
+		addQuestToQuestLine(questLineName, quests.get(quests.size() - 1).name);
+	}
+	
+	public static void addQuestToQuestLine(String questLineName, String questName) {
+		ArrayList<String> questLineArray = getQuestLine(questLineName.toLowerCase());
+		getQuest(questName).addToQuestLine(questLineName, questLineArray.size());
+		questLineArray.add(questName);
+		questLines.put(questLineName.toLowerCase(), questLineArray);
 	}
 }

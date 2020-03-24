@@ -166,8 +166,8 @@ public class OnCommand implements CommandExecutor {
 				for(Quest quest : QuestManager.getActiveQuests(p)) {
 					p.sendMessage(quest.name);
 					p.sendMessage(quest.desc);
-					p.sendMessage(quest.getQuestProgress(p, 0) + " / " + quest.getCondition(p, 0));
-					p.sendMessage(quest.getQuestPercent(p, 0) + "% complete");
+					p.sendMessage(quest.getProgress(p, 0) + " / " + quest.getCondition(0));
+					p.sendMessage(quest.getPercent(p, 0) + "% complete");
 				}
 
 				

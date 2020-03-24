@@ -8,24 +8,27 @@ import java.util.UUID;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+import com.pwnion.legacycraft.quests.triggers.FinishQuest;
+import com.pwnion.legacycraft.quests.triggers.GetItem;
+
 public class Quest {
 	
-	public Quest(String name, String desc, Trigger trigger, Integer finishCondition) {
+	public Quest(String name, String desc, Trigger trigger) {
 		this.name = name;
 		this.desc = desc;
 		triggers.add(trigger);
-		this.finishCondition.add(finishCondition);
 	}
 	
 	public String name;
 	public String desc;
 	
+	public String questLine = null;
+	public int questLineIndex = 0;
+	
 	ArrayList<Trigger> triggers = new ArrayList<Trigger>();
 	
 	HashMap<UUID, ArrayList<Integer>> questHolders = new HashMap<UUID, ArrayList<Integer>>();
 	HashSet<UUID> finishedQuest = new HashSet<UUID>();
-	
-	ArrayList<Integer> finishCondition = new ArrayList<Integer>();
 	
 	public void save() {
 		
@@ -33,12 +36,20 @@ public class Quest {
 	
 	public void addPlayer(Player p) {
 		ArrayList<Integer> progress = new ArrayList<Integer>(triggers.size());
-		progress.add(0);
+		for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
+			progress.add(0);
+		}
 		questHolders.put(p.getUniqueId(), progress);
+		GetItem.updateItemQuests(p);
+	}
+	
+	public void addToQuestLine(String questLine, int questLineIndex) {
+		this.questLine = questLine;
+		this.questLineIndex = questLineIndex;
 	}
 	
 	public void addProgress(Player p, int index, int amount) {
-		setProgress(p, index, getQuestProgress(p, index) + amount);
+		setProgress(p, index, getProgress(p, index) + amount);
 	}
 	
 	public void addProgress(Player p, int index) {
@@ -54,15 +65,15 @@ public class Quest {
 	}
 	
 	public void setProgress(Player p, int index, int value) {
-		ArrayList<Integer> progress = getQuestProgress(p);
+		ArrayList<Integer> progress = getProgress(p);
 		progress.set(index, value);
-		if(progress.get(index) >= finishCondition.get(index)) {
+		if(getPercentOverall(p) >= 100) {
 			
-			//FINISHED QUEST
-			p.sendMessage("You have competed the '" + name + "' quest");
-			
+			//Remove player as active quest Holder and move to finished list
 			finishedQuest.add(p.getUniqueId());
 			questHolders.remove(p.getUniqueId());
+			
+			FinishQuest.onFinishQuest(p, this);
 			return;
 		}
 		questHolders.put(p.getUniqueId(), progress);
@@ -95,19 +106,23 @@ public class Quest {
 		return -1;
 	}
 	
-	public int getCondition(Player p, int index) {
-		return finishCondition.get(index);
+	public int getCondition(int index) {
+		return triggers.get(index).getFinishCondition();
 	}
 	
-	public int getQuestProgress(Player p, int index) {
-		return getQuestProgress(p).get(index);
+	public int getProgress(Player p, int index) {
+		return getProgress(p).get(index);
 	}
 	
-	public ArrayList<Integer> getQuestProgress(Player p) {
+	public ArrayList<Integer> getProgress(Player p) {
 		if(hasQuestActive(p)) {
 			return questHolders.get(p.getUniqueId());
 		} else if(hasQuestFinished(p)) {
-			return finishCondition;
+			ArrayList<Integer> finishValues = new ArrayList<Integer>();
+			for(Trigger trigger : triggers) {
+				finishValues.add(trigger.getFinishCondition());
+			}
+			return finishValues;
 		}
 		ArrayList<Integer> output = new ArrayList<Integer>();
 		for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
@@ -116,17 +131,17 @@ public class Quest {
 		return output;
 	}
 	
-	public double getQuestPercent(Player p, int index) {
-		return ((double) getQuestProgress(p, index) / (double) finishCondition.get(index)) * 100;
+	public double getPercent(Player p, int index) {
+		return ((double) getProgress(p, index) / (double) getCondition(index)) * 100;
 	}
 	
-	public double getQuestPercentOverall(Player p) { 
-		ArrayList<Integer> progress = getQuestProgress(p);
+	public double getPercentOverall(Player p) { 
+		ArrayList<Integer> progress = getProgress(p);
 		double progressTotal = 0;
 		double finalTotal = 0;
 		for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
 			progressTotal += progress.get(i);
-			finalTotal += finishCondition.get(i);
+			finalTotal += getCondition(i);
 		}
 		return (progressTotal / finalTotal) * 100;
 	}

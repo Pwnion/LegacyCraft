@@ -77,10 +77,7 @@ public class Librarian extends Trait {
 			Player p = event.getClicker();
 			SpeakToNPC.onSpeakToNPC(p, npc.getName());
 			
-			QuestManager.getQuest("1").addPlayer(p);
-			QuestManager.getQuest("2").addPlayer(p);
-			QuestManager.getQuest("3").addPlayer(p);
-			QuestManager.getQuest("4").addPlayer(p);
+			QuestManager.giveQuestLine(p, "starter");
 			
 			//If close to work do work related stuff
 			//Else do other stuff
