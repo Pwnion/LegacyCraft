@@ -12,23 +12,23 @@ import com.pwnion.legacycraft.quests.triggers.FinishQuest;
 import com.pwnion.legacycraft.quests.triggers.GetItem;
 
 public class Quest {
-	
+
 	public Quest(String name, String desc, Trigger trigger, String nextQuest) {
 		this.name = name;
 		this.desc = desc;
 		this.nextQuest = nextQuest;
 		triggers.add(trigger);
 	}
-	
+
 	private String name;
 	private String desc;
 	private String nextQuest;
-	
+
 	ArrayList<Trigger> triggers = new ArrayList<Trigger>();
-	
+
 	HashMap<UUID, ArrayList<Integer>> questHolders = new HashMap<UUID, ArrayList<Integer>>();
 	HashSet<UUID> finishedQuest = new HashSet<UUID>();
-	
+
 	public void addPlayer(Player p) {
 		ArrayList<Integer> progress = new ArrayList<Integer>(triggers.size());
 		for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
@@ -38,69 +38,64 @@ public class Quest {
 		p.sendMessage(ChatColor.GRAY + "You have recieved the '" + name + "' quest");
 		GetItem.updateItemQuests(p);
 	}
-	
-	public void addToQuestLine(String questLine, int questLineIndex) {
-		this.questLine = questLine;
-		this.questLineIndex = questLineIndex;
-	}
-	
+
 	public void addProgress(Player p, int index, int amount) {
 		setProgress(p, index, getProgress(p, index) + amount);
 	}
-	
+
 	public void addProgress(Player p, int index) {
 		addProgress(p, index, 1);
 	}
-	
+
 	public void addProgress(Player p, Trigger trigger, int amount) {
 		addProgress(p, getIndex(trigger), amount);
 	}
-	
+
 	public void addProgress(Player p, Trigger trigger) {
 		addProgress(p, trigger, 1);
 	}
-	
+
 	public void setProgress(Player p, int index, int value) {
 		ArrayList<Integer> progress = getProgress(p);
 		progress.set(index, value);
 		if(getPercentOverall(p) >= 100) {
-			
+
 			//Give Quest Rewards?
-			
+
 			//Remove player as active quest Holder and move to finished list
 			finishedQuest.add(p.getUniqueId());
 			questHolders.remove(p.getUniqueId());
-			
+
 			FinishQuest.onFinishQuest(p, this);
 			return;
 		}
 		questHolders.put(p.getUniqueId(), progress);
 	}
-	
+
 	public void setProgress(Player p, Trigger trigger, int value) {
 		setProgress(p, getIndex(trigger), value);
 	}
-	
+
 	public void forceComplete(Player p) {
 		for(Trigger trigger : triggers) {
 			setProgress(p, trigger, trigger.finishCondition);
 		}
 	}
-	
+
 	public ArrayList<Trigger> getTriggers() {
 		return triggers;
 	}
-	
+
 	public ArrayList<Trigger> getTriggers(TriggerType name) {
 		ArrayList<Trigger> output = new ArrayList<Trigger>();
 		for(Trigger trigger : triggers) {
-			if(trigger.name == name) {
+			if(trigger.type == name) {
 				output.add(trigger);
 			}
 		}
 		return output;
 	}
-	
+
 	public int getIndex(Trigger trigger) {
 		for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
 			if(trigger.equals(triggers.get(i))) {
@@ -109,15 +104,15 @@ public class Quest {
 		}
 		return -1;
 	}
-	
+
 	public int getCondition(int index) {
 		return triggers.get(index).getFinishCondition();
 	}
-	
+
 	public int getProgress(Player p, int index) {
 		return getProgress(p).get(index);
 	}
-	
+
 	public ArrayList<Integer> getProgress(Player p) {
 		if(hasQuestActive(p)) {
 			return questHolders.get(p.getUniqueId());
@@ -134,12 +129,12 @@ public class Quest {
 		}
 		return output;
 	}
-	
+
 	public double getPercent(Player p, int index) {
 		return ((double) getProgress(p, index) / (double) getCondition(index)) * 100;
 	}
-	
-	public double getPercentOverall(Player p) { 
+
+	public double getPercentOverall(Player p) {
 		ArrayList<Integer> progress = getProgress(p);
 		double progressTotal = 0;
 		double finalTotal = 0;
@@ -149,34 +144,34 @@ public class Quest {
 		}
 		return (progressTotal / finalTotal) * 100;
 	}
-	
+
 	public boolean hasQuestActive(Player p) {
 		return questHolders.containsKey(p.getUniqueId());
 	}
-	
+
 	public boolean hasQuestActive(UUID playerUUID) {
 		return questHolders.containsKey(playerUUID);
 	}
-	
+
 	public boolean hasQuestFinished(Player p) {
 		return finishedQuest.contains(p.getUniqueId());
 	}
-	
+
 	public boolean hasQuestFinished(UUID playerUUID) {
 		return finishedQuest.contains(playerUUID);
 	}
-	
+
 	public boolean gotQuest(Player p) {
 		return hasQuestActive(p) || hasQuestFinished(p);
 	}
-	
+
 	public boolean hasTrigger(TriggerType item) {
 		for(Trigger trigger : triggers) {
 			if(trigger.getName() == item) {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -186,7 +181,7 @@ public class Quest {
 			this.finishedQuest.remove(p.getUniqueId());
 		} else {
 			if(hasQuestActive(p.getUniqueId())) {
-				for(int i = 0; i < triggers.size(); i++) { 
+				for(int i = 0; i < triggers.size(); i++) {
 					setProgress(p, i, 0);
 				}
 			}

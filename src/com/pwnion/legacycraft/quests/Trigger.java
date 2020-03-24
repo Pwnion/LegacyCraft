@@ -8,30 +8,30 @@ import org.bukkit.entity.EntityType;
 
 public class Trigger {
 	
-	TriggerType name;
+	TriggerType type;
 	Object data;
 	int finishCondition;
 
 	@SuppressWarnings("incomplete-switch")
-	public Trigger(TriggerType name, Object type, int finishCondition) {
-		this.name = name;
+	public Trigger(TriggerType name, Object data, int finishCondition) {
+		this.type = name;
 		
 		switch(name) {
 		case NPC:
-			if(type instanceof String) {
+			if(data instanceof String) {
 				HashMap<String, Boolean> npcData = new HashMap<String, Boolean>();
-				npcData.put((String) type, false);
-				type = npcData;
+				npcData.put((String) data, false);
+				data = npcData;
 			}
 			break;
 		}
 		
-		this.data = type;
+		this.data = data;
 		this.finishCondition = finishCondition;
 	}
 	
 	public TriggerType getName() {
-		return name;
+		return type;
 	}
 	
 	public int getFinishCondition() {
@@ -43,7 +43,7 @@ public class Trigger {
 	}
 	
 	public Material getItem() {
-		if(name == TriggerType.ITEM) {
+		if(type == TriggerType.ITEM) {
 			return (Material) data;
 		}
 		return null;
@@ -51,14 +51,14 @@ public class Trigger {
 	
 	@SuppressWarnings("unchecked")
 	public HashMap<Location, Integer> getLocationData() {
-		if(name == TriggerType.LOCATION) {
+		if(type == TriggerType.LOCATION) {
 			return (HashMap<Location, Integer>) data;
 		}
 		return null;
 	}
 	
 	public EntityType getKillEntity() {
-		if(name == TriggerType.KILLENTITY) {
+		if(type == TriggerType.KILLENTITY) {
 			return (EntityType) data;
 		}
 		return null;
@@ -66,7 +66,7 @@ public class Trigger {
 	
 	@SuppressWarnings("unchecked")
 	public HashMap<String, Boolean> getNPCData() {
-		if(name == TriggerType.NPC) {
+		if(type == TriggerType.NPC) {
 			return (HashMap<String, Boolean>) data;
 		}
 		return null;
@@ -76,7 +76,40 @@ public class Trigger {
 		return (String) getNPCData().keySet().toArray()[0];
 	}
 	
+	public String serialise() {
+		switch(type) {
+		case ITEM:
+			return getItem().name();
+		case LOCATION:
+			HashMap<Location, Integer> locData = getLocationData();
+			break;
+		case KILLENTITY:
+			return getKillEntity().toString();
+		case NPC:
+			String name = getNPCName();
+			return name + "|" + getNPCData().get(name);
+		}
+		return null;
+	}
+	
+	public static Object deserialise(TriggerType type, String data) {
+		switch(type) {
+		case ITEM:
+			return Material.matchMaterial(data);
+		case LOCATION:
+			HashMap<Location, Integer> locData = new HashMap<Location, Integer>();
+			break;
+		case KILLENTITY:
+			return EntityType.valueOf(data);
+		case NPC:
+			String array[] = data.split("|");
+			HashMap<String, Boolean> npcData = new HashMap<String, Boolean>();
+			npcData.put(array[0], Boolean.valueOf(array[1]));
+			return npcData;
+		}
+	}
+	
 	public boolean equals(Trigger trigger) {
-		return (name == trigger.name && data == trigger.data);
+		return (type == trigger.type && data == trigger.data);
 	}
 }
