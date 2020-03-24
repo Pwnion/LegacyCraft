@@ -9,7 +9,7 @@ import org.bukkit.entity.EntityType;
 public class Trigger {
 	
 	TriggerType name;
-	Object type;
+	Object data;
 	int finishCondition;
 
 	@SuppressWarnings("incomplete-switch")
@@ -26,7 +26,7 @@ public class Trigger {
 			break;
 		}
 		
-		this.type = type;
+		this.data = type;
 		this.finishCondition = finishCondition;
 	}
 	
@@ -44,7 +44,7 @@ public class Trigger {
 	
 	public Material getItem() {
 		if(name == TriggerType.ITEM) {
-			return (Material) type;
+			return (Material) data;
 		}
 		return null;
 	}
@@ -52,14 +52,14 @@ public class Trigger {
 	@SuppressWarnings("unchecked")
 	public HashMap<Location, Integer> getLocationData() {
 		if(name == TriggerType.LOCATION) {
-			return (HashMap<Location, Integer>) type;
+			return (HashMap<Location, Integer>) data;
 		}
 		return null;
 	}
 	
 	public EntityType getKillEntity() {
 		if(name == TriggerType.KILLENTITY) {
-			return (EntityType) type;
+			return (EntityType) data;
 		}
 		return null;
 	}
@@ -67,7 +67,7 @@ public class Trigger {
 	@SuppressWarnings("unchecked")
 	public HashMap<String, Boolean> getNPCData() {
 		if(name == TriggerType.NPC) {
-			return (HashMap<String, Boolean>) type;
+			return (HashMap<String, Boolean>) data;
 		}
 		return null;
 	}
@@ -77,6 +77,6 @@ public class Trigger {
 	}
 	
 	public boolean equals(Trigger trigger) {
-		return (name == trigger.name && type == trigger.type);
+		return (name == trigger.name && data == trigger.data);
 	}
 }
