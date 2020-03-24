@@ -98,7 +98,7 @@ public class Trigger {
 			return Material.matchMaterial(data);
 		case LOCATION:
 			HashMap<Location, Integer> locData = new HashMap<Location, Integer>();
-			break;
+			return null;
 		case KILLENTITY:
 			return EntityType.valueOf(data);
 		case NPC:
@@ -107,6 +107,7 @@ public class Trigger {
 			npcData.put(array[0], Boolean.valueOf(array[1]));
 			return npcData;
 		}
+		return data;
 	}
 	
 	public boolean equals(Trigger trigger) {

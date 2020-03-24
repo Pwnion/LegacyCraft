@@ -99,14 +99,6 @@ public class QuestManager {
 		return getQuest(name).getProgress(p);
 	}
 	
-	public static ArrayList<String> getQuestLine(String name) {
-		return questLines.getOrDefault(name.toLowerCase(), new ArrayList<String>());
-	}
-	
-	public static Quest getQuestLineQuest(String questLineName, int index) {
-		return getQuest(getQuestLine(questLineName).get(index));
-	}
-	
 	public static boolean hasActiveTrigger(UUID playerUUID, TriggerType name) {
 		for(Quest quest : getActiveQuests(playerUUID)) {
 			for(Trigger trigger : quest.getTriggers()) {
@@ -116,14 +108,6 @@ public class QuestManager {
 			}
 		}
 		return false;
-	}
-	
-	public static void giveQuestLine(Player p, String questLine) {
-		getQuestLineQuest(questLine, 0).addPlayer(p);
-	}
-	
-	public static boolean gotQuestLine(Player p, String questLineName) {
-		return getQuestLineQuest(questLineName, 0).gotQuest(p);
 	}
 	
 	public static void resetQuests(Player p, boolean fullRemoval) {
