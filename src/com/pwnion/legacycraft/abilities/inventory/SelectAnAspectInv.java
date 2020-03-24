@@ -22,7 +22,7 @@ import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
 public class SelectAnAspectInv extends Inv {
 	//Loads the 'Select An Aspect' inventory for a player
 	public static void load(Player p) {
-		InventoryView inv = p.openInventory(InventoryFromFile.get(InvName.SELECT_AN_ASPECT, FILE));
+		InventoryView inv = p.openInventory(DeserialiseInventory.get(InvName.SELECT_AN_ASPECT));
 		UUID playerUUID = p.getUniqueId();
 		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
 		PlayerClass openedClass = (PlayerClass) LegacyCraft.getPlayerData(playerUUID, PlayerData.CLASS_INVENTORY_OPEN);
@@ -55,6 +55,7 @@ public class SelectAnAspectInv extends Inv {
 		switch(clickedSlot) {
 		case 9:
 			SelectAClassInv.load(p);
+			click(p);
 			break;
 		case 11:
 		case 13:
@@ -63,9 +64,14 @@ public class SelectAnAspectInv extends Inv {
 			PlayerClass openedClass = (PlayerClass) LegacyCraft.getPlayerData(playerUUID, PlayerData.CLASS_INVENTORY_OPEN);
 			SkillTree.Aspect clickedAspect = SkillTree.Aspect.valueOf(clickedItem.getItemMeta().getDisplayName().toUpperCase());
 			
-			LegacyCraft.setPlayerData(playerUUID, PlayerData.ASPECT_INVENTORY_OPEN, clickedAspect);
-			
 			if(clickType.isLeftClick()) {
+				if(p.hasPermission("legacycraft.op")) {
+					skillTree.setUnlockedBuild(openedClass, clickedAspect);
+				}
+				
+				if(!skillTree.getUnlockedBuild(openedClass, clickedAspect)) return;
+				if(clickedAspect.equals(skillTree.getAspect(openedClass))) return;
+				
 				skillTree.setAspect(openedClass, clickedAspect);
 				
 				for(int slot : aspectToSlot.values()) {
@@ -86,8 +92,12 @@ public class SelectAnAspectInv extends Inv {
 				inv.getItem(aspectToSlot.get(clickedAspect) - 9).setType(Material.WHITE_STAINED_GLASS_PANE);
 				inv.getItem(aspectToSlot.get(clickedAspect) + 9).setType(Material.WHITE_STAINED_GLASS_PANE);
 			} else if(clickType.isRightClick()) {
+				LegacyCraft.setPlayerData(playerUUID, PlayerData.ASPECT_INVENTORY_OPEN, clickedAspect);
+				
 				BuildInv.load(p);
 			}
+			click(p);
+			
 			break;
 		}
 	}

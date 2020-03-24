@@ -1,0 +1,4272 @@
+CHARACTER_BUILD_MENU:
+  title: §5§lCharacter Build Menu
+  size: 5
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: PLAYER_HEAD
+    meta:
+      ==: ItemMeta
+      meta-type: SKULL
+      display-name: Classes
+      lore:
+      - Click to Equip/Edit a Class
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: ANVIL
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Weapon Enhancements
+      lore:
+      - Click Equip/View Weapon Enhancements
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+WEAPON_ENHANCEMENTS:
+  title: §5§lWeapon Enhancements
+  size: 54
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+SELECT_A_CLASS:
+  title: §5§lSelect a Class
+  size: 27
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: DIAMOND_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Striker
+      lore:
+      - Offensive Class
+      - Left-Click to Equip
+      - Right-Click to Edit
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: SHIELD
+    meta:
+      ==: ItemMeta
+      meta-type: TILE_ENTITY
+      display-name: Vanguard
+      lore:
+      - Defensive Class
+      - Left-Click to Equip
+      - Right-Click to Edit
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      blockMaterial: SHIELD
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: ENDER_PEARL
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Rogue
+      lore:
+      - Evasive Class
+      - Left-Click to Equip
+      - Right-Click to Edit
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: DRAGON_BREATH
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Shaman
+      lore:
+      - Supportive Class
+      - Left-Click to Equip
+      - Right-Click to Edit
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+SELECT_AN_ASPECT:
+  title: §5§lSelect an Aspect
+  size: 27
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: FIRE_CHARGE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Ignis
+      lore:
+      - Marshmallows, anyone?
+      - Left-Click to Equip
+      - Right-Click to Edit
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: COARSE_DIRT
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Terra
+      lore:
+      - Ground breaking!
+      - Left-Click to Equip
+      - Right-Click to Edit
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: ENDER_EYE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aer
+      lore:
+      - Life's a breeze!
+      - Left-Click to Equip
+      - Right-Click to Edit
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: SNOWBALL
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aqua
+      lore:
+      - Freeze!
+      - Left-Click to Equip
+      - Right-Click to Edit
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+IGNIS_STRIKER:
+  title: §5§lIgnis Striker
+  size: 45
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: NETHER_STAR
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Mastery
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aptitudes
+      lore:
+      - Abilities specific to your class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: LEATHER_BOOTS
+    meta:
+      ==: ItemMeta
+      meta-type: LEATHER_ARMOR
+      display-name: Jumps
+      lore:
+      - Jumps specific to your class
+      - Only one may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: TOTEM_OF_UNDYING
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Proficiencies
+      lore:
+      - Abilities specific to your aspect and class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+TERRA_STRIKER:
+  title: §5§lTerra Striker
+  size: 45
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: NETHER_STAR
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Mastery
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aptitudes
+      lore:
+      - Abilities specific to your class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: LEATHER_BOOTS
+    meta:
+      ==: ItemMeta
+      meta-type: LEATHER_ARMOR
+      display-name: Jumps
+      lore:
+      - Jumps specific to your class
+      - Only one may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: TOTEM_OF_UNDYING
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Proficiencies
+      lore:
+      - Abilities specific to your aspect and class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+AER_STRIKER:
+  title: §5§lAer Striker
+  size: 45
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: NETHER_STAR
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Mastery
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aptitudes
+      lore:
+      - Abilities specific to your class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: LEATHER_BOOTS
+    meta:
+      ==: ItemMeta
+      meta-type: LEATHER_ARMOR
+      display-name: Jumps
+      lore:
+      - Jumps specific to your class
+      - Only one may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: TOTEM_OF_UNDYING
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Proficiencies
+      lore:
+      - Abilities specific to your aspect and class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+AQUA_STRIKER:
+  title: §5§lAqua Striker
+  size: 45
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: NETHER_STAR
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Mastery
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aptitudes
+      lore:
+      - Abilities specific to your class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: LEATHER_BOOTS
+    meta:
+      ==: ItemMeta
+      meta-type: LEATHER_ARMOR
+      display-name: Jumps
+      lore:
+      - Jumps specific to your class
+      - Only one may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: TOTEM_OF_UNDYING
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Proficiencies
+      lore:
+      - Abilities specific to your aspect and class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+IGNIS_VANGUARD:
+  title: §5§lIgnis Vanguard
+  size: 45
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: NETHER_STAR
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Mastery
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aptitudes
+      lore:
+      - Abilities specific to your class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: LEATHER_BOOTS
+    meta:
+      ==: ItemMeta
+      meta-type: LEATHER_ARMOR
+      display-name: Jumps
+      lore:
+      - Jumps specific to your class
+      - Only one may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: TOTEM_OF_UNDYING
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Proficiencies
+      lore:
+      - Abilities specific to your aspect and class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+TERRA_VANGUARD:
+  title: §5§lTerra Vanguard
+  size: 45
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: NETHER_STAR
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Mastery
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aptitudes
+      lore:
+      - Abilities specific to your class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: LEATHER_BOOTS
+    meta:
+      ==: ItemMeta
+      meta-type: LEATHER_ARMOR
+      display-name: Jumps
+      lore:
+      - Jumps specific to your class
+      - Only one may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: TOTEM_OF_UNDYING
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Proficiencies
+      lore:
+      - Abilities specific to your aspect and class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+AER_VANGUARD:
+  title: §5§lAer Vanguard
+  size: 45
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: NETHER_STAR
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Mastery
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aptitudes
+      lore:
+      - Abilities specific to your class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: LEATHER_BOOTS
+    meta:
+      ==: ItemMeta
+      meta-type: LEATHER_ARMOR
+      display-name: Jumps
+      lore:
+      - Jumps specific to your class
+      - Only one may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: TOTEM_OF_UNDYING
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Proficiencies
+      lore:
+      - Abilities specific to your aspect and class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+AQUA_VANGUARD:
+  title: §5§lAqua Vanguard
+  size: 45
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: NETHER_STAR
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Mastery
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aptitudes
+      lore:
+      - Abilities specific to your class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: LEATHER_BOOTS
+    meta:
+      ==: ItemMeta
+      meta-type: LEATHER_ARMOR
+      display-name: Jumps
+      lore:
+      - Jumps specific to your class
+      - Only one may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: TOTEM_OF_UNDYING
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Proficiencies
+      lore:
+      - Abilities specific to your aspect and class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+IGNIS_ROGUE:
+  title: §5§lIgnis Rogue
+  size: 45
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: NETHER_STAR
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Mastery
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aptitudes
+      lore:
+      - Abilities specific to your class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: LEATHER_BOOTS
+    meta:
+      ==: ItemMeta
+      meta-type: LEATHER_ARMOR
+      display-name: Jumps
+      lore:
+      - Jumps specific to your class
+      - Only one may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: TOTEM_OF_UNDYING
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Proficiencies
+      lore:
+      - Abilities specific to your aspect and class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+TERRA_ROGUE:
+  title: §5§lTerra Rogue
+  size: 45
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: NETHER_STAR
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Mastery
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aptitudes
+      lore:
+      - Abilities specific to your class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: LEATHER_BOOTS
+    meta:
+      ==: ItemMeta
+      meta-type: LEATHER_ARMOR
+      display-name: Jumps
+      lore:
+      - Jumps specific to your class
+      - Only one may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: TOTEM_OF_UNDYING
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Proficiencies
+      lore:
+      - Abilities specific to your aspect and class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+AER_ROGUE:
+  title: §5§lAer Rogue
+  size: 45
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: NETHER_STAR
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Mastery
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aptitudes
+      lore:
+      - Abilities specific to your class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: LEATHER_BOOTS
+    meta:
+      ==: ItemMeta
+      meta-type: LEATHER_ARMOR
+      display-name: Jumps
+      lore:
+      - Jumps specific to your class
+      - Only one may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: TOTEM_OF_UNDYING
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Proficiencies
+      lore:
+      - Abilities specific to your aspect and class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+AQUA_ROGUE:
+  title: §5§lAqua Rogue
+  size: 45
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: NETHER_STAR
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Mastery
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aptitudes
+      lore:
+      - Abilities specific to your class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: LEATHER_BOOTS
+    meta:
+      ==: ItemMeta
+      meta-type: LEATHER_ARMOR
+      display-name: Jumps
+      lore:
+      - Jumps specific to your class
+      - Only one may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: TOTEM_OF_UNDYING
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Proficiencies
+      lore:
+      - Abilities specific to your aspect and class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+IGNIS_SHAMAN:
+  title: §5§lIgnis Shaman
+  size: 45
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: NETHER_STAR
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Mastery
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aptitudes
+      lore:
+      - Abilities specific to your class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: LEATHER_BOOTS
+    meta:
+      ==: ItemMeta
+      meta-type: LEATHER_ARMOR
+      display-name: Jumps
+      lore:
+      - Jumps specific to your class
+      - Only one may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: TOTEM_OF_UNDYING
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Proficiencies
+      lore:
+      - Abilities specific to your aspect and class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+TERRA_SHAMAN:
+  title: §5§lTerra Shaman
+  size: 45
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: NETHER_STAR
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Mastery
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aptitudes
+      lore:
+      - Abilities specific to your class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: LEATHER_BOOTS
+    meta:
+      ==: ItemMeta
+      meta-type: LEATHER_ARMOR
+      display-name: Jumps
+      lore:
+      - Jumps specific to your class
+      - Only one may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: TOTEM_OF_UNDYING
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Proficiencies
+      lore:
+      - Abilities specific to your aspect and class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+AER_SHAMAN:
+  title: §5§lAer Shaman
+  size: 45
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: NETHER_STAR
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Mastery
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aptitudes
+      lore:
+      - Abilities specific to your class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: LEATHER_BOOTS
+    meta:
+      ==: ItemMeta
+      meta-type: LEATHER_ARMOR
+      display-name: Jumps
+      lore:
+      - Jumps specific to your class
+      - Only one may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: TOTEM_OF_UNDYING
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Proficiencies
+      lore:
+      - Abilities specific to your aspect and class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+AQUA_SHAMAN:
+  title: §5§lAqua Shaman
+  size: 45
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Go Back
+      lore:
+      - Click for the Previous Inventory Menu
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: NETHER_STAR
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Mastery
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Aptitudes
+      lore:
+      - Abilities specific to your class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: LEATHER_BOOTS
+    meta:
+      ==: ItemMeta
+      meta-type: LEATHER_ARMOR
+      display-name: Jumps
+      lore:
+      - Jumps specific to your class
+      - Only one may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: TOTEM_OF_UNDYING
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Proficiencies
+      lore:
+      - Abilities specific to your aspect and class
+      - Multiple may be active at a time
+      - Click to Equip
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: (Placeholder)
+      lore:
+      - (Placeholder)
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BLACK_STAINED_GLASS_PANE
+WARP_GATES:
+  title: §5§lWarp Gates
+  size: 9
+  contents:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: GLASS_PANE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §fNeutral
+      custom-model-data: 2
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: GLASS_PANE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §cIgnis
+      custom-model-data: 3
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: GLASS_PANE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §aTerra
+      custom-model-data: 4
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: GLASS_PANE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §eAer
+      custom-model-data: 5
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: GLASS_PANE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §9Aqua
+      custom-model-data: 6
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: GLASS_PANE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §dCustom
+      custom-model-data: 7
+  - null
+  - null
+  - null
+BLACKSMITH:
+  title: §5§lBlacksmith
+  size: 9
+  contents:
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null

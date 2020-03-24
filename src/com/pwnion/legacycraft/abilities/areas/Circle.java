@@ -6,58 +6,56 @@ import java.util.HashSet;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.util.BlockVector;
+import org.bukkit.util.Vector;
+
+import com.pwnion.legacycraft.Util;
 
 public class Circle {
+	
 	public static final HashSet<Block> get(World world, int x, int y, int z, int radius) {
-		return get(new Location(world, x, y, z), radius);
+		return get(new Location(world, x, y, z), radius, true);
 	}
 	
-	public static final HashSet<Block> get(Location loc, int radius) {
+	public static void spawn(Location pos, int radius, boolean hollow) {
+		Util.spawnBlocks(get(pos, radius, hollow));
+	}
+	
+	public static final HashSet<Block> get(Location pos, int radius, boolean hollow) {
+		pos = pos.toBlockLocation();
+		
 		HashSet<Block> circle = new HashSet<Block>();
-		if(radius == 0) {
-			return circle;
+		ArrayList<Vector> circleVectors = get(radius, new Vector(0, 1, 0));
+		
+		for(Vector blockVec : circleVectors) {
+			circle.add(pos.clone().add(blockVec).getBlock());
 		}
 		
-		for (double a = 0; a < 2 * Math.PI; a += (Math.PI) / (radius * 4)) {
-  	      int x = (int) (Math.cos(a) * radius);
-  	      int z = (int) (Math.sin(a) * radius);
-  	      circle.add(blockAt(loc, x, z));
-  	      for (int ix = -x; ix < x; ix++) {
-  	    	circle.add(blockAt(loc, ix, z));
-  	    	for (int iz = 0; iz < z; iz++) {
-  	  	    	circle.add(blockAt(loc, ix, iz));
-  	  	    }
-  	      }
-  	   }
+		if(!hollow) {
+			HashSet<Block> circleInside = new HashSet<Block>();
+			for(Vector point : circleVectors) {
+				for(int i = radius - 1; i > 0; i -= 1) {
+					circleInside.add(pos.clone().add(point.clone().normalize().multiply(i).toBlockVector()).getBlock());
+				}
+			}
+			circleInside.add(pos.clone().add(new BlockVector(0, 0, 0)).getBlock());
+			circle.addAll(circleInside);
+		}
 		
-        return circle;
-    }
-	
-	//Gets the block at a location plus x and z coords
-	private static Block blockAt(Location loc, int plusX, int plusZ) {
-		return loc.toBlockLocation().add(plusX, 0, plusZ).getBlock();
+		return circle;
 	}
 	
-	//Old method of getting circle
-	@SuppressWarnings("unused")
-	private static final ArrayList<Block> get1(Location loc, int radius, Boolean hollow) {
-		ArrayList<Location> circleloc = new ArrayList<Location>();
-		ArrayList<Block> circle = new ArrayList<Block>();
-		int centreX = loc.getBlockX();
-		int centreY = loc.getBlockY();
-        int centreZ = loc.getBlockZ();
-        for (int x = centreX - radius; x <= centreX + radius; x++) {
-            for (int z = centreZ - radius; z <= centreZ + radius; z++) {
-                double dist = Math.pow((centreX - x), 2) + Math.pow((centreZ - z), 2);
-                if (dist < radius * radius && !(hollow && dist < (radius - 1) * (radius - 1))) {
-                	Location l = new Location(loc.getWorld(), x, centreY, z);
-                	circleloc.add(l);
-                }
-            }
-        }
-        for(Location l: circleloc) {
-        	circle.add(l.getBlock());
-        }
+	//Gets a circle outline for any given axis
+	//the amount of points on the circle is calculated by circumference (2 * pi * r)
+	public static final ArrayList<Vector> get(int radius, Vector axis) {
+		ArrayList<Vector> circle = new ArrayList<Vector>();
+		int steps = (int) Math.ceil(2 * Math.PI * radius) * 1;
+		Vector pointer = Util.vectorCalc(Util.getYaw(axis), Util.getPitch(axis) + 90, radius);
+		
+		for(double circleRot = 0; circleRot < 360; circleRot += 360 / steps) {
+			circle.add(pointer.clone().rotateAroundAxis(axis, circleRot));
+		}
+		
         return circle;
     }
 }

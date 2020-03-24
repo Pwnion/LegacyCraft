@@ -9,6 +9,7 @@ import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.abilities.SkillTree;
 import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
+import com.pwnion.legacycraft.quests.triggers.NearLocation;
 
 import java.util.UUID;
 
@@ -37,6 +38,8 @@ public class PlayerMove implements Listener {
 		Player p = e.getPlayer();
 		UUID playerUUID = p.getUniqueId();
 		
+		NearLocation.onPlayerMove(p);
+		
 		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
 		
 		//Resets jump ability usage every time a player touches the ground
@@ -59,8 +62,7 @@ public class PlayerMove implements Listener {
 			} else if(distanceToGround < 6 && LegacyCraft.getPlayerUnderNoFallDamageLimit(playerUUID)) {
 				p.setFallDistance(0);
 				LegacyCraft.setPlayerUnderNoFallDamageLimit(playerUUID, false);
-			}
-			*/
+			} //*/
 		}
 	}
 }

@@ -29,7 +29,7 @@ public class BuildInv extends Inv {
 		Aspect openedAspect = (Aspect) LegacyCraft.getPlayerData(playerUUID, PlayerData.ASPECT_INVENTORY_OPEN);
 		
 		InvName buildInvName = InvName.valueOf(skillTree.getBuild(openedClass, openedAspect).toString());
-		InventoryView inv = p.openInventory(InventoryFromFile.get(buildInvName, FILE));
+		InventoryView inv = p.openInventory(DeserialiseInventory.get(buildInvName));
 		
 		HashMap<Aptitude, Boolean> aptitudes = skillTree.getEquippedAptitudes(openedClass);
 		for(Aptitude aptitude : aptitudes.keySet()) {
@@ -63,6 +63,7 @@ public class BuildInv extends Inv {
 		switch(clickedSlot) {
 		case 0:
 			SelectAnAspectInv.load(p);
+			click(p);
 			break;
 		case 28:
 		case 37:
@@ -79,6 +80,7 @@ public class BuildInv extends Inv {
 				skillTree.setEquippedAptitude(openedClass, clickedAptitude);
 				inv.getItem(clickedSlot).setType(Material.ENCHANTED_BOOK);
 				
+				click(p);
 				//Fancy particle effects and stuff
 			}
 			
@@ -86,6 +88,8 @@ public class BuildInv extends Inv {
 		case 31:
 		case 40:
 			Jump clickedJump = slotToJump.get(clickedSlot);
+			
+			if(clickedJump.equals(skillTree.getEquippedJump())) return;
 			
 			if(p.hasPermission("legacycraft.op")) {
 				skillTree.setUnlockedJump(openedClass, clickedJump);
@@ -99,6 +103,8 @@ public class BuildInv extends Inv {
 				inv.getItem(clickedSlot).setType(Material.ENCHANTED_BOOK);
 				
 				skillTree.setEquippedJump(openedClass, slotToJump.get(clickedSlot));
+				
+				click(p);
 			}
 			
 			break;
@@ -117,6 +123,8 @@ public class BuildInv extends Inv {
 			if(unlockedProficiencies.get(clickedProficiency) && !equippedProficiencies.get(clickedProficiency)) {
 				skillTree.setEquippedProficiency(build, clickedProficiency);
 				inv.getItem(clickedSlot).setType(Material.ENCHANTED_BOOK);
+				
+				click(p);
 				
 				//Fancy particle effects and stuff
 			}

@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerToggleFlightEvent;
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.abilities.SkillTree;
+import com.pwnion.legacycraft.abilities.SkillTree.Aspect;
 import com.pwnion.legacycraft.abilities.jumps.RogueJump1;
 import com.pwnion.legacycraft.abilities.jumps.RogueJump2;
 import com.pwnion.legacycraft.abilities.jumps.ShamanJump1;
@@ -32,7 +33,7 @@ public class PlayerToggleFlight implements Listener {
 		//Handle ability jumps
 		if(p.getGameMode().equals(GameMode.ADVENTURE)) {
 			e.setCancelled(true);
-			if(e.isFlying()) {
+			if(e.isFlying() && !skillTree.getAspect().equals(Aspect.NONE)) {
 				switch(skillTree.getPlayerClass()) {
 					case STRIKER:
 						switch(skillTree.getEquippedJump()) {

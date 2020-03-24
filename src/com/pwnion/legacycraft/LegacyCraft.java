@@ -1,7 +1,11 @@
 package com.pwnion.legacycraft;
 
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.function.BiConsumer;
+import java.util.logging.Level;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
@@ -9,46 +13,74 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
-import com.pwnion.legacycraft.commands.OnCommand;
 import com.pwnion.legacycraft.listeners.EntityDamage;
+import com.pwnion.legacycraft.listeners.EntityDeath;
+import com.pwnion.legacycraft.listeners.EntityPickupItem;
 import com.pwnion.legacycraft.listeners.InventoryClick;
+import com.pwnion.legacycraft.listeners.PlayerDropItem;
 import com.pwnion.legacycraft.listeners.PlayerGameModeChange;
+import com.pwnion.legacycraft.listeners.PlayerItemHeld;
 import com.pwnion.legacycraft.listeners.PlayerJoin;
 import com.pwnion.legacycraft.listeners.PlayerMove;
 import com.pwnion.legacycraft.listeners.PlayerQuit;
+import com.pwnion.legacycraft.listeners.PlayerResourcePackStatus;
 import com.pwnion.legacycraft.listeners.PlayerToggleFlight;
+import com.pwnion.legacycraft.listeners.InventoryDrag;
+import com.pwnion.legacycraft.npcs.Speech;
+import com.pwnion.legacycraft.npcs.traits.Blacksmith;
+import com.pwnion.legacycraft.npcs.traits.Librarian;
+import com.pwnion.legacycraft.quests.QuestManager;
+
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.trait.Trait;
+import net.citizensnpcs.api.trait.TraitInfo;
  
 public class LegacyCraft extends JavaPlugin {
 
 	//Declare lots of variables that can be accessed by this classes getter and setter methods
 	//These variables facilitate the storing of values used to track players actions
 	private static final HashMap<UUID, HashMap<PlayerData, Object>> playerData = new HashMap<UUID, HashMap<PlayerData, Object>>();
+	private static final HashMap<BukkitTask, Integer> tasksToBeCancelled = new HashMap<BukkitTask, Integer>();
 	private static Plugin plugin;
 	
 	//Makes registering events in onEnable() simpler and cleaner
 	private void registerEvents(Listener... listeners) {
-		for (Listener listener : listeners) {
+		for(Listener listener : listeners) {
 			Bukkit.getServer().getPluginManager().registerEvents(listener, this);
 		}
 	}
 	
 	//Makes registering commands in onEnable() simpler and cleaner
 	private void registerCommands(String... commands) {
-		for (String command : commands) {
+		for(String command : commands) {
 			this.getCommand(command).setExecutor((CommandExecutor) new OnCommand());
 		}
+	}
+	
+	//Allows the creation and population of config files with default values
+	private void saveDefaultConfigs(String... fileNames) {
+		for(String fileName : fileNames) {
+			new ConfigAccessor(fileName).saveDefaultConfig();
+		}
+	}
+	
+	private void registerTrait(Class<? extends Trait> trait, String traitName) {
+		CitizensAPI.getTraitFactory().registerTrait(TraitInfo.create(trait).withName(traitName));
 	}
 	
 	//Called when the plugin is enabled
 	public void onEnable() {
 		plugin = this;
 		
-		//Create and populate config files if needed
 		saveDefaultConfig();
-		new ConfigAccessor("inventory-gui.yml").saveDefaultConfig();
-		new ConfigAccessor("player-data.yml").saveDefaultConfig();
-		new ConfigAccessor("player-data-template.yml").saveDefaultConfig();
+		saveDefaultConfigs(
+			"inventory-menus.yml",
+			"player-data.yml",
+			"player-data-template.yml",
+			"structures.yml"
+		);
 		
 		//Register listeners
 		registerEvents(
@@ -58,7 +90,13 @@ public class LegacyCraft extends JavaPlugin {
 			new EntityDamage(),
 			new InventoryClick(),
 			new PlayerGameModeChange(),
-			new PlayerQuit()
+			new PlayerQuit(),
+			new PlayerItemHeld(),
+			new PlayerDropItem(),
+			new PlayerResourcePackStatus(),
+			new EntityPickupItem(),
+			new EntityDeath(),
+			new InventoryDrag()
 		);
 		
 		//Register commands
@@ -86,12 +124,41 @@ public class LegacyCraft extends JavaPlugin {
             		}
             		setPlayerData(playerUUID, PlayerData.FALL_DISTANCE, p.getFallDistance());
             	}
+            	
+            	try {
+            		for(BukkitTask task : tasksToBeCancelled.keySet()) {
+                		int timer = tasksToBeCancelled.get(task);
+                		if(timer < 0) {
+                			task.cancel();
+                			tasksToBeCancelled.remove(task);
+                		} else {
+                			tasksToBeCancelled.put(task, timer - 1);
+                		}
+                	}
+            	} catch(ConcurrentModificationException e) {};
             }
 		}.runTaskTimer(this, 0L, 0L);
+		
+		//check if Citizens is present and enabled.
+		if(getServer().getPluginManager().getPlugin("Citizens") == null || getServer().getPluginManager().getPlugin("Citizens").isEnabled() == false) {
+			getLogger().log(Level.SEVERE, "Citizens 2.0 not found or not enabled");
+			//getServer().getPluginManager().disablePlugin(this);	
+			return;
+		}	
+		
+		//Register your trait with Citizens.        
+		registerTrait(Blacksmith.class, "blacksmith");
+		registerTrait(Librarian.class, "librarian");
+		
+		Speech.loadFiles();
+		QuestManager.load();
 	}
-
+	
 	//Called when the plugin is disabled
 	public void onDisable() {
+		Bukkit.getServer().getScheduler().cancelTasks(this);
+		Speech.save();
+		
 		//Set plugin to null to prevent memory leaks
 		plugin = null;
 	}
@@ -122,5 +189,9 @@ public class LegacyCraft extends JavaPlugin {
 	
 	public static final void removePlayerData(UUID playerUUID) {
 		playerData.remove(playerUUID);
+	}
+	
+	public static final void addTaskToBeCancelled(BukkitTask task, int ticksUntilCancellation) {
+		tasksToBeCancelled.put(task, ticksUntilCancellation);
 	}
 }

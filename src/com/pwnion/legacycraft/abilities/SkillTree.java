@@ -1,7 +1,6 @@
 package com.pwnion.legacycraft.abilities;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
 import org.bukkit.Location;
@@ -29,8 +28,8 @@ public class SkillTree {
 		NONE,
 		IGNIS,
 		TERRA,
-		VACUOUS,
-		ARCTIC
+		AER,
+		AQUA
 	}
 	
 	//All possible builds a player can have equipped
@@ -38,20 +37,20 @@ public class SkillTree {
 		NONE,
 		IGNIS_STRIKER,
 		TERRA_STRIKER,
-		VACUOUS_STRIKER,
-		ARCTIC_STRIKER,
+		AER_STRIKER,
+		AQUA_STRIKER,
 		IGNIS_VANGUARD,
 		TERRA_VANGUARD,
-		VACUOUS_VANGUARD,
-		ARCTIC_VANGUARD,
+		AER_VANGUARD,
+		AQUA_VANGUARD,
 		IGNIS_ROGUE,
 		TERRA_ROGUE,
-		VACUOUS_ROGUE,
-		ARCTIC_ROGUE,
+		AER_ROGUE,
+		AQUA_ROGUE,
 		IGNIS_SHAMAN,
 		TERRA_SHAMAN,
-		VACUOUS_SHAMAN,
-		ARCTIC_SHAMAN,
+		AER_SHAMAN,
+		AQUA_SHAMAN,
 	}
 	
 	//All possible aptitudes a player can have equipped
@@ -118,25 +117,71 @@ public class SkillTree {
 		playerDataConfig.saveCustomConfig();
 	}
 	
-	//Save relevent player data for a class to a file
-	public final void saveClass(PlayerClass playerClass) {
-		String savePath = nodePrefix + playerClass.toString() + ".save.";
-		playerDataCS.set(savePath + "inventory", p.getInventory().getContents().clone());
-		playerDataCS.set(savePath + "location", p.getLocation().clone());
+	//Save a state for a player to the player data file
+	private final void saveState(boolean classNotOther) {
+		String savePath;
+		if(classNotOther) {
+			if(getPlayerClass().equals(PlayerClass.NONE)) return;
+			savePath = nodePrefix + playerClass.toString() + ".save.";
+		} else {
+			savePath = nodePrefix + "save.";
+		}
+		
+		playerDataCS.set(savePath + "inventory", p.getInventory().getContents());
+		playerDataCS.set(savePath + "location", p.getLocation());
+		playerDataCS.set(savePath + "health", p.getHealth());
+		playerDataCS.set(savePath + "hunger", p.getFoodLevel());
+		playerDataCS.set(savePath + "level", p.getLevel());
+		playerDataCS.set(savePath + "exp", p.getExp());
+		
 		save();
 	}
 	
-	//Load relevent player data for a class from a file
-	@SuppressWarnings("unchecked")
-	public final void loadClass(PlayerClass playerClass) {
-		String savePath = nodePrefix + playerClass.toString() + ".save.";
+	//Load a state for a player from the player data file
+	private final void loadState(PlayerClass playerClass, boolean classNotOther) {
+		String savePath;
+		if(classNotOther) {
+			savePath = nodePrefix + playerClass.toString() + ".save.";
+		} else {
+			savePath = nodePrefix + "save.";
+		}
 		
-		ItemStack contents[] = ((List<ItemStack>) playerDataCS.get(savePath + "inventory")).toArray(new ItemStack[0]);
+		ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
+		ConfigurationSection playerDataCS = playerDataConfig.getRoot();
+		
+		ItemStack inv[] = playerDataCS.getList(savePath + "inventory").toArray(new ItemStack[0]);
 		Location loc = (Location) playerDataCS.get(savePath + "location");
+		double health = playerDataCS.getDouble(savePath + "health");
+		int hunger = playerDataCS.getInt(savePath + "hunger");
+		int level = playerDataCS.getInt(savePath + "level");
+		float exp = (float) playerDataCS.getDouble(savePath + "exp");
 		
-        p.getInventory().setContents(contents);
-        
+        p.getInventory().setContents(inv);
+        p.setHealth(health);
+        p.setFoodLevel(hunger);
+        p.setLevel(level);
+        p.setExp(exp);
         p.teleport(loc);
+	}
+	
+	//Save the equipped class state
+	public final void saveClass() {
+		saveState(true);
+	}
+	
+	//Load a class state
+	public final void loadClass(PlayerClass playerClass) {
+		loadState(playerClass, true);
+	}
+	
+	//Save the other state
+	public final void saveOther() {
+		saveState(false);
+	}
+	
+	//Load the other state
+	public final void loadOther() {
+		loadState(null, false);
 	}
 	
 	/*
@@ -200,7 +245,7 @@ public class SkillTree {
 		return Build.valueOf(aspect.toString() + "_" + playerClass.toString());
 	}
 	
-	public final boolean getBuildUnlocked(PlayerClass playerClass, Aspect aspect) {
+	public final boolean getUnlockedBuild(PlayerClass playerClass, Aspect aspect) {
 		Build build = getBuild(playerClass, aspect);
 		return playerDataCS.getBoolean(nodePrefix + playerUUID + "." + build.toString() + ".unlocked");
 	}
@@ -209,9 +254,9 @@ public class SkillTree {
 	 * BUILD SETTERS
 	 */
 	
-	public final void setBuildUnlocked(PlayerClass playerClass, Aspect aspect, boolean value) {
+	public final void setUnlockedBuild(PlayerClass playerClass, Aspect aspect) {
 		Build build = getBuild(playerClass, aspect);
-		playerDataCS.set(nodePrefix + playerUUID + "." + build.toString() + ".unlocked", value);
+		playerDataCS.set(nodePrefix + playerUUID + "." + build.toString() + ".unlocked", true);
 		save();
 	}
 	

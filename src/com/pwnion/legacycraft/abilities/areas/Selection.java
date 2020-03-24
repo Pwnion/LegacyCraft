@@ -1,6 +1,6 @@
 package com.pwnion.legacycraft.abilities.areas;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -17,14 +17,15 @@ public class Selection {
     public static final ConfigurationSection structuresCS = structuresConfig.getRoot();
     
     @SuppressWarnings("unchecked")
-    public static final HashMap<Location, Material> load(String name) {
-        return (HashMap<Location, Material>) structuresCS.get("structures." + name);
+    public static final ArrayList<String> load(String name) {
+        return (ArrayList<String>) structuresCS.getList("structures." + name);
     }
     
     private Player p;
     private Block pos1;
     private Block pos2;
     
+    //This method has seperate instances for each player that are generated in onCommand
     public Selection(Player p) {
         this.p = p;
     }
@@ -40,14 +41,20 @@ public class Selection {
     }
     
     public final String export(String name) {
-        HashMap<Location, Material> data = new HashMap<Location, Material>();
+        ArrayList<String> data = new ArrayList<String>();
         if(pos1 == null || pos2 == null) {
             return ChatColor.DARK_RED + "You forgot to set both positions!";
         } else {
-            //add to data (i.e. data.put(key, value))
             for(Block block : RectangularPrism.get(pos1, pos2)) {
                 if(!block.isEmpty()) {
-                    data.put(block.getLocation().subtract(p.getLocation()), block.getType());
+                
+                //these two lines get relative block location
+                	//Gets the location of the block that the player is at
+                	Location centre = p.getLocation().getBlock().getLocation();
+                	Location loc = block.getLocation().subtract(centre);
+                	
+                	loc = loc.toBlockLocation();
+                    data.add(DataToString(loc, block.getType()));
                 }
             }
         }
@@ -55,4 +62,11 @@ public class Selection {
         structuresConfig.saveCustomConfig();
         return ChatColor.DARK_GREEN + "Saved to file!";
     }
+    
+    //formats data into the string
+    //x,y,z,Material
+    private String DataToString(Location loc, Material material) {
+    	return loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ() + "," + material.name();
+    }
+
 }
