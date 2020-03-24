@@ -13,26 +13,21 @@ import com.pwnion.legacycraft.quests.triggers.GetItem;
 
 public class Quest {
 	
-	public Quest(String name, String desc, Trigger trigger) {
+	public Quest(String name, String desc, Trigger trigger, String nextQuest) {
 		this.name = name;
 		this.desc = desc;
+		this.nextQuest = nextQuest;
 		triggers.add(trigger);
 	}
 	
-	public String name;
-	public String desc;
-	
-	public String questLine = null;
-	public int questLineIndex = 0;
+	private String name;
+	private String desc;
+	private String nextQuest;
 	
 	ArrayList<Trigger> triggers = new ArrayList<Trigger>();
 	
 	HashMap<UUID, ArrayList<Integer>> questHolders = new HashMap<UUID, ArrayList<Integer>>();
 	HashSet<UUID> finishedQuest = new HashSet<UUID>();
-	
-	public void save() {
-		
-	}
 	
 	public void addPlayer(Player p) {
 		ArrayList<Integer> progress = new ArrayList<Integer>(triggers.size());

@@ -78,7 +78,8 @@ public class LegacyCraft extends JavaPlugin {
 			"inventory-menus.yml",
 			"player-data.yml",
 			"player-data-template.yml",
-			"structures.yml"
+			"structures.yml",
+			"quest-data.yml"
 		);
 		
 		//Register listeners

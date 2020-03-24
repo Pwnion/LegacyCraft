@@ -7,8 +7,11 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+
+import com.pwnion.legacycraft.ConfigAccessor;
 
 public class QuestManager {
 
@@ -39,8 +42,11 @@ public class QuestManager {
 	}
 	
 	public static void save() {
+		final ConfigAccessor questDataConfig = new ConfigAccessor("quest-data.yml");
+		final ConfigurationSection questDataCS = questDataConfig.getRoot();
+		
 		for(Quest quest : quests) {
-			quest.save();
+			questDataCS.set(path, value);
 		}
 	}
 	
