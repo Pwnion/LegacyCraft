@@ -22,8 +22,7 @@ public class Quest {
 	public String name;
 	public String desc;
 	
-	public String questLine = null;
-	public int questLineIndex = 0;
+	public String nextQuest = null;
 	
 	ArrayList<Trigger> triggers = new ArrayList<Trigger>();
 	
@@ -42,11 +41,6 @@ public class Quest {
 		questHolders.put(p.getUniqueId(), progress);
 		p.sendMessage(ChatColor.GRAY + "You have recieved the '" + name + "' quest");
 		GetItem.updateItemQuests(p);
-	}
-	
-	public void addToQuestLine(String questLine, int questLineIndex) {
-		this.questLine = questLine;
-		this.questLineIndex = questLineIndex;
 	}
 	
 	public void addProgress(Player p, int index, int amount) {
@@ -99,7 +93,7 @@ public class Quest {
 	public ArrayList<Trigger> getTriggers(TriggerType name) {
 		ArrayList<Trigger> output = new ArrayList<Trigger>();
 		for(Trigger trigger : triggers) {
-			if(trigger.name == name) {
+			if(trigger.type == name) {
 				output.add(trigger);
 			}
 		}

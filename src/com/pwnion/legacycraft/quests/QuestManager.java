@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 public class QuestManager {
 
 	static ArrayList<Quest> quests = new ArrayList<Quest>();
-	static HashMap<String, ArrayList<String>> questLines = new HashMap<String, ArrayList<String>>();
+	//static HashMap<String, ArrayList<String>> questLines = new HashMap<String, ArrayList<String>>();
 	
 	public static void load() {
 		//Load
@@ -22,20 +22,20 @@ public class QuestManager {
 		//}
 		
 		quests.add(new Quest("Get 32 oak logs", "mine some trees", new Trigger(TriggerType.ITEM, Material.OAK_LOG, 32)));
-		addLastQuestToQuestLine("Starter");
+		//addLastQuestToQuestLine("Starter");
 		quests.add(new Quest("Get a stack of diamonds", "you'll need an iron pick for this", new Trigger(TriggerType.ITEM, Material.DIAMOND, 64)));
-		addLastQuestToQuestLine("Starter");
+		//addLastQuestToQuestLine("Starter");
 		
 		HashMap<Location, Integer> hash = new HashMap<Location, Integer>();
 		hash.put(new Location(Bukkit.getWorld("Neutral"), 0, 0, 0), 5);
 		quests.add(new Quest("Go to 0, 0, 0", "remember the y-level", new Trigger(TriggerType.LOCATION, hash, 1)));
-		addLastQuestToQuestLine("Starter");
+		//addLastQuestToQuestLine("Starter");
 		
 		quests.add(new Quest("Kill some Zombies", "not a lot just 16", new Trigger(TriggerType.KILLENTITY, EntityType.ZOMBIE, 16)));
-		addLastQuestToQuestLine("Starter");
+		//addLastQuestToQuestLine("Starter");
 		
 		quests.add(new Quest("Speak to the Librarian", "brag to the librarian about your achivements", new Trigger(TriggerType.NPC, "Librarian", 1)));
-		addLastQuestToQuestLine("Starter");
+		//addLastQuestToQuestLine("Starter");
 	}
 	
 	public static void save() {
@@ -120,17 +120,6 @@ public class QuestManager {
 	
 	public static void giveQuestLine(Player p, String questLine) {
 		getQuestLineQuest(questLine, 0).addPlayer(p);
-	}
-	
-	public static void addLastQuestToQuestLine(String questLineName) {
-		addQuestToQuestLine(questLineName, quests.get(quests.size() - 1).name);
-	}
-	
-	public static void addQuestToQuestLine(String questLineName, String questName) {
-		ArrayList<String> questLineArray = getQuestLine(questLineName.toLowerCase());
-		getQuest(questName).addToQuestLine(questLineName, questLineArray.size());
-		questLineArray.add(questName);
-		questLines.put(questLineName.toLowerCase(), questLineArray);
 	}
 	
 	public static boolean gotQuestLine(Player p, String questLineName) {
