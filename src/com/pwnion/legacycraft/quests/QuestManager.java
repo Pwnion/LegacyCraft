@@ -46,9 +46,7 @@ public class QuestManager {
 	}
 	
 	public static void save() {
-		for(Quest quest : quests) {
-			quest.save();
-		}
+		
 	}
 	
 	public static void giveQuest(Player p, Quest quest) {

@@ -17,11 +17,6 @@ public class Quest {
 	
 	ArrayList<Trigger> triggers = new ArrayList<Trigger>();
 	
-	public void save() {
-		
-	}
-	
-	
 	public ArrayList<Trigger> getTriggers() {
 		return triggers;
 	}
