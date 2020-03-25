@@ -39,7 +39,7 @@ public class SpeakToNPC {
 								}
 								
 								if(count < triggers.get(i - 1).getFinishCondition()) {
-									p.sendMessage(ChatColor.RED + "You do not have enough '" + mat.toString() + "' to progress in the quest '" + quest.name + "'");
+									p.sendMessage(ChatColor.RED + "You do not have enough '" + mat.toString() + "' to progress in the quest '" + quest.getName() + "'");
 									break;
 								} 
 							}

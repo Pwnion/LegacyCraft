@@ -24,35 +24,40 @@ public class QuestManager {
 		//	quests.add(new Quest(quest));
 		//}
 		
-		quests.add(new Quest("Get 32 oak logs", "mine some trees", new Trigger(TriggerType.ITEM, Material.OAK_LOG, 32)));
+		quests.add(new Quest("Get 32 oak logs", "mine some trees", new Trigger(TriggerType.ITEM, Material.OAK_LOG, 32), null));
 		//addLastQuestToQuestLine("Starter");
-		quests.add(new Quest("Get a stack of diamonds", "you'll need an iron pick for this", new Trigger(TriggerType.ITEM, Material.DIAMOND, 64)));
+		quests.add(new Quest("Get a stack of diamonds", "you'll need an iron pick for this", new Trigger(TriggerType.ITEM, Material.DIAMOND, 64), null));
 		//addLastQuestToQuestLine("Starter");
 		
 		HashMap<Location, Integer> hash = new HashMap<Location, Integer>();
 		hash.put(new Location(Bukkit.getWorld("Neutral"), 0, 0, 0), 5);
-		quests.add(new Quest("Go to 0, 0, 0", "remember the y-level", new Trigger(TriggerType.LOCATION, hash, 1)));
+		quests.add(new Quest("Go to 0, 0, 0", "remember the y-level", new Trigger(TriggerType.LOCATION, hash, 1), null));
 		//addLastQuestToQuestLine("Starter");
 		
-		quests.add(new Quest("Kill some Zombies", "not a lot just 16", new Trigger(TriggerType.KILLENTITY, EntityType.ZOMBIE, 16)));
+		quests.add(new Quest("Kill some Zombies", "not a lot just 16", new Trigger(TriggerType.KILLENTITY, EntityType.ZOMBIE, 16), null));
 		//addLastQuestToQuestLine("Starter");
 		
-		quests.add(new Quest("Speak to the Librarian", "brag to the librarian about your achivements", new Trigger(TriggerType.NPC, "Librarian", 1)));
+		quests.add(new Quest("Speak to the Librarian", "brag to the librarian about your achivements", new Trigger(TriggerType.NPC, "Librarian", 1), null));
 		//addLastQuestToQuestLine("Starter");
 	}
 	
 	public static void save() {
 		final ConfigAccessor questDataConfig = new ConfigAccessor("quest-data.yml");
 		final ConfigurationSection questDataCS = questDataConfig.getRoot();
-		
 		for(Quest quest : quests) {
-			questDataCS.set(path, value);
+			String nodePrefix = quest.getName() + ".";
+			questDataCS.set(nodePrefix + "description", quest.getDesc());
+			questDataCS.set(nodePrefix + "next-quest", quest.getNextQuest());
+			
+			questDataCS.set(nodePrefix + "description", quest.getDesc());
+			
+			//No need to save quests?? Only load?? But we need to save progress for each player?? Save completed quests???
 		}
 	}
 	
 	public static Quest getQuest(String name) {
 		for(Quest quest : quests) {
-			if(quest.name == name) {
+			if(quest.getName() == name) {
 				return quest;
 			}
 		}

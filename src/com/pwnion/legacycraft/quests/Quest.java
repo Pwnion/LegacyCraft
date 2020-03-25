@@ -28,6 +28,18 @@ public class Quest {
 
 	HashMap<UUID, ArrayList<Integer>> questHolders = new HashMap<UUID, ArrayList<Integer>>();
 	HashSet<UUID> finishedQuest = new HashSet<UUID>();
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getDesc() {
+		return desc;
+	}
+	
+	public String getNextQuest() {
+		return nextQuest;
+	}
 
 	public void addPlayer(Player p) {
 		ArrayList<Integer> progress = new ArrayList<Integer>(triggers.size());

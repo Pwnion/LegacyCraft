@@ -170,8 +170,8 @@ public class OnCommand implements CommandExecutor {
 				}
 			} else if(lbl.equals("test")) {
 				for(Quest quest : QuestManager.getActiveQuests(p)) {
-					p.sendMessage(quest.name);
-					p.sendMessage(quest.desc);
+					p.sendMessage(quest.getName());
+					p.sendMessage(quest.getDesc());
 					p.sendMessage(quest.getProgress(p, 0) + " / " + quest.getCondition(0));
 					p.sendMessage(quest.getPercent(p, 0) + "% complete");
 				}

@@ -6,7 +6,6 @@ import org.bukkit.event.EventHandler;
 import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.npcs.GoPlaces;
 import com.pwnion.legacycraft.npcs.Speech;
-import com.pwnion.legacycraft.quests.QuestManager;
 import com.pwnion.legacycraft.quests.triggers.SpeakToNPC;
 
 import net.citizensnpcs.api.event.NPCRightClickEvent;
@@ -63,9 +62,10 @@ public class Librarian extends Trait {
 			Player p = event.getClicker();
 			SpeakToNPC.onSpeakToNPC(p, npc.getName());
 			
+			/*
 			if(!QuestManager.gotQuestLine(p, "starter")) {
 				QuestManager.giveQuestLine(p, "starter");
-			}
+			}*/
 			
 			//If close to work do work related stuff
 			//Else do other stuff
