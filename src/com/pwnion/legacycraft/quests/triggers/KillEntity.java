@@ -22,7 +22,7 @@ public class KillEntity {
 				for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
 					if(triggers.get(i).getName() == TriggerType.KILLENTITY) {
 						if(triggers.get(i).getKillEntity() == dead) {
-							quest.addProgress(p, i);
+							QuestManager.addProgress(p, quest, i);
 						}
 					}
 				}

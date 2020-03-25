@@ -16,12 +16,11 @@ public class FinishQuest {
 		//FINISHED QUEST
 		p.sendMessage(ChatColor.YELLOW + "You have competed the '" + quest.name + "' quest");
 		
-		/*
+		
 		//Give next quest line quest
-		ArrayList<String> questLine = QuestManager.getQuestLine(quest.questLine);
-		if(quest.questLineIndex >= questLine.size() - 1) {
-			onFinishQuestLine(p, quest.questLine);
-		} else {
+		if(quest.nextQuest != null) {
+			QuestManager.getQuest(quest.nextQuest);
+		} /* else {
 			//Give the player the next quest in the quest line
 			QuestManager.getQuestLineQuest(quest.questLine, quest.questLineIndex + 1).addPlayer(p);
 		} //*/

@@ -158,7 +158,7 @@ public class OnCommand implements CommandExecutor {
 						break;
 					case "complete":
 						for(Quest quest : QuestManager.getActiveQuests(p)) {
-							quest.forceComplete(p);
+							QuestManager.forceComplete(p, quest);
 						}
 						break;
 					case "reset":
@@ -172,8 +172,8 @@ public class OnCommand implements CommandExecutor {
 				for(Quest quest : QuestManager.getActiveQuests(p)) {
 					p.sendMessage(quest.name);
 					p.sendMessage(quest.desc);
-					p.sendMessage(quest.getProgress(p, 0) + " / " + quest.getCondition(0));
-					p.sendMessage(quest.getPercent(p, 0) + "% complete");
+					p.sendMessage(QuestManager.getProgress(p, quest, 0) + " / " + quest.getCondition(0));
+					p.sendMessage(QuestManager.getPercent(p, quest, 0) + "% complete");
 				}
 			}
 			return true;

@@ -43,7 +43,7 @@ public class SpeakToNPC {
 									break;
 								} 
 							}
-							quest.addProgress(p, i);
+							QuestManager.addProgress(p, quest, i);
 						}
 					}
 				}

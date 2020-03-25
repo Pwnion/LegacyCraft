@@ -34,7 +34,7 @@ public class GetItem implements Listener {
 									for(ItemStack items : p.getInventory().all(mat).values()) {
 										count += items.getAmount();
 									}
-									quest.setProgress(p, i, count);
+									QuestManager.setProgress(p, quest, i, count);
 								}
 							}
 						}
