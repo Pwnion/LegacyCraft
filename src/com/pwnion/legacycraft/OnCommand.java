@@ -164,7 +164,7 @@ public class OnCommand implements CommandExecutor {
 						}
 						break;
 					case "reset":
-						QuestManager.resetQuests(p, true);
+						//QuestManager.resetQuests(p, true);
 						break;
 					case "aquav":
 						AquaVanguardProficiency1.activate(p);
