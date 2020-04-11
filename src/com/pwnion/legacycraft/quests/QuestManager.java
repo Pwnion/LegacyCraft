@@ -53,10 +53,12 @@ public class QuestManager {
 		});
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static HashMap<Quest, ArrayList<Integer>> getUnfinishedPlayerData(UUID playerUUID) {
 		return (HashMap<Quest, ArrayList<Integer>>) LegacyCraft.getPlayerData(playerUUID, PlayerData.UNFINISHED_QUESTS);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static ArrayList<Quest> getFinishedPlayerData(UUID playerUUID) {
 		return (ArrayList<Quest>) LegacyCraft.getPlayerData(playerUUID, PlayerData.FINISHED_QUESTS);
 	}

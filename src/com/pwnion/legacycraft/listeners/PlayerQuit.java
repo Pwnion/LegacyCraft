@@ -21,8 +21,6 @@ public class PlayerQuit implements Listener {
 		Player p = e.getPlayer();
 		UUID playerUUID = p.getUniqueId();
 		
-		NearLocation.playerQuit(playerUUID);
-		
 		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
 		if(p.getGameMode().equals(GameMode.ADVENTURE)) {
 			skillTree.saveClass();

@@ -21,8 +21,6 @@ public class PlayerJoin implements Listener {
 		Player p = e.getPlayer();
 		UUID playerUUID = p.getUniqueId();
 		
-		//NearLocation.playerJoin(playerUUID);
-		
 		//Initialise variables and populate with default values to help track the player
 		LegacyCraft.setPlayerData(playerUUID, new HashMap<PlayerData, Object>() {
 			private static final long serialVersionUID = 1L;
