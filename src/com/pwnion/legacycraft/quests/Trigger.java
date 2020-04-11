@@ -12,21 +12,9 @@ public class Trigger {
 	Object data;
 	int finishCondition;
 
-	@SuppressWarnings("incomplete-switch")
-	public Trigger(TriggerType name, Object data, int finishCondition) {
+	public Trigger(TriggerType name, String data, int finishCondition) {
 		this.type = name;
-		
-		switch(name) {
-		case NPC:
-			if(data instanceof String) {
-				HashMap<String, Boolean> npcData = new HashMap<String, Boolean>();
-				npcData.put((String) data, false);
-				data = npcData;
-			}
-			break;
-		}
-		
-		this.data = data;
+		this.data = deserialise(name, data);
 		this.finishCondition = finishCondition;
 	}
 	
@@ -76,6 +64,7 @@ public class Trigger {
 		return (String) getNPCData().keySet().toArray()[0];
 	}
 	
+	/*
 	public String serialise() {
 		switch(type) {
 		case ITEM:
@@ -90,9 +79,9 @@ public class Trigger {
 			return name + "|" + getNPCData().get(name);
 		}
 		return null;
-	}
+	}*/
 	
-	public static Object deserialise(TriggerType type, String data) {
+	private static Object deserialise(TriggerType type, String data) {
 		switch(type) {
 		case ITEM:
 			return Material.matchMaterial(data);

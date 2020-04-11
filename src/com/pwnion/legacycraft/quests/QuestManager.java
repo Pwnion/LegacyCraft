@@ -55,16 +55,16 @@ public class QuestManager {
 
 			ArrayList<Trigger> triggers = new ArrayList<Trigger>();
 			ArrayList<TriggerType> triggerTypes = new ArrayList<TriggerType>();
-			ArrayList<Object> triggerData = new ArrayList<Object>();
+			ArrayList<String> triggerData = new ArrayList<String>();
 			ArrayList<Integer> triggerFinishConditions = new ArrayList<Integer>();
 			String nodePrefix = name + ".triggers.";
 
 			questDataCS.getList(nodePrefix + "types").forEach((trigger) -> {
 				triggerTypes.add(TriggerType.valueOf((String) trigger));
 			});
-
+			
 			questDataCS.getList(nodePrefix + "data").forEach((data) -> {
-				triggerData.add(data);
+				triggerData.add((String) data);
 			});
 
 			questDataCS.getList(nodePrefix + "finishConditions").forEach((finishCondition) -> {
