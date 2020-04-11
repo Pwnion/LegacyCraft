@@ -14,7 +14,6 @@ public class Trigger {
 	Object data;
 	int finishCondition;
 
-	@SuppressWarnings("incomplete-switch")
 	public Trigger(TriggerType name, String data, int finishCondition) {
 		this.type = name;
 		this.data = deserialise(name, data);
@@ -67,6 +66,7 @@ public class Trigger {
 		return (String) getNPCData().keySet().toArray()[0];
 	}
 	
+	/*
 	public String serialise() {
 		switch(type) {
 		case ITEM:
@@ -80,9 +80,9 @@ public class Trigger {
 			return name + "|" + getNPCData().get(name);
 		}
 		return null;
-	}
+	}*/
 	
-	public static Object deserialise(TriggerType type, String data) {
+	private static Object deserialise(TriggerType type, String data) {
 		switch(type) {
 		case ITEM:
 			return Material.matchMaterial(data);

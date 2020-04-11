@@ -63,7 +63,7 @@ public class QuestManager {
 			questDataCS.getList(nodePrefix + "types").forEach((trigger) -> {
 				triggerTypes.add(TriggerType.valueOf((String) trigger));
 			});
-
+			
 			questDataCS.getList(nodePrefix + "data").forEach((data) -> {
 				triggerData.add((String) data);
 			});
@@ -75,8 +75,10 @@ public class QuestManager {
 			for(int i = 0; i < triggerTypes.size(); i++) {
 				triggers.add(new Trigger(triggerTypes.get(i), triggerData.get(i), triggerFinishConditions.get(i)));
 			}
+			
+			String nextQuest = questDataCS.getString(name + ".nextQuest");
 
-			quests.add(new Quest(name, desc, triggers));
+			quests.add(new Quest(name, desc, triggers, nextQuest));
 		});
 	}
 
