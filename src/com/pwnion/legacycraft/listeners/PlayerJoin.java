@@ -12,6 +12,7 @@ import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.abilities.SkillTree;
 import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
+import com.pwnion.legacycraft.quests.QuestManager;
 
 public class PlayerJoin implements Listener {
 	
@@ -31,6 +32,8 @@ public class PlayerJoin implements Listener {
 				put(PlayerData.FALL_DISTANCE, 0f);
 				put(PlayerData.CLASS_INVENTORY_OPEN, PlayerClass.NONE);
 				put(PlayerData.ASPECT_INVENTORY_OPEN, SkillTree.Aspect.NONE);
+				put(PlayerData.UNFINISHED_QUESTS, QuestManager.loadUnfinishedPlayerData(p.getUniqueId()));
+				put(PlayerData.FINISHED_QUESTS, QuestManager.loadFinishedPlayerData(p.getUniqueId()));
 			}
 		});
 	}

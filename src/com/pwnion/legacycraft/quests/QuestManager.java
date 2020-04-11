@@ -9,40 +9,16 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
 import com.pwnion.legacycraft.ConfigAccessor;
+import com.pwnion.legacycraft.LegacyCraft;
+import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.quests.triggers.FinishQuest;
 import com.pwnion.legacycraft.quests.triggers.GetItem;
 
 public class QuestManager {
 
 	private static ArrayList<Quest> quests = new ArrayList<Quest>();
-	//static HashMap<String, ArrayList<String>> questLines = new HashMap<String, ArrayList<String>>();
-
-	private static HashMap<UUID, HashMap<Quest, ArrayList<Integer>>> questProgress = new HashMap<UUID, HashMap<Quest, ArrayList<Integer>>>();
-	private static HashMap<UUID, ArrayList<Quest>> finishedQuests = new HashMap<UUID, ArrayList<Quest>>();
-
-	public static void load() {
-		
-		//Load
-		//for(String quest : file) {
-		//	quests.add(new Quest(quest));
-		//}
-
-		//quests.add(new Quest("Get 32 oak logs", "mine some trees", new Trigger(TriggerType.ITEM, Material.OAK_LOG, 32), null));
-		//addLastQuestToQuestLine("Starter");
-		//quests.add(new Quest("Get a stack of diamonds", "you'll need an iron pick for this", new Trigger(TriggerType.ITEM, Material.DIAMOND, 64), null));
-		//addLastQuestToQuestLine("Starter");
-
-		//HashMap<Location, Integer> hash = new HashMap<Location, Integer>();
-		//hash.put(new Location(Bukkit.getWorld("Neutral"), 0, 0, 0), 5);
-		//quests.add(new Quest("Go to 0, 0, 0", "remember the y-level", new Trigger(TriggerType.LOCATION, hash, 1), null));
-		//addLastQuestToQuestLine("Starter");
-
-		//quests.add(new Quest("Kill some Zombies", "not a lot just 16", new Trigger(TriggerType.KILLENTITY, EntityType.ZOMBIE, 16), null));
-		//addLastQuestToQuestLine("Starter");
-
-		//quests.add(new Quest("Speak to the Librarian", "brag to the librarian about your achivements", new Trigger(TriggerType.NPC, "Librarian", 1), null));
-		//addLastQuestToQuestLine("Starter");
-
+	
+	public static void loadQuests() {
 		final ConfigAccessor questDataConfig = new ConfigAccessor("quest-data.yml");
 		final ConfigurationSection questDataCS = questDataConfig.getRoot();
 
@@ -76,8 +52,16 @@ public class QuestManager {
 			quests.add(new Quest(name, desc, triggers, nextQuest));
 		});
 	}
+	
+	public static HashMap<Quest, ArrayList<Integer>> getUnfinishedPlayerData(UUID playerUUID) {
+		return (HashMap<Quest, ArrayList<Integer>>) LegacyCraft.getPlayerData(playerUUID, PlayerData.UNFINISHED_QUESTS);
+	}
+	
+	public static ArrayList<Quest> getFinishedPlayerData(UUID playerUUID) {
+		return (ArrayList<Quest>) LegacyCraft.getPlayerData(playerUUID, PlayerData.FINISHED_QUESTS);
+	}
 
-	public static void save(Player p) {
+	public static void savePlayerData(Player p) {
 		final ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
 		final ConfigurationSection playerDataCS = playerDataConfig.getRoot();
 		
@@ -92,12 +76,45 @@ public class QuestManager {
 		playerDataConfig.saveCustomConfig();
 	}
 	
+	public static HashMap<Quest, ArrayList<Integer>> loadUnfinishedPlayerData(UUID playerUUID) {
+		HashMap<Quest, ArrayList<Integer>> questProgressFromFile = new HashMap<Quest, ArrayList<Integer>>();
+		
+		final ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
+		final ConfigurationSection playerDataCS = playerDataConfig.getRoot();
+		String nodePrefix = "players." + playerUUID.toString() + ".quests.";
+		
+		playerDataCS.getConfigurationSection(nodePrefix + "unfinished").getKeys(false).forEach((quest) -> {
+			ArrayList<Integer> progress = new ArrayList<Integer>();
+			playerDataCS.getList(nodePrefix + "unfinished." + quest).forEach((num) -> {
+				progress.add((int) num);
+			});
+			
+			questProgressFromFile.put(getQuest(quest), progress);
+		});
+		
+		return questProgressFromFile;
+	}
+	
+	public static ArrayList<Quest> loadFinishedPlayerData(UUID playerUUID) {
+		ArrayList<Quest> finishedQuestsFromFile = new ArrayList<Quest>();
+		
+		final ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
+		final ConfigurationSection playerDataCS = playerDataConfig.getRoot();
+		String nodePrefix = "players." + playerUUID.toString() + ".quests.";
+		
+		playerDataCS.getList(nodePrefix + "finished").forEach((quest) -> {
+			finishedQuestsFromFile.add(getQuest((String) quest));
+		});
+		
+		return finishedQuestsFromFile;
+	}
+	
 	public static void giveQuest(Player p, Quest quest) {
         ArrayList<Integer> progress = new ArrayList<Integer>(quest.triggers.size());
         for(int i = 0; i < quest.triggers.size(); i++) { //GET CHECKED
             progress.add(0);
         }
-        questProgress.get(p.getUniqueId()).put(quest, progress);
+        getUnfinishedPlayerData(p.getUniqueId()).put(quest, progress);
         p.sendMessage(ChatColor.GRAY + "You have recieved the '" + quest.getName() + "' quest");
         GetItem.updateItemQuests(p);
     }
@@ -113,14 +130,14 @@ public class QuestManager {
 	
 	public static ArrayList<Quest> getActiveQuests(UUID playerUUID) {
 		ArrayList<Quest> output = new ArrayList<Quest>();
-		for(Quest quest : questProgress.get(playerUUID).keySet()) {
+		for(Quest quest : getUnfinishedPlayerData(playerUUID).keySet()) {
 			output.add(quest);
 		}
 		return output;
 	}
 
 	public static ArrayList<Quest> getCompletedQuests(UUID playerUUID) {
-		return finishedQuests.get(playerUUID);
+		return getFinishedPlayerData(playerUUID);
 	}
 
 	public static ArrayList<Quest> getQuests(UUID playerUUID) {
@@ -175,14 +192,14 @@ public class QuestManager {
 	public static void setProgress(Player p, Quest quest, int index, int value) {
 		ArrayList<Integer> progress = getProgress(p, quest);
 		progress.set(index, value);
-		questProgress.get(p.getUniqueId()).put(quest, progress);
+		getUnfinishedPlayerData(p.getUniqueId()).put(quest, progress);
 		if(getPercentOverall(p, quest) >= 100) {
 
 			//Give Quest Rewards?
 
 			//Remove player as active quest Holder and move to finished list
-			finishedQuests.get(p.getUniqueId()).add(quest);
-			questProgress.get(p.getUniqueId()).remove(quest);
+			getFinishedPlayerData(p.getUniqueId()).add(quest);
+			getUnfinishedPlayerData(p.getUniqueId()).remove(quest);
 
 			FinishQuest.onFinishQuest(p, quest);
 			return;
@@ -205,7 +222,7 @@ public class QuestManager {
 
 	public static ArrayList<Integer> getProgress(Player p, Quest quest) {
 		if(hasQuestActive(p, quest)) {
-			return questProgress.get(p.getUniqueId()).get(quest);
+			return getUnfinishedPlayerData(p.getUniqueId()).get(quest);
 		} else if(hasQuestFinished(p, quest)) {
 			ArrayList<Integer> finishValues = new ArrayList<Integer>();
 			for(Trigger trigger : quest.triggers) {
@@ -240,7 +257,7 @@ public class QuestManager {
 	}
 
 	public static boolean hasQuestActive(UUID playerUUID, Quest quest) {
-		return questProgress.get(playerUUID).containsKey(quest);
+		return getUnfinishedPlayerData(playerUUID).containsKey(quest);
 	}
 
 	public static boolean hasQuestFinished(Player p, Quest quest) {
@@ -248,13 +265,14 @@ public class QuestManager {
 	}
 
 	public static boolean hasQuestFinished(UUID playerUUID, Quest quest) {
-		return finishedQuests.get(playerUUID).contains(quest);
+		return getFinishedPlayerData(playerUUID).contains(quest);
 	}
 
 	public static boolean gotQuest(Player p, Quest quest) {
 		return hasQuestActive(p, quest) || hasQuestFinished(p, quest);
 	}
 
+	/*
 	public static void resetQuests(Player p, boolean fullRemoval) {
 		if(fullRemoval) {
 			questProgress.put(p.getUniqueId(), new HashMap<Quest, ArrayList<Integer>>());
@@ -264,5 +282,5 @@ public class QuestManager {
 				progress.clear();
 			}
 		}
-	}
+	}*/
 }
