@@ -2,8 +2,10 @@ package com.pwnion.legacycraft.quests;
 
 import java.util.HashMap;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 
 public class Trigger {
@@ -38,9 +40,9 @@ public class Trigger {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public HashMap<Location, Integer> getLocationData() {
+	public LocationData getLocationData() {
 		if(type == TriggerType.LOCATION) {
-			return (HashMap<Location, Integer>) data;
+			return (LocationData) data;
 		}
 		return null;
 	}
@@ -70,8 +72,7 @@ public class Trigger {
 		case ITEM:
 			return getItem().name();
 		case LOCATION:
-			HashMap<Location, Integer> locData = getLocationData();
-			break;
+			return getLocationData().serialise();
 		case KILLENTITY:
 			return getKillEntity().toString();
 		case NPC:
@@ -86,14 +87,18 @@ public class Trigger {
 		case ITEM:
 			return Material.matchMaterial(data);
 		case LOCATION:
-			HashMap<Location, Integer> locData = new HashMap<Location, Integer>();
-			return null;
+			String locArray[] = data.split("|");
+			return new LocationData(Bukkit.getWorld(locArray[0]), 
+					Double.parseDouble(locArray[1]), 
+					Double.parseDouble(locArray[2]), 
+					Double.parseDouble(locArray[3]), 
+					Double.parseDouble(locArray[4]));
 		case KILLENTITY:
 			return EntityType.valueOf(data);
 		case NPC:
-			String array[] = data.split("|");
+			String npcArray[] = data.split("|");
 			HashMap<String, Boolean> npcData = new HashMap<String, Boolean>();
-			npcData.put(array[0], Boolean.valueOf(array[1]));
+			npcData.put(npcArray[0], Boolean.valueOf(npcArray[1]));
 			return npcData;
 		}
 		return data;

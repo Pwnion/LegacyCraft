@@ -19,6 +19,8 @@ import org.bukkit.inventory.ItemStack;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.ooc.Portal;
+import com.pwnion.legacycraft.abilities.proficiencies.AquaVanguardProficiency1;
+import com.pwnion.legacycraft.abilities.proficiencies.TerraVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.targets.Point;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
 import com.pwnion.legacycraft.quests.Quest;
@@ -163,6 +165,12 @@ public class OnCommand implements CommandExecutor {
 						break;
 					case "reset":
 						QuestManager.resetQuests(p, true);
+						break;
+					case "aquav":
+						AquaVanguardProficiency1.activate(p);
+						break;
+					case "terrav":
+						TerraVanguardProficiency1.activate(p, 2);
 						break;
 					default:
 						return false;
