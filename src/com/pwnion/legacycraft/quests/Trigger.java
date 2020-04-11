@@ -3,9 +3,7 @@ package com.pwnion.legacycraft.quests;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 
 public class Trigger {
@@ -39,7 +37,6 @@ public class Trigger {
 		return null;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public LocationData getLocationData() {
 		if(type == TriggerType.LOCATION) {
 			return (LocationData) data;
