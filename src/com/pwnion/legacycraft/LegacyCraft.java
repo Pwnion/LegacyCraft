@@ -79,7 +79,8 @@ public class LegacyCraft extends JavaPlugin {
 			"player-data.yml",
 			"player-data-template.yml",
 			"structures.yml",
-			"quest-data.yml"
+			"quest-data.yml",
+			"npc-data.yml"
 		);
 		
 		//Register listeners
@@ -151,13 +152,12 @@ public class LegacyCraft extends JavaPlugin {
 		registerTrait(Librarian.class, "librarian");
 		
 		Speech.loadFiles();
-		QuestManager.load();
+		QuestManager.loadQuests();
 	}
 	
 	//Called when the plugin is disabled
 	public void onDisable() {
 		Bukkit.getServer().getScheduler().cancelTasks(this);
-		Speech.save();
 		
 		//Set plugin to null to prevent memory leaks
 		plugin = null;

@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
+import com.pwnion.legacycraft.ConfigAccessor;
 import com.pwnion.legacycraft.Util;
 
 import net.citizensnpcs.api.npc.NPC;
@@ -16,17 +18,23 @@ public class Speech {
 	private static HashMap<String, ArrayList<String>> lines = new HashMap<String, ArrayList<String>>();
 	
 	public static void loadFiles() {
-		ArrayList<String> temp = new ArrayList<String>();
-		temp.add("Hello [PLAYER], I am [NPC]");
-		lines.put("blacksmith", temp);
+		final ConfigAccessor npcDataConfig = new ConfigAccessor("npc-data.yml");
+		final ConfigurationSection npcDataCS = npcDataConfig.getRoot();
+		String nodePrefix = "lines.";
+		
+		npcDataCS.getConfigurationSection("lines").getKeys(false).forEach((traitName) -> {
+			ArrayList<String> traitLines = new ArrayList<String>();
+			
+			npcDataCS.getList(nodePrefix + traitName).forEach((line) -> {
+				traitLines.add((String) line);
+			});
+			
+			lines.put(traitName, traitLines);
+		});
 		
 		Util.br(lines.keySet().toString());
 		Util.br(lines.values().toString());
 		Bukkit.getLogger().info(lines.toString());
-	}
-	
-	public static void save() {
-		
 	}
 	
 	public static String getRnd(NPC npc, String traitName, Player p) {

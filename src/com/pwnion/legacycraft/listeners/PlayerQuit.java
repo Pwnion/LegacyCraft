@@ -28,7 +28,7 @@ public class PlayerQuit implements Listener {
 			skillTree.saveOther();
 		}
 		
-		QuestManager.save(p);
+		QuestManager.savePlayerData(p);
 		
 		//Remove the player data for the player that left the server
 		LegacyCraft.removePlayerData(playerUUID);
