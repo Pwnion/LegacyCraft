@@ -63,7 +63,7 @@ public class QuestManager {
 				triggerData.add((String) data);
 			});
 
-			questDataCS.getList(nodePrefix + "finishConditions").forEach((finishCondition) -> {
+			questDataCS.getList(nodePrefix + "finish-conditions").forEach((finishCondition) -> {
 				triggerFinishConditions.add((int) finishCondition);
 			});
 
@@ -71,7 +71,7 @@ public class QuestManager {
 				triggers.add(new Trigger(triggerTypes.get(i), triggerData.get(i), triggerFinishConditions.get(i)));
 			}
 			
-			String nextQuest = questDataCS.getString(name + ".nextQuest");
+			String nextQuest = questDataCS.getString(name + ".next-quest");
 
 			quests.add(new Quest(name, desc, triggers, nextQuest));
 		});
