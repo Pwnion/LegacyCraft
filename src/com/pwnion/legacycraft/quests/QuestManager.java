@@ -23,6 +23,7 @@ public class QuestManager {
 	private static HashMap<UUID, ArrayList<Quest>> finishedQuests = new HashMap<UUID, ArrayList<Quest>>();
 	
 	public static void load() {
+		
 		//Load
 		//for(String quest : file) {
 		//	quests.add(new Quest(quest));
