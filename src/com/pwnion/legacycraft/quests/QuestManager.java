@@ -2,15 +2,10 @@ package com.pwnion.legacycraft.quests;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import com.pwnion.legacycraft.ConfigAccessor;
