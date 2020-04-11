@@ -1043,3 +1043,7 @@ save:
   hunger:
   level:
   exp:
+quests:
+  unfinished:
+    
+  finished:

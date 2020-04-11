@@ -2,6 +2,7 @@ package com.pwnion.legacycraft.quests;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -24,34 +25,62 @@ public class QuestManager {
 		//	quests.add(new Quest(quest));
 		//}
 		
-		quests.add(new Quest("Get 32 oak logs", "mine some trees", new Trigger(TriggerType.ITEM, Material.OAK_LOG, 32), null));
+		//quests.add(new Quest("Get 32 oak logs", "mine some trees", new Trigger(TriggerType.ITEM, Material.OAK_LOG, 32), null));
 		//addLastQuestToQuestLine("Starter");
-		quests.add(new Quest("Get a stack of diamonds", "you'll need an iron pick for this", new Trigger(TriggerType.ITEM, Material.DIAMOND, 64), null));
-		//addLastQuestToQuestLine("Starter");
-		
-		HashMap<Location, Integer> hash = new HashMap<Location, Integer>();
-		hash.put(new Location(Bukkit.getWorld("Neutral"), 0, 0, 0), 5);
-		quests.add(new Quest("Go to 0, 0, 0", "remember the y-level", new Trigger(TriggerType.LOCATION, hash, 1), null));
+		//quests.add(new Quest("Get a stack of diamonds", "you'll need an iron pick for this", new Trigger(TriggerType.ITEM, Material.DIAMOND, 64), null));
 		//addLastQuestToQuestLine("Starter");
 		
-		quests.add(new Quest("Kill some Zombies", "not a lot just 16", new Trigger(TriggerType.KILLENTITY, EntityType.ZOMBIE, 16), null));
+		//HashMap<Location, Integer> hash = new HashMap<Location, Integer>();
+		//hash.put(new Location(Bukkit.getWorld("Neutral"), 0, 0, 0), 5);
+		//quests.add(new Quest("Go to 0, 0, 0", "remember the y-level", new Trigger(TriggerType.LOCATION, hash, 1), null));
 		//addLastQuestToQuestLine("Starter");
 		
-		quests.add(new Quest("Speak to the Librarian", "brag to the librarian about your achivements", new Trigger(TriggerType.NPC, "Librarian", 1), null));
+		//quests.add(new Quest("Kill some Zombies", "not a lot just 16", new Trigger(TriggerType.KILLENTITY, EntityType.ZOMBIE, 16), null));
 		//addLastQuestToQuestLine("Starter");
-	}
-	
-	public static void save() {
+		
+		//quests.add(new Quest("Speak to the Librarian", "brag to the librarian about your achivements", new Trigger(TriggerType.NPC, "Librarian", 1), null));
+		//addLastQuestToQuestLine("Starter");
+		
 		final ConfigAccessor questDataConfig = new ConfigAccessor("quest-data.yml");
 		final ConfigurationSection questDataCS = questDataConfig.getRoot();
+		
+		questDataCS.getKeys(false).forEach((name) -> {
+			String desc = questDataCS.getString(name + ".description");
+			
+			ArrayList<Trigger> triggers = new ArrayList<Trigger>();
+			ArrayList<TriggerType> triggerTypes = new ArrayList<TriggerType>();
+			ArrayList<Object> triggerData = new ArrayList<Object>();
+			ArrayList<Integer> triggerFinishConditions = new ArrayList<Integer>();
+			String nodePrefix = name + ".triggers.";
+			
+			questDataCS.getList(nodePrefix + "types").forEach((trigger) -> {
+				triggerTypes.add(TriggerType.valueOf((String) trigger));
+			});
+			
+			questDataCS.getList(nodePrefix + "data").forEach((data) -> {
+				triggerData.add(data);
+			});
+			
+			questDataCS.getList(nodePrefix + "finishConditions").forEach((finishCondition) -> {
+				triggerFinishConditions.add((int) finishCondition);
+			});
+			
+			for(int i = 0; i < triggerTypes.size(); i++) {
+				triggers.add(new Trigger(triggerTypes.get(i), triggerData.get(i), triggerFinishConditions.get(i)));
+			}
+			
+			quests.add(new Quest(name, desc, triggers));
+		});
+	}
+	
+	public static void save(Player p) {
+		final ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
+		final ConfigurationSection playerDataCS = playerDataConfig.getRoot();
 		for(Quest quest : quests) {
-			String nodePrefix = quest.getName() + ".";
-			questDataCS.set(nodePrefix + "description", quest.getDesc());
-			questDataCS.set(nodePrefix + "next-quest", quest.getNextQuest());
+			String nodePrefix = "players." + p.getUniqueId().toString() + ".quests.";
 			
-			questDataCS.set(nodePrefix + "description", quest.getDesc());
-			
-			//No need to save quests?? Only load?? But we need to save progress for each player?? Save completed quests???
+			playerDataCS.set(nodePrefix + "unfinished.quests", ));
+			playerDataCS.set(nodePrefix + "unfinished.quests", ));
 		}
 	}
 	
