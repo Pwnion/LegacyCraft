@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.abilities.SkillTree;
+import com.pwnion.legacycraft.quests.QuestManager;
 import com.pwnion.legacycraft.quests.triggers.NearLocation;
 
 public class PlayerQuit implements Listener {
@@ -28,6 +29,8 @@ public class PlayerQuit implements Listener {
 		} else {
 			skillTree.saveOther();
 		}
+		
+		QuestManager.save(p);
 		
 		//Remove the player data for the player that left the server
 		LegacyCraft.removePlayerData(playerUUID);

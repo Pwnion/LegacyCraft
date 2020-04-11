@@ -13,6 +13,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
+import com.pwnion.legacycraft.ConfigAccessor;
 import com.pwnion.legacycraft.quests.triggers.FinishQuest;
 import com.pwnion.legacycraft.quests.triggers.GetItem;
 
@@ -81,16 +82,27 @@ public class QuestManager {
 	public static void save(Player p) {
 		final ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
 		final ConfigurationSection playerDataCS = playerDataConfig.getRoot();
-		for(Quest quest : quests) {
-			String nodePrefix = "players." + p.getUniqueId().toString() + ".quests.";
+		
+		String nodePrefix = "players." + p.getUniqueId().toString() + ".quests.";
 
-			playerDataCS.set(nodePrefix + "unfinished.quests", ));
-			playerDataCS.set(nodePrefix + "unfinished.quests", ));
-		}
-		questProgress.get(p.getUniqueId()).put(quest, progress);
-		p.sendMessage(ChatColor.GRAY + "You have recieved the '" + quest.name + "' quest");
-		GetItem.updateItemQuests(p);
+		getActiveQuests(p).forEach((quest) -> {
+			playerDataCS.set(nodePrefix + "unfinished." + quest.getName(), getProgress(p, quest));
+		});
+		
+		playerDataCS.set(nodePrefix + "finished", getCompletedQuests(p));
+		
+		playerDataConfig.saveCustomConfig();
 	}
+	
+	public static void giveQuest(Player p, Quest quest) {
+        ArrayList<Integer> progress = new ArrayList<Integer>(quest.triggers.size());
+        for(int i = 0; i < quest.triggers.size(); i++) { //GET CHECKED
+            progress.add(0);
+        }
+        questProgress.get(p.getUniqueId()).put(quest, progress);
+        p.sendMessage(ChatColor.GRAY + "You have recieved the '" + quest.getName() + "' quest");
+        GetItem.updateItemQuests(p);
+    }
 
 	public static Quest getQuest(String name) {
 		for(Quest quest : quests) {
@@ -100,7 +112,7 @@ public class QuestManager {
 		}
 		return null;
 	}
-
+	
 	public static ArrayList<Quest> getActiveQuests(UUID playerUUID) {
 		ArrayList<Quest> output = new ArrayList<Quest>();
 		for(Quest quest : questProgress.get(playerUUID).keySet()) {

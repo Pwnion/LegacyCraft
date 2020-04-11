@@ -14,6 +14,18 @@ public class Quest {
 	private String name;
 	private String desc;
 	private String nextQuest;
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getDesc() {
+		return desc;
+	}
+	
+	public String getNextQuest() {
+		return nextQuest;
+	}
 
 	ArrayList<Trigger> triggers = new ArrayList<Trigger>();
 
