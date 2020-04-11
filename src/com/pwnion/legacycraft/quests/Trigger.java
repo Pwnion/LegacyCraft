@@ -1,5 +1,6 @@
 package com.pwnion.legacycraft.quests;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
@@ -14,7 +15,7 @@ public class Trigger {
 
 	public Trigger(TriggerType name, String data, int finishCondition) {
 		this.type = name;
-		this.data = deserialise(name, data);
+		this.data = deserialise(data);
 		this.finishCondition = finishCondition;
 	}
 	
@@ -79,20 +80,15 @@ public class Trigger {
 		return null;
 	}*/
 	
-	private static Object deserialise(TriggerType type, String data) {
+	private Object deserialise(String data) {
 		switch(type) {
-		case ITEM:
+		case ITEM: //Format: DIAMOND
 			return Material.matchMaterial(data);
-		case LOCATION:
-			String locArray[] = data.split("|");
-			//return new LocationData(Bukkit.getWorld(locArray[0]), 
-			//		Double.parseDouble(locArray[1]), 
-			//		Double.parseDouble(locArray[2]), 
-			//		Double.parseDouble(locArray[3]), 
-			//		Double.parseDouble(locArray[4]));
-		case KILLENTITY:
+		case LOCATION: //Format: world|x|y|z|radius,world2|x2|y2|z2|radius2
+			return LocationData.deserialise(data);
+		case KILLENTITY: //Format: ZOMBIE
 			return EntityType.valueOf(data);
-		case NPC:
+		case NPC: //Format: NpcName|submit EG: blacksmith|false
 			String npcArray[] = data.split("|");
 			HashMap<String, Boolean> npcData = new HashMap<String, Boolean>();
 			npcData.put(npcArray[0], Boolean.valueOf(npcArray[1]));

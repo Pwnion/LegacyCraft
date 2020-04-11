@@ -1,6 +1,7 @@
 package com.pwnion.legacycraft.abilities.areas;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -47,15 +48,15 @@ public class RectangularPrism {
 		return rectangularPrism;
 	}
 	
-	public static final ArrayList<BlockVector> get(int radius, int height) {
-		ArrayList<BlockVector> rectangularPrism = new ArrayList<BlockVector>((int) (Math.pow(radius * 2 + 1, 2) * height));
+	public static final HashSet<BlockVector> get(int radius) {
+		HashSet<BlockVector> cube = new HashSet<BlockVector>((int) (Math.pow(radius * 2 + 1, 3)));
 		
-		for(int distance = 0; distance < height; distance++) {
-			for(Block squareBlock : Square.get(radius)) {
-				rectangularPrism.add(squareBlock);
+		for(int distance = -radius; distance <= radius; distance++) {
+			for(BlockVector vec : Square.get(radius)) {
+				cube.add(vec);
 			}
 		}
 		
-		return rectangularPrism;
+		return cube;
 	}
 }

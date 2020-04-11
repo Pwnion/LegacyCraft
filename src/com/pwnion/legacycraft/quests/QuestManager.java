@@ -21,27 +21,6 @@ public class QuestManager {
 	private static HashMap<UUID, ArrayList<Quest>> finishedQuests = new HashMap<UUID, ArrayList<Quest>>();
 
 	public static void load() {
-		
-		//Load
-		//for(String quest : file) {
-		//	quests.add(new Quest(quest));
-		//}
-
-		//quests.add(new Quest("Get 32 oak logs", "mine some trees", new Trigger(TriggerType.ITEM, Material.OAK_LOG, 32), null));
-		//addLastQuestToQuestLine("Starter");
-		//quests.add(new Quest("Get a stack of diamonds", "you'll need an iron pick for this", new Trigger(TriggerType.ITEM, Material.DIAMOND, 64), null));
-		//addLastQuestToQuestLine("Starter");
-
-		//HashMap<Location, Integer> hash = new HashMap<Location, Integer>();
-		//hash.put(new Location(Bukkit.getWorld("Neutral"), 0, 0, 0), 5);
-		//quests.add(new Quest("Go to 0, 0, 0", "remember the y-level", new Trigger(TriggerType.LOCATION, hash, 1), null));
-		//addLastQuestToQuestLine("Starter");
-
-		//quests.add(new Quest("Kill some Zombies", "not a lot just 16", new Trigger(TriggerType.KILLENTITY, EntityType.ZOMBIE, 16), null));
-		//addLastQuestToQuestLine("Starter");
-
-		//quests.add(new Quest("Speak to the Librarian", "brag to the librarian about your achievements", new Trigger(TriggerType.NPC, "Librarian", 1), null));
-		//addLastQuestToQuestLine("Starter");
 
 		final ConfigAccessor questDataConfig = new ConfigAccessor("quest-data.yml");
 		final ConfigurationSection questDataCS = questDataConfig.getRoot();

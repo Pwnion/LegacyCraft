@@ -29,13 +29,9 @@ public class NearLocation implements Listener {
 						Trigger trigger = triggers.get(i);
 						if(trigger.getName() == TriggerType.LOCATION) {
 							LocationData LocationData = trigger.getLocationData();
-							Location playerLoc = p.getLocation();
-							if(loc.getWorld() == playerLoc.getWorld()) {
-								int requiredDistance = LocationData.get(loc);
-								if(requiredDistance >= loc.distance(playerLoc)) {
-									QuestManager.addProgress(p, quest, i);
-									break;
-								}
+							if(LocationData.isPlayerHere(p)) {
+								QuestManager.addProgress(p, quest, i);
+								break;
 							}
 						}
 					}

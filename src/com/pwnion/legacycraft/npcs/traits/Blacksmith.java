@@ -34,7 +34,7 @@ public class Blacksmith extends Trait {
 	@Persist Location homeLocation = null;
 	@Persist Location workLocation = null;
 	@Persist static String test = "first";
-	boolean first = true;
+	@Persist Boolean first = true;
 	
 	  
     // see the 'Persistence API' section

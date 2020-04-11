@@ -38,7 +38,7 @@ public class PlayerMove implements Listener {
 		Player p = e.getPlayer();
 		UUID playerUUID = p.getUniqueId();
 		
-		NearLocation.onPlayerMove(p);
+		//NearLocation.onPlayerMove(p);
 		
 		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
 		
