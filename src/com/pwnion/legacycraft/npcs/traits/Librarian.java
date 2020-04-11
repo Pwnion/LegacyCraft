@@ -23,25 +23,25 @@ public class Librarian extends Trait {
 	//@Persist Location homeLocation = null;
 	//@Persist Location workLocation = null;
 	//boolean first = true;
-	
-	  
+
+
     // see the 'Persistence API' section
     //@Persist("mysettingname") boolean automaticallyPersistedSetting = false;
 
 	/*
 	private void setupGoals() {
 		HashMap<Integer, Location> places = new HashMap<Integer, Location>();
-		
+
 		//at 5PM go home (11000 ticks)
 		places.put(((5 + 12) - 6) * 1000, homeLocation);
 		//at 7AM go to work (1000 ticks)
 		places.put(((7) - 6) * 1000, workLocation);
-		
+
 		GoPlaces.run(npc, places);
 	} //*/
-	
-	
-	// Here you should load up any values you have previously saved (optional). 
+
+
+	// Here you should load up any values you have previously saved (optional).
     // This does NOT get called when applying the trait for the first time, only loading onto an existing npc at server start.
     // This is called AFTER onAttach so you can load defaults in onAttach and they will be overridden here.
     // This is called BEFORE onSpawn, npc.getBukkitEntity() will return null.
@@ -58,34 +58,34 @@ public class Librarian extends Trait {
     // An example event handler. All traits will be registered automatically as Bukkit Listeners.
 	@EventHandler
 	public void click(NPCRightClickEvent event){
-		//Handle a click on a NPC. The event has a getNPC() method. 
+		//Handle a click on a NPC. The event has a getNPC() method.
 		//Be sure to check event.getNPC() == this.getNPC() so you only handle clicks on this NPC!
 		if(event.getNPC() == this.getNPC()) {
 			Player p = event.getClicker();
 			SpeakToNPC.onSpeakToNPC(p, npc.getName());
-			
+
 			Quest quest = QuestManager.getQuest("Get 32 oak logs");
 			if(!QuestManager.gotQuest(p, quest)) {
 				QuestManager.giveQuest(p, quest);
 			}
-			
+
 			//If close to work do work related stuff
 			//Else do other stuff
-			
+
 			p.sendMessage(Speech.getRnd(npc, this.getName(), p));
-			
+
 			Util.br("NPC '" + npc.getName() + "' has been clicked by " + p.getName());
-			
+
 		}
 	}
-      
+
     // Called every tick
     @Override
     public void run() {
-    	
+
     }
 
-	//Run code when your trait is attached to a NPC. 
+	//Run code when your trait is attached to a NPC.
     //This is called BEFORE onSpawn, so npc.getBukkitEntity() will return null
     //This would be a good place to load configurable defaults for new NPCs.
     @Override
@@ -105,21 +105,21 @@ public class Librarian extends Trait {
 	@Override
 	public void onSpawn() {
 		Util.br("NPC '" + npc.getName() + "' has called onSpawn event for trait " + this.getName());
-		
+
 		/*
 		if(first) {
 			Player p = NPCHomeWork.editPlayer;
-			
+
 			if(!NPCHomeWork.hasLocations()) {
 				p.sendMessage(ChatColor.RED + "No Home/Work found, please add a Home and Work before adding this trait.");
 				npc.removeTrait(this.getClass());
 				return;
 			}
-			
+
 			//homeLocation = NPCHomeWork.getHome();
 			//workLocation = NPCHomeWork.getWork();
 			//p.sendMessage(ChatColor.GOLD + "Transfered Home/Work locations successfully!");
-		
+
 			Util.br("NPC '" + npc.getName() + "' has been assigned trait " + this.getName().toUpperCase() + " by " + p.getName());
 		}
 		
@@ -128,7 +128,7 @@ public class Librarian extends Trait {
 			npc.removeTrait(this.getClass());
 			return;
 		}
-		
+
 		setupGoals(); //*/
 	}
 
