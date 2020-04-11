@@ -2,6 +2,7 @@ package com.pwnion.legacycraft.quests;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
@@ -53,12 +54,10 @@ public class QuestManager {
 		});
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static HashMap<Quest, ArrayList<Integer>> getUnfinishedPlayerData(UUID playerUUID) {
 		return (HashMap<Quest, ArrayList<Integer>>) LegacyCraft.getPlayerData(playerUUID, PlayerData.UNFINISHED_QUESTS);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static ArrayList<Quest> getFinishedPlayerData(UUID playerUUID) {
 		return (ArrayList<Quest>) LegacyCraft.getPlayerData(playerUUID, PlayerData.FINISHED_QUESTS);
 	}
@@ -85,7 +84,10 @@ public class QuestManager {
 		final ConfigurationSection playerDataCS = playerDataConfig.getRoot();
 		String nodePrefix = "players." + playerUUID.toString() + ".quests.";
 		
-		playerDataCS.getConfigurationSection(nodePrefix + "unfinished").getKeys(false).forEach((quest) -> {
+		ConfigurationSection unfinishedCS = playerDataCS.getConfigurationSection(nodePrefix + "unfinished");
+		if(unfinishedCS == null) return questProgressFromFile;
+		
+		unfinishedCS.getKeys(false).forEach((quest) -> {
 			ArrayList<Integer> progress = new ArrayList<Integer>();
 			playerDataCS.getList(nodePrefix + "unfinished." + quest).forEach((num) -> {
 				progress.add((int) num);
@@ -104,7 +106,10 @@ public class QuestManager {
 		final ConfigurationSection playerDataCS = playerDataConfig.getRoot();
 		String nodePrefix = "players." + playerUUID.toString() + ".quests.";
 		
-		playerDataCS.getList(nodePrefix + "finished").forEach((quest) -> {
+		List<?> finishedList = playerDataCS.getList(nodePrefix + "finished");
+		if(finishedList == null) return finishedQuestsFromFile;
+		
+		finishedList.forEach((quest) -> {
 			finishedQuestsFromFile.add(getQuest((String) quest));
 		});
 		

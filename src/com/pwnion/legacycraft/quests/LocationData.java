@@ -1,15 +1,11 @@
 package com.pwnion.legacycraft.quests;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
-import org.bukkit.util.BlockVector;
-
-import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 
 public class LocationData {
 	

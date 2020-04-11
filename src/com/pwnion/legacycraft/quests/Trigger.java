@@ -1,9 +1,7 @@
 package com.pwnion.legacycraft.quests;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 

@@ -841,7 +841,6 @@ IGNIS_STRIKER:
     ONE:
       unlocked: false
       equipped: false
-  hotbar:
 TERRA_STRIKER:
   unlocked: false
   proficiencies:
@@ -855,7 +854,6 @@ TERRA_STRIKER:
     ONE:
       unlocked: false
       equipped: false
-  hotbar:
 AER_STRIKER:
   unlocked: false
   proficiencies:
@@ -869,7 +867,6 @@ AER_STRIKER:
     ONE:
       unlocked: false
       equipped: false
-  hotbar:
 AQUA_STRIKER:
   unlocked: false
   proficiencies:
@@ -883,7 +880,6 @@ AQUA_STRIKER:
     ONE:
       unlocked: false
       equipped: false
-  hotbar:
 IGNIS_VANGUARD:
   unlocked: true
   proficiencies:
@@ -897,7 +893,6 @@ IGNIS_VANGUARD:
     ONE:
       unlocked: false
       equipped: false
-  hotbar:
 TERRA_VANGUARD:
   unlocked: false
   proficiencies:
@@ -911,7 +906,6 @@ TERRA_VANGUARD:
     ONE:
       unlocked: false
       equipped: false
-  hotbar:
 AER_VANGUARD:
   unlocked: false
   proficiencies:
@@ -925,7 +919,6 @@ AER_VANGUARD:
     ONE:
       unlocked: false
       equipped: false
-  hotbar:
 AQUA_VANGUARD:
   unlocked: false
   proficiencies:
@@ -939,7 +932,6 @@ AQUA_VANGUARD:
     ONE:
       unlocked: false
       equipped: false
-  hotbar:
 IGNIS_ROGUE:
   unlocked: true
   proficiencies:
@@ -953,7 +945,6 @@ IGNIS_ROGUE:
     ONE:
       unlocked: false
       equipped: false
-  hotbar:
 TERRA_ROGUE:
   unlocked: false
   proficiencies:
@@ -967,7 +958,6 @@ TERRA_ROGUE:
     ONE:
       unlocked: false
       equipped: false
-  hotbar:
 AER_ROGUE:
   unlocked: false
   proficiencies:
@@ -981,7 +971,6 @@ AER_ROGUE:
     ONE:
       unlocked: false
       equipped: false
-  hotbar:
 AQUA_ROGUE:
   unlocked: false
   proficiencies:
@@ -995,7 +984,6 @@ AQUA_ROGUE:
     ONE:
       unlocked: false
       equipped: false
-  hotbar:
 IGNIS_SHAMAN:
   unlocked: true
   proficiencies:
@@ -1009,7 +997,6 @@ IGNIS_SHAMAN:
     ONE:
       unlocked: false
       equipped: false
-  hotbar:
 TERRA_SHAMAN:
   unlocked: false
   proficiencies:
@@ -1023,7 +1010,6 @@ TERRA_SHAMAN:
     ONE:
       unlocked: false
       equipped: false
-  hotbar:
 AER_SHAMAN:
   unlocked: false
   proficiencies:
@@ -1037,7 +1023,6 @@ AER_SHAMAN:
     ONE:
       unlocked: false
       equipped: false
-  hotbar:
 AQUA_SHAMAN:
   unlocked: false
   proficiencies:
@@ -1051,14 +1036,14 @@ AQUA_SHAMAN:
     ONE:
       unlocked: false
       equipped: false
-  hotbar:
-save:
-  inventory:
-  location:
-  health:
-  hunger:
-  level:
-  exp:
-quests:
-  unfinished:
-  finished:
+
+#save:
+#  inventory:
+#  location:
+#  health:
+#  hunger:
+#  level:
+#  exp:
+#quests:
+#  unfinished:
+#  finished:
