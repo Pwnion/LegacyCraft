@@ -33,6 +33,7 @@ public class Blacksmith extends Trait {
 
 	@Persist Location homeLocation = null;
 	@Persist Location workLocation = null;
+	@Persist static String test = "first";
 	boolean first = true;
 	
 	  
@@ -68,6 +69,11 @@ public class Blacksmith extends Trait {
     // An example event handler. All traits will be registered automatically as Bukkit Listeners.
 	@EventHandler
 	public void click(NPCRightClickEvent event){
+		
+		Util.br(test);
+		test = "2";
+		Util.br(test);
+		
 		//Handle a click on a NPC. The event has a getNPC() method. 
 		//Be sure to check event.getNPC() == this.getNPC() so you only handle clicks on this NPC!
 		if(event.getNPC() == this.getNPC()) {

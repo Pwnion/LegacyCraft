@@ -64,10 +64,10 @@ public class Librarian extends Trait {
 			Player p = event.getClicker();
 			SpeakToNPC.onSpeakToNPC(p, npc.getName());
 
-			Quest quest = QuestManager.getQuest("Get 32 oak logs");
-			if(!QuestManager.gotQuest(p, quest)) {
-				QuestManager.giveQuest(p, quest);
-			}
+			//Quest quest = QuestManager.getQuest("Get 32 oak logs");
+			//if(!QuestManager.gotQuest(p, quest)) {
+			//	QuestManager.giveQuest(p, quest);
+			//}
 
 			//If close to work do work related stuff
 			//Else do other stuff

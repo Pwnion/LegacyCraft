@@ -8,6 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
+import com.pwnion.legacycraft.quests.LocationData;
 import com.pwnion.legacycraft.quests.Quest;
 import com.pwnion.legacycraft.quests.QuestManager;
 import com.pwnion.legacycraft.quests.Trigger;
@@ -27,15 +28,13 @@ public class NearLocation implements Listener {
 					for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
 						Trigger trigger = triggers.get(i);
 						if(trigger.getName() == TriggerType.LOCATION) {
-							HashMap<Location, Integer> LocationData = trigger.getLocationData();
+							LocationData LocationData = trigger.getLocationData();
 							Location playerLoc = p.getLocation();
-							for(Location loc : LocationData.keySet()) {
-								if(loc.getWorld() == playerLoc.getWorld()) {
-									int requiredDistance = LocationData.get(loc);
-									if(requiredDistance >= loc.distance(playerLoc)) {
-										QuestManager.addProgress(p, quest, i);
-										break;
-									}
+							if(loc.getWorld() == playerLoc.getWorld()) {
+								int requiredDistance = LocationData.get(loc);
+								if(requiredDistance >= loc.distance(playerLoc)) {
+									QuestManager.addProgress(p, quest, i);
+									break;
 								}
 							}
 						}

@@ -15,20 +15,9 @@ public class Trigger {
 	int finishCondition;
 
 	@SuppressWarnings("incomplete-switch")
-	public Trigger(TriggerType name, Object data, int finishCondition) {
+	public Trigger(TriggerType name, String data, int finishCondition) {
 		this.type = name;
-		
-		switch(name) {
-		case NPC:
-			if(data instanceof String) {
-				HashMap<String, Boolean> npcData = new HashMap<String, Boolean>();
-				npcData.put((String) data, false);
-				data = npcData;
-			}
-			break;
-		}
-		
-		this.data = data;
+		this.data = deserialise(name, data);
 		this.finishCondition = finishCondition;
 	}
 	

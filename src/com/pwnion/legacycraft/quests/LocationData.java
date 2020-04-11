@@ -1,22 +1,25 @@
 package com.pwnion.legacycraft.quests;
 
+import java.util.HashSet;
+
+import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.util.BlockVector;
 
 public class LocationData {
 	
-	World world;
-	double x;
-	double y;
-	double z;
+    Location centre;
+	HashSet<BlockVector> area;
+
 	
-	double distance;
-	
-	LocationData(World world, double x, double y, double z, double distance) {
-		this.x = x;
-		this.y = y;
-		this.z = z;
+	LocationData(Location centre, double radius) {
+		this.centre = centre;
 		
-		this.distance = distance;
+		RectangularPrism
+	}
+	
+	LocationData() {
+		
 	}
 	
 	public String serialise() {

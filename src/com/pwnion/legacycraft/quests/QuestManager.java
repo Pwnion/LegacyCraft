@@ -45,7 +45,7 @@ public class QuestManager {
 		//quests.add(new Quest("Kill some Zombies", "not a lot just 16", new Trigger(TriggerType.KILLENTITY, EntityType.ZOMBIE, 16), null));
 		//addLastQuestToQuestLine("Starter");
 
-		//quests.add(new Quest("Speak to the Librarian", "brag to the librarian about your achivements", new Trigger(TriggerType.NPC, "Librarian", 1), null));
+		//quests.add(new Quest("Speak to the Librarian", "brag to the librarian about your achievements", new Trigger(TriggerType.NPC, "Librarian", 1), null));
 		//addLastQuestToQuestLine("Starter");
 
 		final ConfigAccessor questDataConfig = new ConfigAccessor("quest-data.yml");
@@ -56,7 +56,7 @@ public class QuestManager {
 
 			ArrayList<Trigger> triggers = new ArrayList<Trigger>();
 			ArrayList<TriggerType> triggerTypes = new ArrayList<TriggerType>();
-			ArrayList<Object> triggerData = new ArrayList<Object>();
+			ArrayList<String> triggerData = new ArrayList<String>();
 			ArrayList<Integer> triggerFinishConditions = new ArrayList<Integer>();
 			String nodePrefix = name + ".triggers.";
 
@@ -65,7 +65,7 @@ public class QuestManager {
 			});
 
 			questDataCS.getList(nodePrefix + "data").forEach((data) -> {
-				triggerData.add(data);
+				triggerData.add((String) data);
 			});
 
 			questDataCS.getList(nodePrefix + "finishConditions").forEach((finishCondition) -> {

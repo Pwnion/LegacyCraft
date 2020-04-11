@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Quest {
 
-	public Quest(String name, String desc, Trigger trigger, String nextQuest) {
+	public Quest(String name, String desc, ArrayList<Trigger> triggers) {
 		this.name = name;
 		this.desc = desc;
 		this.nextQuest = nextQuest;
-		triggers.add(trigger);
+		this.triggers = triggers;
 	}
 
 	private String name;

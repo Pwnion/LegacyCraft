@@ -1,7 +1,10 @@
-name:
+QuestName: 
   description:
   triggers:
     types:
+      - ITEM
     data:
+      - DIAMOND
     finish-conditions:
+      - 1
   next-quest:

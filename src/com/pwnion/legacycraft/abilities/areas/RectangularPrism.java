@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.util.BlockVector;
 
 import com.pwnion.legacycraft.Util;
 
@@ -40,6 +41,18 @@ public class RectangularPrism {
 					temp.add(pos1);
 					rectangularPrism.add(temp.getBlock());
 				}
+			}
+		}
+		
+		return rectangularPrism;
+	}
+	
+	public static final ArrayList<BlockVector> get(int radius, int height) {
+		ArrayList<BlockVector> rectangularPrism = new ArrayList<BlockVector>((int) (Math.pow(radius * 2 + 1, 2) * height));
+		
+		for(int distance = 0; distance < height; distance++) {
+			for(Block squareBlock : Square.get(radius)) {
+				rectangularPrism.add(squareBlock);
 			}
 		}
 		
