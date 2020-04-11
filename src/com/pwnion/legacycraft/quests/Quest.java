@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Quest {
 
-	public Quest(String name, String desc, ArrayList<Trigger> triggers) {
+	public Quest(String name, String desc, ArrayList<Trigger> triggers, String nextQuest) {
 		this.name = name;
 		this.desc = desc;
 		this.nextQuest = nextQuest;

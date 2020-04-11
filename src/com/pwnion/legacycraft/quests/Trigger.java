@@ -88,11 +88,11 @@ public class Trigger {
 			return Material.matchMaterial(data);
 		case LOCATION:
 			String locArray[] = data.split("|");
-			return new LocationData(Bukkit.getWorld(locArray[0]), 
-					Double.parseDouble(locArray[1]), 
-					Double.parseDouble(locArray[2]), 
-					Double.parseDouble(locArray[3]), 
-					Double.parseDouble(locArray[4]));
+			//return new LocationData(Bukkit.getWorld(locArray[0]), 
+			//		Double.parseDouble(locArray[1]), 
+			//		Double.parseDouble(locArray[2]), 
+			//		Double.parseDouble(locArray[3]), 
+			//		Double.parseDouble(locArray[4]));
 		case KILLENTITY:
 			return EntityType.valueOf(data);
 		case NPC:
