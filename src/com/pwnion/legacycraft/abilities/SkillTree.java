@@ -3,9 +3,11 @@ package com.pwnion.legacycraft.abilities;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import com.google.common.collect.ImmutableMap;
@@ -473,5 +475,26 @@ public class SkillTree {
 	
 	public final void setUnlockedMastery(Build build) {
 		setMastery(build, false);
+	}
+	
+	/*
+	 * HOTBAR FUNCTIONS
+	 */
+	
+	public final void saveHotbar(Build build) {
+		Inventory hotbar = Bukkit.createInventory(null, 9);
+		for(int i = 0; i < 9; i++) {
+			hotbar.setItem(i, p.getInventory().getItem(i));
+		}
+		
+		playerDataCS.set(nodePrefix + build.toString() + ".hotbar", hotbar);
+		save();
+	}
+	
+	public final void loadHotbar(Build build) {
+		Inventory hotbar = (Inventory) playerDataCS.get(nodePrefix + build.toString() + ".hotbar");
+		for(int i = 0; i < 9; i++) {
+			p.getInventory().setItem(i, hotbar.getItem(i));
+		}
 	}
 }
