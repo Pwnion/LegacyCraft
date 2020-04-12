@@ -24,6 +24,8 @@ public class PlayerDropItem implements Listener {
 		
 		if(p.getGameMode().equals(GameMode.ADVENTURE) && !skillTree.getPlayerClass().equals(PlayerClass.NONE)) {
 			e.setCancelled(true);
+			
+			//Cast Ultimate
 		}
 	}
 }

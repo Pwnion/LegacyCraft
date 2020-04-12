@@ -119,10 +119,22 @@ public class InventoryClick implements Listener {
             			CharacterBuildMenuInv.load(p);
             		} else if(itemMaterial.equals(Material.GLASS_PANE) && itemMeta.getCustomModelData() == 1) {
             			WarpGatesInv.load(p);
+            		} else if(itemMaterial.equals(Material.STICK) && itemMeta.getCustomModelData() == 1) {
+            			//Rotate hotbar
             		}
             	}
         	} else {
         		
+        	/*
+	        if (current.getType().equals(Material.AIR)) {
+	            // player put item to inventory
+	        } else if (!current.getType().equals(Material.AIR) && cursor.getType().equals(Material.AIR)) {
+	            // player take item from inventory
+	        } else if (!current.getType().equals(Material.AIR) && !cursor.getType().equals(Material.AIR)) {
+	            // player swap item in inventory
+	        }
+        	*/
+        	
         	}
         }
     }

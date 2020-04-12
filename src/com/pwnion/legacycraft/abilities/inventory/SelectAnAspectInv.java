@@ -69,6 +69,9 @@ public class SelectAnAspectInv extends Inv {
 					skillTree.setUnlockedBuild(openedClass, clickedAspect);
 				}
 				
+				skillTree.saveHotbar(skillTree.getBuild());
+				skillTree.loadHotbar(skillTree.getBuild(openedClass, clickedAspect));
+				
 				if(!skillTree.getUnlockedBuild(openedClass, clickedAspect)) return;
 				if(clickedAspect.equals(skillTree.getAspect(openedClass))) return;
 				
