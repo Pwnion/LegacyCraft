@@ -18,5 +18,4 @@ public class InventoryDrag implements Listener {
 			GetItem.updateItemQuests(p);
 		}
 	}
-
 }

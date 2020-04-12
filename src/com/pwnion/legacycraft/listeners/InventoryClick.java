@@ -108,17 +108,21 @@ public class InventoryClick implements Listener {
         if(!handleGUI.get()) {
         	SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
         	
-        	if(p.getGameMode().equals(GameMode.ADVENTURE) && !skillTree.getPlayerClass().equals(PlayerClass.NONE)) {
-        		e.setCancelled(true);
+        	if(clickedSlot > 8 || clickedSlot == -106) {
+        		if(p.getGameMode().equals(GameMode.ADVENTURE) && !skillTree.getPlayerClass().equals(PlayerClass.NONE)) {
+            		e.setCancelled(true);
+            		
+            		Material itemMaterial = clickedItem.getType();
+            		ItemMeta itemMeta = clickedItem.getItemMeta();
+            		
+            		if(itemMaterial.equals(Material.COMPASS)) {
+            			CharacterBuildMenuInv.load(p);
+            		} else if(itemMaterial.equals(Material.GLASS_PANE) && itemMeta.getCustomModelData() == 1) {
+            			WarpGatesInv.load(p);
+            		}
+            	}
+        	} else {
         		
-        		Material itemMaterial = clickedItem.getType();
-        		ItemMeta itemMeta = clickedItem.getItemMeta();
-        		
-        		if(itemMaterial.equals(Material.COMPASS)) {
-        			CharacterBuildMenuInv.load(p);
-        		} else if(itemMaterial.equals(Material.GLASS_PANE) && itemMeta.getCustomModelData() == 1) {
-        			WarpGatesInv.load(p);
-        		}
         	}
         }
     }

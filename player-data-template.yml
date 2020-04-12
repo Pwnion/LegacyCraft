@@ -1036,13 +1036,14 @@ AQUA_SHAMAN:
     ONE:
       unlocked: false
       equipped: false
-save:
-  inventory:
-  location:
-  health:
-  hunger:
-  level:
-  exp:
-quests:
-  unfinished:
-  finished:
+
+#save:
+#  inventory:
+#  location:
+#  health:
+#  hunger:
+#  level:
+#  exp:
+#quests:
+#  unfinished:
+#  finished:
