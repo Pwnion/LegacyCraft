@@ -93,7 +93,14 @@ STRIKER:
     - null
     - null
     - null
-    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: STICK
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Rotate Hotbar
+        custom-model-data: 1
     - null
     - null
     - null
@@ -300,7 +307,14 @@ VANGUARD:
     - null
     - null
     - null
-    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: STICK
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Rotate Hotbar
+        custom-model-data: 1
     - null
     - null
     - null
@@ -507,7 +521,14 @@ ROGUE:
     - null
     - null
     - null
-    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: STICK
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Rotate Hotbar
+        custom-model-data: 1
     - null
     - null
     - null
@@ -714,7 +735,14 @@ SHAMAN:
     - null
     - null
     - null
-    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: STICK
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Rotate Hotbar
+        custom-model-data: 1
     - null
     - null
     - null
@@ -841,6 +869,45 @@ IGNIS_STRIKER:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §4Striker Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §4Striker Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
 TERRA_STRIKER:
   unlocked: false
   proficiencies:
@@ -854,6 +921,45 @@ TERRA_STRIKER:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §4Striker Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §4Striker Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
 AER_STRIKER:
   unlocked: false
   proficiencies:
@@ -867,6 +973,45 @@ AER_STRIKER:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §4Striker Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §4Striker Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
 AQUA_STRIKER:
   unlocked: false
   proficiencies:
@@ -880,6 +1025,45 @@ AQUA_STRIKER:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §4Striker Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §4Striker Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
 IGNIS_VANGUARD:
   unlocked: true
   proficiencies:
@@ -893,6 +1077,45 @@ IGNIS_VANGUARD:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §2Vanguard Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §2Vanguard Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
 TERRA_VANGUARD:
   unlocked: false
   proficiencies:
@@ -906,6 +1129,45 @@ TERRA_VANGUARD:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §2Vanguard Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §2Vanguard Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null      
 AER_VANGUARD:
   unlocked: false
   proficiencies:
@@ -919,6 +1181,45 @@ AER_VANGUARD:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §2Vanguard Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §2Vanguard Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
 AQUA_VANGUARD:
   unlocked: false
   proficiencies:
@@ -932,6 +1233,45 @@ AQUA_VANGUARD:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §2Vanguard Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §2Vanguard Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
 IGNIS_ROGUE:
   unlocked: true
   proficiencies:
@@ -945,6 +1285,45 @@ IGNIS_ROGUE:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §8Rogue Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §8Rogue Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
 TERRA_ROGUE:
   unlocked: false
   proficiencies:
@@ -958,6 +1337,45 @@ TERRA_ROGUE:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §8Rogue Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §8Rogue Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
 AER_ROGUE:
   unlocked: false
   proficiencies:
@@ -971,6 +1389,45 @@ AER_ROGUE:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §8Rogue Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §8Rogue Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
 AQUA_ROGUE:
   unlocked: false
   proficiencies:
@@ -984,6 +1441,45 @@ AQUA_ROGUE:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §8Rogue Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §8Rogue Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
 IGNIS_SHAMAN:
   unlocked: true
   proficiencies:
@@ -997,6 +1493,45 @@ IGNIS_SHAMAN:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Shaman Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Shaman Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
 TERRA_SHAMAN:
   unlocked: false
   proficiencies:
@@ -1010,6 +1545,45 @@ TERRA_SHAMAN:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Shaman Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Shaman Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
 AER_SHAMAN:
   unlocked: false
   proficiencies:
@@ -1023,6 +1597,45 @@ AER_SHAMAN:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Shaman Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Shaman Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
 AQUA_SHAMAN:
   unlocked: false
   proficiencies:
@@ -1036,3 +1649,42 @@ AQUA_SHAMAN:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Shaman Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Shaman Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null
+  - null

@@ -56,11 +56,5 @@
       <artifactId>ProtocolLib</artifactId>
       <version>4.5.0</version>
     </dependency>
-    <dependency>
-      <groupId>io.netty</groupId>
-      <artifactId>netty-all</artifactId>
-      <version>4.1.48.Final</version>
-      <scope>compile</scope>
-    </dependency>
   </dependencies>
 </project>
