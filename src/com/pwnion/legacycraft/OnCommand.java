@@ -183,32 +183,38 @@ public class OnCommand implements CommandExecutor {
 					}
 				}
 			} else if(lbl.equals("test")) {
-				
 				try {
-					ItemStack book = MinecraftReflection.getBukkitItemStack(p.getInventory().getItemInMainHand());
-					Util.br(NbtFactory.fromItemTag(book).toString());
-				} catch(Exception ex) {
+					try {
+						ItemStack book = MinecraftReflection.getBukkitItemStack(p.getInventory().getItemInMainHand());
+						Util.br(NbtFactory.fromItemTag(book).toString());
+					} catch(Exception ex) {
+						
+					}
 					
+					Book questBook = new Book("Title", "Author");
+					PageBuilder newPage = questBook.addPage();
+					newPage.add("Lol");
+					Builder test = newPage.add();
+					test.hoverEvent(HoverAction.Show_Text, "More info");
+					test.setText("Hover over me for more info");
+					test.build();
+					newPage.build();
+					
+					p.getInventory().addItem(questBook.build());
+					
+					questBook.open(p);
+					
+					/*
+					for(Quest quest : QuestManager.getActiveQuests(p)) {
+						p.sendMessage(quest.getName());
+						p.sendMessage(quest.getDesc());
+						p.sendMessage(QuestManager.getProgress(p, quest, 0) + " / " + quest.getCondition(0));
+						p.sendMessage(QuestManager.getPercent(p, quest, 0) + "% complete");
+					} //*/
+					
+				} catch(Exception e) {
+					Util.print(e);
 				}
-				
-				Book questBook = new Book("Title", "Author");
-				PageBuilder newPage = questBook.addPage();
-				newPage.add("Lol");
-				Builder test = newPage.add();
-				test.hoverEvent(HoverAction.Show_Text, "More info");
-				test.setText("Hover over me for more info");
-				test.build();
-				newPage.build();
-				
-				p.getInventory().addItem(questBook.build());
-				
-				/*
-				for(Quest quest : QuestManager.getActiveQuests(p)) {
-					p.sendMessage(quest.getName());
-					p.sendMessage(quest.getDesc());
-					p.sendMessage(QuestManager.getProgress(p, quest, 0) + " / " + quest.getCondition(0));
-					p.sendMessage(QuestManager.getPercent(p, quest, 0) + "% complete");
-				} //*/
 			}
 			return true;
 		} else {

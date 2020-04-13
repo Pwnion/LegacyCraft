@@ -4,13 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.utility.MinecraftReflection;
+import com.comphenix.protocol.wrappers.MinecraftKey;
 import com.comphenix.protocol.wrappers.nbt.NbtCompound;
 import com.comphenix.protocol.wrappers.nbt.NbtFactory;
 import com.comphenix.protocol.wrappers.nbt.NbtList;
+import com.pwnion.legacycraft.Util;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+
+//Book API by Juanco
 public class Book {
 
 	    private String title;
@@ -24,6 +34,7 @@ public class Book {
 	  
 	    public PageBuilder addPage() { return new PageBuilder(this); }
 	  
+	    //Modified to work with ProtocolLib
 	    public ItemStack build() {
 	        ItemStack book = MinecraftReflection.getBukkitItemStack(new ItemStack(Material.WRITTEN_BOOK));
 
@@ -34,15 +45,36 @@ public class Book {
 	        
 	        NbtList<String> pages = NbtFactory.ofList("name", this.pages);
 	        
-	        /*
-	        for (String page : this.pages) {
-	        	pages.add(page);
-	        } //*/
-	        
 	        tag.put("pages", pages);
 	        
 	        NbtFactory.setItemTag(book, tag);
 	        return book;
+	    }
+	    
+	    //Open book function by MysteX and connection_lost
+	    public void open(Player p) {
+	    	ItemStack bookitem = build();
+	    	int slot = p.getInventory().getHeldItemSlot();
+	    	ItemStack old = p.getInventory().getItem(slot);
+	    	p.getInventory().setItem(slot, bookitem);
+	    	try {
+	    	    PacketContainer pc = ProtocolLibrary.getProtocolManager().
+	    	        createPacket(PacketType.Play.Server.CUSTOM_PAYLOAD);
+	    	    pc.getModifier().writeDefaults();
+	    	    ByteBuf bf = Unpooled.buffer(256); // note 1
+	    	    bf.setByte(0, (byte) 0); // note 2
+	    	    bf.writerIndex(1);
+	    	    pc.getModifier().write(1, MinecraftReflection.getPacketDataSerializer(bf));
+	    	    pc.getModifier().write(0, new MinecraftKey("minecraft:book_open"));
+	    	    //Util.br(new MinecraftKey("minecraft:book_open"));
+	    	    
+	    	    ProtocolLibrary.getProtocolManager().sendServerPacket(p, pc);
+	    	  
+	    	} catch (Exception e) {
+	    	    e.printStackTrace();
+	    	    Util.print(e);
+	    	}
+	    	p.getInventory().setItem(slot, old);
 	    }
 	  
 	    public final class PageBuilder {
