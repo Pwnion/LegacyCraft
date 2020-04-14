@@ -59,31 +59,12 @@ public class Book {
 	    	    
 	    	    ProtocolLibrary.getProtocolManager().sendServerPacket(p, pc);
 	    	} catch (Exception e) {
+	    		//May catch on a lag spike
 	    	    e.printStackTrace();
 	    	    Util.print(e);
 	    	}
 	    	p.getInventory().setItem(slot, old);
 	    }
-	    
-	    
-	    public static ItemStack newBook() {
-	    	BookMeta meta = (BookMeta) Bukkit.getItemFactory().getItemMeta(Material.WRITTEN_BOOK);
-	    	meta.setTitle("");
-	    	meta.setAuthor("");
-	      
-	    	TextComponent message = new TextComponent( "Click me" );
-	    	message.setClickEvent( new ClickEvent( ClickEvent.Action.OPEN_URL, "http://spigotmc.org" ) );
-	    	message.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Goto the Spigot website!").create() ) );
-	    	
-	    	BaseComponent page[] = {message};
-	    	
-	    	meta.spigot().addPage(page);
-	    	meta.spigot().getPages();
-	      
-	    	ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-	    	book.setItemMeta(meta);
-	    	return book;
-	    } //*/
 	  
 	    public final class PageBuilder {
 	        private ArrayList<BaseComponent> page = new ArrayList<BaseComponent>();

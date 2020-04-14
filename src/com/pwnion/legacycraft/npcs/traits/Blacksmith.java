@@ -33,8 +33,8 @@ public class Blacksmith extends Trait {
 
 	@Persist Location homeLocation = null;
 	@Persist Location workLocation = null;
-	@Persist static String test = "first";
-	@Persist Boolean first = true;
+	@Persist static String test = "first"; //TODO check Persistence of static variables
+	@Persist Boolean first = true; //TODO check Persistence if works
 	
 	  
     // see the 'Persistence API' section
@@ -58,7 +58,7 @@ public class Blacksmith extends Trait {
     // This is called BEFORE onSpawn, npc.getBukkitEntity() will return null.
 	public void load(DataKey key) {
 		Util.br("NPC '" + npc.getName() + "' is loading for trait " + this.getName());
-		first = false;
+		first = false; //TODO come up with a better method
 	}
 
 	// Save settings for this NPC (optional). These values will be persisted to the Citizens saves file
@@ -70,6 +70,7 @@ public class Blacksmith extends Trait {
 	@EventHandler
 	public void click(NPCRightClickEvent event){
 		
+		//TODO check Persistence of static variables
 		Util.br(test);
 		test = "2";
 		Util.br(test);
@@ -80,10 +81,11 @@ public class Blacksmith extends Trait {
 			Player p = event.getClicker();
 			SpeakToNPC.onSpeakToNPC(p, npc.getName());
 			
-			//If close to work do work related stuff
-			//Else do other stuff
+			
+			//TODO add a blacksmith gui
 			p.sendMessage(ChatColor.GRAY + "REPAIR ITEMS?");
 			
+			//TODO add some speech lines
 			p.sendMessage(Speech.getRnd(npc, this.getName(), p));
 			
 			PlayerInventory inv = p.getInventory();
@@ -131,6 +133,7 @@ public class Blacksmith extends Trait {
 		Util.br("NPC '" + npc.getName() + "' has called onSpawn event for trait " + this.getName());
 		
 		if(first) {
+			//TODO sometimes null
 			Player p = NPCHomeWork.editPlayer;
 			
 			if(!NPCHomeWork.hasLocations()) {

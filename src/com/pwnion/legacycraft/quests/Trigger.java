@@ -57,7 +57,6 @@ public class Trigger {
 		return null;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public HashMap<String, Boolean> getNPCData() {
 		if(type == TriggerType.NPC) {
 			return (HashMap<String, Boolean>) data;
@@ -69,7 +68,8 @@ public class Trigger {
 		return (String) getNPCData().keySet().toArray()[0];
 	}
 	
-	/*
+	//Only Required if an in-game quest creator was added
+	/* 
 	public String serialise() {
 		switch(type) {
 		case ITEM:

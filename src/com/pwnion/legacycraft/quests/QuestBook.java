@@ -75,6 +75,7 @@ public class QuestBook {
 			questName = questName.substring(0, maxLineLength - 2) + "...";
 		}
 		
+		//TODO: Setup quest page, Add Back button?
 		PageBuilder questPage = questBook.addPage();
 		
 		questPage.add("Quest Name:\n" + quest.getName()).setColor(ChatColor.BOLD).build();

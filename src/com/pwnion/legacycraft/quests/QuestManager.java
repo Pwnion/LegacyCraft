@@ -56,6 +56,8 @@ public class QuestManager {
 			quests.add(new Quest(name, desc, triggers, nextQuest));
 		});
 		
+		
+		//TEMP
 		quests.add(new Quest("Get 64 Diamonds", "desc", new Trigger(TriggerType.ITEM, Material.DIAMOND, 64)));
 		quests.add(new Quest("Get 64 Oak Logs", "desc", new Trigger(TriggerType.ITEM, Material.OAK_LOG, 64)));
 		quests.add(new Quest("Get 1 Diamond Horse Armour", "desc", new Trigger(TriggerType.ITEM, Material.DIAMOND_HORSE_ARMOR, 64)));
@@ -127,9 +129,10 @@ public class QuestManager {
 		return finishedQuestsFromFile;
 	}
 	
+	//For new quests
 	public static void giveQuest(Player p, Quest quest) {
         ArrayList<Integer> progress = new ArrayList<Integer>(quest.triggers.size());
-        for(int i = 0; i < quest.triggers.size(); i++) { //GET CHECKED
+        for(int i = 0; i < quest.triggers.size(); i++) { 
             progress.add(0);
         }
         getUnfinishedPlayerData(p.getUniqueId()).put(quest, progress);
@@ -221,7 +224,7 @@ public class QuestManager {
 		getUnfinishedPlayerData(p.getUniqueId()).put(quest, progress);
 		if(getPercentOverall(p, quest) >= 100) {
 
-			//Give Quest Rewards?
+			//TODO Give Quest Rewards?
 
 			//Remove player as active quest Holder and move to finished list
 			getFinishedPlayerData(p.getUniqueId()).add(quest);
@@ -257,7 +260,7 @@ public class QuestManager {
 			return finishValues;
 		}
 		ArrayList<Integer> output = new ArrayList<Integer>();
-		for(int i = 0; i < quest.triggers.size(); i++) { //GET CHECKED
+		for(int i = 0; i < quest.triggers.size(); i++) {
 			output.add(0);
 		}
 		return output;
@@ -279,7 +282,7 @@ public class QuestManager {
 		ArrayList<Integer> progress = getProgress(p, quest);
 		double progressTotal = 0;
 		double finalTotal = 0;
-		for(int i = 0; i < quest.triggers.size(); i++) { //GET CHECKED
+		for(int i = 0; i < quest.triggers.size(); i++) {
 			progressTotal += progress.get(i);
 			finalTotal += quest.getCondition(i);
 		}
@@ -310,6 +313,7 @@ public class QuestManager {
 		return hasQuestActive(p, quest) || hasQuestFinished(p, quest);
 	}
 
+	//May be used later for debugging
 	/*
 	public static void resetQuests(Player p, boolean fullRemoval) {
 		if(fullRemoval) {

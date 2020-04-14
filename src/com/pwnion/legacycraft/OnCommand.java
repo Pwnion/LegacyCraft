@@ -153,10 +153,10 @@ public class OnCommand implements CommandExecutor {
 						}
 
 						break;
-					case "home":
+					case "home": //TODO not working
 						p.sendMessage(NPCHomeWork.setHome(p, p.getLocation()));
 						break;
-					case "work":
+					case "work": //TODO not working
 						p.sendMessage(NPCHomeWork.setWork(p, p.getLocation()));
 						break;
 					case "complete":

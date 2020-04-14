@@ -52,6 +52,7 @@ public class LocationData {
 		return dim == null || ((pDim > dim - radius) && (pDim < dim + radius));
 	}
 	
+	//Not used
 	public String serialise() {
 		String output = "";
 		for(ArrayList<Object> location : data) {
