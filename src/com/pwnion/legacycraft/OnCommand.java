@@ -16,8 +16,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
-import com.comphenix.protocol.utility.MinecraftReflection;
-import com.comphenix.protocol.wrappers.nbt.NbtFactory;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.ooc.Portal;
@@ -25,11 +23,8 @@ import com.pwnion.legacycraft.abilities.proficiencies.AquaVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.proficiencies.TerraVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.targets.Point;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
-import com.pwnion.legacycraft.quests.Book;
-import com.pwnion.legacycraft.quests.Book.Builder;
-import com.pwnion.legacycraft.quests.Book.HoverAction;
-import com.pwnion.legacycraft.quests.Book.PageBuilder;
 import com.pwnion.legacycraft.quests.Quest;
+import com.pwnion.legacycraft.quests.QuestBook;
 import com.pwnion.legacycraft.quests.QuestManager;
 
 public class OnCommand implements CommandExecutor {
@@ -184,33 +179,9 @@ public class OnCommand implements CommandExecutor {
 				}
 			} else if(lbl.equals("test")) {
 				try {
-					try {
-						ItemStack book = MinecraftReflection.getBukkitItemStack(p.getInventory().getItemInMainHand());
-						Util.br(NbtFactory.fromItemTag(book).toString());
-					} catch(Exception ex) {
-						
-					}
 					
-					Book questBook = new Book("Title", "Author");
-					PageBuilder newPage = questBook.addPage();
-					newPage.add("Lol");
-					Builder test = newPage.add();
-					test.hoverEvent(HoverAction.Show_Text, "More info");
-					test.setText("Hover over me for more info");
-					test.build();
-					newPage.build();
 					
-					p.getInventory().addItem(questBook.build());
-					
-					questBook.open(p);
-					
-					/*
-					for(Quest quest : QuestManager.getActiveQuests(p)) {
-						p.sendMessage(quest.getName());
-						p.sendMessage(quest.getDesc());
-						p.sendMessage(QuestManager.getProgress(p, quest, 0) + " / " + quest.getCondition(0));
-						p.sendMessage(QuestManager.getPercent(p, quest, 0) + "% complete");
-					} //*/
+					QuestBook.open(p);
 					
 				} catch(Exception e) {
 					Util.print(e);

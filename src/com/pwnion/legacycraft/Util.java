@@ -27,8 +27,9 @@ public class Util {
 	}
 	
 	public static final void print(Exception e) {
+		e.printStackTrace();
 		StackTraceElement st[] = e.getStackTrace();
-	    for(int i = 4; i != 0; i--) {
+	    for(int i = 8; i != 0; i--) {
 	    	StackTraceElement el = e.getStackTrace()[i];
 	    	Util.br(el.toString());
 	    }

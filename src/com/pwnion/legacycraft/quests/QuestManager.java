@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import com.pwnion.legacycraft.ConfigAccessor;
@@ -17,7 +19,8 @@ import com.pwnion.legacycraft.quests.triggers.GetItem;
 
 public class QuestManager {
 
-	private static ArrayList<Quest> quests = new ArrayList<Quest>();
+	//TEMP PUBLIC CHANGE TO PRIVATE?
+	public static ArrayList<Quest> quests = new ArrayList<Quest>();
 	
 	public static void loadQuests() {
 		final ConfigAccessor questDataConfig = new ConfigAccessor("quest-data.yml");
@@ -52,6 +55,14 @@ public class QuestManager {
 
 			quests.add(new Quest(name, desc, triggers, nextQuest));
 		});
+		
+		quests.add(new Quest("Get 64 Diamonds", "desc", new Trigger(TriggerType.ITEM, Material.DIAMOND, 64)));
+		quests.add(new Quest("Get 64 Oak Logs", "desc", new Trigger(TriggerType.ITEM, Material.OAK_LOG, 64)));
+		quests.add(new Quest("Get 1 Diamond Horse Armour", "desc", new Trigger(TriggerType.ITEM, Material.DIAMOND_HORSE_ARMOR, 64)));
+	
+		quests.add(new Quest("Kill 16 Zombies", "desc", new Trigger(TriggerType.KILLENTITY, EntityType.ZOMBIE, 16)));
+		quests.add(new Quest("Kill 16 Skeletons", "desc", new Trigger(TriggerType.KILLENTITY, EntityType.SKELETON, 16)));
+		quests.add(new Quest("Kill 16 Pigs", "desc", new Trigger(TriggerType.KILLENTITY, EntityType.PIG, 16)));
 	}
 	
 	public static HashMap<Quest, ArrayList<Integer>> getUnfinishedPlayerData(UUID playerUUID) {
@@ -160,9 +171,17 @@ public class QuestManager {
 	public static ArrayList<Quest> getActiveQuests(Player p) {
 		return getActiveQuests(p.getUniqueId());
 	}
+	
+	public static double getActiveQuestCount(Player p) {
+		return getUnfinishedPlayerData(p.getUniqueId()).size();
+	}
 
 	public static ArrayList<Quest> getCompletedQuests(Player p) {
 		return getCompletedQuests(p.getUniqueId());
+	}
+	
+	public static double getCompletedQuestCount(Player p) {
+		return getFinishedPlayerData(p.getUniqueId()).size();
 	}
 
 	public static ArrayList<Quest> getQuests(Player p) {
@@ -243,6 +262,14 @@ public class QuestManager {
 		}
 		return output;
 	}
+	
+	public static int getProgressOverall(Player p, Quest quest) {
+		int out = 0;
+		for(int prog : getProgress(p, quest)) {
+			out += prog;
+		}
+		return out;
+	}
 
 	public static double getPercent(Player p, Quest quest, int index) {
 		return ((double) getProgress(p, quest, index) / (double) quest.getCondition(index)) * 100;
@@ -257,6 +284,10 @@ public class QuestManager {
 			finalTotal += quest.getCondition(i);
 		}
 		return (progressTotal / finalTotal) * 100;
+	}
+	
+	public static String getProgressString(Player p, Quest quest) {
+		return getProgressOverall(p, quest) + " / " + quest.getConditionOverall();
 	}
 
 	public static boolean hasQuestActive(Player p, Quest quest) {

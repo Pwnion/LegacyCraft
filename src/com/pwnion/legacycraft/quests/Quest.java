@@ -10,6 +10,16 @@ public class Quest {
 		this.nextQuest = nextQuest;
 		this.triggers = triggers;
 	}
+	
+	//TEMP
+	public Quest(String name, String desc, Trigger trigger) {
+		this.name = name;
+		this.desc = desc;
+		this.nextQuest = null;
+		ArrayList<Trigger> triggers = new ArrayList<Trigger>();
+		triggers.add(trigger);
+		this.triggers = triggers;
+	}
 
 	private String name;
 	private String desc;
@@ -54,6 +64,14 @@ public class Quest {
 
 	public int getCondition(int index) {
 		return triggers.get(index).getFinishCondition();
+	}
+	
+	public int getConditionOverall() {
+		int out = 0;
+		for(Trigger trigger : triggers) {
+			out += trigger.getFinishCondition();
+		}
+		return out;
 	}
 
 	public boolean hasTrigger(TriggerType item) {

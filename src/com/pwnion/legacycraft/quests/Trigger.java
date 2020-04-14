@@ -17,6 +17,13 @@ public class Trigger {
 		this.finishCondition = finishCondition;
 	}
 	
+	//TEMP
+	public Trigger(TriggerType name, Object data, int finishCondition) {
+		this.type = name;
+		this.data = (data);
+		this.finishCondition = finishCondition;
+	}
+	
 	public TriggerType getName() {
 		return type;
 	}
