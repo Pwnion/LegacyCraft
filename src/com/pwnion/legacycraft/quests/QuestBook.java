@@ -2,6 +2,7 @@ package com.pwnion.legacycraft.quests;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import com.pwnion.legacycraft.Util;
@@ -69,6 +70,7 @@ public class QuestBook {
 	private static void buildQuest(Player p, Book questBook, Quest quest, PageBuilder currentPage, boolean finished) {
 		
 		final int maxLineLength = 19;
+		
 		String questName = quest.getName();
 		if(questName.length() > maxLineLength) {
 			//add ellipse
@@ -78,6 +80,8 @@ public class QuestBook {
 		//TODO: Setup quest page, Add Back button?
 		PageBuilder questPage = questBook.addPage();
 		
+		//Quest page should contain:
+		//Name, Description, Triggers, Trigger Hints?
 		questPage.add("Quest Name:\n" + quest.getName()).setColor(ChatColor.BOLD).build();
 		
 		Builder questText = currentPage.add(questName);

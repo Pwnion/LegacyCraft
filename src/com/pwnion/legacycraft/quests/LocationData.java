@@ -14,6 +14,10 @@ public class LocationData {
 		data.add(newArray(world, x, y, z, radius));
 	}
 	
+	LocationData(String data) {
+		this.data = deserialise(data);
+	}
+	
 	public static ArrayList<Object> newArray(World world, Integer x, Integer y, Integer z, int radius) {
 		ArrayList<Object> array = new ArrayList<Object>(4);
 		array.add(world);

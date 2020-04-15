@@ -90,7 +90,7 @@ public class Trigger {
 		case ITEM: //Format: DIAMOND
 			return Material.matchMaterial(data);
 		case LOCATION: //Format: world|x|y|z|radius,world2|x2|y2|z2|radius2
-			return LocationData.deserialise(data);
+			return new LocationData(data);
 		case KILLENTITY: //Format: ZOMBIE
 			return EntityType.valueOf(data);
 		case NPC: //Format: NpcName|submit EG: blacksmith|false
