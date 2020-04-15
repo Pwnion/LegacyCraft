@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.function.Supplier;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -72,11 +73,13 @@ public class InventoryClick implements Listener {
 	
 	@EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
+		final Player p = (Player) e.getWhoClicked();
+		final UUID playerUUID = p.getUniqueId();
         final Inventory currentInv = e.getInventory();
-        final Player p = (Player) e.getWhoClicked();
-        final UUID playerUUID = p.getUniqueId();
         final int clickedSlot = e.getRawSlot();
         final ItemStack clickedItem = e.getCurrentItem();
+        final ItemStack cursorItem = e.getCursor();
+        SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
         
         //Handles Quest Updates for items in inventory
         GetItem.updateItemQuests(p);
@@ -106,35 +109,45 @@ public class InventoryClick implements Listener {
         };
         
         if(!handleGUI.get()) {
-        	SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
+        	if(!(p.getGameMode().equals(GameMode.ADVENTURE) && !skillTree.getPlayerClass().equals(PlayerClass.NONE))) return;
+        	if(clickedItem == null) return;
         	
-        	if(clickedSlot > 8 || clickedSlot == -106) {
-        		if(p.getGameMode().equals(GameMode.ADVENTURE) && !skillTree.getPlayerClass().equals(PlayerClass.NONE)) {
-            		e.setCancelled(true);
-            		
-            		Material itemMaterial = clickedItem.getType();
-            		ItemMeta itemMeta = clickedItem.getItemMeta();
-            		
-            		if(itemMaterial.equals(Material.COMPASS)) {
-            			CharacterBuildMenuInv.load(p);
-            		} else if(itemMaterial.equals(Material.GLASS_PANE) && itemMeta.getCustomModelData() == 1) {
-            			WarpGatesInv.load(p);
-            		} else if(itemMaterial.equals(Material.STICK) && itemMeta.getCustomModelData() == 1) {
-            			//Rotate hotbar
-            		}
-            	}
+        	if(clickedSlot >= 36 && clickedSlot <= 44) {
+        		if (!(clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.IRON_HOE) || clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.AIR))) {
+    	            e.setCancelled(true);
+    	        } else if(clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.IRON_HOE)) {
+    	        	Bukkit.getServer().getScheduler().runTask(LegacyCraft.getPlugin(), new Runnable() {
+    	        		public void run() {
+    	        			p.getOpenInventory().setItem((int) LegacyCraft.getPlayerData(playerUUID, PlayerData.SWAP_SLOT), p.getItemOnCursor());
+    	    	        	p.setItemOnCursor(null);
+    	        		}
+    	        	});
+    	        } else if(clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.AIR)) {
+    	        	LegacyCraft.getPlayerData(playerUUID).put(PlayerData.SWAP_SLOT, clickedSlot);
+    	        }
         	} else {
+        		e.setCancelled(true);
         		
-        	/*
-	        if (current.getType().equals(Material.AIR)) {
-	            // player put item to inventory
-	        } else if (!current.getType().equals(Material.AIR) && cursor.getType().equals(Material.AIR)) {
-	            // player take item from inventory
-	        } else if (!current.getType().equals(Material.AIR) && !cursor.getType().equals(Material.AIR)) {
-	            // player swap item in inventory
-	        }
-        	*/
-        	
+        		Material itemMaterial = clickedItem.getType();
+        		ItemMeta itemMeta = clickedItem.getItemMeta();
+        		
+        		if(itemMaterial.equals(Material.COMPASS)) {
+        			CharacterBuildMenuInv.load(p);
+        		} else if(itemMaterial.equals(Material.GLASS_PANE) && itemMeta.getCustomModelData() == 1) {
+        			WarpGatesInv.load(p);
+        		} else if(itemMaterial.equals(Material.STICK) && itemMeta.getCustomModelData() == 1) {
+        			Inventory inv = p.getInventory();
+        			
+        			ItemStack hotbar[] = new ItemStack[9];
+        			for(int i = 0; i < 9; i++) {
+        				hotbar[i] = inv.getItem(i);
+        			}
+        			
+        			for(int i = 0; i < 8; i++) {
+        				inv.setItem(i + 1, hotbar[i]);
+        			}
+        			inv.setItem(0, hotbar[8]);
+        		}
         	}
         }
     }

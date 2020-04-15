@@ -32,6 +32,7 @@ public class PlayerJoin implements Listener {
 				put(PlayerData.ASPECT_INVENTORY_OPEN, SkillTree.Aspect.NONE);
 				put(PlayerData.UNFINISHED_QUESTS, QuestManager.loadUnfinishedPlayerData(p.getUniqueId()));
 				put(PlayerData.FINISHED_QUESTS, QuestManager.loadFinishedPlayerData(p.getUniqueId()));
+				put(PlayerData.SWAP_SLOT, -1);
 			}
 		});
 	}

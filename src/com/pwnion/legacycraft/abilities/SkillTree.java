@@ -151,6 +151,8 @@ public class SkillTree {
 		ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
 		ConfigurationSection playerDataCS = playerDataConfig.getRoot();
 		
+		if(playerDataCS.getList(savePath + "inventory") == null) return;
+		
 		ItemStack inv[] = playerDataCS.getList(savePath + "inventory").toArray(new ItemStack[0]);
 		Location loc = (Location) playerDataCS.get(savePath + "location");
 		double health = playerDataCS.getDouble(savePath + "health");
@@ -249,7 +251,7 @@ public class SkillTree {
 	
 	public final boolean getUnlockedBuild(PlayerClass playerClass, Aspect aspect) {
 		Build build = getBuild(playerClass, aspect);
-		return playerDataCS.getBoolean(nodePrefix + playerUUID + "." + build.toString() + ".unlocked");
+		return playerDataCS.getBoolean(nodePrefix + "." + build.toString() + ".unlocked");
 	}
 	
 	/*
@@ -258,7 +260,7 @@ public class SkillTree {
 	
 	public final void setUnlockedBuild(PlayerClass playerClass, Aspect aspect) {
 		Build build = getBuild(playerClass, aspect);
-		playerDataCS.set(nodePrefix + playerUUID + "." + build.toString() + ".unlocked", true);
+		playerDataCS.set(nodePrefix + "." + build.toString() + ".unlocked", true);
 		save();
 	}
 	
@@ -482,19 +484,25 @@ public class SkillTree {
 	 */
 	
 	public final void saveHotbar(Build build) {
+		if(build.equals(Build.NONE)) return;
+		
 		Inventory hotbar = Bukkit.createInventory(null, 9);
 		for(int i = 0; i < 9; i++) {
 			hotbar.setItem(i, p.getInventory().getItem(i));
 		}
 		
-		playerDataCS.set(nodePrefix + build.toString() + ".hotbar", hotbar);
+		playerDataCS.set(nodePrefix + build.toString() + ".hotbar", hotbar.getContents());
 		save();
 	}
 	
 	public final void loadHotbar(Build build) {
-		Inventory hotbar = (Inventory) playerDataCS.get(nodePrefix + build.toString() + ".hotbar");
+		ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
+		ConfigurationSection playerDataCS = playerDataConfig.getRoot();
+		
+		ItemStack hotbar[] = playerDataCS.getList(nodePrefix + build.toString() + ".hotbar").toArray(new ItemStack[0]);
+		
 		for(int i = 0; i < 9; i++) {
-			p.getInventory().setItem(i, hotbar.getItem(i));
+			p.getInventory().setItem(i, hotbar[i]);
 		}
 	}
 }
