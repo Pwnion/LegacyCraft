@@ -181,7 +181,7 @@ public class OnCommand implements CommandExecutor {
 			} else if(lbl.equals("test")) {
 				try {
 					
-					Util.br(Levels.getExperienceForLevel(Integer.parseInt(args[0])));
+					Util.br(Levels.getExperienceFromLevel(Integer.parseInt(args[0])));
 					
 					//QuestBook.open(p);
 					

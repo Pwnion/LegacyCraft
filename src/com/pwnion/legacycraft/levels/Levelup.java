@@ -6,9 +6,10 @@ import net.md_5.bungee.api.ChatColor;
 
 public class Levelup {
 
-	public static void onPlayerLevelup(Player p) {
-		int newLevel = Levels.getLevel(p.getUniqueId());
-		int oldLevel = newLevel - 1;
+	//Occurs before experience is saved
+	public static void onPlayerLevelup(Player p, int newExperience) {
+		int newLevel = Levels.getLevel(newExperience);
+		int oldLevel = Levels.getLevel(p.getUniqueId());
 		
 		p.sendMessage(ChatColor.GOLD + "Levelup!!! " + oldLevel + " -> " + newLevel);
 	}

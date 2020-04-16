@@ -20,7 +20,7 @@ public class Levels {
 	}
 	
 	public static int getTotalExperience(UUID playerUUID) {
-		return 0; //TODO: get from player data
+		return 500; //TODO: get from player data
 	}
 	
 	//Will get experience from current level
@@ -30,9 +30,14 @@ public class Levels {
 	
 	public static void setTotalExperience(Player p, int experience) {
 		if(getLevel(p.getUniqueId()) < getLevel(experience)) {
-			Levelup.onPlayerLevelup(p);
+			Levelup.onPlayerLevelup(p, experience);
 		}
+		
 		//TODO: save to player data
+		
+		p.setTotalExperience(0);
+		p.giveExpLevels(getLevel(p.getUniqueId()));
+		p.setExp(getPercentExperience(p.getUniqueId()));
 	}
 	
 	public static void addExperience(Player p, int experience) {
@@ -43,6 +48,7 @@ public class Levels {
 		setTotalExperience(p, getTotalExperienceForLevel(level));
 	}
 	
+	//Gets the level given the total amount of experience
 	public static int getLevel(int experience) {
 		int i = 1;
 		while(getTotalExperienceForLevel(i + 1) <= experience) {
@@ -51,21 +57,30 @@ public class Levels {
 		return i;
 	} 
 	
+	//Gets the level of the player
 	public static int getLevel(UUID playerUUID) {
 		return getLevel(getTotalExperience(playerUUID));
 	}
 	
-	public static int getExperienceForLevel(int level) {
-		return (int) (Math.round(getExperienceForLevelA(level) / 50) * 50); //TODO: Reverse Equations
+	//Gets experience required to levelup from 'level' to next level
+	public static int getExperienceFromLevel(int level) {
+		if(level < 1) { return 0; }
+		
+		final double level2Exp = 100;
+		final double roundToNearest = 50;
+		final double geometricSeriesConstant = 1.5;
+		
+		return (int) (Math.round(level2Exp * Math.pow(geometricSeriesConstant, level - 1) / roundToNearest) * roundToNearest);
 	}
 	
-	public static double getExperienceForLevelA(int level) {
-		if(level <= 1) { return 0; }
-		return (int) (100 * Math.pow(1.5, level - 2)); //TODO: Reverse Equations
-	}
-	
+	//Gets experience required to levelup to 'level' from level 1
 	public static int getTotalExperienceForLevel(int level) {
 		if(level <= 1) { return 0; }
-		return getTotalExperienceForLevel(level - 1) + getExperienceForLevel(level);
+		return getTotalExperienceForLevel(level - 1) + getExperienceFromLevel(level - 1);
+	}
+	
+	//Returns value between 0 and 1
+	public static float getPercentExperience(UUID playerUUID) {
+		return (float) getExperience(playerUUID) / (float) getExperienceFromLevel(getLevel(playerUUID));
 	}
 }
