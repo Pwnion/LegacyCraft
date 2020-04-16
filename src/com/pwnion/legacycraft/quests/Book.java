@@ -95,7 +95,7 @@ public class Book {
 	    	
 	    	public Builder(PageBuilder page) { this.page = page; }
 	    	
-	    	public Builder setText(String message) { this.message.setText(message);; return this; }
+	    	public Builder setText(String message) { this.message.setText(message); return this; }
 	    	
 	    	public Builder setColor(ChatColor color) {
 	    		message.setColor(color);
