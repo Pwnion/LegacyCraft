@@ -1,26 +1,57 @@
 package com.pwnion.legacycraft.levels;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
+import com.pwnion.legacycraft.ConfigAccessor;
+import com.pwnion.legacycraft.LegacyCraft;
+import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.Util;
+import com.pwnion.legacycraft.quests.Quest;
 
 public class Levels {
 	
 	//Add PLAYER_EXPERIENCE to Player Data
 	
+	//Save experience to file
 	public static void save(UUID playerUUID) {
-		//Save experience to file
+		//TODO: Get checked by Aden
+		
+		final ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
+		final ConfigurationSection playerDataCS = playerDataConfig.getRoot();
+		final String node = "players." + playerUUID.toString() + ".experience";
+		
+		ConfigurationSection experienceCS = playerDataCS.getConfigurationSection(node);
+		
+		experienceCS.set(node, getTotalExperience(playerUUID));
+		
+		playerDataConfig.saveCustomConfig();
 	}
 	
-	public static void load(UUID playerUUID) {
-		//Load experience into player data
+	//Load experience from file into player data
+	public static int load(UUID playerUUID) {
+		int playerExperience = 0;
+		
+		final ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
+		final ConfigurationSection playerDataCS = playerDataConfig.getRoot();
+		final String node = "players." + playerUUID.toString() + ".experience";
+		
+		ConfigurationSection experienceCS = playerDataCS.getConfigurationSection(node);
+		
+		playerExperience = experienceCS.getInt(""); //TODO: Get Aden to check
+
+		return playerExperience;
 	}
 	
 	public static int getTotalExperience(UUID playerUUID) {
-		return 500; //TODO: get from player data
+		return (int) LegacyCraft.getPlayerData(playerUUID, PlayerData.EXPERIENCE);
+		
+		//TODO: get from player data
 	}
 	
 	//Will get experience from current level
@@ -34,6 +65,7 @@ public class Levels {
 		}
 		
 		//TODO: save to player data
+		LegacyCraft.setPlayerData(p.getUniqueId(), PlayerData.EXPERIENCE, experience);
 		
 		p.setTotalExperience(0);
 		p.giveExpLevels(getLevel(p.getUniqueId()));
