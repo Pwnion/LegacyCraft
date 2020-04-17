@@ -239,6 +239,7 @@ public class QuestManager {
 		setProgress(p, quest, quest.getIndex(trigger), value);
 	}
 
+	//For debugging
 	public static void forceComplete(Player p, Quest quest) {
 		for(Trigger trigger : quest.triggers) {
 			setProgress(p, quest, trigger, trigger.finishCondition);

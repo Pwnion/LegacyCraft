@@ -14,6 +14,8 @@ import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.quests.Quest;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class Experience {
 	
 	//Save experience to file
@@ -61,25 +63,22 @@ public class Experience {
 	
 	//Gets the total experience for all experience types
 	public static HashMap<ExperienceType, Integer> getAllExperience(UUID playerUUID) {
-		HashMap<ExperienceType, Integer> allExperience = new HashMap<ExperienceType, Integer>();
-		for(ExperienceType experienceType : ExperienceType.values()) {
-			allExperience.put(experienceType, getTotalExperience(playerUUID, experienceType));
-		}
-		return allExperience;
+		return LegacyCraft.getPlayerData(playerUUID, PlayerData.EXPERIENCE);
 	}
 	
+	//Gets Experience from level 1
 	public static int getTotalExperience(UUID playerUUID, ExperienceType experienceType) {
-		return (int) LegacyCraft.getPlayerData(playerUUID, PlayerData.EXPERIENCE).get(experienceType);
+		return getAllExperience(playerUUID).get(experienceType);
 	}
 	
-	//Will get experience from current level
+	//Gets experience from current level
 	public static int getExperience(UUID playerUUID, ExperienceType experienceType) {
 		return getTotalExperience(playerUUID, experienceType) - getTotalExperienceForLevel(getLevel(playerUUID, experienceType), experienceType);
 	}
 	
 	public static void setTotalExperience(Player p, int experience, ExperienceType experienceType) {
 		if(getLevel(p.getUniqueId(), experienceType) < getLevel(experience, experienceType)) {
-			Levelup.onPlayerLevelup(p, experience);
+			Levelup.onPlayerLevelup(p, experienceType, experience);
 		}
 		
 		//TODO: save to player data
@@ -91,11 +90,35 @@ public class Experience {
 	}
 	
 	public static void addExperience(Player p, int experience, ExperienceType experienceType) {
+		
+		//Subject to change
+		if(experienceType == ExperienceType.PLAYER) {
+			p.sendMessage(ChatColor.GRAY + "+" + experience);
+		}
+		
 		setTotalExperience(p, getTotalExperience(p.getUniqueId(), experienceType) + experience, experienceType);
 	}
 	
 	public static void setLevel(Player p, int level, ExperienceType experienceType) {
 		setTotalExperience(p, getTotalExperienceForLevel(level, experienceType), experienceType);
+	}
+	
+	//Adds 'level' levels
+	public static void addLevel(Player p, int level, ExperienceType experienceType) {
+		
+		//Subject to change
+		if(experienceType == ExperienceType.PLAYER) {
+			String addS = "";
+			if(level > 1) { addS = "s"; }
+			p.sendMessage(ChatColor.GRAY + "+" + level + " Level" + addS);
+		}
+		
+		setTotalExperience(p, getExperience(p.getUniqueId(), experienceType) + getTotalExperienceForLevel(level + getLevel(p.getUniqueId(), experienceType), experienceType), experienceType);
+	}
+	
+	//Adds one level
+	public static void addLevel(Player p, ExperienceType experienceType) {
+		addLevel(p, 1, experienceType);
 	}
 	
 	//Gets the level given the total amount of experience
