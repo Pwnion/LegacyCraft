@@ -22,7 +22,7 @@ import com.pwnion.legacycraft.abilities.ooc.Portal;
 import com.pwnion.legacycraft.abilities.proficiencies.AquaVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.proficiencies.TerraVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.targets.Point;
-import com.pwnion.legacycraft.levels.Levels;
+import com.pwnion.legacycraft.levels.Experience;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
 import com.pwnion.legacycraft.quests.Quest;
 import com.pwnion.legacycraft.quests.QuestBook;
@@ -181,7 +181,7 @@ public class OnCommand implements CommandExecutor {
 			} else if(lbl.equals("test")) {
 				try {
 					
-					Util.br(Levels.getExperienceFromLevel(Integer.parseInt(args[0])));
+					Util.br(Experience.getExperienceFromLevel(Integer.parseInt(args[0])));
 					
 					//QuestBook.open(p);
 					

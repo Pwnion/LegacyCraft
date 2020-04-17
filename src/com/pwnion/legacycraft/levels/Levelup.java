@@ -7,10 +7,14 @@ import net.md_5.bungee.api.ChatColor;
 public class Levelup {
 
 	//Occurs before experience is saved
-	public static void onPlayerLevelup(Player p, int newExperience) {
-		int newLevel = Levels.getLevel(newExperience);
-		int oldLevel = Levels.getLevel(p.getUniqueId());
+	public static void onPlayerLevelup(Player p, ExperienceType experienceType, int newExperience) {
+		int newLevel = Experience.getLevel(newExperience, experienceType);
+		int oldLevel = Experience.getLevel(p.getUniqueId(), experienceType);
 		
-		p.sendMessage(ChatColor.GOLD + "Levelup!!! " + oldLevel + " -> " + newLevel);
+		if(experienceType == ExperienceType.PLAYER_LEVELS) {
+			p.sendMessage(ChatColor.GOLD + "Levelup!!! " + oldLevel + " -> " + newLevel);
+		} else {
+			p.sendMessage(ChatColor.AQUA + "You feel more comfortable weilding " + experienceType.toString() + " " + oldLevel + " -> " + newLevel);
+		}
 	}
 }
