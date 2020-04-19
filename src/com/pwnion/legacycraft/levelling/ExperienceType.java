@@ -1,4 +1,4 @@
-package com.pwnion.legacycraft.levels;
+package com.pwnion.legacycraft.levelling;
 
 public enum ExperienceType {
 	PLAYER("Player Level", "player"), //Total player experience

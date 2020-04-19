@@ -22,7 +22,8 @@ import com.pwnion.legacycraft.abilities.ooc.Portal;
 import com.pwnion.legacycraft.abilities.proficiencies.AquaVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.proficiencies.TerraVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.targets.Point;
-import com.pwnion.legacycraft.levels.Experience;
+import com.pwnion.legacycraft.levelling.Experience;
+import com.pwnion.legacycraft.levelling.ExperienceType;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
 import com.pwnion.legacycraft.quests.Quest;
 import com.pwnion.legacycraft.quests.QuestBook;
@@ -181,7 +182,7 @@ public class OnCommand implements CommandExecutor {
 			} else if(lbl.equals("test")) {
 				try {
 					
-					Util.br(Experience.getExperienceFromLevel(Integer.parseInt(args[0])));
+					Util.br(((Experience) LegacyCraft.getPlayerData(playerUUID, PlayerData.EXPERIENCE)).getExperienceFromLevel(Integer.parseInt(args[0]), ExperienceType.PLAYER));
 					
 					//QuestBook.open(p);
 					

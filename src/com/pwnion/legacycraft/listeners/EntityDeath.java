@@ -12,10 +12,10 @@ public class EntityDeath implements Listener {
 
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent e) {
-		Entity dead = e.getEntity();
-		Player p = e.getEntity().getKiller();
-		if(!p.equals(null)) {
-			KillEntity.onPlayerKilledEntity(p, dead.getType());
+		Entity victim = e.getEntity();
+		Player killer = e.getEntity().getKiller();
+		if(killer != null) {
+			KillEntity.onPlayerKilledEntity(killer, victim.getType());
 		}
 	}
 

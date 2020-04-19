@@ -149,14 +149,10 @@ public class SkillTree {
 		Location loc = (Location) playerDataCS.get(savePath + "location");
 		double health = playerDataCS.getDouble(savePath + "health");
 		int hunger = playerDataCS.getInt(savePath + "hunger");
-		int level = playerDataCS.getInt(savePath + "level");
-		float exp = (float) playerDataCS.getDouble(savePath + "exp");
 		
         p.getInventory().setContents(inv);
         p.setHealth(health);
         p.setFoodLevel(hunger);
-        p.setLevel(level);
-        p.setExp(exp);
         p.teleport(loc);
 	}
 	
@@ -179,8 +175,6 @@ public class SkillTree {
 		playerDataCS.set(savePath + "location", p.getLocation());
 		playerDataCS.set(savePath + "health", p.getHealth());
 		playerDataCS.set(savePath + "hunger", p.getFoodLevel());
-		playerDataCS.set(savePath + "level", p.getLevel());
-		playerDataCS.set(savePath + "exp", p.getExp());
 		
 		save();
 	}

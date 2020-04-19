@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.abilities.SkillTree;
+import com.pwnion.legacycraft.levelling.Experience;
 import com.pwnion.legacycraft.quests.QuestManager;
 
 public class PlayerQuit implements Listener {
@@ -26,6 +27,9 @@ public class PlayerQuit implements Listener {
 		} else {
 			skillTree.saveOther();
 		}
+		
+		Experience experience = (Experience) LegacyCraft.getPlayerData(playerUUID, PlayerData.EXPERIENCE);
+		experience.save();
 		
 		QuestManager.savePlayerData(p);
 		

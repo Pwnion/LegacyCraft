@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
-import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.abilities.SkillTree;
 import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
 import com.pwnion.legacycraft.quests.triggers.GetItem;
@@ -27,7 +26,7 @@ public class InventoryDrag implements Listener {
 		ItemStack newCursor = p.getItemOnCursor();
 		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
 		
-		Util.br(p.getName() + " has called onInventoryDrag");
+		//Util.br(p.getName() + " has called onInventoryDrag");
 		GetItem.updateItemQuests(p);
 		
 		if(!(p.getGameMode().equals(GameMode.ADVENTURE) && !skillTree.getPlayerClass().equals(PlayerClass.NONE))) return;
