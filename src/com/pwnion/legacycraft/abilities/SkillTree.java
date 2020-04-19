@@ -1,6 +1,7 @@
 package com.pwnion.legacycraft.abilities;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
@@ -52,7 +53,7 @@ public class SkillTree {
 		IGNIS_SHAMAN,
 		TERRA_SHAMAN,
 		AER_SHAMAN,
-		AQUA_SHAMAN,
+		AQUA_SHAMAN
 	}
 	
 	//All possible aptitudes a player can have equipped
@@ -119,6 +120,51 @@ public class SkillTree {
 		playerDataConfig.saveCustomConfig();
 	}
 	
+	public final ItemStack[] getInventory(PlayerClass playerClass) {
+		ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
+		ConfigurationSection playerDataCS = playerDataConfig.getRoot();
+		
+		List<?> inventory = playerDataCS.getList(nodePrefix + playerClass.toString() + ".save.inventory");
+		
+		if(inventory == null) return new ItemStack[0];
+		return inventory.toArray(new ItemStack[0]);
+	}
+	
+	//Load a state for a player from the player data file
+	private final void loadState(PlayerClass playerClass, boolean classNotOther) {
+		String savePath;
+		if(classNotOther) {
+			savePath = nodePrefix + playerClass.toString() + ".save.";
+		} else {
+			savePath = nodePrefix + ".save.";
+		}
+		
+		ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
+		ConfigurationSection playerDataCS = playerDataConfig.getRoot();
+		
+		ItemStack inv[] = getInventory(playerClass);
+		
+		if(inv.length == 0) return;
+		
+		Location loc = (Location) playerDataCS.get(savePath + "location");
+		double health = playerDataCS.getDouble(savePath + "health");
+		int hunger = playerDataCS.getInt(savePath + "hunger");
+		int level = playerDataCS.getInt(savePath + "level");
+		float exp = (float) playerDataCS.getDouble(savePath + "exp");
+		
+        p.getInventory().setContents(inv);
+        p.setHealth(health);
+        p.setFoodLevel(hunger);
+        p.setLevel(level);
+        p.setExp(exp);
+        p.teleport(loc);
+	}
+	
+	public final void setInventory(PlayerClass playerClass, ItemStack[] inv) {
+		playerDataCS.set(nodePrefix + playerClass.toString() + ".save." + "inventory", inv);
+		save();
+	}
+	
 	//Save a state for a player to the player data file
 	private final void saveState(boolean classNotOther) {
 		String savePath;
@@ -137,35 +183,6 @@ public class SkillTree {
 		playerDataCS.set(savePath + "exp", p.getExp());
 		
 		save();
-	}
-	
-	//Load a state for a player from the player data file
-	private final void loadState(PlayerClass playerClass, boolean classNotOther) {
-		String savePath;
-		if(classNotOther) {
-			savePath = nodePrefix + playerClass.toString() + ".save.";
-		} else {
-			savePath = nodePrefix + "save.";
-		}
-		
-		ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
-		ConfigurationSection playerDataCS = playerDataConfig.getRoot();
-		
-		if(playerDataCS.getList(savePath + "inventory") == null) return;
-		
-		ItemStack inv[] = playerDataCS.getList(savePath + "inventory").toArray(new ItemStack[0]);
-		Location loc = (Location) playerDataCS.get(savePath + "location");
-		double health = playerDataCS.getDouble(savePath + "health");
-		int hunger = playerDataCS.getInt(savePath + "hunger");
-		int level = playerDataCS.getInt(savePath + "level");
-		float exp = (float) playerDataCS.getDouble(savePath + "exp");
-		
-        p.getInventory().setContents(inv);
-        p.setHealth(health);
-        p.setFoodLevel(hunger);
-        p.setLevel(level);
-        p.setExp(exp);
-        p.teleport(loc);
 	}
 	
 	//Save the equipped class state
@@ -480,8 +497,32 @@ public class SkillTree {
 	}
 	
 	/*
-	 * HOTBAR FUNCTIONS
+	 * HOTBAR GETTERS AND LOADERS
 	 */
+	
+	public final ItemStack[] getHotbar(Build build) {
+		ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
+		ConfigurationSection playerDataCS = playerDataConfig.getRoot();
+		
+		return playerDataCS.getList(nodePrefix + build.toString() + ".hotbar").toArray(new ItemStack[0]);
+	}
+	
+	public final void loadHotbar(Build build) {
+		ItemStack hotbar[] = getHotbar(build);
+		
+		for(int i = 0; i < 9; i++) {
+			p.getInventory().setItem(i, hotbar[i]);
+		}
+	}
+	
+	/*
+	 * HOTBAR SETTERS AND SAVERS
+	 */
+	
+	public final void setHotbar(Build build, ItemStack hotbar[]) {
+		playerDataCS.set(nodePrefix + build.toString() + ".hotbar", hotbar);
+		save();
+	}
 	
 	public final void saveHotbar(Build build) {
 		if(build.equals(Build.NONE)) return;
@@ -491,18 +532,6 @@ public class SkillTree {
 			hotbar.setItem(i, p.getInventory().getItem(i));
 		}
 		
-		playerDataCS.set(nodePrefix + build.toString() + ".hotbar", hotbar.getContents());
-		save();
-	}
-	
-	public final void loadHotbar(Build build) {
-		ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
-		ConfigurationSection playerDataCS = playerDataConfig.getRoot();
-		
-		ItemStack hotbar[] = playerDataCS.getList(nodePrefix + build.toString() + ".hotbar").toArray(new ItemStack[0]);
-		
-		for(int i = 0; i < 9; i++) {
-			p.getInventory().setItem(i, hotbar[i]);
-		}
+		setHotbar(build, hotbar.getContents());
 	}
 }

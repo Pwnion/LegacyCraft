@@ -29,6 +29,7 @@ import com.pwnion.legacycraft.abilities.inventory.WarpGatesInv;
 import com.pwnion.legacycraft.abilities.inventory.WeaponEnhancementsInv;
 import com.pwnion.legacycraft.quests.triggers.GetItem;
 import com.pwnion.legacycraft.abilities.SkillTree;
+import com.pwnion.legacycraft.abilities.SkillTree.Aspect;
 import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
 import com.pwnion.legacycraft.abilities.inventory.BlacksmithInv;
 import com.pwnion.legacycraft.abilities.inventory.BuildInv;
@@ -110,45 +111,57 @@ public class InventoryClick implements Listener {
         
         if(!handleGUI.get()) {
         	if(!(p.getGameMode().equals(GameMode.ADVENTURE) && !skillTree.getPlayerClass().equals(PlayerClass.NONE))) return;
-        	if(clickedItem == null) return;
-        	
-        	if(clickedSlot >= 36 && clickedSlot <= 44) {
-        		if (!(clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.IRON_HOE) || clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.AIR))) {
-    	            e.setCancelled(true);
-    	        } else if(clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.IRON_HOE)) {
-    	        	Bukkit.getServer().getScheduler().runTask(LegacyCraft.getPlugin(), new Runnable() {
-    	        		public void run() {
-    	        			p.getOpenInventory().setItem((int) LegacyCraft.getPlayerData(playerUUID, PlayerData.SWAP_SLOT), p.getItemOnCursor());
-    	    	        	p.setItemOnCursor(null);
-    	        		}
-    	        	});
-    	        } else if(clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.AIR)) {
-    	        	LegacyCraft.getPlayerData(playerUUID).put(PlayerData.SWAP_SLOT, clickedSlot);
-    	        }
-        	} else {
+        	if(clickedItem == null) {
         		e.setCancelled(true);
-        		
-        		Material itemMaterial = clickedItem.getType();
-        		ItemMeta itemMeta = clickedItem.getItemMeta();
-        		
-        		if(itemMaterial.equals(Material.COMPASS)) {
-        			CharacterBuildMenuInv.load(p);
-        		} else if(itemMaterial.equals(Material.GLASS_PANE) && itemMeta.getCustomModelData() == 1) {
-        			WarpGatesInv.load(p);
-        		} else if(itemMaterial.equals(Material.STICK) && itemMeta.getCustomModelData() == 1) {
-        			Inventory inv = p.getInventory();
-        			
-        			ItemStack hotbar[] = new ItemStack[9];
-        			for(int i = 0; i < 9; i++) {
-        				hotbar[i] = inv.getItem(i);
-        			}
-        			
-        			for(int i = 0; i < 8; i++) {
-        				inv.setItem(i + 1, hotbar[i]);
-        			}
-        			inv.setItem(0, hotbar[8]);
-        		}
+        		return;
         	}
+        	
+    		if(clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.AIR)) {
+	        	//Picking up ability
+	        	LegacyCraft.getPlayerData(playerUUID).put(PlayerData.SWAP_SLOT, clickedSlot);
+	        } else if((clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.IRON_HOE))) {
+    			//Swapping abilities
+	        	Bukkit.getServer().getScheduler().runTask(LegacyCraft.getPlugin(), new Runnable() {
+	        		public void run() {
+	        			p.getOpenInventory().setItem((int) LegacyCraft.getPlayerData(playerUUID, PlayerData.SWAP_SLOT), p.getItemOnCursor());
+	    	        	p.setItemOnCursor(null);
+	        		}
+	        	});
+	        } else if (cursorItem.getType().equals(Material.IRON_HOE)) {
+	        	e.setCancelled(true);
+	        	p.getOpenInventory().setItem((int) LegacyCraft.getPlayerData(playerUUID, PlayerData.SWAP_SLOT), cursorItem);
+	        	p.setItemOnCursor(null);
+	        } else {
+	        	e.setCancelled(true);
+	    		
+	    		Material itemMaterial = clickedItem.getType();
+	    		ItemMeta itemMeta = clickedItem.getItemMeta();
+	    		
+	    		if(itemMaterial.equals(Material.COMPASS)) {
+	    			CharacterBuildMenuInv.load(p);
+	    		} else if(itemMaterial.equals(Material.GLASS_PANE) && itemMeta.getCustomModelData() == 1) {
+	    			WarpGatesInv.load(p);
+	    		} else if(itemMaterial.equals(Material.STICK) && itemMeta.getCustomModelData() == 1 && cursorItem.getType().equals(Material.AIR)) {
+	    			if(skillTree.getAspect().equals(Aspect.NONE)) return;
+	     			
+	    			Inventory inv = p.getInventory();
+	    			
+	    			ItemStack hotbar[] = new ItemStack[9];
+	    			for(int i = 0; i < 9; i++) {
+	    				hotbar[i] = inv.getItem(i);
+	    			}
+	    			
+	    			for(int i = 0; i < 8; i++) {
+	    				inv.setItem(i + 1, hotbar[i]);
+	    			}
+	    			inv.setItem(0, hotbar[8]);
+	    		}
+	        }
+    		/*
+    		 * if (!(clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.IRON_HOE) || clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.AIR))) {
+	               e.setCancelled(true);
+	        } else 
+    		 */
         }
     }
 }

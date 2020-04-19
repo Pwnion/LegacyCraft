@@ -50,12 +50,26 @@ STRIKER:
         - HIDE_UNBREAKABLE
         Unbreakable: true
     - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BARRIER
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Hotbar Separator
+        custom-model-data: 1
     - null
     - null
     - null
     - null
-    - null
-    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BARRIER
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Hotbar Separator
+        custom-model-data: 2
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
       type: GLASS_PANE
@@ -264,12 +278,26 @@ VANGUARD:
         - HIDE_UNBREAKABLE
         Unbreakable: true
     - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BARRIER
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Hotbar Separator
+        custom-model-data: 1
     - null
     - null
     - null
     - null
-    - null
-    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BARRIER
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Hotbar Separator
+        custom-model-data: 2
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
       type: GLASS_PANE
@@ -478,12 +506,26 @@ ROGUE:
         - HIDE_UNBREAKABLE
         Unbreakable: true
     - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BARRIER
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Hotbar Separator
+        custom-model-data: 1
     - null
     - null
     - null
     - null
-    - null
-    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BARRIER
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Hotbar Separator
+        custom-model-data: 2
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
       type: GLASS_PANE
@@ -692,12 +734,26 @@ SHAMAN:
         - HIDE_UNBREAKABLE
         Unbreakable: true
     - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BARRIER
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Hotbar Separator
+        custom-model-data: 1
     - null
     - null
     - null
     - null
-    - null
-    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BARRIER
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Hotbar Separator
+        custom-model-data: 2
     - ==: org.bukkit.inventory.ItemStack
       v: 1976
       type: GLASS_PANE
@@ -902,12 +958,26 @@ IGNIS_STRIKER:
       - HIDE_UNBREAKABLE
       Unbreakable: true
   - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
   - null
   - null
   - null
   - null
-  - null
-  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 TERRA_STRIKER:
   unlocked: false
   proficiencies:
@@ -954,12 +1024,26 @@ TERRA_STRIKER:
       - HIDE_UNBREAKABLE
       Unbreakable: true
   - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
   - null
   - null
   - null
   - null
-  - null
-  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 AER_STRIKER:
   unlocked: false
   proficiencies:
@@ -1006,12 +1090,26 @@ AER_STRIKER:
       - HIDE_UNBREAKABLE
       Unbreakable: true
   - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
   - null
   - null
   - null
   - null
-  - null
-  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 AQUA_STRIKER:
   unlocked: false
   proficiencies:
@@ -1058,12 +1156,26 @@ AQUA_STRIKER:
       - HIDE_UNBREAKABLE
       Unbreakable: true
   - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
   - null
   - null
   - null
   - null
-  - null
-  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 IGNIS_VANGUARD:
   unlocked: true
   proficiencies:
@@ -1110,12 +1222,26 @@ IGNIS_VANGUARD:
       - HIDE_UNBREAKABLE
       Unbreakable: true
   - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
   - null
   - null
   - null
   - null
-  - null
-  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 TERRA_VANGUARD:
   unlocked: false
   proficiencies:
@@ -1162,12 +1288,26 @@ TERRA_VANGUARD:
       - HIDE_UNBREAKABLE
       Unbreakable: true
   - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
   - null
   - null
   - null
   - null
-  - null
-  - null      
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2     
 AER_VANGUARD:
   unlocked: false
   proficiencies:
@@ -1214,12 +1354,26 @@ AER_VANGUARD:
       - HIDE_UNBREAKABLE
       Unbreakable: true
   - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
   - null
   - null
   - null
   - null
-  - null
-  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 AQUA_VANGUARD:
   unlocked: false
   proficiencies:
@@ -1266,12 +1420,26 @@ AQUA_VANGUARD:
       - HIDE_UNBREAKABLE
       Unbreakable: true
   - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
   - null
   - null
   - null
   - null
-  - null
-  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 IGNIS_ROGUE:
   unlocked: true
   proficiencies:
@@ -1318,12 +1486,26 @@ IGNIS_ROGUE:
       - HIDE_UNBREAKABLE
       Unbreakable: true
   - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
   - null
   - null
   - null
   - null
-  - null
-  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 TERRA_ROGUE:
   unlocked: false
   proficiencies:
@@ -1370,12 +1552,26 @@ TERRA_ROGUE:
       - HIDE_UNBREAKABLE
       Unbreakable: true
   - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
   - null
   - null
   - null
   - null
-  - null
-  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 AER_ROGUE:
   unlocked: false
   proficiencies:
@@ -1422,12 +1618,26 @@ AER_ROGUE:
       - HIDE_UNBREAKABLE
       Unbreakable: true
   - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
   - null
   - null
   - null
   - null
-  - null
-  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 AQUA_ROGUE:
   unlocked: false
   proficiencies:
@@ -1474,12 +1684,26 @@ AQUA_ROGUE:
       - HIDE_UNBREAKABLE
       Unbreakable: true
   - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
   - null
   - null
   - null
   - null
-  - null
-  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 IGNIS_SHAMAN:
   unlocked: true
   proficiencies:
@@ -1526,12 +1750,26 @@ IGNIS_SHAMAN:
       - HIDE_UNBREAKABLE
       Unbreakable: true
   - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
   - null
   - null
   - null
   - null
-  - null
-  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 TERRA_SHAMAN:
   unlocked: false
   proficiencies:
@@ -1578,12 +1816,26 @@ TERRA_SHAMAN:
       - HIDE_UNBREAKABLE
       Unbreakable: true
   - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
   - null
   - null
   - null
   - null
-  - null
-  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 AER_SHAMAN:
   unlocked: false
   proficiencies:
@@ -1630,12 +1882,26 @@ AER_SHAMAN:
       - HIDE_UNBREAKABLE
       Unbreakable: true
   - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
   - null
   - null
   - null
   - null
-  - null
-  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 AQUA_SHAMAN:
   unlocked: false
   proficiencies:
@@ -1682,9 +1948,23 @@ AQUA_SHAMAN:
       - HIDE_UNBREAKABLE
       Unbreakable: true
   - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
   - null
   - null
   - null
   - null
-  - null
-  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2

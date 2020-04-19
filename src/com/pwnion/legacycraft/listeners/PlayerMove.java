@@ -45,24 +45,12 @@ public class PlayerMove implements Listener {
 		//Resets jump ability usage every time a player touches the ground
 		if(p.isOnGround()) {
 			if((int) LegacyCraft.getPlayerData(playerUUID, PlayerData.JUMP_COUNTER) != 0) { 
-				//LegacyCraft.setJumpCounter(playerUUID, 0);
 				LegacyCraft.setPlayerData(playerUUID, PlayerData.JUMP_COUNTER, 0);
 				if(skillTree.getPlayerClass().equals(PlayerClass.SHAMAN)) {
 					p.removePotionEffect(PotionEffectType.SLOW_FALLING);
 				}
 			}
 			if(p.getGameMode().equals(GameMode.ADVENTURE) && !p.getAllowFlight() && !skillTree.getPlayerClass().equals(PlayerClass.NONE)) p.setAllowFlight(true);
-			
-			/*
-			int distanceToGround = distanceToGround(p);
-			if(distanceToGround > 7 && LegacyCraft.getPlayerUnderNoFallDamageLimit(playerUUID)) {
-				LegacyCraft.setPlayerUnderNoFallDamageLimit(playerUUID, false);
-			} else if(distanceToGround >= 3 && distanceToGround <= 7 && p.getFallDistance() <= 10 - distanceToGround && !LegacyCraft.getPlayerUnderNoFallDamageLimit(playerUUID)) {
-				LegacyCraft.setPlayerUnderNoFallDamageLimit(playerUUID, true);
-			} else if(distanceToGround < 6 && LegacyCraft.getPlayerUnderNoFallDamageLimit(playerUUID)) {
-				p.setFallDistance(0);
-				LegacyCraft.setPlayerUnderNoFallDamageLimit(playerUUID, false);
-			} //*/
 		}
 	}
 }
