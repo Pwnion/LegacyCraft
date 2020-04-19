@@ -1,7 +1,6 @@
 package com.pwnion.legacycraft.quests;
 
 import java.util.ArrayList;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -13,6 +12,10 @@ public class LocationData {
 	
 	LocationData(World world, Integer x, Integer y, Integer z, int radius) {
 		data.add(newArray(world, x, y, z, radius));
+	}
+	
+	LocationData(String data) {
+		this.data = deserialise(data);
 	}
 	
 	public static ArrayList<Object> newArray(World world, Integer x, Integer y, Integer z, int radius) {
@@ -53,6 +56,7 @@ public class LocationData {
 		return dim == null || ((pDim > dim - radius) && (pDim < dim + radius));
 	}
 	
+	//Not used
 	public String serialise() {
 		String output = "";
 		for(ArrayList<Object> location : data) {

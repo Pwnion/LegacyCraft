@@ -6,6 +6,8 @@ import org.bukkit.event.EventHandler;
 import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.npcs.GoPlaces;
 import com.pwnion.legacycraft.npcs.Speech;
+import com.pwnion.legacycraft.quests.Quest;
+import com.pwnion.legacycraft.quests.QuestManager;
 import com.pwnion.legacycraft.quests.triggers.SpeakToNPC;
 
 import net.citizensnpcs.api.event.NPCRightClickEvent;
@@ -69,11 +71,18 @@ public class Librarian extends Trait {
 
 			//If close to work do work related stuff
 			//Else do other stuff
+			
+			for(Quest quest : QuestManager.quests) {
+				QuestManager.giveQuest(p, quest);
+			}
 
-			p.sendMessage(Speech.getRnd(npc, this.getName(), p));
+			//TODO: Add Speech Lines
+			//p.sendMessage(Speech.getRnd(npc, this.getName(), p));
 
 			Util.br("NPC '" + npc.getName() + "' has been clicked by " + p.getName());
 
+			
+			
 		}
 	}
 

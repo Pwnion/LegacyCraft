@@ -22,6 +22,20 @@ public class Util {
 		Bukkit.broadcastMessage("[C] " + message);
 	}
 	
+	public static final void br(Object message) {
+		br(message.toString());
+	}
+	
+	public static final void print(Exception e) {
+		e.printStackTrace();
+		StackTraceElement st[] = e.getStackTrace();
+	    for(int i = 8; i != 0; i--) {
+	    	StackTraceElement el = e.getStackTrace()[i];
+	    	Util.br(el.toString());
+	    }
+	    Util.br(e.toString());
+	}
+	
 	public static final void spawnBlocks(HashSet<Block> blocks) {
 		for(Block block : blocks) {
 			block.setType(Material.STONE);

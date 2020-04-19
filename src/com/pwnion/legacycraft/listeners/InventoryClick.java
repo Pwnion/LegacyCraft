@@ -104,6 +104,7 @@ public class InventoryClick implements Listener {
             	
             	holderToInvClass.get(currentHolder).getMethod("respond", new Class[] {InventoryClickEvent.class}).invoke(null, e);
             } catch(Exception ex) {
+            	Bukkit.getLogger().info("HandleGUI returned false (try catch)");
             	return false;
             };
             return true;

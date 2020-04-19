@@ -17,6 +17,13 @@ public class Trigger {
 		this.finishCondition = finishCondition;
 	}
 	
+	//TEMP
+	public Trigger(TriggerType name, Object data, int finishCondition) {
+		this.type = name;
+		this.data = (data);
+		this.finishCondition = finishCondition;
+	}
+	
 	public TriggerType getName() {
 		return type;
 	}
@@ -50,7 +57,6 @@ public class Trigger {
 		return null;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public HashMap<String, Boolean> getNPCData() {
 		if(type == TriggerType.NPC) {
 			return (HashMap<String, Boolean>) data;
@@ -62,7 +68,8 @@ public class Trigger {
 		return (String) getNPCData().keySet().toArray()[0];
 	}
 	
-	/*
+	//Only Required if an in-game quest creator was added
+	/* 
 	public String serialise() {
 		switch(type) {
 		case ITEM:
@@ -83,7 +90,7 @@ public class Trigger {
 		case ITEM: //Format: DIAMOND
 			return Material.matchMaterial(data);
 		case LOCATION: //Format: world|x|y|z|radius,world2|x2|y2|z2|radius2
-			return LocationData.deserialise(data);
+			return new LocationData(data);
 		case KILLENTITY: //Format: ZOMBIE
 			return EntityType.valueOf(data);
 		case NPC: //Format: NpcName|submit EG: blacksmith|false

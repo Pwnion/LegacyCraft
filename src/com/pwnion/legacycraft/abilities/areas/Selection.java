@@ -16,7 +16,6 @@ public class Selection {
     public static final ConfigAccessor structuresConfig = new ConfigAccessor("structures.yml");
     public static final ConfigurationSection structuresCS = structuresConfig.getRoot();
     
-    @SuppressWarnings("unchecked")
     public static final ArrayList<String> load(String name) {
         return (ArrayList<String>) structuresCS.getList("structures." + name);
     }
@@ -25,7 +24,7 @@ public class Selection {
     private Block pos1;
     private Block pos2;
     
-    //This method has seperate instances for each player that are generated in onCommand
+    //This method has separate instances for each player that are generated in onCommand
     public Selection(Player p) {
         this.p = p;
     }
@@ -48,7 +47,7 @@ public class Selection {
             for(Block block : RectangularPrism.get(pos1, pos2)) {
                 if(!block.isEmpty()) {
                 
-                //these two lines get relative block location
+                	//these two lines get relative block location
                 	//Gets the location of the block that the player is at
                 	Location centre = p.getLocation().getBlock().getLocation();
                 	Location loc = block.getLocation().subtract(centre);

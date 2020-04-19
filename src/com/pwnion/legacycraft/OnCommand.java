@@ -22,8 +22,10 @@ import com.pwnion.legacycraft.abilities.ooc.Portal;
 import com.pwnion.legacycraft.abilities.proficiencies.AquaVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.proficiencies.TerraVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.targets.Point;
+import com.pwnion.legacycraft.levels.Experience;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
 import com.pwnion.legacycraft.quests.Quest;
+import com.pwnion.legacycraft.quests.QuestBook;
 import com.pwnion.legacycraft.quests.QuestManager;
 
 public class OnCommand implements CommandExecutor {
@@ -152,10 +154,10 @@ public class OnCommand implements CommandExecutor {
 						}
 
 						break;
-					case "home":
+					case "home": //TODO not working
 						p.sendMessage(NPCHomeWork.setHome(p, p.getLocation()));
 						break;
-					case "work":
+					case "work": //TODO not working
 						p.sendMessage(NPCHomeWork.setWork(p, p.getLocation()));
 						break;
 					case "complete":
@@ -177,11 +179,14 @@ public class OnCommand implements CommandExecutor {
 					}
 				}
 			} else if(lbl.equals("test")) {
-				for(Quest quest : QuestManager.getActiveQuests(p)) {
-					p.sendMessage(quest.getName());
-					p.sendMessage(quest.getDesc());
-					p.sendMessage(QuestManager.getProgress(p, quest, 0) + " / " + quest.getCondition(0));
-					p.sendMessage(QuestManager.getPercent(p, quest, 0) + "% complete");
+				try {
+					
+					Util.br(Experience.getExperienceFromLevel(Integer.parseInt(args[0])));
+					
+					//QuestBook.open(p);
+					
+				} catch(Exception e) {
+					Util.print(e);
 				}
 			}
 			return true;
