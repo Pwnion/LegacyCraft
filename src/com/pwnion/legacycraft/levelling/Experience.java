@@ -96,8 +96,7 @@ public class Experience {
 			//Levelup.onPlayerLevelup(experienceType, experience);
 		}
 		
-		//TODO: save to player data
-		//LegacyCraft.setPlayerData(playerUUID, PlayerData.EXPERIENCE, experience); --> THIS NOW BROKEN?
+		getAllExperience().put(experienceType, experience);
 		
 		p.setTotalExperience(0);
 		p.giveExpLevels(getLevel(experienceType));
