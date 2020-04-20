@@ -93,7 +93,7 @@ public class Experience {
 	
 	public void setTotalExperience(int experience, ExperienceType experienceType) {
 		if(getLevel(experienceType) < getLevel(experience, experienceType)) {
-			//Levelup.onPlayerLevelup(experienceType, experience);
+			PlayerLevelup.onPlayerLevelup(p, this, experienceType, experience);
 		}
 		
 		getAllExperience().put(experienceType, experience);
