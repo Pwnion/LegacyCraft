@@ -164,8 +164,7 @@ public class Experience {
 	public int getTotalExperienceForLevel(int level, ExperienceType experienceType) {
 		if(level <= 1) { return 0; }
 		
-		
-		// Non-recursion sum
+		// ==== Non-recursion sum ====
 		//final double a1 = getExperienceFromLevel(level - 1, experienceType);
 		//final double r = geometricSeriesConstant;
 		//final double n = level;
