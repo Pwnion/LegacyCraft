@@ -163,6 +163,16 @@ public class Experience {
 	//Gets experience required to levelup to 'level' from level 1
 	public int getTotalExperienceForLevel(int level, ExperienceType experienceType) {
 		if(level <= 1) { return 0; }
+		
+		
+		// Non-recursion sum
+		//final double a1 = getExperienceFromLevel(level - 1, experienceType);
+		//final double r = geometricSeriesConstant;
+		//final double n = level;
+		//final double roundToNearest = 50;
+		
+		//return (int) (Math.round(a1 * (1 - Math.pow(r, n))) / (1 - r) / roundToNearest) * roundToNearest);
+		
 		return getTotalExperienceForLevel(level - 1, experienceType) + getExperienceFromLevel(level - 1, experienceType);
 	}
 	
