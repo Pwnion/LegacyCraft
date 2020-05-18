@@ -65,13 +65,7 @@ public class InventoryClick implements Listener {
 		}
 
 		for(int i = 0; i < invCount; i++) {
-			Bukkit.getLogger().info(String.format("i: %d, holder: %h, inventories(i): %s", i, inventories.get(i).getHolder(), inventories.get(i).toString()));
-			String invHolder;
-			try {
-				invHolder = inventories.get(i).getHolder().toString();
-			} catch (Exception e) {
-				continue;
-			}
+			String invHolder = inventories.get(i).getHolder().toString();
 			int index = i < 4 ? i : i < 20 ? 4 : i - 15;
 			holderToInvClass.put(invHolder.substring(0, invHolder.indexOf("@")), invClasses.get(index));
 		}
@@ -170,14 +164,5 @@ public class InventoryClick implements Listener {
 	        } else 
     		 */
         }
-	}
-	
-	@EventHandler
-	public void onSwitch(PlayerSwapHandItemsEvent e) {
-		try {
-			e.setCancelled(true);
-		} catch(Exception ex) {
-			return;
-		}
 	}
 }
