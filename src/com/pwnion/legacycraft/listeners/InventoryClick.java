@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -64,7 +65,13 @@ public class InventoryClick implements Listener {
 		}
 
 		for(int i = 0; i < invCount; i++) {
-			String invHolder = inventories.get(i).getHolder().toString();
+			Bukkit.getLogger().info(String.format("i: %d, holder: %h, inventories(i): %s", i, inventories.get(i).getHolder(), inventories.get(i).toString()));
+			String invHolder;
+			try {
+				invHolder = inventories.get(i).getHolder().toString();
+			} catch (Exception e) {
+				continue;
+			}
 			int index = i < 4 ? i : i < 20 ? 4 : i - 15;
 			holderToInvClass.put(invHolder.substring(0, invHolder.indexOf("@")), invClasses.get(index));
 		}
@@ -163,5 +170,14 @@ public class InventoryClick implements Listener {
 	        } else 
     		 */
         }
-    }
+	}
+	
+	@EventHandler
+	public void onSwitch(PlayerSwapHandItemsEvent e) {
+		try {
+			e.setCancelled(true);
+		} catch(Exception ex) {
+			return;
+		}
+	}
 }

@@ -41,7 +41,7 @@ public class DeserialiseInventory {
 		ItemStack contents[] = targetCS.getList("contents").toArray(new ItemStack[0]);
 		InventoryHolder holder;
 		
-		switch(title.replace("§5§l", "")) {
+		switch(title.replace("\u00A75\u00A7l", "")) {
 		case "Character Build Menu":
 			holder = new SelectOption();
 			break;

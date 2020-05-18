@@ -17,6 +17,22 @@
         </configuration>
       </plugin>
     </plugins>
+    <resources>
+		  <resource>
+        <directory>${basedir}</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>plugin.yml</include>
+          <include>config.yml</include>
+          <include>inventory-menus.yml</include>
+          <include>player-data-template.yml</include>
+          <include>player-data.yml</include>
+          <include>npc-data.yml</include>
+          <include>quest-data.yml</include>
+          <include>structures.yml</include>
+        </includes>
+      </resource>
+    </resources>  
   </build>
   <repositories>
     <repository>
