@@ -34,8 +34,9 @@ public class PlayerJoin implements Listener {
 				put(PlayerData.UNFINISHED_QUESTS, QuestManager.loadUnfinishedPlayerData(p.getUniqueId()));
 				put(PlayerData.FINISHED_QUESTS, QuestManager.loadFinishedPlayerData(p.getUniqueId()));
 				put(PlayerData.SWAP_SLOT, -1);
-				put(PlayerData.EXPERIENCE, new Experience(p));
 			}
 		});
+		
+		LegacyCraft.addPlayerData(playerUUID, PlayerData.EXPERIENCE, new Experience(p));
 	}
 }

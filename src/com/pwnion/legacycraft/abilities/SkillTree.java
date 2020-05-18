@@ -120,6 +120,16 @@ public class SkillTree {
 		playerDataConfig.saveCustomConfig();
 	}
 	
+	public final ItemStack[] getInventory() {
+		ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
+		ConfigurationSection playerDataCS = playerDataConfig.getRoot();
+		
+		List<?> inventory = playerDataCS.getList(nodePrefix + ".save.inventory");
+		
+		if(inventory == null) return new ItemStack[0];
+		return inventory.toArray(new ItemStack[0]);
+	}
+	
 	public final ItemStack[] getInventory(PlayerClass playerClass) {
 		ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
 		ConfigurationSection playerDataCS = playerDataConfig.getRoot();
@@ -132,17 +142,18 @@ public class SkillTree {
 	
 	//Load a state for a player from the player data file
 	private final void loadState(PlayerClass playerClass, boolean classNotOther) {
-		String savePath;
-		if(classNotOther) {
-			savePath = nodePrefix + playerClass.toString() + ".save.";
-		} else {
-			savePath = nodePrefix + ".save.";
-		}
-		
 		ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
 		ConfigurationSection playerDataCS = playerDataConfig.getRoot();
 		
-		ItemStack inv[] = getInventory(playerClass);
+		String savePath;
+		ItemStack inv[];
+		if(classNotOther) {
+			savePath = nodePrefix + playerClass.toString() + ".save.";
+			inv = getInventory(playerClass);
+		} else {
+			savePath = nodePrefix + ".save.";
+			inv = getInventory();
+		}
 		
 		if(inv.length == 0) return;
 		
@@ -157,7 +168,7 @@ public class SkillTree {
 	}
 	
 	public final void setInventory(PlayerClass playerClass, ItemStack[] inv) {
-		playerDataCS.set(nodePrefix + playerClass.toString() + ".save." + "inventory", inv);
+		playerDataCS.set(nodePrefix + playerClass.toString() + ".save.inventory", inv);
 		save();
 	}
 	

@@ -228,6 +228,10 @@ STRIKER:
     hunger: 20
     level: 0
     exp: 0.0
+  experience:
+    PLAYER: 0
+    SWORDS: 0
+    BOWS: 0
 VANGUARD:
   ASPECT: NONE
   aptitudes:
@@ -456,6 +460,10 @@ VANGUARD:
     hunger: 20
     level: 0
     exp: 0.0
+  experience:
+    PLAYER: 0
+    SWORDS: 0
+    BOWS: 0
 ROGUE:
   ASPECT: NONE
   aptitudes:
@@ -684,6 +692,10 @@ ROGUE:
     hunger: 20
     level: 0
     exp: 0.0
+  experience:
+    PLAYER: 0
+    SWORDS: 0
+    BOWS: 0
 SHAMAN:
   ASPECT: NONE
   aptitudes:
@@ -912,6 +924,10 @@ SHAMAN:
     hunger: 20
     level: 0
     exp: 0.0
+  experience:
+    PLAYER: 0
+    SWORDS: 0
+    BOWS: 0
 IGNIS_STRIKER:
   unlocked: true
   proficiencies:

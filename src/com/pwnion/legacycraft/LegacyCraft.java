@@ -183,6 +183,10 @@ public class LegacyCraft extends JavaPlugin {
 		playerData.put(playerUUID, data);
 	}
 	
+	public static final void addPlayerData(UUID playerUUID, PlayerData playerData, Object data) {
+		getPlayerData(playerUUID).put(playerData, data);
+	}
+	
 	public static final void setPlayerData(UUID playerUUID, PlayerData data, Object obj) {
 		playerData.get(playerUUID).put(data, obj);
 	}
