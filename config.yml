@@ -1,1 +1,4 @@
-#config.yml
+resourcepack:
+  successfully-loaded-message: "§7------[§cServer Resource Pack§7]------\n§3 The official §6§lLegacy§f§lCraft §3Resource\n  Pack has been loaded successfully!\n§7------[§cServer Resource Pack§7]------"
+  declined-message: "§cYou were kicked because you didn't allow the\nServer Resource Pack to load on your client.\n\n§rPlease select this server in your server list,\nclick 'Edit' and make sure the option\n'Server Resource Packs' is set to 'Enabled'"
+  failed-download-message: "§cYou were kicked because the Server Resource Pack\nfailed to download on your client.\n\n§rPlease reconnect and try again."

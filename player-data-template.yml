@@ -1,7 +1,7 @@
 equipped:
-  CLASS: 'NONE'
+  CLASS: NONE
 STRIKER:
-  ASPECT: 'NONE'
+  ASPECT: NONE
   aptitudes:
     ONE:
       unlocked: false
@@ -16,8 +16,224 @@ STRIKER:
     TWO:
       unlocked: false
       equipped: false
+  save:
+    inventory:
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: IRON_SWORD
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §4Striker Sword
+        attribute-modifiers:
+          GENERIC_ATTACK_DAMAGE:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 10.0
+            name: generic.attackDamage
+            uuid: 00000000-0000-0001-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BOW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §4Striker Bow
+        enchants:
+          ARROW_INFINITE: 1
+        ItemFlags:
+        - HIDE_ENCHANTS
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BARRIER
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Hotbar Separator
+        custom-model-data: 1
+    - null
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BARRIER
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Hotbar Separator
+        custom-model-data: 2
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: GLASS_PANE
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §5Warp Gates
+        custom-model-data: 1
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: ARROW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Your last arrow. Use it wisely.
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: COMPASS
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §5Character Build Menu
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: STICK
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Rotate Hotbar
+        custom-model-data: 1
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: LEATHER_BOOTS
+      meta:
+        ==: ItemMeta
+        meta-type: LEATHER_ARMOR
+        display-name: §4Striker Boots
+        attribute-modifiers:
+          GENERIC_ARMOR:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 5.0
+            name: generic.armor
+            uuid: 00000000-0000-0004-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+        color:
+          ==: Color
+          RED: 205
+          BLUE: 0
+          GREEN: 0
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: LEATHER_LEGGINGS
+      meta:
+        ==: ItemMeta
+        meta-type: LEATHER_ARMOR
+        display-name: §4Striker Leggings
+        attribute-modifiers:
+          GENERIC_ARMOR:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 5.0
+            name: generic.armor
+            uuid: 00000000-0000-0003-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+        color:
+          ==: Color
+          RED: 205
+          BLUE: 0
+          GREEN: 0
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: LEATHER_CHESTPLATE
+      meta:
+        ==: ItemMeta
+        meta-type: LEATHER_ARMOR
+        display-name: §4Striker Chestplate
+        attribute-modifiers:
+          GENERIC_ARMOR:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 5.0
+            name: generic.armor
+            uuid: 00000000-0000-0002-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+        color:
+          ==: Color
+          RED: 205
+          BLUE: 0
+          GREEN: 0
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: LEATHER_HELMET
+      meta:
+        ==: ItemMeta
+        meta-type: LEATHER_ARMOR
+        display-name: §4Striker Helmet
+        attribute-modifiers:
+          GENERIC_ARMOR:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 5.0
+            name: generic.armor
+            uuid: 00000000-0000-0001-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+        color:
+          ==: Color
+          RED: 205
+          BLUE: 0
+          GREEN: 0
+    - null
+    location:
+      ==: org.bukkit.Location
+      world: Neutral
+      x: 98.5
+      y: 60.0
+      z: 81.5
+      pitch: 0.0
+      yaw: 180.0
+    health: 20.0
+    hunger: 20
+    level: 0
+    exp: 0.0
+  experience:
+    PLAYER: 0
+    SWORDS: 0
+    BOWS: 0
 VANGUARD:
-  ASPECT: 'NONE'
+  ASPECT: NONE
   aptitudes:
     ONE:
       unlocked: false
@@ -32,8 +248,224 @@ VANGUARD:
     TWO:
       unlocked: false
       equipped: false
+  save:
+    inventory:
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: IRON_SWORD
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §2Vanguard Sword
+        attribute-modifiers:
+          GENERIC_ATTACK_DAMAGE:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 10.0
+            name: generic.attackDamage
+            uuid: 00000000-0000-0001-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BOW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §2Vanguard Bow
+        enchants:
+          ARROW_INFINITE: 1
+        ItemFlags:
+        - HIDE_ENCHANTS
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BARRIER
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Hotbar Separator
+        custom-model-data: 1
+    - null
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BARRIER
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Hotbar Separator
+        custom-model-data: 2
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: GLASS_PANE
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §5Warp Gates
+        custom-model-data: 1
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: ARROW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Your last arrow. Use it wisely.
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: COMPASS
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §5Character Build Menu
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: STICK
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Rotate Hotbar
+        custom-model-data: 1
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: LEATHER_BOOTS
+      meta:
+        ==: ItemMeta
+        meta-type: LEATHER_ARMOR
+        display-name: §2Vanguard Boots
+        attribute-modifiers:
+          GENERIC_ARMOR:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 5.0
+            name: generic.armor
+            uuid: 00000000-0000-0004-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+        color:
+          ==: Color
+          RED: 0
+          BLUE: 139
+          GREEN: 0
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: LEATHER_LEGGINGS
+      meta:
+        ==: ItemMeta
+        meta-type: LEATHER_ARMOR
+        display-name: §2Vanguard Leggings
+        attribute-modifiers:
+          GENERIC_ARMOR:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 5.0
+            name: generic.armor
+            uuid: 00000000-0000-0003-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+        color:
+          ==: Color
+          RED: 0
+          BLUE: 139
+          GREEN: 0
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: LEATHER_CHESTPLATE
+      meta:
+        ==: ItemMeta
+        meta-type: LEATHER_ARMOR
+        display-name: §2Vanguard Chestplate
+        attribute-modifiers:
+          GENERIC_ARMOR:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 5.0
+            name: generic.armor
+            uuid: 00000000-0000-0002-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+        color:
+          ==: Color
+          RED: 0
+          BLUE: 139
+          GREEN: 0
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: LEATHER_HELMET
+      meta:
+        ==: ItemMeta
+        meta-type: LEATHER_ARMOR
+        display-name: §2Vanguard Helmet
+        attribute-modifiers:
+          GENERIC_ARMOR:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 5.0
+            name: generic.armor
+            uuid: 00000000-0000-0001-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+        color:
+          ==: Color
+          RED: 0
+          BLUE: 139
+          GREEN: 0
+    - null
+    location:
+      ==: org.bukkit.Location
+      world: Neutral
+      x: 98.5
+      y: 60.0
+      z: 81.5
+      pitch: 0.0
+      yaw: 180.0
+    health: 20.0
+    hunger: 20
+    level: 0
+    exp: 0.0
+  experience:
+    PLAYER: 0
+    SWORDS: 0
+    BOWS: 0
 ROGUE:
-  ASPECT: 'NONE'
+  ASPECT: NONE
   aptitudes:
     ONE:
       unlocked: false
@@ -48,8 +480,224 @@ ROGUE:
     TWO:
       unlocked: false
       equipped: false
+  save:
+    inventory:
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: IRON_SWORD
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §8Rogue Sword
+        attribute-modifiers:
+          GENERIC_ATTACK_DAMAGE:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 10.0
+            name: generic.attackDamage
+            uuid: 00000000-0000-0001-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BOW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §8Rogue Bow
+        enchants:
+          ARROW_INFINITE: 1
+        ItemFlags:
+        - HIDE_ENCHANTS
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BARRIER
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Hotbar Separator
+        custom-model-data: 1
+    - null
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BARRIER
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Hotbar Separator
+        custom-model-data: 2
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: GLASS_PANE
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §5Warp Gates
+        custom-model-data: 1
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: ARROW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Your last arrow. Use it wisely.
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: COMPASS
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §5Character Build Menu
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: STICK
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Rotate Hotbar
+        custom-model-data: 1
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: LEATHER_BOOTS
+      meta:
+        ==: ItemMeta
+        meta-type: LEATHER_ARMOR
+        display-name: §8Rogue Boots
+        attribute-modifiers:
+          GENERIC_ARMOR:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 5.0
+            name: generic.armor
+            uuid: 00000000-0000-0004-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+        color:
+          ==: Color
+          RED: 0
+          BLUE: 0
+          GREEN: 0
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: LEATHER_LEGGINGS
+      meta:
+        ==: ItemMeta
+        meta-type: LEATHER_ARMOR
+        display-name: §8Rogue Leggings
+        attribute-modifiers:
+          GENERIC_ARMOR:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 5.0
+            name: generic.armor
+            uuid: 00000000-0000-0003-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+        color:
+          ==: Color
+          RED: 0
+          BLUE: 0
+          GREEN: 0
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: LEATHER_CHESTPLATE
+      meta:
+        ==: ItemMeta
+        meta-type: LEATHER_ARMOR
+        display-name: §8Rogue Chestplate
+        attribute-modifiers:
+          GENERIC_ARMOR:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 5.0
+            name: generic.armor
+            uuid: 00000000-0000-0002-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+        color:
+          ==: Color
+          RED: 0
+          BLUE: 0
+          GREEN: 0
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: LEATHER_HELMET
+      meta:
+        ==: ItemMeta
+        meta-type: LEATHER_ARMOR
+        display-name: §8Rogue Helmet
+        attribute-modifiers:
+          GENERIC_ARMOR:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 5.0
+            name: generic.armor
+            uuid: 00000000-0000-0001-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+        color:
+          ==: Color
+          RED: 0
+          BLUE: 0
+          GREEN: 0
+    - null
+    location:
+      ==: org.bukkit.Location
+      world: Neutral
+      x: 98.5
+      y: 60.0
+      z: 81.5
+      pitch: 0.0
+      yaw: 180.0
+    health: 20.0
+    hunger: 20
+    level: 0
+    exp: 0.0
+  experience:
+    PLAYER: 0
+    SWORDS: 0
+    BOWS: 0
 SHAMAN:
-  ASPECT: 'NONE'
+  ASPECT: NONE
   aptitudes:
     ONE:
       unlocked: false
@@ -64,7 +712,224 @@ SHAMAN:
     TWO:
       unlocked: false
       equipped: false
+  save:
+    inventory:
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: IRON_SWORD
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §6Shaman Sword
+        attribute-modifiers:
+          GENERIC_ATTACK_DAMAGE:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 10.0
+            name: generic.attackDamage
+            uuid: 00000000-0000-0001-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BOW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §6Shaman Bow
+        enchants:
+          ARROW_INFINITE: 1
+        ItemFlags:
+        - HIDE_ENCHANTS
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BARRIER
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Hotbar Separator
+        custom-model-data: 1
+    - null
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: BARRIER
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Hotbar Separator
+        custom-model-data: 2
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: GLASS_PANE
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §5Warp Gates
+        custom-model-data: 1
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: ARROW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Your last arrow. Use it wisely.
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: COMPASS
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §5Character Build Menu
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: STICK
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: Rotate Hotbar
+        custom-model-data: 1
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: LEATHER_BOOTS
+      meta:
+        ==: ItemMeta
+        meta-type: LEATHER_ARMOR
+        display-name: §6Shaman Boots
+        attribute-modifiers:
+          GENERIC_ARMOR:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 5.0
+            name: generic.armor
+            uuid: 00000000-0000-0004-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+        color:
+          ==: Color
+          RED: 255
+          BLUE: 0
+          GREEN: 165
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: LEATHER_LEGGINGS
+      meta:
+        ==: ItemMeta
+        meta-type: LEATHER_ARMOR
+        display-name: §6Shaman Leggings
+        attribute-modifiers:
+          GENERIC_ARMOR:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 5.0
+            name: generic.armor
+            uuid: 00000000-0000-0003-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+        color:
+          ==: Color
+          RED: 255
+          BLUE: 0
+          GREEN: 165
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: LEATHER_CHESTPLATE
+      meta:
+        ==: ItemMeta
+        meta-type: LEATHER_ARMOR
+        display-name: §6Shaman Chestplate
+        attribute-modifiers:
+          GENERIC_ARMOR:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 5.0
+            name: generic.armor
+            uuid: 00000000-0000-0002-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+        color:
+          ==: Color
+          RED: 255
+          BLUE: 0
+          GREEN: 165
+    - ==: org.bukkit.inventory.ItemStack
+      v: 1976
+      type: LEATHER_HELMET
+      meta:
+        ==: ItemMeta
+        meta-type: LEATHER_ARMOR
+        display-name: §6Shaman Helmet
+        attribute-modifiers:
+          GENERIC_ARMOR:
+          - ==: org.bukkit.attribute.AttributeModifier
+            amount: 5.0
+            name: generic.armor
+            uuid: 00000000-0000-0001-0000-000000000001
+            operation: 0
+        ItemFlags:
+        - HIDE_ATTRIBUTES
+        - HIDE_UNBREAKABLE
+        Unbreakable: true
+        color:
+          ==: Color
+          RED: 255
+          BLUE: 0
+          GREEN: 165
+    - null
+    location:
+      ==: org.bukkit.Location
+      world: Neutral
+      x: 98.5
+      y: 60.0
+      z: 81.5
+      pitch: 0.0
+      yaw: 180.0
+    health: 20.0
+    hunger: 20
+    level: 0
+    exp: 0.0
+  experience:
+    PLAYER: 0
+    SWORDS: 0
+    BOWS: 0
 IGNIS_STRIKER:
+  unlocked: true
   proficiencies:
     ONE:
       unlocked: false
@@ -76,7 +941,61 @@ IGNIS_STRIKER:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §4Striker Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §4Striker Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
+  - null
+  - null
+  - null
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 TERRA_STRIKER:
+  unlocked: false
   proficiencies:
     ONE:
       unlocked: false
@@ -88,7 +1007,61 @@ TERRA_STRIKER:
     ONE:
       unlocked: false
       equipped: false
-VACUOUS_STRIKER:
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §4Striker Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §4Striker Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
+  - null
+  - null
+  - null
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
+AER_STRIKER:
+  unlocked: false
   proficiencies:
     ONE:
       unlocked: false
@@ -100,7 +1073,61 @@ VACUOUS_STRIKER:
     ONE:
       unlocked: false
       equipped: false
-ARCTIC_STRIKER:
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §4Striker Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §4Striker Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
+  - null
+  - null
+  - null
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
+AQUA_STRIKER:
+  unlocked: false
   proficiencies:
     ONE:
       unlocked: false
@@ -112,7 +1139,61 @@ ARCTIC_STRIKER:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §4Striker Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §4Striker Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
+  - null
+  - null
+  - null
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 IGNIS_VANGUARD:
+  unlocked: true
   proficiencies:
     ONE:
       unlocked: false
@@ -124,7 +1205,61 @@ IGNIS_VANGUARD:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §2Vanguard Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §2Vanguard Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
+  - null
+  - null
+  - null
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 TERRA_VANGUARD:
+  unlocked: false
   proficiencies:
     ONE:
       unlocked: false
@@ -136,7 +1271,61 @@ TERRA_VANGUARD:
     ONE:
       unlocked: false
       equipped: false
-VACUOUS_VANGUARD:
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §2Vanguard Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §2Vanguard Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
+  - null
+  - null
+  - null
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2     
+AER_VANGUARD:
+  unlocked: false
   proficiencies:
     ONE:
       unlocked: false
@@ -148,7 +1337,61 @@ VACUOUS_VANGUARD:
     ONE:
       unlocked: false
       equipped: false
-ARCTIC_VANGUARD:
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §2Vanguard Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §2Vanguard Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
+  - null
+  - null
+  - null
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
+AQUA_VANGUARD:
+  unlocked: false
   proficiencies:
     ONE:
       unlocked: false
@@ -160,7 +1403,61 @@ ARCTIC_VANGUARD:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §2Vanguard Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §2Vanguard Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
+  - null
+  - null
+  - null
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 IGNIS_ROGUE:
+  unlocked: true
   proficiencies:
     ONE:
       unlocked: false
@@ -172,7 +1469,61 @@ IGNIS_ROGUE:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §8Rogue Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §8Rogue Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
+  - null
+  - null
+  - null
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 TERRA_ROGUE:
+  unlocked: false
   proficiencies:
     ONE:
       unlocked: false
@@ -184,7 +1535,61 @@ TERRA_ROGUE:
     ONE:
       unlocked: false
       equipped: false
-VACUOUS_ROGUE:
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §8Rogue Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §8Rogue Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
+  - null
+  - null
+  - null
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
+AER_ROGUE:
+  unlocked: false
   proficiencies:
     ONE:
       unlocked: false
@@ -196,7 +1601,61 @@ VACUOUS_ROGUE:
     ONE:
       unlocked: false
       equipped: false
-ARCTIC_ROGUE:
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §8Rogue Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §8Rogue Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
+  - null
+  - null
+  - null
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
+AQUA_ROGUE:
+  unlocked: false
   proficiencies:
     ONE:
       unlocked: false
@@ -208,7 +1667,61 @@ ARCTIC_ROGUE:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §8Rogue Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §8Rogue Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
+  - null
+  - null
+  - null
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 IGNIS_SHAMAN:
+  unlocked: true
   proficiencies:
     ONE:
       unlocked: false
@@ -220,7 +1733,61 @@ IGNIS_SHAMAN:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Shaman Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Shaman Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
+  - null
+  - null
+  - null
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
 TERRA_SHAMAN:
+  unlocked: false
   proficiencies:
     ONE:
       unlocked: false
@@ -232,7 +1799,61 @@ TERRA_SHAMAN:
     ONE:
       unlocked: false
       equipped: false
-VACUOUS_SHAMAN:
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Shaman Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Shaman Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
+  - null
+  - null
+  - null
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
+AER_SHAMAN:
+  unlocked: false
   proficiencies:
     ONE:
       unlocked: false
@@ -244,7 +1865,61 @@ VACUOUS_SHAMAN:
     ONE:
       unlocked: false
       equipped: false
-ARCTIC_SHAMAN:
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Shaman Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Shaman Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
+  - null
+  - null
+  - null
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2
+AQUA_SHAMAN:
+  unlocked: false
   proficiencies:
     ONE:
       unlocked: false
@@ -256,3 +1931,56 @@ ARCTIC_SHAMAN:
     ONE:
       unlocked: false
       equipped: false
+  hotbar:
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: IRON_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Shaman Sword
+      attribute-modifiers:
+        GENERIC_ATTACK_DAMAGE:
+        - ==: org.bukkit.attribute.AttributeModifier
+          amount: 10.0
+          name: generic.attackDamage
+          uuid: 00000000-0000-0001-0000-000000000001
+          operation: 0
+      ItemFlags:
+      - HIDE_ATTRIBUTES
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BOW
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Shaman Bow
+      enchants:
+        ARROW_INFINITE: 1
+      ItemFlags:
+      - HIDE_ENCHANTS
+      - HIDE_UNBREAKABLE
+      Unbreakable: true
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 1
+  - null
+  - null
+  - null
+  - null
+  - ==: org.bukkit.inventory.ItemStack
+    v: 1976
+    type: BARRIER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: Hotbar Separator
+      custom-model-data: 2

@@ -22,7 +22,7 @@ import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
 public class SelectAClassInv extends Inv {
 	//Loads the 'Select A Class' inventory for a player
 	public static void load(Player p) {
-		InventoryView inv = p.openInventory(InventoryFromFile.get(InvName.SELECT_A_CLASS, FILE));
+		InventoryView inv = p.openInventory(DeserialiseInventory.get(InvName.SELECT_A_CLASS));
 		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.SKILL_TREE);
 		
     	if(!skillTree.getPlayerClass().equals(PlayerClass.NONE)) {
@@ -57,35 +57,28 @@ public class SelectAClassInv extends Inv {
 			SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.SKILL_TREE);
 			PlayerClass clickedClass = PlayerClass.valueOf(clickedItem.getItemMeta().getDisplayName().toUpperCase());
 			
-			LegacyCraft.setPlayerData(playerUUID, PlayerData.CLASS_INVENTORY_OPEN, clickedClass);
-			
 			if(clickType.isLeftClick()) {
+				if(skillTree.getPlayerClass().equals(clickedClass)) return;
+				
+				p.closeInventory();
+				
+				skillTree.saveClass();
 				skillTree.setPlayerClass(clickedClass);
+				skillTree.loadClass(clickedClass);
 				
 				Jump jump = skillTree.getEquippedJump(clickedClass);
 				if(!jump.equals(Jump.NONE)) {
 					skillTree.setEquippedJump(clickedClass, jump);
 				}
-
-				for(int slot : classToSlot.values()) {
-					inv.getItem(slot).removeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL);
-				}
 				
-				for(int slot : selectedSlots) {
-					inv.getItem(slot).setType(Material.BLACK_STAINED_GLASS_PANE);
-				}
-				
-				ItemMeta itemMeta = inv.getItem(classToSlot.get(skillTree.getPlayerClass())).getItemMeta();
-				itemMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-				itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-				
-				inv.getItem(classToSlot.get(skillTree.getPlayerClass())).setItemMeta(itemMeta);
-				
-				inv.getItem(classToSlot.get(skillTree.getPlayerClass()) - 9).setType(Material.WHITE_STAINED_GLASS_PANE);
-    			inv.getItem(classToSlot.get(skillTree.getPlayerClass()) + 9).setType(Material.WHITE_STAINED_GLASS_PANE);
+				load(p);
 			} else if(clickType.isRightClick()) {
+				LegacyCraft.setPlayerData(playerUUID, PlayerData.CLASS_INVENTORY_OPEN, clickedClass);
+				
 				SelectAnAspectInv.load(p);
 			}
+			click(p);
+			
 			break;
 		}
 	}
