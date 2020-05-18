@@ -8,7 +8,6 @@ import org.bukkit.event.Listener;
 public class PlayerSwapHandItems implements Listener {
 	@EventHandler
 	public void onSwitch(PlayerSwapHandItemsEvent e) {
-		Bukkit.getLogger().info("Attempted swap hand");
 		e.setCancelled(true);
 	}
 }
