@@ -176,14 +176,22 @@ public class OnCommand implements CommandExecutor {
 						TerraVanguardProficiency1.activate(p, 2);
 						break;
 					default:
+						p.sendMessage(ChatColor.RED + "Invalid Command");
 						return false;
 					}
 				}
 			} else if(lbl.equals("test")) {
 				try {
 					
-					Util.br(((Experience) LegacyCraft.getPlayerData(playerUUID, PlayerData.EXPERIENCE)).getExperienceFromLevel(Integer.parseInt(args[0]), ExperienceType.PLAYER));
+					Experience playerExperience = (Experience) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.EXPERIENCE);
 					
+					Util.br(playerExperience);
+					Util.br(playerExperience.getAllExperience());
+					
+					if(args.length > 0) {
+						Util.br(((Experience) LegacyCraft.getPlayerData(playerUUID, PlayerData.EXPERIENCE)).getExperienceFromLevel(Integer.parseInt(args[0]), ExperienceType.PLAYER));
+					}
+
 					//QuestBook.open(p);
 					
 				} catch(Exception e) {

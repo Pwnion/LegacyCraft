@@ -3,6 +3,7 @@ package com.pwnion.legacycraft.levelling;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -10,6 +11,7 @@ import org.bukkit.entity.Player;
 import com.pwnion.legacycraft.ConfigAccessor;
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
+import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.abilities.SkillTree;
 import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
 
@@ -34,7 +36,7 @@ public class Experience {
 		final ConfigurationSection playerDataCS = playerDataConfig.getRoot();
 		
 		for(PlayerClass playerClass : SkillTree.PlayerClass.values()) {
-			if(playerClass.equals(PlayerClass.NONE)) continue;
+			//if(playerClass.equals(PlayerClass.NONE)) continue;
 			
 			String node = "players." + playerUUID.toString() + "." + playerClass.toString() + ".experience";
 			
@@ -55,7 +57,7 @@ public class Experience {
         SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
 		
         for(PlayerClass playerClass : SkillTree.PlayerClass.values()) {
-        	if(playerClass.equals(PlayerClass.NONE)) continue;
+        	//if(playerClass.equals(PlayerClass.NONE)) continue;
         	
         	String node = "players." + playerUUID.toString() + "." + playerClass.toString() + ".experience";
         	ConfigurationSection experienceCS = playerDataCS.getConfigurationSection(node);
@@ -106,8 +108,7 @@ public class Experience {
 		
 		getAllExperience().put(experienceType, experience);
 		
-		p.setTotalExperience(0);
-		p.giveExpLevels(getLevel(experienceType));
+		p.setLevel(getLevel(experienceType));
 		p.setExp(getPercentExperience(experienceType));
 	}
 	
