@@ -20,6 +20,7 @@ import com.pwnion.legacycraft.quests.triggers.KillEntity;
 public class EntityDeath implements Listener {
 	
 	//Simple example experience system
+	@SuppressWarnings("unused")
 	private static final HashMap<EntityType, Integer> EntityWorth = new HashMap<EntityType, Integer>() {
 		private static final long serialVersionUID = 1L;
 		{
