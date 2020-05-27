@@ -18,7 +18,7 @@ import com.pwnion.legacycraft.quests.QuestManager;
 public class PlayerJoin implements Listener {
 	
 	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent e) {
+	public void onPlayerJoin(PlayerJoinEvent e) { //Player Data null?
 		Player p = e.getPlayer();
 		UUID playerUUID = p.getUniqueId();
 		
