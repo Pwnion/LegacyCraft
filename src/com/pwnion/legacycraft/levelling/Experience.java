@@ -39,7 +39,7 @@ public class Experience {
 			String node = "players." + playerUUID.toString() + "." + playerClass.toString() + ".experience";
 			
 			for(ExperienceType experienceType : ExperienceType.values()) {
-				playerDataCS.set(node + "." + experienceType.toString(), getTotalExperience(experienceType));
+				playerDataCS.set(node + "." + experienceType.toString(), getTotalExperience(experienceType, playerClass));
 			}
 		}
 		
@@ -80,10 +80,18 @@ public class Experience {
 	public HashMap<ExperienceType, Integer> getAllExperience() {
 		return allExperience.get(playerClass);
 	}
+	
+	public HashMap<ExperienceType, Integer> getAllExperience(PlayerClass playerClass) {
+		return allExperience.get(playerClass);
+	}
 
 	//Gets Experience from level 1
 	public int getTotalExperience(ExperienceType experienceType) {
-		return allExperience.get(playerClass).get(experienceType);
+		return getAllExperience().get(experienceType);
+	}
+	
+	public int getTotalExperience(ExperienceType experienceType, PlayerClass playerClass) {
+		return getAllExperience(playerClass).get(experienceType);
 	}
 	
 	//Gets experience from current level
