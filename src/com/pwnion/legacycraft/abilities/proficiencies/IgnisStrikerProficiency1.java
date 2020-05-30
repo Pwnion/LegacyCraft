@@ -20,7 +20,7 @@ public class IgnisStrikerProficiency1 {
 	 * 
 	 * Make sure to only replace Air/Long grass like blocks and not solid blocks.
 	 * 
-	 * Bonus points if you can make the wave 'splash' on any wall by raising it's height. (Only if that actually looks cool)
+	 * Try seeing if making the wave 'splash' on a wall by raising it's height looks cool.
 	 */
 	
 	/**
