@@ -89,7 +89,7 @@ public class AquaVanguardProficiency1 {
 			return ChatColor.RED + "Stand on Solid Ground!";
 		}
 		
-		/*
+		/* Not sure if required
 		//Player must have a 3x3 cube centred on their head non-solid
 		ArrayList<Block> safetyRectangularPrism = RectangularPrism.get(centre.getBlock(), 1, 3);
 		for(Block block : safetyRectangularPrism) {
@@ -98,7 +98,7 @@ public class AquaVanguardProficiency1 {
 			}
 		} //*/
 		
-		//Not finished
+		//TODO: Not finished
 		p.teleport(centre.toCenterLocation());
 		p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, time, 2 /* Amplifier */, true /* Ambient */, false /* Particles */), true /* Forced */); //Regeneration 2 for 'time' ticks, no particles, forced.
 		
