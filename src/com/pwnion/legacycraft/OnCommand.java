@@ -170,10 +170,15 @@ public class OnCommand implements CommandExecutor {
 						//QuestManager.resetQuests(p, true);
 						break;
 					case "aquav":
-						AquaVanguardProficiency1.activate(p);
+						try {
+							Util.br("AquaVanguardProficiency1");
+							p.sendMessage(AquaVanguardProficiency1.activate(p));
+						} catch(Exception e) {
+							Util.print(e);
+						}
 						break;
 					case "terrav":
-						TerraVanguardProficiency1.activate(p, 2);
+						p.sendMessage(TerraVanguardProficiency1.activate(p, 2));
 						break;
 					default:
 						p.sendMessage(ChatColor.RED + "Invalid Command");

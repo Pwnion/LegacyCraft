@@ -23,7 +23,11 @@ public class Util {
 	}
 	
 	public static final void br(Object message) {
-		br(message.toString());
+		if(message.equals(null)) {
+			br("null");
+		} else {
+			br(message.toString());
+		}
 	}
 	
 	public static final void print(Exception e) {
