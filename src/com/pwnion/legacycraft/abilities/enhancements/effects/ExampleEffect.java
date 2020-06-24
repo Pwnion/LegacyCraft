@@ -23,10 +23,7 @@ public class ExampleEffect implements Enhancement {
 	}
 	
 	@Override
-	public void apply(Entity wielder, Entity target) {
-		if(target instanceof Damageable) {
-			Damageable targetD = (Damageable) target;
-			targetD.damage(5);
-		}
+	public void apply(Entity wielder, Damageable target, double damage) {
+		target.damage(5);
 	}
 }

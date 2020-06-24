@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -25,14 +26,14 @@ public class EnhancementManager {
 	
 	private static HashMap<ItemStack, ArrayList<Enhancement>> enhancements = new HashMap<ItemStack, ArrayList<Enhancement>>();
 	
-	public static void apply(Player wielder, ItemStack item, @Nullable Entity target, EnhancementType type) {
+	public static void apply(Player wielder, @Nullable Damageable target, ItemStack item, double damage, EnhancementType type) {
 		if(hasEnhancements(item)) {
 			for(Enhancement enhancement : enhancements.get(item)) {
 				if(type == EnhancementType.WeaponHit) {
-					apply(wielder, item, target, EnhancementType.WeaponSwing);
+					apply(wielder, target, item, damage, EnhancementType.WeaponSwing);
 				}
 				if(enhancement.getType() == type) {
-					enhancement.apply(wielder, target);
+					enhancement.apply(wielder, target, damage);
 				}
 			}
 		}

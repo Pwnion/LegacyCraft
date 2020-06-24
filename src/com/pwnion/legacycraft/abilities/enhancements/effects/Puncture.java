@@ -25,20 +25,17 @@ public class Puncture implements Enhancement {
 	private static final int DELAY = 20; //Delay between damages
 
 	@Override
-	public void apply(Entity wielder, Entity targetEntity) {
-		if(targetEntity instanceof Damageable) {
-			Damageable target = (Damageable) targetEntity;
-			if(Math.random() < PROC_RATE) {
-				wielder.sendMessage("Opponent is bleeding"); //TODO: Choose colour and text
-				int count = 1;
-				while(Math.random() < CONT_RATE) count++;
-				
-				LegacyCraft.addTaskToBeCancelled(Bukkit.getServer().getScheduler().runTaskTimer(LegacyCraft.getPlugin(), new Runnable() {
-					public void run() {
-						target.damage(DAMAGE);
-					}
-				}, DELAY, DELAY), DELAY * count + 1);
-			}
+	public void apply(Entity wielder, Damageable target, double damage) {
+		if (Math.random() < PROC_RATE) {
+			wielder.sendMessage("Opponent is bleeding"); // TODO: Choose colour and text
+			int count = 1;
+			while (Math.random() < CONT_RATE) count++;
+
+			LegacyCraft.addTaskToBeCancelled(Bukkit.getServer().getScheduler().runTaskTimer(LegacyCraft.getPlugin(), new Runnable() {
+				public void run() {
+					target.damage(DAMAGE);
+				}
+			}, DELAY, DELAY), DELAY * count + 1);
 		}
 		
 	}

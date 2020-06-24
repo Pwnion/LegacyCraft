@@ -18,7 +18,7 @@ public class PlayerInteract implements Listener {
 			Player p = e.getPlayer();
 			ItemStack item = p.getInventory().getItemInMainHand();
 			
-			EnhancementManager.apply(p, item, null, EnhancementType.WeaponSwing);
+			EnhancementManager.apply(p, null, item, 0, EnhancementType.WeaponSwing);
 		}
 	}
 }
