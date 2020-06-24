@@ -2,6 +2,8 @@ package com.pwnion.legacycraft.quests;
 
 import java.util.ArrayList;
 
+import org.bukkit.inventory.ItemStack;
+
 public class Quest {
 
 	public Quest(String name, String desc, ArrayList<Trigger> triggers, String nextQuest) {
@@ -24,6 +26,9 @@ public class Quest {
 	private String name;
 	private String desc;
 	private String nextQuest;
+	
+	//Possible reward system
+	//private ArrayList<ItemStack> rewards = new ArrayList<ItemStack>();
 	
 	public String getName() {
 		return name;

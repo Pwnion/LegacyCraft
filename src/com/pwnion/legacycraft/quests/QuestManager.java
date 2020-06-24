@@ -67,14 +67,17 @@ public class QuestManager {
 		quests.add(new Quest("Kill 16 Pigs", "desc", new Trigger(TriggerType.KILLENTITY, EntityType.PIG, 16)));
 	}
 	
+	//Gets unfinished quests from player data
 	public static HashMap<Quest, ArrayList<Integer>> getUnfinishedPlayerData(UUID playerUUID) {
 		return (HashMap<Quest, ArrayList<Integer>>) LegacyCraft.getPlayerData(playerUUID, PlayerData.UNFINISHED_QUESTS);
 	}
 	
+	//Gets finished quests from player data
 	public static ArrayList<Quest> getFinishedPlayerData(UUID playerUUID) {
 		return (ArrayList<Quest>) LegacyCraft.getPlayerData(playerUUID, PlayerData.FINISHED_QUESTS);
 	}
 
+	//Saves player data to config called on player log off (PlayerQuit)
 	public static void savePlayerData(Player p) {
 		final ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
 		final ConfigurationSection playerDataCS = playerDataConfig.getRoot();
@@ -90,6 +93,12 @@ public class QuestManager {
 		playerDataConfig.saveCustomConfig();
 	}
 	
+	/**
+	 * Retrieves unfinished quests for player from configs
+	 * 
+	 * @param playerUUID	playerUUID of player
+	 * @return 				Hashmap of quests to an arraylist of quest progress
+	 */
 	public static HashMap<Quest, ArrayList<Integer>> loadUnfinishedPlayerData(UUID playerUUID) {
 		HashMap<Quest, ArrayList<Integer>> questProgressFromFile = new HashMap<Quest, ArrayList<Integer>>();
 		
@@ -106,12 +115,23 @@ public class QuestManager {
 				progress.add((int) num);
 			});
 			
-			questProgressFromFile.put(getQuest(quest), progress);
+			Quest questToAdd = getQuest(quest);
+			
+			if(questToAdd != null) {
+				questProgressFromFile.put(questToAdd, progress);
+			} else {
+				//Error: Quest not found
+				//Could cause loss of data save somewhere to prevent this
+				
+				//Name of quest = quest
+				//Quest progress = progress
+			}
 		});
 		
 		return questProgressFromFile;
 	}
 	
+	//Retrieves finished quests for player from configs
 	public static ArrayList<Quest> loadFinishedPlayerData(UUID playerUUID) {
 		ArrayList<Quest> finishedQuestsFromFile = new ArrayList<Quest>();
 		
@@ -130,6 +150,7 @@ public class QuestManager {
 	}
 	
 	//For new quests
+	//Gives quest to player
 	public static void giveQuest(Player p, Quest quest) {
         ArrayList<Integer> progress = new ArrayList<Integer>(quest.triggers.size());
         for(int i = 0; i < quest.triggers.size(); i++) { 
@@ -137,9 +158,17 @@ public class QuestManager {
         }
         getUnfinishedPlayerData(p.getUniqueId()).put(quest, progress);
         p.sendMessage(ChatColor.GRAY + "You have recieved the '" + quest.getName() + "' quest");
+        
+        //Update item quests with initial items in inventory
         GetItem.updateItemQuests(p);
     }
 
+	/**
+	 * Linearly searches through an arraylist of all quest for a quest that has the given name
+	 * 
+	 * @param name 	Name of quest
+	 * @return 		first Quest with given name
+	 */
 	public static Quest getQuest(String name) {
 		for(Quest quest : quests) {
 			if(quest.getName() == name) {
@@ -149,6 +178,13 @@ public class QuestManager {
 		return null;
 	}
 	
+	/**
+	 * Gets active quests from player data. Active quests are quests that have been given to the player but not yet completed.
+	 * Progress of the quest can be accessed through the functions getProgress, setProgess and addProgress.
+	 * 
+	 * @param playerUUID
+	 * @return
+	 */
 	public static ArrayList<Quest> getActiveQuests(UUID playerUUID) {
 		ArrayList<Quest> output = new ArrayList<Quest>();
 		for(Quest quest : getUnfinishedPlayerData(playerUUID).keySet()) {
@@ -160,14 +196,17 @@ public class QuestManager {
 	public static ArrayList<Quest> getCompletedQuests(UUID playerUUID) {
 		return getFinishedPlayerData(playerUUID);
 	}
-
+	
+	/**
+	 * Gets an arraylist of both active and completed quests
+	 * 
+	 * @param playerUUID
+	 * @return
+	 */
 	public static ArrayList<Quest> getQuests(UUID playerUUID) {
 		ArrayList<Quest> output = new ArrayList<Quest>();
-		for(Quest quest : quests) {
-			if(hasQuestActive(playerUUID, quest) || hasQuestFinished(playerUUID, quest)) {
-				output.add(quest);
-			}
-		}
+		output.addAll(getActiveQuests(playerUUID));
+		output.addAll(getCompletedQuests(playerUUID));
 		return output;
 	}
 
@@ -202,6 +241,7 @@ public class QuestManager {
 		return false;
 	}
 
+	//index is index of trigger
 	public static void addProgress(Player p, Quest quest, int index, int amount) {
 		setProgress(p, quest, index, getProgress(p, quest, index) + amount);
 	}
@@ -275,10 +315,12 @@ public class QuestManager {
 		return out;
 	}
 
+	//Returns percent as value between 0-100
 	public static double getPercent(Player p, Quest quest, int index) {
 		return ((double) getProgress(p, quest, index) / (double) quest.getCondition(index)) * 100;
 	}
 
+	//Returns percent as value between 0-100
 	public static double getPercentOverall(Player p, Quest quest) {
 		ArrayList<Integer> progress = getProgress(p, quest);
 		double progressTotal = 0;
@@ -290,6 +332,7 @@ public class QuestManager {
 		return (progressTotal / finalTotal) * 100;
 	}
 	
+	//Returns a human readable string of progress as a fraction
 	public static String getProgressString(Player p, Quest quest) {
 		return getProgressOverall(p, quest) + " / " + quest.getConditionOverall();
 	}

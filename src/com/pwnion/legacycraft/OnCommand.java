@@ -17,6 +17,9 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.abilities.areas.Selection;
+import com.pwnion.legacycraft.abilities.enhancements.EnhancementManager;
+import com.pwnion.legacycraft.abilities.enhancements.effects.ExampleEffect;
+import com.pwnion.legacycraft.abilities.enhancements.effects.Puncture;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.ooc.Portal;
 import com.pwnion.legacycraft.abilities.proficiencies.AquaVanguardProficiency1;
@@ -188,10 +191,14 @@ public class OnCommand implements CommandExecutor {
 			} else if(lbl.equals("test")) {
 				try {
 					
+					ItemStack item = p.getInventory().getItemInMainHand();
+					EnhancementManager.addEnhancement(item, new Puncture());
+					Util.br("Added ExampleEffect to " + item);
+					
 					Experience playerExperience = (Experience) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.EXPERIENCE);
 					
-					Util.br(playerExperience);
-					Util.br(playerExperience.getAllExperience());
+					Util.br("Experience: " + playerExperience);
+					Util.br("Experience: " + playerExperience.getAllExperience());
 					
 					if(args.length > 0) {
 						Util.br(((Experience) LegacyCraft.getPlayerData(playerUUID, PlayerData.EXPERIENCE)).getExperienceFromLevel(Integer.parseInt(args[0]), ExperienceType.PLAYER));

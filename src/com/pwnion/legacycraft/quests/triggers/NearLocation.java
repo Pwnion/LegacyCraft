@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
+import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.quests.LocationData;
 import com.pwnion.legacycraft.quests.Quest;
 import com.pwnion.legacycraft.quests.QuestManager;
@@ -13,16 +14,18 @@ import com.pwnion.legacycraft.quests.Trigger;
 import com.pwnion.legacycraft.quests.TriggerType;
 
 
-public class NearLocation implements Listener {
+public class NearLocation {
 
 	//static HashSet<UUID> activePlayers = new HashSet<UUID>();
 	
 	//Called from onMove in Listeners
 	public static void onPlayerMove(Player p) {
+		
+		try {
 		//if(activePlayers.contains(p.getUniqueId())) {
 			for(Quest quest : QuestManager.getActiveQuests(p)) {
 				if(quest.hasTrigger(TriggerType.LOCATION)) {
-					ArrayList<Trigger> triggers = quest.getTriggers();
+					ArrayList<Trigger> triggers = quest.getTriggers();	
 					for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
 						Trigger trigger = triggers.get(i);
 						if(trigger.getName() == TriggerType.LOCATION) {
@@ -36,6 +39,9 @@ public class NearLocation implements Listener {
 				}
 			}
 		//}
+		} catch(Exception ex) {
+			Util.print(ex);
+		}
 	}
 	
 	//Possible resource / speed improvement methods
