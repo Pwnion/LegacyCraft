@@ -1,11 +1,11 @@
-package com.pwnion.legacycraft.abilities.enhancements.effects;
+package com.pwnion.legacycraft.items.enhancements.effects;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import com.pwnion.legacycraft.LegacyCraft;
-import com.pwnion.legacycraft.abilities.enhancements.Enhancement;
-import com.pwnion.legacycraft.abilities.enhancements.EnhancementType;
+import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 
 public class Puncture implements Enhancement {
 
@@ -16,7 +16,7 @@ public class Puncture implements Enhancement {
 
 	@Override
 	public EnhancementType getType() {
-		return EnhancementType.WeaponHit;
+		return EnhancementType.WEAPON_HIT;
 	}
 	
 	private static final double PROC_RATE = 0.4; //Chance to trigger

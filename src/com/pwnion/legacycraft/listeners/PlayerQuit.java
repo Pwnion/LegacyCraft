@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.abilities.SkillTree;
-import com.pwnion.legacycraft.abilities.enhancements.EnhancementManager;
+import com.pwnion.legacycraft.items.ItemManager;
 import com.pwnion.legacycraft.levelling.Experience;
 import com.pwnion.legacycraft.quests.QuestManager;
 
@@ -34,7 +34,7 @@ public class PlayerQuit implements Listener {
 		
 		QuestManager.savePlayerData(p);
 		
-		EnhancementManager.saveEnhancements(p);
+		ItemManager.deactivate(p);
 		
 		//Remove the player data for the player that left the server
 		LegacyCraft.removePlayerData(playerUUID);

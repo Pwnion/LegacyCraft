@@ -1,10 +1,10 @@
-package com.pwnion.legacycraft.abilities.enhancements.effects;
+package com.pwnion.legacycraft.items.enhancements.effects;
 
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 
-import com.pwnion.legacycraft.abilities.enhancements.Enhancement;
-import com.pwnion.legacycraft.abilities.enhancements.EnhancementType;
+import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 
 public class ExampleEffect implements Enhancement {
 
@@ -19,7 +19,7 @@ public class ExampleEffect implements Enhancement {
 	
 	@Override
 	public EnhancementType getType() {
-		return EnhancementType.WeaponHit;
+		return EnhancementType.WEAPON_HIT;
 	}
 	
 	@Override

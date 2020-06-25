@@ -7,8 +7,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.pwnion.legacycraft.abilities.enhancements.EnhancementManager;
-import com.pwnion.legacycraft.abilities.enhancements.EnhancementType;
+import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 
 public class PlayerInteract implements Listener {
 
@@ -18,7 +18,7 @@ public class PlayerInteract implements Listener {
 			Player p = e.getPlayer();
 			ItemStack item = p.getInventory().getItemInMainHand();
 			
-			EnhancementManager.apply(p, null, item, 0, EnhancementType.WeaponSwing);
+			Enhancement.apply(p, null, item, 0, EnhancementType.WEAPON_SWING);
 		}
 	}
 }

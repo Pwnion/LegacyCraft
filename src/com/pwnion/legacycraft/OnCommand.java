@@ -17,20 +17,18 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.abilities.areas.Selection;
-import com.pwnion.legacycraft.abilities.enhancements.EnhancementManager;
-import com.pwnion.legacycraft.abilities.enhancements.effects.ExampleEffect;
-import com.pwnion.legacycraft.abilities.enhancements.effects.Puncture;
-import com.pwnion.legacycraft.abilities.enhancements.effects.Relentless;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.ooc.Portal;
 import com.pwnion.legacycraft.abilities.proficiencies.AquaVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.proficiencies.TerraVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.targets.Point;
+import com.pwnion.legacycraft.items.ItemManager;
+import com.pwnion.legacycraft.items.enhancements.effects.Puncture;
+import com.pwnion.legacycraft.items.enhancements.effects.Relentless;
 import com.pwnion.legacycraft.levelling.Experience;
 import com.pwnion.legacycraft.levelling.ExperienceType;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
 import com.pwnion.legacycraft.quests.Quest;
-import com.pwnion.legacycraft.quests.QuestBook;
 import com.pwnion.legacycraft.quests.QuestManager;
 
 public class OnCommand implements CommandExecutor {
@@ -188,7 +186,7 @@ public class OnCommand implements CommandExecutor {
 						ItemStack item = p.getInventory().getItemInMainHand();
 						String newUID = args[1];
 						if(newUID.length() > 0) {
-							if(EnhancementManager.changeUID(item, newUID)) {
+							if(ItemManager.changeUID(item, newUID)) {
 								p.sendMessage("Changed to " + newUID);
 							} else {
 								p.sendMessage(ChatColor.RED + "ID taken");
@@ -203,8 +201,8 @@ public class OnCommand implements CommandExecutor {
 				try {
 					
 					ItemStack item = p.getInventory().getItemInMainHand();
-					EnhancementManager.addEnhancement(new Puncture(), item);
-					EnhancementManager.addEnhancement(new Relentless(), item);
+					ItemManager.getItemData(item).addEnhancement(new Puncture());
+					ItemManager.getItemData(item).addEnhancement(new Relentless());
 					
 					Experience playerExperience = (Experience) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.EXPERIENCE);
 					

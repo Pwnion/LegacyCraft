@@ -15,8 +15,8 @@ import org.bukkit.inventory.ItemStack;
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.Util;
-import com.pwnion.legacycraft.abilities.enhancements.EnhancementManager;
-import com.pwnion.legacycraft.abilities.enhancements.EnhancementType;
+import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 import com.pwnion.legacycraft.levelling.Experience;
 import com.pwnion.legacycraft.levelling.ExperienceType;
 
@@ -53,9 +53,9 @@ public class EntityDamageByEntity implements Listener {
 					playerExperience.addExperience((int) damage, ExperienceType.SWORDS);
 				}
 				
-				EnhancementManager.apply(p, (Damageable) attacked, item, damage, EnhancementType.WeaponHit);
+				Enhancement.apply(p, (Damageable) attacked, item, damage, EnhancementType.WEAPON_HIT);
 			} else {
-				EnhancementManager.apply(p, null, item, 0, EnhancementType.WeaponSwing);
+				Enhancement.apply(p, null, item, 0, EnhancementType.WEAPON_SWING);
 			}
 		}
 	}

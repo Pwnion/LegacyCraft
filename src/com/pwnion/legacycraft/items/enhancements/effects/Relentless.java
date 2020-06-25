@@ -1,12 +1,12 @@
-package com.pwnion.legacycraft.abilities.enhancements.effects;
+package com.pwnion.legacycraft.items.enhancements.effects;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 
 import com.pwnion.legacycraft.Util;
-import com.pwnion.legacycraft.abilities.enhancements.Enhancement;
-import com.pwnion.legacycraft.abilities.enhancements.EnhancementType;
+import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 
 public class Relentless implements Enhancement {
 
@@ -17,7 +17,7 @@ public class Relentless implements Enhancement {
 
 	@Override
 	public EnhancementType getType() {
-		return EnhancementType.WeaponHit;
+		return EnhancementType.WEAPON_HIT;
 	}
 	
 	private int lastHit = Bukkit.getCurrentTick();
