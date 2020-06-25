@@ -14,7 +14,7 @@ public class PlayerInteract implements Listener {
 
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
-		if(e.getAction() == Action.LEFT_CLICK_AIR && e.getAction() == Action.LEFT_CLICK_BLOCK) {
+		if(e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK) {
 			Player p = e.getPlayer();
 			ItemStack item = p.getInventory().getItemInMainHand();
 			

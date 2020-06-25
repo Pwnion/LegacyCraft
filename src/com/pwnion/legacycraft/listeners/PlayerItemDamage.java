@@ -14,6 +14,8 @@ public class PlayerItemDamage implements Listener {
 
 	@EventHandler
 	public void onPlayerItemDamageEvent(PlayerItemDamageEvent e) {
+		
+		/*
 		ItemStack oldItem = e.getItem().clone();
 		Util.br(EnhancementManager.hasEnhancements(oldItem));
 		
@@ -24,6 +26,6 @@ public class PlayerItemDamage implements Listener {
 				Util.br(EnhancementManager.hasEnhancements(oldItem));
 				EnhancementManager.transfer(oldItem, e.getItem());
 			}
-		}, 1);
+		}, 1); //*/
 	}
 }

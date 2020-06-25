@@ -24,7 +24,7 @@ public class Relentless implements Enhancement {
 	private int consecHits = 0; //Consecutive hits
 	
 	private static final double DMG_PERCENT_ADD = 0.1; //adds 10% damage per consecutive hit
-	private static final int MAX_DELAY = 20; //max delay allowed between damages
+	private static final int MAX_DELAY = 40; //max delay allowed between damages
 
 	@Override
 	public void apply(Entity wielder, Damageable target, double damage) {

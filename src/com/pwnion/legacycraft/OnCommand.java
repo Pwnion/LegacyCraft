@@ -20,6 +20,7 @@ import com.pwnion.legacycraft.abilities.areas.Selection;
 import com.pwnion.legacycraft.abilities.enhancements.EnhancementManager;
 import com.pwnion.legacycraft.abilities.enhancements.effects.ExampleEffect;
 import com.pwnion.legacycraft.abilities.enhancements.effects.Puncture;
+import com.pwnion.legacycraft.abilities.enhancements.effects.Relentless;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.ooc.Portal;
 import com.pwnion.legacycraft.abilities.proficiencies.AquaVanguardProficiency1;
@@ -183,6 +184,16 @@ public class OnCommand implements CommandExecutor {
 					case "terrav":
 						p.sendMessage(TerraVanguardProficiency1.activate(p, 2));
 						break;
+					case "uid":
+						ItemStack item = p.getInventory().getItemInMainHand();
+						String newUID = args[1];
+						if(newUID.length() > 0) {
+							if(EnhancementManager.changeUID(item, newUID)) {
+								p.sendMessage("Changed to " + newUID);
+							} else {
+								p.sendMessage(ChatColor.RED + "ID taken");
+							}
+						}
 					default:
 						p.sendMessage(ChatColor.RED + "Invalid Command");
 						return false;
@@ -192,12 +203,11 @@ public class OnCommand implements CommandExecutor {
 				try {
 					
 					ItemStack item = p.getInventory().getItemInMainHand();
-					EnhancementManager.addEnhancement(item, new Puncture());
-					Util.br("Added ExampleEffect to " + item);
+					EnhancementManager.addEnhancement(new Puncture(), item);
+					EnhancementManager.addEnhancement(new Relentless(), item);
 					
 					Experience playerExperience = (Experience) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.EXPERIENCE);
 					
-					Util.br("Experience: " + playerExperience);
 					Util.br("Experience: " + playerExperience.getAllExperience());
 					
 					if(args.length > 0) {
