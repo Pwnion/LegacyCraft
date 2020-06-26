@@ -3,6 +3,7 @@ package com.pwnion.legacycraft.listeners;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -45,5 +46,7 @@ public class PlayerJoin implements Listener {
 		for(ItemStack item : p.getInventory().getContents()) {
 			ItemManager.getItemData(item);
 		}
+		
+		p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, (float) 0.2, 1);
 	}
 }

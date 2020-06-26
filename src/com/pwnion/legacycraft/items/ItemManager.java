@@ -1,6 +1,7 @@
 package com.pwnion.legacycraft.items;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
+import com.google.common.collect.Iterables;
 import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 
@@ -25,19 +27,14 @@ public class ItemManager {
 		
 	//uid sizes can change with no effect to old uids
 		
-	private static String generateNewUID(@Nullable String uid) {
+	private static String generateNewUID(@Nullable String preferredUID) {
 		while (true) {
-			if(!activeItems.containsKey(uid) && uid != null) {
-				return uid;
+			if(!activeItems.containsKey(preferredUID) && preferredUID != null) {
+				return preferredUID;
 			}
-			uid = Util.generateUID(4); //1.6 million
+			preferredUID = Util.generateUID(4); //1.6 million
 		}
 	}
-	
-	/*
-	private static String generateNewUID() {
-		return generateNewUID(null);
-	} //*/
 	
 	/**
 	 * Output Order:
@@ -49,17 +46,28 @@ public class ItemManager {
 	 * @param item 	item to get lore from
 	 * @return		an arraylist of segments of lore split by title
 	 */
-	private static ArrayList<List<String>> stripTitles(ItemStack item) {
-		ArrayList<List<String>> out = new ArrayList<List<String>>();
+	private static HashMap<TitleType, List<String>> stripTitles(ItemStack item) {
+		HashMap<TitleType, List<String>> out = new HashMap<TitleType, List<String>>();
 		List<String> lore = item.getLore();
+		TitleType lastTitle = TitleType.DESCRIPTION;
 		int last = 0;
 		for(int i = 0; i < lore.size(); i++) {
 			if(lore.get(i).contains("===")) {
-				out.add(lore.subList(last, i));
+				out.put(lastTitle, lore.subList(last, i - 1));
 				last = i + 1;
+				lastTitle = TitleType.valueOf(ChatColor.stripColor(lore.get(i)).replace("=", "").replace(" ", ""));
 			}
 		}
+		out.put(lastTitle, lore.subList(last, lore.size() - 2));
+		out.put(TitleType.UID, lore.subList(lore.size() - 1, lore.size()));
 		return out;
+	}
+	
+	private enum TitleType {
+		DESCRIPTION,
+		STATS,
+		ENHANCEMENTS,
+		UID
 	}
 	
 	/**
@@ -70,6 +78,39 @@ public class ItemManager {
 		for(ItemStack item : p.getInventory().getContents()) {
 			activeItems.remove(getUIDnoGen(item));
 		}
+	}
+	
+	public static ItemData generateItem(ItemStack item, String description) {
+		List<String> lore = new ArrayList<String>();
+		
+		lore.add(ChatColor.GRAY.toString() + ChatColor.ITALIC + "Some default description");
+		lore.add("");
+		
+		lore.add(ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + " === STATS ===");
+		lore.add(ChatColor.GRAY + " Attack: 5"); //Damage per hit
+		lore.add(ChatColor.GRAY + " Speed: 5"); //Speed of cooldown
+		lore.add(ChatColor.GRAY + " Range: 5"); //Reach in blocks
+		lore.add("");
+		
+		/*
+		//Enhancements
+		if(itemData.hasEnhancements()) {
+			lore.add(ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + " === ENHANCEMENTS === ");
+			for(Enhancement e : itemData.getEnhancements()) {
+				lore.add(ChatColor.GRAY + " - " + e.getName());
+			}
+			lore.add("");
+		} //*/
+		
+		lore.add("");
+		
+		String uid = generateNewUID(null);
+		lore.add(ChatColor.DARK_GRAY.toString() + ChatColor.ITALIC + "@" + uid);
+		item.setLore(lore);
+		item.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+		ItemData data = new ItemData(description, item);
+		activeItems.put(uid, data);
+		return data;
 	}
 	
 	public static ItemData getItemData(@Nullable ItemStack item, @Nonnull String uid) {
@@ -87,17 +128,19 @@ public class ItemManager {
 		if(activeItems.containsKey(uid)) {
 			return getItemData(item, getUIDnoGen(item));
 		}
-		ArrayList<List<String>> lore = stripTitles(item);
+		HashMap<TitleType, List<String>> lore = stripTitles(item);
+		
+		Util.br(lore);
 		
 		ArrayList<Enhancement> enhancements = new ArrayList<Enhancement>();
-		for(String line : stripTitles(item).get(2)) {
+		for(String line : lore.getOrDefault(TitleType.ENHANCEMENTS, Collections.emptyList())) {
 			Enhancement enh = Enhancement.getEnhancementFromName(ChatColor.stripColor(line).replace(" - ", ""));
 			if(enh != null) {
 				enhancements.add(enh);
 			}
 		}
 		
-		ItemData data = new ItemData(lore.get(0), enhancements, item);
+		ItemData data = new ItemData(lore.get(TitleType.DESCRIPTION), enhancements, item);
 		activeItems.put(uid, data);
 		return data;
 	}
@@ -168,7 +211,6 @@ public class ItemManager {
 		lore.add("");
 		lore.add(ChatColor.DARK_GRAY.toString() + ChatColor.ITALIC + "@" + uid);
 		item.setLore(lore);
-		item.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 	}
 	
 	//Updates lore with same uid

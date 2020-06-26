@@ -1,7 +1,10 @@
 package com.pwnion.legacycraft.items;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 import org.bukkit.inventory.ItemStack;
 
@@ -13,11 +16,19 @@ public class ItemData {
 	
 	private ArrayList<Enhancement> enhancements = new ArrayList<Enhancement>();
 	
-	private ItemStack lastItemStack = null;
+	private ItemStack lastItemStack;
 	
-	public ItemData(List<String> desc, ArrayList<Enhancement> enhancements, ItemStack item) {
+	public ItemData(List<String> desc, @Nullable ArrayList<Enhancement> enhancements, ItemStack item) {
 		this.desc = String.join(" ", desc);
-		this.enhancements = enhancements;
+		this.lastItemStack = item;
+		
+		if(enhancements != null) {
+			this.enhancements = enhancements;
+		}
+	}
+	
+	public ItemData(String desc, ItemStack item) {
+		this.desc = desc;
 		this.lastItemStack = item;
 	}
 
@@ -35,6 +46,12 @@ public class ItemData {
 
 	public void setEnhancements(ArrayList<Enhancement> enhancements) {
 		this.enhancements = enhancements;
+	}
+	
+	public void addEnhancements(ItemStack item, Enhancement... enhancements) {
+		this.enhancements.addAll(Arrays.asList(enhancements));
+		ItemManager.updateLore(item);
+		lastItemStack = item;
 	}
 	
 	public void addEnhancement(Enhancement enhancement) {

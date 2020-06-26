@@ -22,6 +22,7 @@ import com.pwnion.legacycraft.abilities.ooc.Portal;
 import com.pwnion.legacycraft.abilities.proficiencies.AquaVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.proficiencies.TerraVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.targets.Point;
+import com.pwnion.legacycraft.items.ItemData;
 import com.pwnion.legacycraft.items.ItemManager;
 import com.pwnion.legacycraft.items.enhancements.effects.Puncture;
 import com.pwnion.legacycraft.items.enhancements.effects.Relentless;
@@ -201,8 +202,8 @@ public class OnCommand implements CommandExecutor {
 				try {
 					
 					ItemStack item = p.getInventory().getItemInMainHand();
-					ItemManager.getItemData(item).addEnhancement(new Puncture());
-					ItemManager.getItemData(item).addEnhancement(new Relentless());
+					ItemData itemData = ItemManager.generateItem(item, "Some default description");
+					itemData.addEnhancements(item, new Puncture(), new Relentless());
 					
 					Experience playerExperience = (Experience) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.EXPERIENCE);
 					
