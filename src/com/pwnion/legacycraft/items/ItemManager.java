@@ -85,7 +85,7 @@ public class ItemManager {
 		ItemData data = new ItemData(description, item);
 		data.setStats(attack, speed, range);
 		activeItems.put(uid, data);
-		//item.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+		item.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 		updateLore(item, uid);
 		return data;
 	}
