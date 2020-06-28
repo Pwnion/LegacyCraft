@@ -27,7 +27,7 @@ public class Relentless implements Enhancement {
 	private static final int MAX_DELAY = 40; //max delay allowed between damages
 
 	@Override
-	public void apply(Entity wielder, LivingEntity target, double damage) {
+	public void apply(LivingEntity wielder, LivingEntity target, double damage) {
 		int curTime = Bukkit.getCurrentTick();
 		if(curTime - lastHit <= MAX_DELAY) {
 			consecHits++;
@@ -40,7 +40,7 @@ public class Relentless implements Enhancement {
 	}
 
 	@Override
-	public void onEquip(ItemStack item) {
+	public void onEquip(ItemStack item, boolean initial) {
 		// TODO Auto-generated method stub
 		
 	}

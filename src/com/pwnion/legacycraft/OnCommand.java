@@ -203,7 +203,7 @@ public class OnCommand implements CommandExecutor {
 					case "enhance":
 						try {
 							ItemStack hand = p.getInventory().getItemInMainHand();
-							ItemManager.getItemData(hand).addEnhancement(hand, Enhancement.fromName(args[1]));
+							ItemManager.getItemData(hand).addEnhancement(hand, Enhancement.fromName(args[1]), true);
 							ItemManager.updateLore(hand);
 							p.sendMessage("Success");
 						} catch (Exception e) {

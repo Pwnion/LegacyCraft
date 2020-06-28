@@ -9,7 +9,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.items.ItemManager;
 import com.pwnion.legacycraft.items.Stats;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
@@ -34,7 +33,7 @@ public class PlayerInteract implements Listener {
 					double dis = p.getLocation().distanceSquared(target.getLocation());
 					double maxDis = Math.pow(range * RANGE_INCREMENT + 3, 2);
 					if(dis < maxDis && dis > Math.pow(3, 2)) {
-						le.damage(1, p);
+						le.damage(1, p); //triggers damage event where dmg calc is done
 					}
 				}
 			}

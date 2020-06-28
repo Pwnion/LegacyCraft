@@ -19,15 +19,18 @@ public class Heavy implements Enhancement {
 	public EnhancementType getType() {
 		return EnhancementType.WEAPON_HIT;
 	}
+	
+	private static final double DMG_PERCENT_ADD = 0.1;
+	private static final double SPEED_PERCENT_REDUCE = 0.3;
 
 	@Override
-	public void apply(Entity wielder, LivingEntity target, double damage) {
-		
+	public void apply(LivingEntity wielder, LivingEntity target, double damage) {
+		target.damage(damage * DMG_PERCENT_ADD);
 	}
 	
 	@Override
-	public void onEquip(ItemStack item) {
-		final AttributeModifier att = new AttributeModifier(UUID.nameUUIDFromBytes("Heavy".getBytes()), "Heavy", -0.3, Operation.MULTIPLY_SCALAR_1);
+	public void onEquip(ItemStack item, boolean initial) {
+		final AttributeModifier att = new AttributeModifier(UUID.nameUUIDFromBytes("Heavy".getBytes()), "Heavy", -SPEED_PERCENT_REDUCE, Operation.MULTIPLY_SCALAR_1);
 		ItemMeta meta = item.getItemMeta();
 		//Stop duplication
 		meta.removeAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, att);

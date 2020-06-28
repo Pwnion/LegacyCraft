@@ -28,7 +28,7 @@ public class Puncture implements Enhancement {
 	private static final int DELAY = 20; //Delay between damages
 
 	@Override
-	public void apply(Entity wielder, LivingEntity target, double damage) {
+	public void apply(LivingEntity wielder, LivingEntity target, double damage) {
 		if (Math.random() < PROC_RATE) {
 			wielder.sendMessage("Opponent is bleeding"); // TODO: Choose colour and text
 			int count = 1;
@@ -46,7 +46,7 @@ public class Puncture implements Enhancement {
 	}
 
 	@Override
-	public void onEquip(ItemStack item) {
+	public void onEquip(ItemStack item, boolean initial) {
 		// TODO Auto-generated method stub
 		
 	}

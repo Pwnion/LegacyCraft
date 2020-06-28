@@ -96,30 +96,34 @@ public class ItemData {
 	/**
 	 * @param item
 	 * @param enhancements
+	 * @param initial
 	 */
-	public void addEnhancements(ItemStack item, List<Enhancement> enhancements) {
+	public void addEnhancements(ItemStack item, List<Enhancement> enhancements, boolean initial) {
 		for(Enhancement enh : enhancements) {
-			addEnhancement(item, enh);
+			addEnhancement(item, enh, initial);
 		}
 		ItemManager.updateLore(item);
 	}
 	
 	/**
+	 * Should only be used to add new enhancements
+	 * 
 	 * @param item
 	 * @param enhancements
 	 */
 	public void addEnhancements(ItemStack item, Enhancement... enhancements) {
-		addEnhancements(item, Arrays.asList(enhancements));
+		addEnhancements(item, Arrays.asList(enhancements), true);
 	}
 	
 	/**
 	 * @param item
 	 * @param enhancement
+	 * @param initial
 	 */
-	public void addEnhancement(ItemStack item, Enhancement enhancement) {
+	public void addEnhancement(ItemStack item, Enhancement enhancement, boolean initial) {
 		enhancements.add(enhancement);
 		lastItemStack = item;
-		enhancement.onEquip(item);
+		enhancement.onEquip(item, initial);
 	}
 	
 	/**

@@ -1,35 +1,45 @@
+/**
+ * 
+ */
 package com.pwnion.legacycraft.items.enhancements.effects;
 
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
+import com.pwnion.legacycraft.items.ItemManager;
+import com.pwnion.legacycraft.items.Stats;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 
-public class ExampleEffect implements Enhancement {
-
-	/*
-	 * This Example effect deals 5 extra damage to the target
-	 */
+/**
+ * Blade Dancer (you can reach further)
+ * 
+ * @author Zephreo
+ */
+public class BladeDancer implements Enhancement {
 	
 	@Override
 	public String getName() {
-		return "Example Effect";
+		return "Blade Dancer";
 	}
-	
+
 	@Override
 	public EnhancementType getType() {
-		return EnhancementType.WEAPON_HIT;
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
+
 	@Override
 	public void apply(LivingEntity wielder, LivingEntity target, double damage) {
-		target.damage(5);
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void onEquip(ItemStack item, boolean initial) {
-		
+		if(initial) {
+			ItemManager.getItemData(item).addToStat(Stats.RANGE, 1);
+		}
 	}
+
 }
