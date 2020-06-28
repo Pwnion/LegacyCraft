@@ -37,6 +37,7 @@ public class PlayerJoin implements Listener {
 				put(PlayerData.UNFINISHED_QUESTS, QuestManager.loadUnfinishedPlayerData(p.getUniqueId()));
 				put(PlayerData.FINISHED_QUESTS, QuestManager.loadFinishedPlayerData(p.getUniqueId()));
 				put(PlayerData.SWAP_SLOT, -1);
+				put(PlayerData.LAST_ATTACK, -1);
 			}
 		});
 		
@@ -47,6 +48,6 @@ public class PlayerJoin implements Listener {
 			ItemManager.getItemData(item);
 		}
 		
-		p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, (float) 0.2, 1);
+		p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, (float) 1.5, 1);
 	}
 }

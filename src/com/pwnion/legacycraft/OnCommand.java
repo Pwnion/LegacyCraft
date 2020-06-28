@@ -24,6 +24,8 @@ import com.pwnion.legacycraft.abilities.proficiencies.TerraVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.targets.Point;
 import com.pwnion.legacycraft.items.ItemData;
 import com.pwnion.legacycraft.items.ItemManager;
+import com.pwnion.legacycraft.items.Stats;
+import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.items.enhancements.effects.Puncture;
 import com.pwnion.legacycraft.items.enhancements.effects.Relentless;
 import com.pwnion.legacycraft.levelling.Experience;
@@ -193,6 +195,44 @@ public class OnCommand implements CommandExecutor {
 								p.sendMessage(ChatColor.RED + "ID taken");
 							}
 						}
+						break;
+					case "uitem":
+						ItemManager.updateLore(p.getInventory().getItemInMainHand());
+						p.sendMessage("Updated");
+						break;
+					case "enhance":
+						try {
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							ItemManager.getItemData(hand).addEnhancement(hand, Enhancement.fromName(args[1]));
+							ItemManager.updateLore(hand);
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Enhancement: /lc enhance <enhancement>");
+							e.printStackTrace();
+						}
+						break;
+					case "setstat":
+						try {
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							ItemManager.getItemData(hand).setStat(Stats.valueOf(args[1].toUpperCase()), Integer.parseInt(args[2]));
+							ItemManager.updateLore(hand);
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc setstat <stat> <value>");
+							e.printStackTrace();
+						}
+						break;
+					case "temp":
+						try {
+							ItemData.speedIncrement = Double.parseDouble(args[1]);
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							ItemManager.getItemData(hand).updateStats();
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc temp <value>");
+							e.printStackTrace();
+						}
+						break;
 					default:
 						p.sendMessage(ChatColor.RED + "Invalid Command");
 						return false;
@@ -202,7 +242,7 @@ public class OnCommand implements CommandExecutor {
 				try {
 					
 					ItemStack item = p.getInventory().getItemInMainHand();
-					ItemData itemData = ItemManager.generateItem(item, "Some default description");
+					ItemData itemData = ItemManager.generateItem(item, "Some default description", 5, 5, 5);
 					itemData.addEnhancements(item, new Puncture(), new Relentless());
 					
 					Experience playerExperience = (Experience) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.EXPERIENCE);

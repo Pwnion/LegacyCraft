@@ -1,10 +1,10 @@
 package com.pwnion.legacycraft.items.enhancements.effects;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.ItemStack;
 
-import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 
@@ -27,7 +27,7 @@ public class Relentless implements Enhancement {
 	private static final int MAX_DELAY = 40; //max delay allowed between damages
 
 	@Override
-	public void apply(Entity wielder, Damageable target, double damage) {
+	public void apply(Entity wielder, LivingEntity target, double damage) {
 		int curTime = Bukkit.getCurrentTick();
 		if(curTime - lastHit <= MAX_DELAY) {
 			consecHits++;
@@ -37,6 +37,12 @@ public class Relentless implements Enhancement {
 			consecHits = 0;
 		}
 		lastHit = Bukkit.getCurrentTick();
+	}
+
+	@Override
+	public void onEquip(ItemStack item) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

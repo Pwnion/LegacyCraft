@@ -3,6 +3,9 @@ package com.pwnion.legacycraft.items.enhancements.effects;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.ItemStack;
+
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.items.enhancements.EnhancementType;
@@ -25,7 +28,7 @@ public class Puncture implements Enhancement {
 	private static final int DELAY = 20; //Delay between damages
 
 	@Override
-	public void apply(Entity wielder, Damageable target, double damage) {
+	public void apply(Entity wielder, LivingEntity target, double damage) {
 		if (Math.random() < PROC_RATE) {
 			wielder.sendMessage("Opponent is bleeding"); // TODO: Choose colour and text
 			int count = 1;
@@ -33,10 +36,18 @@ public class Puncture implements Enhancement {
 
 			LegacyCraft.addTaskToBeCancelled(Bukkit.getServer().getScheduler().runTaskTimer(LegacyCraft.getPlugin(), new Runnable() {
 				public void run() {
+					int prev = target.getNoDamageTicks();
 					target.damage(DAMAGE);
+					target.setNoDamageTicks(prev);
 				}
 			}, DELAY, DELAY), DELAY * count + 1);
 		}
+		
+	}
+
+	@Override
+	public void onEquip(ItemStack item) {
+		// TODO Auto-generated method stub
 		
 	}
 
