@@ -45,7 +45,7 @@ public class PlayerJoin implements Listener {
 		
 		//Activates all item abilities in inventory
 		for(ItemStack item : p.getInventory().getContents()) {
-			ItemManager.getItemData(item);
+			ItemManager.activate(item);
 		}
 		
 		p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, (float) 1.5, 1);

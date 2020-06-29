@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.items.ItemManager;
-import com.pwnion.legacycraft.items.Stats;
+import com.pwnion.legacycraft.items.ItemStat;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 
@@ -25,7 +25,7 @@ public class PlayerInteract implements Listener {
 		
 		//Handle item range
 		if(e.getAction() == Action.LEFT_CLICK_AIR) {
-			int range = ItemManager.getStats(item).get(Stats.RANGE);
+			int range = ItemManager.getStats(item).get(ItemStat.RANGE);
 			if(range > 1) {
 				Entity target = p.getTargetEntity((int) Math.ceil(range * RANGE_INCREMENT + 3));
 				if(target instanceof LivingEntity) {

@@ -80,41 +80,30 @@ public class ItemManager {
 		}
 	}
 	
-	public static ItemData generateItem(ItemStack item, String description, int attack, int speed, int range) {
-		String uid = generateNewUID(null);
-		ItemData data = new ItemData(description, item);
-		data.setStats(attack, speed, range);
-		activeItems.put(uid, data);
-		item.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-		updateLore(item, uid);
-		return data;
-	}
-	
-	public static ItemData getItemData(@Nullable ItemStack item, @Nonnull String uid) {
-		if(activeItems.containsKey(uid)) {
-			return activeItems.get(uid);
-		}
-		return getItemData(item);
-	}
-	
-	public static ItemData getItemData(@Nullable ItemStack item) {
+	/**
+	 * Activates an inactive item.
+	 * If item was already active creates a new ItemData with a new UID.
+	 * 
+	 * @Nullable if item does not have a uid in lore
+	 * 
+	 * @param item
+	 * @return
+	 */
+	public static ItemData activate(ItemStack item) {
 		String uid = getUID(item);
 		if(uid == null) {
 			return null;
 		}
-		if(activeItems.containsKey(uid)) {
-			ItemData data = getItemData(item, getUID(item));
-			data.setLastItemStack(item);
-			return data;
-		}
+		uid = generateNewUID(uid);
+		
 		HashMap<TitleType, List<String>> lore = stripTitles(item);
 		
 		Util.br(lore);
 		
-		LinkedHashMap<Stats, Integer> stats = new LinkedHashMap<Stats, Integer>();
+		LinkedHashMap<ItemStat, Integer> stats = new LinkedHashMap<ItemStat, Integer>();
 		for(String line : lore.getOrDefault(TitleType.STATS, Collections.emptyList())) {
 			String[] statLine = ChatColor.stripColor(line).replace(" ", "").split(":");
-			Stats stat = Stats.valueOf(statLine[0].toUpperCase());
+			ItemStat stat = ItemStat.valueOf(statLine[0].toUpperCase());
 			if(stat != null) {
 				stats.put(stat, Integer.parseInt(statLine[1]));
 			}
@@ -133,6 +122,61 @@ public class ItemManager {
 		data.addEnhancements(item, enhancements, false);
 		
 		return data;
+	}
+	
+	/**
+	 * Adds stats and a description to an item. Generates a random UID for the item.
+	 * 
+	 * @param item			The item to add stats for
+	 * @param description	The description for the item
+	 * @param attack		The damage per hit the item should do
+	 * @param speed			The speed (> 0) used for attack cooldown
+	 * @param range			The range (> 0) used for range for 3+ blocks
+	 * @return				The itemData unique to that item
+	 */
+	public static ItemData generateItem(ItemStack item, String description, int attack, int speed, int range) {
+		String uid = generateNewUID(null);
+		ItemData data = new ItemData(description, item);
+		data.setStats(attack, speed, range);
+		activeItems.put(uid, data);
+		item.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+		updateLore(item, uid);
+		return data;
+	}
+	
+	/**
+	 *  Gets the item data for a uid. If inactive activates the item from the itemStack.
+	 * 
+	 * @param item
+	 * @param uid
+	 * @return
+	 */
+	public static ItemData getItemData(@Nullable ItemStack item, @Nonnull String uid) {
+		if(activeItems.containsKey(uid)) {
+			return activeItems.get(uid);
+		}
+		return getItemData(item);
+	}
+	
+	/**
+	 * Gets the item data for an item. If inactive activates the item.
+	 * 
+	 * @param item	
+	 * @return 		The itemData of the item
+	 * 
+	 * @Nullable
+	 */
+	public static ItemData getItemData(@Nullable ItemStack item) {
+		String uid = getUID(item);
+		if(uid == null) {
+			return null;
+		}
+		if(activeItems.containsKey(uid)) {
+			ItemData data = getItemData(item, getUID(item));
+			data.setLastItemStack(item);
+			return data;
+		}
+		return activate(item);
 	}
 	
 	private static boolean isActive(@Nullable String uid) {
@@ -172,15 +216,15 @@ public class ItemManager {
 		return data.getEnhancements();
 	}
 	
-	private static final HashMap<Stats, Integer> DEFAULT_STATS;
+	private static final HashMap<ItemStat, Integer> DEFAULT_STATS;
 	static {
-		DEFAULT_STATS = new HashMap<Stats, Integer>();
-		DEFAULT_STATS.put(Stats.ATTACK, 1);
-		DEFAULT_STATS.put(Stats.SPEED, 1);
-		DEFAULT_STATS.put(Stats.RANGE, 1);
+		DEFAULT_STATS = new HashMap<ItemStat, Integer>();
+		DEFAULT_STATS.put(ItemStat.ATTACK, 1);
+		DEFAULT_STATS.put(ItemStat.SPEED, 1);
+		DEFAULT_STATS.put(ItemStat.RANGE, 1);
 	}
 	
-	public static HashMap<Stats, Integer> getStats(ItemStack item) {
+	public static HashMap<ItemStat, Integer> getStats(ItemStack item) {
 		ItemData data = getItemData(item);
 		if(data == null) {
 			return DEFAULT_STATS;
@@ -199,7 +243,7 @@ public class ItemManager {
 		
 		if(itemData.hasStats()) {
 			lore.add(ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + " === STATS === ");
-			for(Stats stat : itemData.getStats().keySet()) {
+			for(ItemStat stat : itemData.getStats().keySet()) {
 				String name = stat.toString().substring(0, 1) + stat.toString().substring(1).toLowerCase();
 				lore.add(ChatColor.GRAY + " " + name + ": " + itemData.getStat(stat));
 			}

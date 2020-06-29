@@ -28,7 +28,7 @@ public class ItemData {
 	
 	private HashSet<ItemLoreFlag> flags = new HashSet<ItemLoreFlag>();
 	private ArrayList<Enhancement> enhancements = new ArrayList<Enhancement>();
-	private LinkedHashMap<Stats, Integer> stats = new LinkedHashMap<Stats, Integer>();
+	private LinkedHashMap<ItemStat, Integer> stats = new LinkedHashMap<ItemStat, Integer>();
 	
 	private ItemStack lastItemStack;
 	
@@ -41,7 +41,7 @@ public class ItemData {
 	 * @param stats
 	 * @param item
 	 */
-	public ItemData(List<String> desc, @Nullable LinkedHashMap<Stats, Integer> stats, ItemStack item) {
+	public ItemData(List<String> desc, @Nullable LinkedHashMap<ItemStat, Integer> stats, ItemStack item) {
 		this.desc = ChatColor.stripColor(String.join(" ", desc));
 		this.lastItemStack = item;
 		
@@ -188,7 +188,7 @@ public class ItemData {
 	 * 
 	 * @return	All the stats
 	 */
-	public LinkedHashMap<Stats, Integer> getStats() {
+	public LinkedHashMap<ItemStat, Integer> getStats() {
 		return stats;
 	}
 
@@ -198,15 +198,15 @@ public class ItemData {
 	 * 
 	 * @param stats	An ordered HashMap of all stats
 	 */
-	public void setStats(LinkedHashMap<Stats, Integer> stats) {
+	public void setStats(LinkedHashMap<ItemStat, Integer> stats) {
 		this.stats = stats;
 		updateStats();
 	}
 	
 	public void setStats(int attack, int speed, int range) {
-		stats.put(Stats.ATTACK, attack);
-		stats.put(Stats.SPEED, speed);
-		stats.put(Stats.RANGE, range);
+		stats.put(ItemStat.ATTACK, attack);
+		stats.put(ItemStat.SPEED, speed);
+		stats.put(ItemStat.RANGE, range);
 		updateStats();
 	}
 	
@@ -214,7 +214,7 @@ public class ItemData {
 	public static double speedIncrement = 0.3;
 	
 	public double calculateSpeed() {
-		return stats.getOrDefault(Stats.SPEED, 1) * speedIncrement + (minSpeed - speedIncrement);
+		return stats.getOrDefault(ItemStat.SPEED, 1) * speedIncrement + (minSpeed - speedIncrement);
 	}
 	
 	public void updateStats() {
@@ -232,7 +232,7 @@ public class ItemData {
 	 * @param stat	The stat to get
 	 * @return		The stat's value
 	 */
-	public int getStat(Stats stat) {
+	public int getStat(ItemStat stat) {
 		return stats.get(stat);
 	}
 	
@@ -243,7 +243,7 @@ public class ItemData {
 	 * @param val	The value to set the stat to
 	 * @return 		This
 	 */
-	public ItemData setStat(Stats stat, int val) {
+	public ItemData setStat(ItemStat stat, int val) {
 		stats.put(stat, val);
 		updateStats();
 		return this;
@@ -255,7 +255,7 @@ public class ItemData {
 	 * @param stat 	The stat to add to
 	 * @param val	The value to add to the stat
 	 */
-	public void addToStat(Stats stat, int val) {
+	public void addToStat(ItemStat stat, int val) {
 		stats.put(stat, stats.get(stat) + val);
 		updateStats();
 	}

@@ -41,6 +41,8 @@ public class DeserialiseInventory {
 		ItemStack contents[] = targetCS.getList("contents").toArray(new ItemStack[0]);
 		InventoryHolder holder;
 		
+		// \u00A75 = Dark Purple
+		// \u00A7l = Bold
 		switch(title.replace("\u00A75\u00A7l", "")) {
 		case "Character Build Menu":
 			holder = new SelectOption();

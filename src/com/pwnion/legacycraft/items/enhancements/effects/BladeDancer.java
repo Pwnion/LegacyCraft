@@ -7,7 +7,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.items.ItemManager;
-import com.pwnion.legacycraft.items.Stats;
+import com.pwnion.legacycraft.items.ItemStat;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 
@@ -25,20 +25,18 @@ public class BladeDancer implements Enhancement {
 
 	@Override
 	public EnhancementType getType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void apply(LivingEntity wielder, LivingEntity target, double damage) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void onEquip(ItemStack item, boolean initial) {
 		if(initial) {
-			ItemManager.getItemData(item).addToStat(Stats.RANGE, 1);
+			ItemManager.getItemData(item).addToStat(ItemStat.RANGE, 1);
 		}
 	}
 

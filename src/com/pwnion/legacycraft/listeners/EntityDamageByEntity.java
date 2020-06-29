@@ -20,7 +20,7 @@ import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.items.ItemData;
 import com.pwnion.legacycraft.items.ItemManager;
-import com.pwnion.legacycraft.items.Stats;
+import com.pwnion.legacycraft.items.ItemStat;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 import com.pwnion.legacycraft.levelling.Experience;
@@ -58,7 +58,7 @@ public class EntityDamageByEntity implements Listener {
 			if(dmgMul > 1) dmgMul = 1;
 			Util.br("Cooldown Multiplier: " + dmgMul);
 			
-			e.setDamage(ItemManager.getStats(item).get(Stats.ATTACK) * dmgMul);
+			e.setDamage(ItemManager.getStats(item).get(ItemStat.ATTACK) * dmgMul);
 			
 			if(attacked.isInvulnerable() || e.isCancelled()) {
 				e.setDamage(0);

@@ -24,7 +24,7 @@ import com.pwnion.legacycraft.abilities.proficiencies.TerraVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.targets.Point;
 import com.pwnion.legacycraft.items.ItemData;
 import com.pwnion.legacycraft.items.ItemManager;
-import com.pwnion.legacycraft.items.Stats;
+import com.pwnion.legacycraft.items.ItemStat;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.items.enhancements.effects.Puncture;
 import com.pwnion.legacycraft.items.enhancements.effects.Relentless;
@@ -214,11 +214,26 @@ public class OnCommand implements CommandExecutor {
 					case "setstat":
 						try {
 							ItemStack hand = p.getInventory().getItemInMainHand();
-							ItemManager.getItemData(hand).setStat(Stats.valueOf(args[1].toUpperCase()), Integer.parseInt(args[2]));
+							ItemManager.getItemData(hand).setStat(ItemStat.valueOf(args[1].toUpperCase()), Integer.parseInt(args[2]));
 							ItemManager.updateLore(hand);
 							p.sendMessage("Success");
 						} catch (Exception e) {
 							p.sendMessage(ChatColor.RED + "Invalid Values: /lc setstat <stat> <value>");
+							e.printStackTrace();
+						}
+						break;
+					case "desc":
+						try {
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							String desc = "";
+							for(int i = 1; i < args.length; i++) {
+								desc += args[i] + " ";
+							}
+							ItemManager.getItemData(hand).setDesc(desc);
+							ItemManager.updateLore(hand);
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc desc <description>");
 							e.printStackTrace();
 						}
 						break;
