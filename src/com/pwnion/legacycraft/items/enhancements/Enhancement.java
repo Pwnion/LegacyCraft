@@ -2,19 +2,16 @@ package com.pwnion.legacycraft.items.enhancements;
 
 import javax.annotation.Nullable;
 
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.Util;
-import com.pwnion.legacycraft.items.ItemData;
 import com.pwnion.legacycraft.items.ItemManager;
 
 public interface Enhancement {
 	
 	public static Enhancement fromName(String name) {
+		
 		try {
 			return (Enhancement) Class.forName("com.pwnion.legacycraft.items.enhancements.effects." + name.replace(" ", "")).newInstance();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {

@@ -3,7 +3,6 @@ package com.pwnion.legacycraft.levelling;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -11,7 +10,6 @@ import org.bukkit.entity.Player;
 import com.pwnion.legacycraft.ConfigAccessor;
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
-import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.abilities.SkillTree;
 import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
 

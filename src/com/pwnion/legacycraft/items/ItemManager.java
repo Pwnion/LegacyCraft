@@ -119,7 +119,7 @@ public class ItemManager {
 		
 		ItemData data = new ItemData(lore.get(TitleType.DESCRIPTION), stats, item);
 		activeItems.put(uid, data);
-		data.addEnhancements(item, enhancements, false);
+		data.addEnhancements(item, uid, enhancements, false);
 		
 		return data;
 	}

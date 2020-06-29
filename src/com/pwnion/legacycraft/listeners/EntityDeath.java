@@ -12,7 +12,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.Util;
-import com.pwnion.legacycraft.abilities.SkillTree;
 import com.pwnion.legacycraft.levelling.Experience;
 import com.pwnion.legacycraft.levelling.ExperienceType;
 import com.pwnion.legacycraft.quests.triggers.KillEntity;

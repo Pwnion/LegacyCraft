@@ -11,14 +11,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.PlayerAnimationEvent;
-import org.bukkit.event.player.PlayerAnimationType;
 import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.Util;
-import com.pwnion.legacycraft.items.ItemData;
 import com.pwnion.legacycraft.items.ItemManager;
 import com.pwnion.legacycraft.items.ItemStat;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;

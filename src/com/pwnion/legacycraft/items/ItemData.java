@@ -2,11 +2,9 @@ package com.pwnion.legacycraft.items;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -17,7 +15,6 @@ import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.google.common.collect.Multimap;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 
 import net.md_5.bungee.api.ChatColor;
@@ -95,14 +92,15 @@ public class ItemData {
 	
 	/**
 	 * @param item
+	 * @param uid
 	 * @param enhancements
 	 * @param initial
 	 */
-	public void addEnhancements(ItemStack item, List<Enhancement> enhancements, boolean initial) {
+	public void addEnhancements(ItemStack item, String uid, List<Enhancement> enhancements, boolean initial) {
 		for(Enhancement enh : enhancements) {
 			addEnhancement(item, enh, initial);
 		}
-		ItemManager.updateLore(item);
+		ItemManager.updateLore(item, uid);
 	}
 	
 	/**
@@ -112,7 +110,7 @@ public class ItemData {
 	 * @param enhancements
 	 */
 	public void addEnhancements(ItemStack item, Enhancement... enhancements) {
-		addEnhancements(item, Arrays.asList(enhancements), true);
+		addEnhancements(item, ItemManager.getUID(item), Arrays.asList(enhancements), true);
 	}
 	
 	/**
