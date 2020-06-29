@@ -18,10 +18,10 @@ public class KillEntity {
 		try {
 			// Util.br(p.getName() + " has called onPlayerKilledEntity for " +  dead.toString());
 			for (Quest quest : QuestManager.getActiveQuests(p)) {
-				if (quest.hasTrigger(TriggerType.KILLENTITY)) {
+				if (quest.hasTrigger(TriggerType.KILL_ENTITY)) {
 					ArrayList<Trigger> triggers = quest.getTriggers();
 					for (int i = 0; i < triggers.size(); i++) { // GET CHECKED
-						if (triggers.get(i).getName() == TriggerType.KILLENTITY) {
+						if (triggers.get(i).getName() == TriggerType.KILL_ENTITY) {
 							if (triggers.get(i).getKillEntity() == dead) {
 								QuestManager.addProgress(p, quest, i);
 							}

@@ -129,13 +129,17 @@ public class ItemData {
 	 */
 	public void removeEnhancement(Enhancement enhancement) {
 		enhancements.remove(enhancement);
+		enhancement.onRemove(lastItemStack);
+		ItemManager.updateLore(lastItemStack);
 	}
 	
 	/**
 	 * @param enhancements
 	 */
 	public void removeEnhancements(ArrayList<Enhancement> enhancements) {
-		enhancements.removeAll(enhancements);
+		for(Enhancement enh : enhancements) {
+			removeEnhancement(enh);
+		}
 	}
 	
 	/**
@@ -248,7 +252,7 @@ public class ItemData {
 	}
 	
 	/**
-	 * Adds some value to a stat
+	 * Adds (or subtracts) some value to a stat
 	 * 
 	 * @param stat 	The stat to add to
 	 * @param val	The value to add to the stat

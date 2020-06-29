@@ -40,4 +40,8 @@ public class BladeDancer implements Enhancement {
 		}
 	}
 
+	@Override
+	public void onRemove(ItemStack item) {
+		ItemManager.getItemData(item).addToStat(ItemStat.RANGE, -1);
+	}
 }

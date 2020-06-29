@@ -2,8 +2,6 @@ package com.pwnion.legacycraft.quests;
 
 import java.util.ArrayList;
 
-import org.bukkit.inventory.ItemStack;
-
 public class Quest {
 
 	public Quest(String name, String desc, ArrayList<Trigger> triggers, String nextQuest) {

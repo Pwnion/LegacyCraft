@@ -38,4 +38,11 @@ public class Heavy implements Enhancement {
 		item.setItemMeta(meta);
 	}
 
+	@Override
+	public void onRemove(ItemStack item) {
+		final AttributeModifier att = new AttributeModifier(UUID.nameUUIDFromBytes("Heavy".getBytes()), "Heavy", -SPEED_PERCENT_REDUCE, Operation.MULTIPLY_SCALAR_1);
+		ItemMeta meta = item.getItemMeta();
+		meta.removeAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, att);
+		item.setItemMeta(meta);
+	}
 }

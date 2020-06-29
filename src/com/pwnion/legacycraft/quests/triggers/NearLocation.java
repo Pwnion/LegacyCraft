@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
-
 import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.quests.LocationData;
 import com.pwnion.legacycraft.quests.Quest;

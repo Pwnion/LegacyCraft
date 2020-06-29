@@ -62,9 +62,9 @@ public class QuestManager {
 		quests.add(new Quest("Get 64 Oak Logs", "desc", new Trigger(TriggerType.ITEM, Material.OAK_LOG, 64)));
 		quests.add(new Quest("Get 1 Diamond Horse Armour", "desc", new Trigger(TriggerType.ITEM, Material.DIAMOND_HORSE_ARMOR, 64)));
 	
-		quests.add(new Quest("Kill 16 Zombies", "desc", new Trigger(TriggerType.KILLENTITY, EntityType.ZOMBIE, 16)));
-		quests.add(new Quest("Kill 16 Skeletons", "desc", new Trigger(TriggerType.KILLENTITY, EntityType.SKELETON, 16)));
-		quests.add(new Quest("Kill 16 Pigs", "desc", new Trigger(TriggerType.KILLENTITY, EntityType.PIG, 16)));
+		quests.add(new Quest("Kill 16 Zombies", "desc", new Trigger(TriggerType.KILL_ENTITY, EntityType.ZOMBIE, 16)));
+		quests.add(new Quest("Kill 16 Skeletons", "desc", new Trigger(TriggerType.KILL_ENTITY, EntityType.SKELETON, 16)));
+		quests.add(new Quest("Kill 16 Pigs", "desc", new Trigger(TriggerType.KILL_ENTITY, EntityType.PIG, 16)));
 	}
 	
 	//Gets unfinished quests from player data

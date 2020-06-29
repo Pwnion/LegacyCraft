@@ -8,6 +8,19 @@ import org.bukkit.inventory.ItemStack;
 import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.items.ItemManager;
 
+/**
+ * Enhancements allow running code when:
+ * 	Player swings item 				(EnhancementType.WEAPON_SWING)
+ *  Player hits entity with item	(EnhancementType.WEAPON_HIT)
+ *  Player equips enhancement		(onEquip(), initial = true)
+ *  Player removes enhancement		(onRemove())
+ *  Player joins server with enhanced item in inventory (onEquip(), initial = false)
+ *  
+ *  This allows storing of data in memory (but not files)
+ * 
+ * @author Zephreo
+ *
+ */
 public interface Enhancement {
 	
 	public static Enhancement fromName(String name) {
@@ -48,6 +61,13 @@ public interface Enhancement {
 	 * @param item
 	 * @param initial	False when reactivating item e.g after restart/relog
 	 */
-	public void onEquip(ItemStack item, boolean initial);
+	public default void onEquip(ItemStack item, boolean initial) {};
+	
+	/**
+	 * Called when removing an enhancement from an item
+	 * 
+	 * @param item
+	 */
+	public default void onRemove(ItemStack item) {};
 	
 }
