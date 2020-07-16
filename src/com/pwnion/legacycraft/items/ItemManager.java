@@ -309,7 +309,7 @@ public class ItemManager {
 		 
 		ArrayList<String> lore = new ArrayList<String>();
 		
-		lore.add(ChatColor.BLUE + "Common | Shortsword");
+		//lore.add(ChatColor.BLUE + "Common | Shortsword");
 		
 		lore.add(ChatColor.GRAY.toString() + ChatColor.ITALIC + itemData.getDesc());
 		lore.add("");
