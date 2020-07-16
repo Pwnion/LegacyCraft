@@ -12,6 +12,7 @@ import javax.annotation.Nullable;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
@@ -22,11 +23,39 @@ public class ItemManager {
 	
 	private static HashMap<String, ItemData> activeItems = new HashMap<String, ItemData>();
 	
+	//Access modifier is intentionally empty to be accessed by ItemData
+	//This can be changed out for getStats(null) in ItemData to have a private modifier
+	static final HashMap<ItemStat, Integer> DEFAULT_STATS;
+	static {
+		DEFAULT_STATS = new HashMap<ItemStat, Integer>();
+		DEFAULT_STATS.put(ItemStat.ATTACK, 1);
+		DEFAULT_STATS.put(ItemStat.SPEED, 1);
+		DEFAULT_STATS.put(ItemStat.RANGE, 1);
+	}
+	
+	private enum TitleType {
+		DESCRIPTION,
+		STATS,
+		ENHANCEMENTS,
+		UID
+	}
+	
 	//Where uid is Unique identifier
 	//Not uuid as it is not universally unique
 		
 	//uid sizes can change with no effect to old uids
-		
+	
+	/**
+	 * Generates a UID with collision checking
+	 * 
+	 * preferredUID should not contain the strings "===" or "@"
+	 * Colour Codes and Spaces may be stripped from the preferredUID
+	 * 
+	 * @param preferredUID	null if no preferred
+	 * @return				4-character alphanumeric string (or preferredUID)
+	 * 
+	 * @NonNull
+	 */
 	private static String generateNewUID(@Nullable String preferredUID) {
 		while (true) {
 			if(!activeItems.containsKey(preferredUID) && preferredUID != null) {
@@ -61,13 +90,6 @@ public class ItemManager {
 		out.put(lastTitle, lore.subList(last, lore.size() - 3));
 		out.put(TitleType.UID, lore.subList(lore.size() - 1, lore.size()));
 		return out;
-	}
-	
-	private enum TitleType {
-		DESCRIPTION,
-		STATS,
-		ENHANCEMENTS,
-		UID
 	}
 	
 	/**
@@ -150,8 +172,12 @@ public class ItemManager {
 	 * @param item
 	 * @param uid
 	 * @return
+	 * 
+	 * @Nullable if item is inactive and has no uid
+	 * 
+	 * @throws NullPointerException if uid is null
 	 */
-	public static ItemData getItemData(@Nullable ItemStack item, @Nonnull String uid) {
+	public static ItemData getItemData(@Nullable ItemStack item, @Nonnull String uid) throws NullPointerException {
 		if(activeItems.containsKey(uid)) {
 			return activeItems.get(uid);
 		}
@@ -164,7 +190,7 @@ public class ItemManager {
 	 * @param item	
 	 * @return 		The itemData of the item
 	 * 
-	 * @Nullable
+	 * @Nullable If item is null or has a lore size less than 3
 	 */
 	public static ItemData getItemData(@Nullable ItemStack item) {
 		String uid = getUID(item);
@@ -179,6 +205,13 @@ public class ItemManager {
 		return activate(item);
 	}
 	
+	/**
+	 * Checks if an ItemData instance has been created for this uid.
+	 * If null returns false.
+	 * 
+	 * @param uid
+	 * @return
+	 */
 	private static boolean isActive(@Nullable String uid) {
 		if(uid == null) {
 			return false;
@@ -186,12 +219,29 @@ public class ItemManager {
 		return activeItems.containsKey(uid);
 	}
 	
+	/**
+	 * Checks the item for a uid and checks if that uid has an ItemData associated with it
+	 * 
+	 * @param item
+	 * @return
+	 */
 	private static boolean isActive(@Nullable ItemStack item) {
 		return isActive(getUID(item));
 	}
 	
-	//gets the UID of item
-	public static String getUID(ItemStack item) {
+	/**
+	 * Gets the UID from the last line in the items lore.
+	 * The UID must be after an @ symbol
+	 * 
+	 * @param item		
+	 * @return			UID
+	 * 
+	 * @throws IndexOutOfBoundsException if lore size is >= 3 and has no text after @ symbol in last line of lore 
+	 * @throws IndexOutOfBoundsException if lore size is >= 3 and no @ symbol is found in last line of lore
+	 * 
+	 * @Nullable If item is null or has a lore size less than 3
+	 */
+	public static String getUID(ItemStack item) throws IndexOutOfBoundsException {
 		if(item == null || item.getLore() == null || item.getLore().size() < 3) {
 			return null;
 		}
@@ -199,7 +249,17 @@ public class ItemManager {
 		return lore.get(lore.size() - 1).split("@")[1];
 	}
 	
-	//gets the UID of item or generates a new one
+	/**
+	 * gets the UID of item or generates a new one.
+	 * 
+	 * If item is null generates a new UID
+	 * 
+	 * @param item			
+	 * @param preferredUID	null if no preferred
+	 * @return
+	 * 
+	 * @NonNull
+	 */
 	public static String getUID(ItemStack item, @Nullable String preferredUID) {
 		String uid = getUID(item);
 		if(uid == null) {
@@ -208,6 +268,12 @@ public class ItemManager {
 		return uid;
 	}
 	
+	/**
+	 * Gets Enhancements or returns empty arraylist
+	 * 
+	 * @param item
+	 * @return
+	 */
 	public static ArrayList<Enhancement> getEnhancements(ItemStack item) {
 		ItemData data = getItemData(item);
 		if(data == null) {
@@ -216,14 +282,12 @@ public class ItemManager {
 		return data.getEnhancements();
 	}
 	
-	private static final HashMap<ItemStat, Integer> DEFAULT_STATS;
-	static {
-		DEFAULT_STATS = new HashMap<ItemStat, Integer>();
-		DEFAULT_STATS.put(ItemStat.ATTACK, 1);
-		DEFAULT_STATS.put(ItemStat.SPEED, 1);
-		DEFAULT_STATS.put(ItemStat.RANGE, 1);
-	}
-	
+	/**
+	 * Gets stats or returns default
+	 * 
+	 * @param item
+	 * @return
+	 */
 	public static HashMap<ItemStat, Integer> getStats(ItemStack item) {
 		ItemData data = getItemData(item);
 		if(data == null) {
@@ -232,11 +296,20 @@ public class ItemManager {
 		return data.getStats();
 	}
 	
-	//Forces item to use uid
-	public static void updateLore(ItemStack item, String uid) {
+	/**
+	 * Forces item to use uid
+	 * 
+	 * @param item
+	 * @param uid
+	 * 
+	 * @throws NullPointerException if uid is null
+	 */
+	public static void updateLore(ItemStack item, @NonNull String uid) throws NullPointerException {
 		ItemData itemData = getItemData(item, uid);
 		 
 		ArrayList<String> lore = new ArrayList<String>();
+		
+		lore.add(ChatColor.BLUE + "Common | Shortsword");
 		
 		lore.add(ChatColor.GRAY.toString() + ChatColor.ITALIC + itemData.getDesc());
 		lore.add("");
@@ -244,7 +317,7 @@ public class ItemManager {
 		if(itemData.hasStats()) {
 			lore.add(ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + " === STATS === ");
 			for(ItemStat stat : itemData.getStats().keySet()) {
-				String name = stat.toString().substring(0, 1) + stat.toString().substring(1).toLowerCase();
+				String name = stat.toString().substring(0, 1) + stat.toString().substring(1).toLowerCase(); //First character upper case, rest is lower case
 				lore.add(ChatColor.GRAY + " " + name + ": " + itemData.getStat(stat));
 			}
 			lore.add("");
@@ -264,12 +337,24 @@ public class ItemManager {
 		item.setLore(lore);
 	}
 	
-	//Updates lore with same uid
+	/**
+	 * Updates lore with same uid
+	 * 
+	 * @param item
+	 */
 	public static void updateLore(ItemStack item) {
 		String uid = getUID(item, null);
 		updateLore(item, uid);
 	}
 	
+	/**
+	 * Changes an items UID.
+	 * newUID must be unused, item must be active
+	 * 
+	 * @param item		the ItemStack to change
+	 * @param newUID	the uid to change to
+	 * @return			if item successfully changed uid
+	 */
 	public static boolean changeUID(ItemStack item, String newUID) {
 		if(isActive(newUID) || !isActive(item)) {
 			return false;

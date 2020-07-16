@@ -10,6 +10,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.pwnion.legacycraft.items.ItemManager;
+import com.pwnion.legacycraft.items.ItemStat;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 
@@ -21,7 +23,7 @@ public class Heavy implements Enhancement {
 	}
 	
 	private static final double DMG_PERCENT_ADD = 0.1;
-	private static final double SPEED_PERCENT_REDUCE = 0.3;
+	private static final double SPEED_REDUCE = 0.3;
 
 	@Override
 	public void apply(LivingEntity wielder, LivingEntity target, double damage) {
@@ -30,19 +32,11 @@ public class Heavy implements Enhancement {
 	
 	@Override
 	public void onEquip(ItemStack item, boolean initial) {
-		final AttributeModifier att = new AttributeModifier(UUID.nameUUIDFromBytes("Heavy".getBytes()), "Heavy", -SPEED_PERCENT_REDUCE, Operation.MULTIPLY_SCALAR_1);
-		ItemMeta meta = item.getItemMeta();
-		//Stop duplication
-		meta.removeAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, att);
-		meta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, att);
-		item.setItemMeta(meta);
+		ItemManager.getItemData(item).incrementStat(ItemStat.SPEED, -SPEED_REDUCE);
 	}
 
 	@Override
 	public void onRemove(ItemStack item) {
-		final AttributeModifier att = new AttributeModifier(UUID.nameUUIDFromBytes("Heavy".getBytes()), "Heavy", -SPEED_PERCENT_REDUCE, Operation.MULTIPLY_SCALAR_1);
-		ItemMeta meta = item.getItemMeta();
-		meta.removeAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, att);
-		item.setItemMeta(meta);
+		ItemManager.getItemData(item).incrementStat(ItemStat.SPEED, SPEED_REDUCE);
 	}
 }

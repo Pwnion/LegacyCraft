@@ -2,6 +2,7 @@ package com.pwnion.legacycraft.items;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -20,12 +21,17 @@ import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import net.md_5.bungee.api.ChatColor;
 
 public class ItemData {
+	
+	//TODO: Test and refine this value (/lc temp, in onCommand may be useful) 
+	//Any speed stats below this value are set to this value
+	private static final double MIN_SPEED = 0.2;
 
 	private String desc;
 	
 	private HashSet<ItemLoreFlag> flags = new HashSet<ItemLoreFlag>();
 	private ArrayList<Enhancement> enhancements = new ArrayList<Enhancement>();
 	private LinkedHashMap<ItemStat, Integer> stats = new LinkedHashMap<ItemStat, Integer>();
+	private HashMap<ItemStat, Double> statIncrement = new HashMap<ItemStat, Double>();
 	
 	private ItemStack lastItemStack;
 	
@@ -138,8 +144,10 @@ public class ItemData {
 	 */
 	public void removeEnhancements(ArrayList<Enhancement> enhancements) {
 		for(Enhancement enh : enhancements) {
-			removeEnhancement(enh);
+			enh.onRemove(lastItemStack);
+			this.enhancements.remove(enh);
 		}
+		ItemManager.updateLore(lastItemStack);
 	}
 	
 	/**
@@ -186,7 +194,9 @@ public class ItemData {
 	}
 
 	/**
-	 * 
+	 * getStats().get(ItemStat.ATTACK)
+	 * getStats().get(ItemStat.SPEED)
+	 * getStats().get(ItemStat.RANGE)
 	 * 
 	 * @return	All the stats
 	 */
@@ -212,14 +222,27 @@ public class ItemData {
 		updateStats();
 	}
 	
-	public static double minSpeed = 0.5;
-	public static double speedIncrement = 0.3;
+	//Minimum speed as dictated by minecraft's speed stat 
+	//(e.g. Diamond Sword has speed of 1.6, Fist has a speed of 4)
+	//(1 LC Speed Stat therefore equals this value)
+	private static final double _MIN_SPEED_MC = 0.5; 
+	
+	private static final double SPEED_INCREMENT = 0.3; //How much each LegacyCraft speed stat should increment speed by
 	
 	public double calculateSpeed() {
-		return stats.getOrDefault(ItemStat.SPEED, 1) * speedIncrement + (minSpeed - speedIncrement);
+		double lcSpeed = stats.getOrDefault(ItemStat.SPEED, ItemManager.DEFAULT_STATS.get(ItemStat.SPEED)) - statIncrement.getOrDefault(ItemStat.SPEED, 0.0);
+		if(lcSpeed < MIN_SPEED) {
+			lcSpeed = MIN_SPEED;
+		}
+		return lcSpeed * SPEED_INCREMENT + (_MIN_SPEED_MC - SPEED_INCREMENT);
 	}
 	
+	/**
+	 * Syncs LC speed stats to Minecraft's Speed Attribute
+	 * This allows the client to see correct attack speed.
+	 */
 	public void updateStats() {
+		//Speed - 4 as base speed is 4
 		final AttributeModifier att = new AttributeModifier(UUID.nameUUIDFromBytes("Base".getBytes()), "Base", calculateSpeed() - 4, Operation.ADD_NUMBER);
 		ItemMeta meta = lastItemStack.getItemMeta();
 		//Stop duplication
@@ -281,6 +304,22 @@ public class ItemData {
 	 */
 	public void setType(ItemType type) {
 		this.type = type;
+	}
+	
+	
+	/**
+	 * Add invisible stat increments
+	 * 
+	 * Note that these increments are not permanent and are removed whenever a item is deactivated. (player logs off/server restarts)
+	 * 
+	 * ATTACK: may heal
+	 * 
+	 * @param stat
+	 * @param val
+	 */
+	public void incrementStat(ItemStat stat, double val) {
+		statIncrement.put(stat, statIncrement.getOrDefault(stat, 0.0) + val);
+		updateStats();
 	}
 	
 }

@@ -239,7 +239,7 @@ public class OnCommand implements CommandExecutor {
 						break;
 					case "temp":
 						try {
-							ItemData.speedIncrement = Double.parseDouble(args[1]);
+							//ItemData.SPEED_INCREMENT = Double.parseDouble(args[1]);
 							ItemStack hand = p.getInventory().getItemInMainHand();
 							ItemManager.getItemData(hand).updateStats();
 							p.sendMessage("Success");
