@@ -13,20 +13,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.pwnion.legacycraft.items.ItemManager;
 import com.pwnion.legacycraft.items.ItemStat;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
-import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 
 public class Heavy implements Enhancement {
-
-	@Override
-	public EnhancementType getType() {
-		return EnhancementType.WEAPON_HIT;
-	}
 	
 	private static final double DMG_PERCENT_ADD = 0.1;
 	private static final double SPEED_REDUCE = 0.3;
 
 	@Override
-	public void apply(LivingEntity wielder, LivingEntity target, double damage) {
+	public void onHit(LivingEntity wielder, LivingEntity target, double damage) {
 		target.damage(damage * DMG_PERCENT_ADD);
 	}
 	

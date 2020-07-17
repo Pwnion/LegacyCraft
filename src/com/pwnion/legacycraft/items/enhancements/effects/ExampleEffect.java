@@ -5,7 +5,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
-import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 
 public class ExampleEffect implements Enhancement {
 
@@ -19,12 +18,7 @@ public class ExampleEffect implements Enhancement {
 	}
 	
 	@Override
-	public EnhancementType getType() {
-		return EnhancementType.WEAPON_HIT;
-	}
-	
-	@Override
-	public void apply(LivingEntity wielder, LivingEntity target, double damage) {
+	public void onHit(LivingEntity wielder, LivingEntity target, double damage) {
 		target.damage(5);
 	}
 

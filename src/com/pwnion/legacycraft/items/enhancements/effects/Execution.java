@@ -7,7 +7,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
-import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 
 /**
  * Execution (do more damage if attacking from behind)
@@ -17,16 +16,11 @@ import com.pwnion.legacycraft.items.enhancements.EnhancementType;
  * @author Zephreo
  */
 public class Execution implements Enhancement {
-
-	@Override
-	public EnhancementType getType() {
-		return EnhancementType.WEAPON_HIT;
-	}
 	
 	private static final double DMG_INCREASE = 0.5;
 
 	@Override
-	public void apply(LivingEntity wielder, LivingEntity target, double damage) {
+	public void onHit(LivingEntity wielder, LivingEntity target, double damage) {
 		if(wielder.getFacing() == target.getFacing()) {
 			target.damage(damage * DMG_INCREASE);
 		}

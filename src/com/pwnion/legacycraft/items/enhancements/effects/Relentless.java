@@ -6,18 +6,12 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
-import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 
 public class Relentless implements Enhancement {
 
 	@Override
 	public String getName() {
 		return "Relentless";
-	}
-
-	@Override
-	public EnhancementType getType() {
-		return EnhancementType.WEAPON_HIT;
 	}
 	
 	private int lastHit = Bukkit.getCurrentTick();
@@ -27,7 +21,7 @@ public class Relentless implements Enhancement {
 	private static final int MAX_DELAY = 40; //max delay allowed between damages
 
 	@Override
-	public void apply(LivingEntity wielder, LivingEntity target, double damage) {
+	public void onHit(LivingEntity wielder, LivingEntity target, double damage) {
 		int curTime = Bukkit.getCurrentTick();
 		if(curTime - lastHit <= MAX_DELAY) {
 			consecHits++;
@@ -38,11 +32,4 @@ public class Relentless implements Enhancement {
 		}
 		lastHit = Bukkit.getCurrentTick();
 	}
-
-	@Override
-	public void onEquip(ItemStack item, boolean initial) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

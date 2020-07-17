@@ -17,7 +17,6 @@ import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.items.ItemManager;
 import com.pwnion.legacycraft.items.ItemStat;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
-import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 
 public class PlayerInteract implements Listener {
 	
@@ -46,7 +45,7 @@ public class PlayerInteract implements Listener {
 		
 		//Handle swing enhancements 
 		if(e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK) {
-			Enhancement.apply(p, null, item, 0, EnhancementType.WEAPON_SWING);
+			Enhancement.applySwing(p, item);
 			
 			//Possible Horizontal Enhancement
 			/*

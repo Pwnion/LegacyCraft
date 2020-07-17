@@ -16,7 +16,6 @@ import com.pwnion.legacycraft.items.ItemData;
 import com.pwnion.legacycraft.items.ItemManager;
 import com.pwnion.legacycraft.items.ItemStat;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
-import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 import com.pwnion.legacycraft.levelling.Experience;
 import com.pwnion.legacycraft.levelling.ExperienceType;
 
@@ -69,10 +68,10 @@ public class EntityDamageByEntity implements Listener {
 				}
 				
 				//Apply Enhancements
-				Enhancement.apply(p, attacked, item, damage, EnhancementType.WEAPON_HIT);
+				Enhancement.applyHit(p, attacked, item, damage);
 				LegacyCraft.setPlayerData(p.getUniqueId(), PlayerData.LAST_ATTACK, Bukkit.getCurrentTick());
 			} else {
-				Enhancement.apply(p, null, item, 0, EnhancementType.WEAPON_SWING);
+				Enhancement.applySwing(p, item);
 				e.setCancelled(true);
 			}
 		}

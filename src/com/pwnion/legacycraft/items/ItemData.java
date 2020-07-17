@@ -312,8 +312,6 @@ public class ItemData {
 	 * 
 	 * Note that these increments are not permanent and are removed whenever a item is deactivated. (player logs off/server restarts)
 	 * 
-	 * ATTACK: may heal
-	 * 
 	 * @param stat
 	 * @param val
 	 */

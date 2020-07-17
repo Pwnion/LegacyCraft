@@ -8,18 +8,12 @@ import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
-import com.pwnion.legacycraft.items.enhancements.EnhancementType;
 
 public class Puncture implements Enhancement {
 
 	@Override
 	public String getName() {
 		return "Puncture";
-	}
-
-	@Override
-	public EnhancementType getType() {
-		return EnhancementType.WEAPON_HIT;
 	}
 	
 	private static final double PROC_RATE = 0.4; //Chance to trigger
@@ -28,7 +22,7 @@ public class Puncture implements Enhancement {
 	private static final int DELAY = 20; //Delay between damages
 
 	@Override
-	public void apply(LivingEntity wielder, LivingEntity target, double damage) {
+	public void onHit(LivingEntity wielder, LivingEntity target, double damage) {
 		if (Math.random() < PROC_RATE) {
 			wielder.sendMessage("Opponent is bleeding"); // TODO: Choose colour and text
 			int count = 1;
