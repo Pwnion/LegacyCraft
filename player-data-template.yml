@@ -1,5 +1,10 @@
 equipped:
   CLASS: NONE
+NONE:
+  experience:
+    PLAYER: 0
+    SWORDS: 0
+    BOWS: 0
 STRIKER:
   ASPECT: NONE
   aptitudes:

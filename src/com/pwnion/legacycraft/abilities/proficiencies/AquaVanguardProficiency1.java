@@ -13,19 +13,26 @@ import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import com.pwnion.legacycraft.LegacyCraft;
+import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 
 public class AquaVanguardProficiency1 {
-
+	
+	private static final ArrayList<HashMap<Location, Material>> iceblockProcessed = getIceBlockLists(3);
+	
 	//splits the iceblock file into the requested amount of HashMaps 
 	private static final ArrayList<HashMap<Location, Material>> getIceBlockLists(int num) {
+		
 		final ArrayList<String> iceblockUnproccessed = Selection.load("iceblock");
 		
 		HashMap<Location, Material> iceblockFull = new HashMap<Location, Material>(iceblockUnproccessed.size());
 		HashMap<Location, Double> distances = new HashMap<Location, Double>(iceblockUnproccessed.size());
+		
 		double furthest = 0;
 		
 		//dataS should be formatted: x,y,z,Material
@@ -70,11 +77,11 @@ public class AquaVanguardProficiency1 {
 		return iceblockLists;
 	}
 	
-	public static final String activate(Player p) {
+	public static String activate(Player p) {
 		int time = 20 * 10;
 		int delay = 4;
 		
-		Location centre = p.getLocation().toBlockLocation();
+		final Location centre = p.getLocation().toBlockLocation();
 		World w = p.getWorld();
 		
 		//Player must have a solid block 1 block below them
@@ -82,25 +89,30 @@ public class AquaVanguardProficiency1 {
 			return ChatColor.RED + "Stand on Solid Ground!";
 		}
 		
+		/* Not sure if required
 		//Player must have a 3x3 cube centred on their head non-solid
 		ArrayList<Block> safetyRectangularPrism = RectangularPrism.get(centre.getBlock(), 1, 3);
 		for(Block block : safetyRectangularPrism) {
 			if(block.getType().isSolid()) {
 				return ChatColor.RED + "Surrounding Area not Clear!";
 			}
-		}
+		} //*/
 		
-		//Not finished
+		//TODO: Not finished
 		p.teleport(centre.toCenterLocation());
+		p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, time, 2 /* Amplifier */, true /* Ambient */, false /* Particles */), true /* Forced */); //Regeneration 2 for 'time' ticks, no particles, forced.
 		
 		//Creates iceblock
-		final ArrayList<HashMap<Location, Material>> iceBlockLists = getIceBlockLists(3);
+		final ArrayList<HashMap<Location, Material>> iceBlockLists = iceblockProcessed;
 		HashSet<Block> changing = new HashSet<Block>();
 		for(int i = 0; i < iceBlockLists.size(); i++) {
+			Util.br("i = " + i);
 			if(iceBlockLists.get(i).size() > 0) {
-				changing.addAll(ChangeBlocksToIce(centre, iceBlockLists.get(i), delay * (i)));
+				changing.addAll(ChangeBlocksToIce(centre, iceBlockLists.get(i), delay * i));
 			}
 		}
+		
+		Util.br("Changed");
 		
 		final HashSet<Block> changed = changing;
 		
@@ -118,16 +130,20 @@ public class AquaVanguardProficiency1 {
 		return ChatColor.DARK_GREEN + "Casted Ice Block!";
 	}
 	
-	private static final Set<Block> ChangeBlocksToIce(Location centre, HashMap<Location, Material> blocks, int delay) {
+	private static Set<Block> ChangeBlocksToIce(Location centre, HashMap<Location, Material> blocks, int delay) {
+		
+		//Util.br(blocks.values());
 		
 		HashMap<Block, Material> changed = new HashMap<Block, Material>();
 		World w = centre.getWorld();
 
+		Util.br(blocks);
+		
 		for(Location loc : blocks.keySet()) {
-			Material mat = blocks.get(loc);
+			Material mat = blocks.get(loc); //TODO: Returns null the second time?
+			Util.br(mat); 
 			loc.setWorld(w);
-			loc.add(centre);
-			Block block = loc.getBlock();
+			Block block = loc.clone().add(centre).getBlock();
 			if(block.isEmpty()) {
 				changed.put(block, mat);
 			}

@@ -254,11 +254,11 @@ public enum Portal {
 										}
 									}
 								}
-							}
+							} //End of for
 						}
-					}
+					} //End of run (233)
 				}, 0, 1), killDelay - (stepsSpiral / 2));
-			}
+			} //End of run (199)
 		}, stepsSpiral / 2);
-	}
+	} //End of activate
 }

@@ -34,7 +34,7 @@ public class Experience {
 		final ConfigurationSection playerDataCS = playerDataConfig.getRoot();
 		
 		for(PlayerClass playerClass : SkillTree.PlayerClass.values()) {
-			if(playerClass.equals(PlayerClass.NONE)) continue;
+			//if(playerClass.equals(PlayerClass.NONE)) continue;
 			
 			String node = "players." + playerUUID.toString() + "." + playerClass.toString() + ".experience";
 			
@@ -55,7 +55,7 @@ public class Experience {
         SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
 		
         for(PlayerClass playerClass : SkillTree.PlayerClass.values()) {
-        	if(playerClass.equals(PlayerClass.NONE)) continue;
+        	//if(playerClass.equals(PlayerClass.NONE)) continue;
         	
         	String node = "players." + playerUUID.toString() + "." + playerClass.toString() + ".experience";
         	ConfigurationSection experienceCS = playerDataCS.getConfigurationSection(node);
@@ -106,8 +106,7 @@ public class Experience {
 		
 		getAllExperience().put(experienceType, experience);
 		
-		p.setTotalExperience(0);
-		p.giveExpLevels(getLevel(experienceType));
+		p.setLevel(getLevel(experienceType));
 		p.setExp(getPercentExperience(experienceType));
 	}
 	
@@ -171,6 +170,15 @@ public class Experience {
 	//Gets experience required to levelup to 'level' from level 1
 	public int getTotalExperienceForLevel(int level, ExperienceType experienceType) {
 		if(level <= 1) { return 0; }
+		
+		// ==== Non-recursion sum ====
+		//final double a0 = getExperienceFromLevel(1, experienceType);
+		//final double k = geometricSeriesConstant;
+		//final double i = level;
+		//final double roundToNearest = 50;
+		
+		//return (int) (Math.round(((a0 * (Math.pow(k, i + 1) - 1)) / (k - 1)) / roundToNearest) * roundToNearest);
+		
 		return getTotalExperienceForLevel(level - 1, experienceType) + getExperienceFromLevel(level - 1, experienceType);
 	}
 	

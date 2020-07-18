@@ -2,7 +2,7 @@ package com.pwnion.legacycraft.quests;
 
 public enum TriggerType {
 	ITEM,
-	KILLENTITY,
+	KILL_ENTITY,
 	LOCATION,
 	NPC
 }

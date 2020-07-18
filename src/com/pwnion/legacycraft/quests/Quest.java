@@ -25,6 +25,9 @@ public class Quest {
 	private String desc;
 	private String nextQuest;
 	
+	//Possible reward system
+	//private ArrayList<ItemStack> rewards = new ArrayList<ItemStack>();
+	
 	public String getName() {
 		return name;
 	}

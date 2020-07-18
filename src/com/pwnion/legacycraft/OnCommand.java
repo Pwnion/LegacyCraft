@@ -22,11 +22,16 @@ import com.pwnion.legacycraft.abilities.ooc.Portal;
 import com.pwnion.legacycraft.abilities.proficiencies.AquaVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.proficiencies.TerraVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.targets.Point;
+import com.pwnion.legacycraft.items.ItemData;
+import com.pwnion.legacycraft.items.ItemManager;
+import com.pwnion.legacycraft.items.ItemStat;
+import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.effects.Puncture;
+import com.pwnion.legacycraft.items.enhancements.effects.Relentless;
 import com.pwnion.legacycraft.levelling.Experience;
 import com.pwnion.legacycraft.levelling.ExperienceType;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
 import com.pwnion.legacycraft.quests.Quest;
-import com.pwnion.legacycraft.quests.QuestBook;
 import com.pwnion.legacycraft.quests.QuestManager;
 
 public class OnCommand implements CommandExecutor {
@@ -170,20 +175,99 @@ public class OnCommand implements CommandExecutor {
 						//QuestManager.resetQuests(p, true);
 						break;
 					case "aquav":
-						AquaVanguardProficiency1.activate(p);
+						try {
+							Util.br("AquaVanguardProficiency1");
+							p.sendMessage(AquaVanguardProficiency1.activate(p));
+						} catch(Exception e) {
+							Util.print(e);
+						}
 						break;
 					case "terrav":
-						TerraVanguardProficiency1.activate(p, 2);
+						p.sendMessage(TerraVanguardProficiency1.activate(p, 2));
+						break;
+					case "uid":
+						ItemStack item = p.getInventory().getItemInMainHand();
+						String newUID = args[1];
+						if(newUID.length() > 0) {
+							if(ItemManager.changeUID(item, newUID)) {
+								p.sendMessage("Changed to " + newUID);
+							} else {
+								p.sendMessage(ChatColor.RED + "ID taken");
+							}
+						}
+						break;
+					case "uitem":
+						ItemManager.updateLore(p.getInventory().getItemInMainHand());
+						p.sendMessage("Updated");
+						break;
+					case "enhance":
+						try {
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							ItemManager.getItemData(hand).addEnhancement(hand, Enhancement.fromName(args[1]), true);
+							ItemManager.updateLore(hand);
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Enhancement: /lc enhance <enhancement>");
+							e.printStackTrace();
+						}
+						break;
+					case "setstat":
+						try {
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							ItemManager.getItemData(hand).setStat(ItemStat.valueOf(args[1].toUpperCase()), Integer.parseInt(args[2]));
+							ItemManager.updateLore(hand);
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc setstat <stat> <value>");
+							e.printStackTrace();
+						}
+						break;
+					case "desc":
+						try {
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							String desc = "";
+							for(int i = 1; i < args.length; i++) {
+								desc += args[i] + " ";
+							}
+							ItemManager.getItemData(hand).setDesc(desc);
+							ItemManager.updateLore(hand);
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc desc <description>");
+							e.printStackTrace();
+						}
+						break;
+					case "temp":
+						try {
+							//ItemData.SPEED_INCREMENT = Double.parseDouble(args[1]);
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							ItemManager.getItemData(hand).updateStats();
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc temp <value>");
+							e.printStackTrace();
+						}
 						break;
 					default:
+						p.sendMessage(ChatColor.RED + "Invalid Command");
 						return false;
 					}
 				}
 			} else if(lbl.equals("test")) {
 				try {
 					
-					Util.br(((Experience) LegacyCraft.getPlayerData(playerUUID, PlayerData.EXPERIENCE)).getExperienceFromLevel(Integer.parseInt(args[0]), ExperienceType.PLAYER));
+					ItemStack item = p.getInventory().getItemInMainHand();
+					ItemData itemData = ItemManager.generateItem(item, "Some default description", 5, 5, 5);
+					itemData.addEnhancements(item, new Puncture(), new Relentless());
 					
+					Experience playerExperience = (Experience) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.EXPERIENCE);
+					
+					Util.br("Experience: " + playerExperience.getAllExperience());
+					
+					if(args.length > 0) {
+						Util.br(((Experience) LegacyCraft.getPlayerData(playerUUID, PlayerData.EXPERIENCE)).getExperienceFromLevel(Integer.parseInt(args[0]), ExperienceType.PLAYER));
+					}
+
 					//QuestBook.open(p);
 					
 				} catch(Exception e) {

@@ -51,7 +51,7 @@ public class Trigger {
 	}
 	
 	public EntityType getKillEntity() {
-		if(type == TriggerType.KILLENTITY) {
+		if(type == TriggerType.KILL_ENTITY) {
 			return (EntityType) data;
 		}
 		return null;
@@ -91,7 +91,7 @@ public class Trigger {
 			return Material.matchMaterial(data);
 		case LOCATION: //Format: world|x|y|z|radius,world2|x2|y2|z2|radius2
 			return new LocationData(data);
-		case KILLENTITY: //Format: ZOMBIE
+		case KILL_ENTITY: //Format: ZOMBIE
 			return EntityType.valueOf(data);
 		case NPC: //Format: NpcName|submit EG: blacksmith|false
 			String npcArray[] = data.split("|");

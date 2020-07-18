@@ -38,7 +38,11 @@ public class PlayerMove implements Listener {
 		Player p = e.getPlayer();
 		UUID playerUUID = p.getUniqueId();
 		
-		NearLocation.onPlayerMove(p);
+		try {
+			NearLocation.onPlayerMove(p);
+		} catch (NoClassDefFoundError e1) {
+			e1.printStackTrace();
+		}
 		
 		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
 		

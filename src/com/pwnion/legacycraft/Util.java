@@ -3,6 +3,7 @@ package com.pwnion.legacycraft;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -23,7 +24,11 @@ public class Util {
 	}
 	
 	public static final void br(Object message) {
-		br(message.toString());
+		if(message.equals(null)) {
+			br("null");
+		} else {
+			br(message.toString());
+		}
 	}
 	
 	public static final void print(Exception e) {
@@ -34,6 +39,18 @@ public class Util {
 	    	Util.br(el.toString());
 	    }
 	    Util.br(e.toString());
+	}
+	
+	private static final char[] posbChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+	
+	//Generates UID with 36^n combinations using alphanumeric characters
+	public static String generateUID(int length) {
+		Random rnd = new Random();
+		String out = "";
+	    for(int i = 0; i < length; i++) {
+	    	out += posbChars[rnd.nextInt(posbChars.length)];
+	    }
+	    return out;
 	}
 	
 	public static final void spawnBlocks(HashSet<Block> blocks) {
