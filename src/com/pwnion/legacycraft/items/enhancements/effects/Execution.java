@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 
 /**
- * Execution (do more damage if attacking from behind)
+ * Execution (do more damage if attacking from behind) <br>
  * 
  * +50% damage from behind
  * 

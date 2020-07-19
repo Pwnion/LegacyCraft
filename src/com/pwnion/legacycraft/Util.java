@@ -41,6 +41,20 @@ public class Util {
 	    Util.br(e.toString());
 	}
 	
+	/**
+	 * Whole string is lowercase except those after spaces (including first character)
+	 * 
+	 * @param input
+	 * @return
+	 */
+	public static String toTitleCase(String input) {
+		String out = "";
+		for(String str : input.split(" ")) {
+			out += str.toString().substring(0, 1).toUpperCase() + str.substring(1).toLowerCase() + " ";
+		}
+		return out.substring(0, out.length() - 1);
+	}
+	
 	private static final char[] posbChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 	
 	//Generates UID with 36^n combinations using alphanumeric characters

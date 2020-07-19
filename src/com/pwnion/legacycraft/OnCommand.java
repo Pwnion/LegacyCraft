@@ -203,7 +203,11 @@ public class OnCommand implements CommandExecutor {
 					case "enhance":
 						try {
 							ItemStack hand = p.getInventory().getItemInMainHand();
-							ItemManager.getItemData(hand).addEnhancement(hand, Enhancement.fromName(args[1]), true);
+							String enh = "";
+							for(int i = 1; i < args.length; i++) {
+								enh += args[i] + " ";
+							}
+							ItemManager.getItemData(hand).addEnhancement(Enhancement.fromName(enh), true);
 							ItemManager.updateLore(hand);
 							p.sendMessage("Success");
 						} catch (Exception e) {
@@ -258,7 +262,7 @@ public class OnCommand implements CommandExecutor {
 					
 					ItemStack item = p.getInventory().getItemInMainHand();
 					ItemData itemData = ItemManager.generateItem(item, "Some default description", 5, 5, 5);
-					itemData.addEnhancements(item, new Puncture(), new Relentless());
+					itemData.addEnhancements(new Puncture(), new Relentless());
 					
 					Experience playerExperience = (Experience) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.EXPERIENCE);
 					

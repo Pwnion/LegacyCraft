@@ -28,14 +28,23 @@ public class ItemData {
 
 	private String desc;
 	
-	private HashSet<ItemLoreFlag> flags = new HashSet<ItemLoreFlag>();
 	private ArrayList<Enhancement> enhancements = new ArrayList<Enhancement>();
 	private LinkedHashMap<ItemStat, Integer> stats = new LinkedHashMap<ItemStat, Integer>();
 	private HashMap<ItemStat, Double> statIncrement = new HashMap<ItemStat, Double>();
 	
 	private ItemStack lastItemStack;
 	
-	private ItemType type;
+	private ItemTier tier = ItemTier.NONE;
+	private ItemType type = ItemType.NONE;
+	
+	@Override
+	public String toString() {
+		return "[Description: " + desc +
+			  ", Stats: " + stats +
+			  ", StatIncrement: " + statIncrement +
+			  ", ItemType: " + type +
+			  ", LastItemStack: " + lastItemStack + "]";
+	}
 	
 	/**
 	 * Used when activating an item from an inactive state
@@ -44,14 +53,15 @@ public class ItemData {
 	 * @param stats
 	 * @param item
 	 */
-	public ItemData(List<String> desc, @Nullable LinkedHashMap<ItemStat, Integer> stats, ItemStack item) {
-		this.desc = ChatColor.stripColor(String.join(" ", desc));
+	public ItemData(List<String> desc, ItemTier tier, ItemType type, @Nullable LinkedHashMap<ItemStat, Integer> stats, ItemStack item) {
+		setDesc(ChatColor.stripColor(String.join(" ", desc)));
 		this.lastItemStack = item;
+		
+		this.tier = tier;
+		this.type = type;
 		
 		if(stats != null) {
 			setStats(stats);
-		} else {
-			addFlags(ItemLoreFlag.STATS);
 		}
 	}
 	
@@ -60,12 +70,12 @@ public class ItemData {
 	 * 
 	 * @param desc
 	 * @param item
+	 * 
+	 * @throws IllegalArgumentException if desc contains " | "
 	 */
-	public ItemData(String desc, ItemStack item) {
-		this.desc = desc;
+	public ItemData(String desc, ItemStack item) throws IllegalArgumentException {
+		setDesc(desc);
 		this.lastItemStack = item;
-		
-		
 	}
 
 	/**
@@ -77,13 +87,36 @@ public class ItemData {
 
 	/**
 	 * @param desc
+	 * 
+	 * @throws IllegalArgumentException if desc contains " | "
 	 */
-	public void setDesc(String desc) {
+	public void setDesc(String desc) throws IllegalArgumentException {
+		if(desc.contains(" | ")) {
+			throw new IllegalArgumentException("description cannot contain \" | \"");
+		}
 		this.desc = desc;
+	}
+	
+	/**
+	 * Gets the first enhancement with the name <br>
+	 * Ignores caps, Ignores spaces.
+	 * 
+	 * @param name
+	 * @return
+	 * 
+	 * @Nullable if no enhancement with name
+	 */
+	public Enhancement getEnhancement(String name) {
+		for(Enhancement enh : enhancements) {
+			if(enh.getName().toLowerCase().replace(" ", "") == name.toLowerCase().replace(" ", "")) {
+				return enh;
+			}
+		}
+		return null;
 	}
 
 	/**
-	 * @return
+	 * @return Enhancements
 	 */
 	public ArrayList<Enhancement> getEnhancements() {
 		return enhancements;
@@ -102,11 +135,11 @@ public class ItemData {
 	 * @param enhancements
 	 * @param initial
 	 */
-	public void addEnhancements(ItemStack item, String uid, List<Enhancement> enhancements, boolean initial) {
+	public void addEnhancements(String uid, List<Enhancement> enhancements, boolean initial) {
 		for(Enhancement enh : enhancements) {
-			addEnhancement(item, enh, initial);
+			addEnhancement(enh, initial);
 		}
-		ItemManager.updateLore(item, uid);
+		ItemManager.updateLore(lastItemStack, uid);
 	}
 	
 	/**
@@ -115,8 +148,8 @@ public class ItemData {
 	 * @param item
 	 * @param enhancements
 	 */
-	public void addEnhancements(ItemStack item, Enhancement... enhancements) {
-		addEnhancements(item, ItemManager.getUID(item), Arrays.asList(enhancements), true);
+	public void addEnhancements(Enhancement... enhancements) {
+		addEnhancements(ItemManager.getUID(lastItemStack), Arrays.asList(enhancements), true);
 	}
 	
 	/**
@@ -124,13 +157,14 @@ public class ItemData {
 	 * @param enhancement
 	 * @param initial
 	 */
-	public void addEnhancement(ItemStack item, Enhancement enhancement, boolean initial) {
+	public void addEnhancement(Enhancement enhancement, boolean initial) {
 		enhancements.add(enhancement);
-		lastItemStack = item;
-		enhancement.onEquip(item, initial);
+		enhancement.onEquip(lastItemStack, initial);
 	}
 	
 	/**
+	 * Get enhancement from getEnhancements()
+	 * 
 	 * @param enhancement
 	 */
 	public void removeEnhancement(Enhancement enhancement) {
@@ -175,8 +209,8 @@ public class ItemData {
 	}
 
 	/**
-	 * Gets the last recorded itemStack associated to this set of Data.
-	 * itemStacks are recorded every time they are created, used, enhancements are added, and when players log in with them.
+	 * Gets the last recorded itemStack associated to this set of Data. <br>
+	 * itemStacks are recorded every time they are created, used, and when players log in with them.
 	 * 
 	 * @return 		The last itemStack associated to this set of Data
 	 */
@@ -194,9 +228,9 @@ public class ItemData {
 	}
 
 	/**
-	 * getStats().get(ItemStat.ATTACK)
-	 * getStats().get(ItemStat.SPEED)
-	 * getStats().get(ItemStat.RANGE)
+	 * getStats().get(ItemStat.ATTACK) <br>
+	 * getStats().get(ItemStat.SPEED) <br>
+	 * getStats().get(ItemStat.RANGE) <br>
 	 * 
 	 * @return	All the stats
 	 */
@@ -205,7 +239,7 @@ public class ItemData {
 	}
 
 	/**
-	 * Sets all stats
+	 * Sets all stats <br>
 	 * Must include all stats
 	 * 
 	 * @param stats	An ordered HashMap of all stats
@@ -238,7 +272,7 @@ public class ItemData {
 	}
 	
 	/**
-	 * Syncs LC speed stats to Minecraft's Speed Attribute
+	 * Syncs LC speed stats to Minecraft's Speed Attribute <br>
 	 * This allows the client to see correct attack speed.
 	 */
 	public void updateStats() {
@@ -286,13 +320,6 @@ public class ItemData {
 	}
 
 	/**
-	 * @param flags	The flags to add
-	 */
-	public void addFlags(ItemLoreFlag... flags) {
-		this.flags.addAll(Arrays.asList(flags));
-	}
-
-	/**
 	 * @return the type
 	 */
 	public ItemType getType() {
@@ -306,9 +333,27 @@ public class ItemData {
 		this.type = type;
 	}
 	
+	public boolean hasType() {
+		return type != ItemType.NONE;
+	}
 	
 	/**
-	 * Add invisible stat increments
+	 * @return the tier
+	 */
+	public ItemTier getTier() {
+		return tier;
+	}
+
+	/**
+	 * @param tier the tier to set
+	 */
+	public void getTier(ItemTier tier) {
+		this.tier = tier;
+	}
+	
+	
+	/**
+	 * Add invisible stat increments <br>
 	 * 
 	 * Note that these increments are not permanent and are removed whenever a item is deactivated. (player logs off/server restarts)
 	 * 
@@ -319,5 +364,6 @@ public class ItemData {
 		statIncrement.put(stat, statIncrement.getOrDefault(stat, 0.0) + val);
 		updateStats();
 	}
+	
 	
 }

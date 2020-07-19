@@ -1,6 +1,5 @@
 package com.pwnion.legacycraft.items.enhancements.effects;
 
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
@@ -20,6 +19,14 @@ public class ExampleEffect implements Enhancement {
 	@Override
 	public void onHit(LivingEntity wielder, LivingEntity target, double damage) {
 		target.damage(5);
+	}
+
+	@Override
+	public void onSwing(LivingEntity wielder) {
+	}
+
+	@Override
+	public void onRemove(ItemStack item) {
 	}
 
 	@Override

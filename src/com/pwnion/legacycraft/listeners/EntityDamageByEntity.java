@@ -57,7 +57,8 @@ public class EntityDamageByEntity implements Listener {
 				//Apply Experience
 				Experience playerExperience = (Experience) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.EXPERIENCE);
 				switch(itemData.getType()) {
-				case SWORD:
+				case SHORTSWORD:
+				case LONGSWORD:
 					playerExperience.addExperience((int) damage, ExperienceType.SWORDS);
 					break;
 				case BOW:
