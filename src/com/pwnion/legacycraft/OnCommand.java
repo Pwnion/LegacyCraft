@@ -25,6 +25,8 @@ import com.pwnion.legacycraft.abilities.targets.Point;
 import com.pwnion.legacycraft.items.ItemData;
 import com.pwnion.legacycraft.items.ItemManager;
 import com.pwnion.legacycraft.items.ItemStat;
+import com.pwnion.legacycraft.items.ItemTier;
+import com.pwnion.legacycraft.items.ItemType;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.items.enhancements.effects.Puncture;
 import com.pwnion.legacycraft.items.enhancements.effects.Relentless;
@@ -226,6 +228,46 @@ public class OnCommand implements CommandExecutor {
 							e.printStackTrace();
 						}
 						break;
+					case "settier":
+						try {
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							String tierStr = "";
+							for(int i = 1; i < args.length; i++) {
+								tierStr += args[i] + " ";
+							}
+							ItemTier tier = ItemTier.fromString(tierStr);
+							if(tier == null) {
+								p.sendMessage(ChatColor.RED + "Invalid Tier: please enter a valid tier");
+								return false;
+							}
+							ItemManager.getItemData(hand).setTier(tier);
+							ItemManager.updateLore(hand);
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc settier <tier>");
+							e.printStackTrace();
+						}
+						break;
+					case "settype":
+						try {
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							String typeStr = "";
+							for(int i = 1; i < args.length; i++) {
+								typeStr += args[i] + " ";
+							}
+							ItemType type = ItemType.fromString(typeStr);
+							if(type == null) {
+								p.sendMessage(ChatColor.RED + "Invalid Type: please enter a valid type");
+								return false;
+							}
+							ItemManager.getItemData(hand).setType(type);
+							ItemManager.updateLore(hand);
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc settype <tier>");
+							e.printStackTrace();
+						}
+						break;
 					case "desc":
 						try {
 							ItemStack hand = p.getInventory().getItemInMainHand();
@@ -261,8 +303,8 @@ public class OnCommand implements CommandExecutor {
 				try {
 					
 					ItemStack item = p.getInventory().getItemInMainHand();
-					ItemData itemData = ItemManager.generateItem(item, "Some default description", 5, 5, 5);
-					itemData.addEnhancements(new Puncture(), new Relentless());
+					ItemData itemData = ItemManager.generateItem(item, ItemTier.STABLE, ItemType.SHORTSWORD);
+					ItemManager.updateLore(item);
 					
 					Experience playerExperience = (Experience) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.EXPERIENCE);
 					

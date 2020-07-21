@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -16,15 +17,12 @@ import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 
 import net.md_5.bungee.api.ChatColor;
 
 public class ItemData {
-	
-	//TODO: Test and refine this value (/lc temp, in onCommand may be useful) 
-	//Any speed stats below this value are set to this value
-	private static final double MIN_SPEED = 0.2;
 
 	private String desc;
 	
@@ -163,6 +161,7 @@ public class ItemData {
 	}
 	
 	/**
+	 * Removes an enhancement from an item
 	 * Get enhancement from getEnhancements()
 	 * 
 	 * @param enhancement
@@ -174,6 +173,8 @@ public class ItemData {
 	}
 	
 	/**
+	 * Removes enhancements from an item.
+	 * 
 	 * @param enhancements
 	 */
 	public void removeEnhancements(ArrayList<Enhancement> enhancements) {
@@ -185,13 +186,11 @@ public class ItemData {
 	}
 	
 	/**
-	 * @return
+	 * Checks if the item has enhancements
+	 * 
+	 * @return if enhancements size > 0
 	 */
 	public boolean hasEnhancements() {
-		/* 
-		if(flags.contains(ItemLoreFlag.ENHANCEMENTS)) {
-			return false;
-		} //*/
 		return enhancements.size() > 0;
 	}
 	
@@ -201,10 +200,6 @@ public class ItemData {
 	 * @return if stats size is > 0
 	 */
 	public boolean hasStats() {
-		/*
-		if(flags.contains(ItemLoreFlag.STATS)) {
-			return false;
-		} //*/
 		return stats.size() > 0;
 	}
 
@@ -228,32 +223,29 @@ public class ItemData {
 	}
 
 	/**
-	 * getStats().get(ItemStat.ATTACK) <br>
-	 * getStats().get(ItemStat.SPEED) <br>
-	 * getStats().get(ItemStat.RANGE) <br>
-	 * 
-	 * @return	All the stats
-	 */
-	public LinkedHashMap<ItemStat, Integer> getStats() {
-		return stats;
-	}
-
-	/**
 	 * Sets all stats <br>
-	 * Must include all stats
+	 * Must include all stats <br>
+	 * 
+	 * Values below minimum stats are raised
 	 * 
 	 * @param stats	An ordered HashMap of all stats
 	 */
 	public void setStats(LinkedHashMap<ItemStat, Integer> stats) {
+		for(ItemStat stat : stats.keySet()) {
+			if(stats.get(stat) < stat.getMin()) {
+				stats.put(stat, stat.getMin());
+			}
+		}
 		this.stats = stats;
 		updateStats();
 	}
 	
 	public void setStats(int attack, int speed, int range) {
+		LinkedHashMap<ItemStat, Integer> stats = new LinkedHashMap<ItemStat, Integer>();
 		stats.put(ItemStat.ATTACK, attack);
 		stats.put(ItemStat.SPEED, speed);
 		stats.put(ItemStat.RANGE, range);
-		updateStats();
+		setStats(stats);
 	}
 	
 	//Minimum speed as dictated by minecraft's speed stat 
@@ -264,9 +256,9 @@ public class ItemData {
 	private static final double SPEED_INCREMENT = 0.3; //How much each LegacyCraft speed stat should increment speed by
 	
 	public double calculateSpeed() {
-		double lcSpeed = stats.getOrDefault(ItemStat.SPEED, ItemManager.DEFAULT_STATS.get(ItemStat.SPEED)) - statIncrement.getOrDefault(ItemStat.SPEED, 0.0);
-		if(lcSpeed < MIN_SPEED) {
-			lcSpeed = MIN_SPEED;
+		double lcSpeed = stats.getOrDefault(ItemStat.SPEED, ItemStat.SPEED.getDefault()) - statIncrement.getOrDefault(ItemStat.SPEED, 0.0);
+		if(lcSpeed < ItemStat.SPEED.getAbsMin()) {
+			lcSpeed = ItemStat.SPEED.getAbsMin();
 		}
 		return lcSpeed * SPEED_INCREMENT + (_MIN_SPEED_MC - SPEED_INCREMENT);
 	}
@@ -286,13 +278,23 @@ public class ItemData {
 	}
 	
 	/**
-	 * Gets a stat
+	 * Gets a stat or returns default
 	 * 
 	 * @param stat	The stat to get
 	 * @return		The stat's value
 	 */
 	public int getStat(ItemStat stat) {
-		return stats.get(stat);
+		return stats.getOrDefault(stat, stat.getDefault());
+	}
+	
+	/**
+	 * Gets the stats attached to this item
+	 * 
+	 * @param stat	The stat to get
+	 * @return		The stat's value
+	 */
+	public Set<ItemStat> getStats() {
+		return stats.keySet();
 	}
 	
 	/**
@@ -302,10 +304,12 @@ public class ItemData {
 	 * @param val	The value to set the stat to
 	 * @return 		This
 	 */
-	public ItemData setStat(ItemStat stat, int val) {
+	public void setStat(ItemStat stat, int val) {
+		if(val < stat.getMin()) {
+			val = stat.getMin();
+		}
 		stats.put(stat, val);
 		updateStats();
-		return this;
 	}
 	
 	/**
@@ -315,8 +319,7 @@ public class ItemData {
 	 * @param val	The value to add to the stat
 	 */
 	public void addToStat(ItemStat stat, int val) {
-		stats.put(stat, stats.get(stat) + val);
-		updateStats();
+		setStat(stat, stats.get(stat) + val);
 	}
 
 	/**
@@ -347,8 +350,15 @@ public class ItemData {
 	/**
 	 * @param tier the tier to set
 	 */
-	public void getTier(ItemTier tier) {
+	public void setTier(ItemTier tier) {
+		if(tier == null) {
+			tier = ItemTier.NONE;
+		}
 		this.tier = tier;
+	}
+	
+	public boolean hasTier() {
+		return tier != ItemTier.NONE;
 	}
 	
 	
@@ -364,6 +374,5 @@ public class ItemData {
 		statIncrement.put(stat, statIncrement.getOrDefault(stat, 0.0) + val);
 		updateStats();
 	}
-	
 	
 }

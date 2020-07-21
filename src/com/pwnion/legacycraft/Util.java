@@ -19,11 +19,11 @@ import org.bukkit.util.Vector;
 
 public class Util {
 	
-	public static final void br(String message) {
+	public static void br(String message) {
 		Bukkit.broadcastMessage("[C] " + message);
 	}
 	
-	public static final void br(Object message) {
+	public static void br(Object message) {
 		if(message.equals(null)) {
 			br("null");
 		} else {
@@ -31,7 +31,7 @@ public class Util {
 		}
 	}
 	
-	public static final void print(Exception e) {
+	public static void print(Exception e) {
 		e.printStackTrace();
 		StackTraceElement st[] = e.getStackTrace();
 	    for(int i = 8; i != 0; i--) {
@@ -39,6 +39,19 @@ public class Util {
 	    	Util.br(el.toString());
 	    }
 	    Util.br(e.toString());
+	}
+	
+	/**
+	 * Random double between the given range [min,max)
+	 * 
+	 * @param min	minimum value inclusive
+	 * @param max	maximum value exclusive
+	 * @return		random double
+	 * 
+	 * @see Math.random()
+	 */
+	public static double random(double min, double max) {
+		return min + (Math.random() * (max - min));
 	}
 	
 	/**
@@ -67,7 +80,7 @@ public class Util {
 	    return out;
 	}
 	
-	public static final void spawnBlocks(HashSet<Block> blocks) {
+	public static void spawnBlocks(HashSet<Block> blocks) {
 		for(Block block : blocks) {
 			block.setType(Material.STONE);
 		}

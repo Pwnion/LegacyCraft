@@ -30,11 +30,4 @@ public class IndomitableSpirit implements Enhancement {
 		double mod = (1 - (wielder.getHealth() / wielder.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())) / EVERY_VAL_PERCENT;
 		target.damage(damage * mod * DMG_INCREASE);
 	}
-
-	@Override
-	public void onEquip(ItemStack item, boolean initial) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

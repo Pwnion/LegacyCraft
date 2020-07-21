@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -22,16 +23,6 @@ import net.md_5.bungee.api.ChatColor;
 public class ItemManager {
 	
 	private static HashMap<String, ItemData> activeItems = new HashMap<String, ItemData>();
-	
-	//Access modifier is package to be accessed by ItemData
-	//This can be changed out for getStats(null) in ItemData to have a private modifier
-	static final HashMap<ItemStat, Integer> DEFAULT_STATS;
-	static {
-		DEFAULT_STATS = new HashMap<ItemStat, Integer>();
-		DEFAULT_STATS.put(ItemStat.ATTACK, 1);
-		DEFAULT_STATS.put(ItemStat.SPEED, 1);
-		DEFAULT_STATS.put(ItemStat.RANGE, 1);
-	}
 	
 	private enum TitleType {
 		TIER_ITEMTYPE,
@@ -189,6 +180,46 @@ public class ItemManager {
 	}
 	
 	/**
+	 * Generates stats and a description for an item. Generates a random UID for the item.
+	 * 
+	 * @param item
+	 * @param tier
+	 * @param type
+	 * @return
+	 */
+	public static ItemData generateItem(ItemStack item, ItemTier tier, ItemType type) {
+		String uid = generateNewUID(null);
+		ItemData data = new ItemData("Some randomised description.", item);
+		
+		data.setTier(tier);
+		data.setType(type);
+		data.setStats(generateStats(tier, type, 2));
+		activeItems.put(uid, data);
+		item.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+		updateLore(item, uid);
+		return data;
+	}
+	
+	/**
+	 * Generated stats may be negative. (ItemData handles this)
+	 * 
+	 * @param tier
+	 * @param type
+	 * @param range		Range from the value to generate
+	 * @return
+	 */
+	private static LinkedHashMap<ItemStat,Integer> generateStats(ItemTier tier, ItemType type, double range) {
+		LinkedHashMap<ItemStat,Integer> out = new LinkedHashMap<ItemStat,Integer>();
+		Random rnd = new Random();
+		
+		for(ItemStat stat : ItemStat.values()) {
+			double mid = tier.power + type.get(stat);
+			out.put(stat, (int) Util.random(mid - range,  mid + range));
+		}
+		return out;
+	}
+	
+	/**
 	 *  Gets the item data for a uid. If inactive activates the item from the itemStack.
 	 * 
 	 * @param item
@@ -308,12 +339,12 @@ public class ItemManager {
 	 * @param item
 	 * @return
 	 */
-	public static HashMap<ItemStat, Integer> getStats(ItemStack item) {
+	public static int getStat(ItemStack item, ItemStat stat) {
 		ItemData data = getItemData(item);
 		if(data == null) {
-			return DEFAULT_STATS;
+			return stat.getDefault();
 		}
-		return data.getStats();
+		return data.getStat(stat);
 	}
 	
 	/**
@@ -331,18 +362,19 @@ public class ItemManager {
 		
 		Util.br(itemData);
 		
-		if(itemData.hasType()) {
-			lore.add(ChatColor.DARK_GRAY + Util.toTitleCase(itemData.getTier().toString().replace("_", " ") + " | " + itemData.getType().toString().replace("_", " ")));
+		//Tier - Type
+		if(itemData.hasTier() && itemData.hasType()) {
+			lore.add(ChatColor.DARK_GRAY.toString() + itemData.getTier() + " | " + itemData.getType());
 		}
 		
+		//Description
 		lore.add(ChatColor.GRAY.toString() + ChatColor.ITALIC + itemData.getDesc());
 		lore.add("");
 		
 		if(itemData.hasStats()) {
 			lore.add(ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + " === STATS === ");
-			for(ItemStat stat : itemData.getStats().keySet()) {
-				String name = stat.toString().substring(0, 1) + stat.toString().substring(1).toLowerCase(); //First character upper case, rest is lower case
-				lore.add(ChatColor.GRAY + " " + name + ": " + itemData.getStat(stat));
+			for(ItemStat stat : itemData.getStats()) {
+				lore.add(ChatColor.GRAY + " " + stat + ": " + itemData.getStat(stat));
 			}
 			lore.add("");
 		}
@@ -351,8 +383,8 @@ public class ItemManager {
 		if(itemData.hasEnhancements()) {
 			lore.add(ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + " === ENHANCEMENTS === ");
 			Util.br(itemData.getEnhancements());
-			for(Enhancement e : itemData.getEnhancements()) {
-				lore.add(ChatColor.GRAY + " - " + e.getName());
+			for(Enhancement enh : itemData.getEnhancements()) {
+				lore.add(ChatColor.GRAY + " - " + enh.getName());
 			}
 			lore.add("");
 		}

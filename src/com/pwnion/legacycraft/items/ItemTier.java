@@ -1,20 +1,39 @@
 package com.pwnion.legacycraft.items;
 
-public enum ItemTier {
-	NONE,
-	WEAK, 
-	STABLE, 
-	TOUGH, 
-	STRONG;
-	
-	public static ItemTier fromString(String name) {
+import com.pwnion.legacycraft.Util;
 
+public enum ItemTier {
+	NONE(1),
+	WEAK(1), 
+	STABLE(3), 
+	TOUGH(5), 
+	STRONG(7);
+	
+	public final double power;
+	
+	ItemTier(double power) {
+		this.power = power;
+	}
+	
+	/**
+	 * gets the ItemTier from a string. IgnoresCase, Ignores Leading/Trailing whitespace, Spaces treated as '_'
+	 * 
+	 * @param name
+	 * @return
+	 * 
+	 * @Nullable if none found
+	 */
+	public static ItemTier fromString(String name) {
 	    for (ItemTier enumValue : ItemTier.values()) {
 	        if (enumValue.toString().equalsIgnoreCase(name.replace(" ", "_"))) {
 	            return enumValue;
 	        }
 	    }
-
-	    return NONE;
+	    return null;
+	}
+	
+	@Override
+	public String toString() {
+		return Util.toTitleCase(this.name().replace("_", " "));
 	}
 }

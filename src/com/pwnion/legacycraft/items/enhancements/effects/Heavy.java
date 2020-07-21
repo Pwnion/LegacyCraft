@@ -17,7 +17,7 @@ import com.pwnion.legacycraft.items.enhancements.Enhancement;
 public class Heavy implements Enhancement {
 	
 	private static final double DMG_PERCENT_ADD = 0.1;
-	private static final double SPEED_REDUCE = 0.3;
+	private static final double SPEED_REDUCE = 0.7;
 
 	@Override
 	public void onHit(LivingEntity wielder, LivingEntity target, double damage) {

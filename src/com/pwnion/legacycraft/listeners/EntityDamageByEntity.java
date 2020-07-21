@@ -42,7 +42,7 @@ public class EntityDamageByEntity implements Listener {
 			if(dmgMul > 1) dmgMul = 1;
 			Util.br("Cooldown Multiplier: " + dmgMul);
 			
-			e.setDamage(itemData.getStats().get(ItemStat.ATTACK) * dmgMul);
+			e.setDamage(itemData.getStat(ItemStat.ATTACK) * dmgMul);
 			
 			if(attacked.isInvulnerable() || e.isCancelled()) {
 				e.setDamage(0);
