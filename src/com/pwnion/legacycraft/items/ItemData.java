@@ -3,7 +3,6 @@ package com.pwnion.legacycraft.items;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
@@ -155,9 +154,13 @@ public class ItemData {
 	 * @param enhancement
 	 * @param initial
 	 */
-	public void addEnhancement(Enhancement enhancement, boolean initial) {
+	public boolean addEnhancement(Enhancement enhancement, boolean initial) {
+		if(type.category != enhancement.getRestriction() && type != enhancement.getRestriction()) {
+			return false;
+		}
 		enhancements.add(enhancement);
 		enhancement.onEquip(lastItemStack, initial);
+		return true;
 	}
 	
 	/**

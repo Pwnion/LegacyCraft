@@ -32,7 +32,7 @@ public class RectangularPrism {
 		ArrayList<Block> rectangularPrism = new ArrayList<Block>();
 		
 		Location pos1 = block1.getLocation();
-		Location pos2 = Util.getRelativeLoc(block1.getLocation(), block2.getLocation());
+		Location pos2 = block1.getLocation().clone().subtract(block2.getLocation());
 		Location temp;
 		
 		for(int x = 0; x <= pos2.getBlockX(); x++) {

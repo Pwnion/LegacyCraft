@@ -1,4 +1,4 @@
-package com.pwnion.legacycraft.items.enhancements.effects;
+package com.pwnion.legacycraft.items.enhancements.effects.melee;
 
 import java.util.UUID;
 
@@ -12,12 +12,18 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.pwnion.legacycraft.items.ItemManager;
 import com.pwnion.legacycraft.items.ItemStat;
+import com.pwnion.legacycraft.items.ItemType;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 
 public class Heavy implements Enhancement {
 	
 	private static final double DMG_PERCENT_ADD = 0.1;
 	private static final double SPEED_REDUCE = 0.7;
+	
+	@Override
+	public ItemType getRestriction() {
+		return ItemType.MELEE;
+	}
 
 	@Override
 	public void onHit(LivingEntity wielder, LivingEntity target, double damage) {

@@ -5,21 +5,27 @@ import java.util.HashMap;
 import com.pwnion.legacycraft.Util;
 
 public enum ItemType {
-	NONE(0, 0, 0),
-	SHORTSWORD(0, 1, -1),
-	LONGSWORD(1, -1, 1),
-	BOW(0, 0, 0);
+	NONE,
+	MELEE,
+	SHORTSWORD(MELEE, 0, 1, -1),
+	LONGSWORD(MELEE, 1, -1, 1),
+	RANGED,
+	BOW(RANGED, 0, 0, 0);
 	
-	HashMap<ItemStat, Double> statMod = new HashMap<ItemStat, Double>();
+	ItemType category = null;
+	final HashMap<ItemStat, Integer> statMod = new HashMap<ItemStat, Integer>();
 	
-	ItemType(double attack, double speed, double range) {
+	ItemType(ItemType category, int attack, int speed, int range) {
+		this.category = category;
 		statMod.put(ItemStat.ATTACK, attack);
 		statMod.put(ItemStat.SPEED, speed);
 		statMod.put(ItemStat.RANGE, range);
 	}
 	
-	public double get(ItemStat stat) {
-		return statMod.getOrDefault(stat, 0.0);
+	ItemType() {}
+	
+	public int get(ItemStat stat) {
+		return statMod.getOrDefault(stat, 0);
 	}
 	
 	/**

@@ -48,10 +48,31 @@ public class Util {
 	 * @param max	maximum value exclusive
 	 * @return		random double
 	 * 
+	 * @throws IllegalArgumentException when min >= max
+	 * 
 	 * @see Math.random()
 	 */
-	public static double random(double min, double max) {
+	public static double random(double min, double max) throws IllegalArgumentException {
+		if(min >= max) {
+			throw new IllegalArgumentException("The maximum must be greater than the minimum!");
+		}
 		return min + (Math.random() * (max - min));
+	}
+	
+	/**
+	 * Random int between the given range [min,max]
+	 * 
+	 * @param min	minimum value inclusive
+	 * @param max	maximum value inclusive
+	 * @return
+	 * @throws IllegalArgumentException when min >= max
+	 */
+	public static int randomInt(int min, int max) throws IllegalArgumentException {
+		if(min >= max) {
+			throw new IllegalArgumentException("The maximum must be greater than the minimum!");
+		}
+		Random rnd = new Random();
+		return min + rnd.nextInt(max - min + 1);
 	}
 	
 	/**
@@ -80,6 +101,7 @@ public class Util {
 	    return out;
 	}
 	
+	//TEMP, used for testing Areas
 	public static void spawnBlocks(HashSet<Block> blocks) {
 		for(Block block : blocks) {
 			block.setType(Material.STONE);
@@ -100,30 +122,6 @@ public class Util {
 			relativeArea.add(getRelativeVec(centre, loc));
 		}
 		return relativeArea;
-	}
-	
-	public static final Location getRelativeLoc(Location centre, Location pos) {
-		if(centre.getWorld() != pos.getWorld()) {
-			return null;
-		}
-
-		return new Location(pos.getWorld(), pos.getX() - centre.getX(), pos.getY() - centre.getY(), pos.getZ() - centre.getZ());
-	}
-	
-	public static final HashSet<Block> approxBlock(World world, Vector vector) {
-		HashSet<Block> output = new HashSet<Block>();
-		for(BlockVector blockVec : approxBlock(vector)) {
-			output.add(blockVec.toLocation(world).getBlock());
-		}
-		return output;
-	}
-	
-	public static final HashSet<Block> approxBlocks(World world, Collection<Vector> vectors) {
-		HashSet<Block> output = new HashSet<Block>();
-		for(Vector vector : vectors) {
-			output.addAll(approxBlock(world, vector));
-		}
-		return output;
 	}
 	
 	public static final HashSet<BlockVector> approxBlocks(Collection<Vector> vectors) {
@@ -233,13 +231,6 @@ public class Util {
 	public static final Vector vectorCalc(Entity e, double dist) {
 		return vectorCalc(e.getLocation().getYaw(), e.getLocation().getPitch(), dist);
 	}
-
-	public static final Vector vectorCalc(Location pos1, Location pos2) {
-		if(pos1.getWorld() != pos2.getWorld()) {
-			return null;
-		}
-		return new Vector(pos2.getX() - pos1.getX(), pos2.getY() - pos1.getY(), pos2.getZ() - pos1.getZ());
-	}
 	
 	public static final double getYaw(Vector vec) {
 		double yaw = 0;
@@ -253,10 +244,6 @@ public class Util {
 	
 	public static final double getPitch(Vector vec) {
 		return Math.toDegrees(vec.angle(new Vector(0, 1, 0))) - 90;
-	}
-
-	public static final Location addY(Location loc, double plusY) {
-		return loc.clone().add(0, plusY, 0);
 	}
 
 	public static final Vector addY(Vector vec, double plusY) {

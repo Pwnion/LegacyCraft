@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.items.ItemManager;
+import com.pwnion.legacycraft.items.ItemType;
 
 /**
  * Enhancements allow running code when: <br>
@@ -62,6 +63,23 @@ public interface Enhancement {
 	}
 	
 	/**
+	 * IMPORTANT: Names must be their class name or name with spaces added otherwise an exception must be added to Enhancement.fromName() <br>
+	 * by default returns Class Name (Simple)
+	 * 
+	 * @return	name
+	 */
+	public default String getName() {
+		return this.getClass().getSimpleName();
+	}
+	
+	/**
+	 * What items can equip this enhancement.
+	 * 
+	 * @return	The type of items that can equip
+	 */
+	public ItemType getRestriction();
+	
+	/**
 	 * Sends onHit (unofficial) events to each enhancement on the item
 	 * 
 	 * @param wielder
@@ -85,16 +103,6 @@ public interface Enhancement {
 		for(Enhancement enhancement : ItemManager.getEnhancements(item)) {
 			enhancement.onSwing(wielder);
 		}
-	}
-	
-	/**
-	 * IMPORTANT: Names must be their class name or name with spaces added otherwise an exception must be added to Enhancement.fromName() <br>
-	 * by default returns Class Name (Simple)
-	 * 
-	 * @return	name
-	 */
-	public default String getName() {
-		return this.getClass().getSimpleName();
 	}
 	
 	/**

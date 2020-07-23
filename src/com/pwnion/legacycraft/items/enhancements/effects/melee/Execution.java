@@ -1,11 +1,12 @@
 /**
  * 
  */
-package com.pwnion.legacycraft.items.enhancements.effects;
+package com.pwnion.legacycraft.items.enhancements.effects.melee;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
+import com.pwnion.legacycraft.items.ItemType;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 
 /**
@@ -18,6 +19,11 @@ import com.pwnion.legacycraft.items.enhancements.Enhancement;
 public class Execution implements Enhancement {
 	
 	private static final double DMG_INCREASE = 0.5;
+	
+	@Override
+	public ItemType getRestriction() {
+		return ItemType.MELEE;
+	}
 
 	@Override
 	public void onHit(LivingEntity wielder, LivingEntity target, double damage) {

@@ -3,6 +3,7 @@ package com.pwnion.legacycraft.items.enhancements.effects;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
+import com.pwnion.legacycraft.items.ItemType;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 
 public class ExampleEffect implements Enhancement {
@@ -14,6 +15,11 @@ public class ExampleEffect implements Enhancement {
 	@Override
 	public String getName() {
 		return "Example Effect";
+	}
+	
+	@Override
+	public ItemType getRestriction() {
+		return null;
 	}
 	
 	@Override

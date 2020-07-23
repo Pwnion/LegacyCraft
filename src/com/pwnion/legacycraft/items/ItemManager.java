@@ -201,20 +201,24 @@ public class ItemManager {
 	}
 	
 	/**
-	 * Generated stats may be negative. (ItemData handles this)
+	 * Generated stats may be negative. (ItemData handles this). <br>
+	 * Stats generated from tier base power + type modifiers +- range
 	 * 
 	 * @param tier
 	 * @param type
 	 * @param range		Range from the value to generate
 	 * @return
 	 */
-	private static LinkedHashMap<ItemStat,Integer> generateStats(ItemTier tier, ItemType type, double range) {
+	private static LinkedHashMap<ItemStat,Integer> generateStats(ItemTier tier, ItemType type, int range) {
 		LinkedHashMap<ItemStat,Integer> out = new LinkedHashMap<ItemStat,Integer>();
 		Random rnd = new Random();
-		
 		for(ItemStat stat : ItemStat.values()) {
-			double mid = tier.power + type.get(stat);
-			out.put(stat, (int) Util.random(mid - range,  mid + range));
+			int mid = tier.power + type.get(stat);
+			int gen = Util.randomInt(mid - range,  mid + range);
+			if(gen < stat.getMin()) {
+				gen = stat.getMin();
+			}
+			out.put(stat, gen);
 		}
 		return out;
 	}
