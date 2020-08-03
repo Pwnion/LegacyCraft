@@ -312,12 +312,12 @@ public class OnCommand implements CommandExecutor {
 					
 					new LCEntity(p.getLocation(), LCEntityType.ZOMBIE);
 					
-					Experience playerExperience = PlayerData.get(p.getUniqueId(), PlayerDataType.EXPERIENCE).get();
+					Experience playerExperience = PlayerData.getExperience(p.getUniqueId());
 					
 					Util.br("Experience: " + playerExperience.getAllExperience());
 					
 					if(args.length > 0) {
-						Util.br(((Experience) LegacyCraft.getPlayerData(playerUUID, PlayerData.EXPERIENCE)).getExperienceFromLevel(Integer.parseInt(args[0]), ExperienceType.PLAYER));
+						Util.br(PlayerData.getExperience(p.getUniqueId()).getExperienceFromLevel(Integer.parseInt(args[0]), ExperienceType.PLAYER));
 					}
 
 					//QuestBook.open(p);

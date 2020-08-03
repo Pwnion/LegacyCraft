@@ -69,12 +69,12 @@ public class QuestManager {
 	
 	//Gets unfinished quests from player data
 	public static HashMap<Quest, ArrayList<Integer>> getUnfinishedPlayerData(UUID playerUUID) {
-		return (HashMap<Quest, ArrayList<Integer>>) LegacyCraft.getPlayerData(playerUUID, PlayerData.UNFINISHED_QUESTS);
+		return PlayerData.getUnfinishedQuests(playerUUID);
 	}
 	
 	//Gets finished quests from player data
 	public static ArrayList<Quest> getFinishedPlayerData(UUID playerUUID) {
-		return (ArrayList<Quest>) LegacyCraft.getPlayerData(playerUUID, PlayerData.FINISHED_QUESTS);
+		return PlayerData.getFinishedQuests(playerUUID);
 	}
 
 	//Saves player data to config called on player log off (PlayerQuit)

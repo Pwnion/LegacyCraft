@@ -122,14 +122,14 @@ public class LegacyCraft extends JavaPlugin {
             		//Handles instances where the player hadn't used all of their ability jumps,
             		//but still must take fall damage
             		if(p.isOnGround()) {
-            			float fallDistanceLastTick = (float) getPlayerData(playerUUID, PlayerData.FALL_DISTANCE);
+            			float fallDistanceLastTick = PlayerData.getFallDistance(playerUUID);
                 		float fallDistance = p.getFallDistance();
                 		
                 		if(fallDistanceLastTick > 10 && fallDistance == 0 && p.getAllowFlight()) {
                 			p.damage((fallDistanceLastTick - 3) / 4);
                 		}
             		}
-            		setPlayerData(playerUUID, PlayerData.FALL_DISTANCE, p.getFallDistance());
+            		PlayerData.setFallDistance(playerUUID, p.getFallDistance());
             	}
             	
             	try {

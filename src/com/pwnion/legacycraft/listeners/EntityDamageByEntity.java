@@ -36,7 +36,7 @@ public class EntityDamageByEntity implements Listener {
 			 * Calculate attack cooldown (no weapon switching) 
 			 * {@link https://minecraft.gamepedia.com/Damage#Attack_cooldown}
 			 */
-			double t = Bukkit.getCurrentTick() - (int) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.LAST_ATTACK);
+			double t = Bukkit.getCurrentTick() - PlayerData.getLastAttack(p.getUniqueId());
 			double cooldown = 1 / itemData.calculateSpeed() * 20;
 			double dmgMul = 0.2 + Math.pow((t + 0.5) / cooldown, 2) * 0.8;
 			if(dmgMul > 1) dmgMul = 1;
@@ -55,7 +55,7 @@ public class EntityDamageByEntity implements Listener {
 			if(damage > 0) {
 				
 				//Apply Experience
-				Experience playerExperience = (Experience) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.EXPERIENCE);
+				Experience playerExperience = PlayerData.getExperience(p.getUniqueId());
 				switch(itemData.getType()) {
 				case SHORTSWORD:
 				case LONGSWORD:
@@ -70,7 +70,7 @@ public class EntityDamageByEntity implements Listener {
 				
 				//Apply Enhancements
 				Enhancement.applyHit(p, attacked, item, damage);
-				LegacyCraft.setPlayerData(p.getUniqueId(), PlayerData.LAST_ATTACK, Bukkit.getCurrentTick());
+				PlayerData.setLastAttack(p.getUniqueId(), Bukkit.getCurrentTick());
 			} else {
 				Enhancement.applySwing(p, item);
 				e.setCancelled(true);

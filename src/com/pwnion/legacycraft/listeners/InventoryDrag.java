@@ -24,7 +24,7 @@ public class InventoryDrag implements Listener {
 		UUID playerUUID = p.getUniqueId();
 		ItemStack oldCursor = e.getOldCursor();
 		ItemStack newCursor = p.getItemOnCursor();
-		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
+		SkillTree skillTree = PlayerData.getSkillTree(playerUUID);
 		
 		//Util.br(p.getName() + " has called onInventoryDrag");
 		GetItem.updateItemQuests(p);
