@@ -103,7 +103,7 @@ public class LegacyCraft extends JavaPlugin {
 			new EntityPickupItem(),
 			new EntityDeath(),
 			new InventoryDrag(),
-			new InventoryClose()
+			new InventoryClose(),
 			new EntityDamageByEntity(),
 			new PlayerInteract()
 		);

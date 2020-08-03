@@ -12,7 +12,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import com.pwnion.legacycraft.ConfigAccessor;
-import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.quests.triggers.FinishQuest;
 import com.pwnion.legacycraft.quests.triggers.GetItem;

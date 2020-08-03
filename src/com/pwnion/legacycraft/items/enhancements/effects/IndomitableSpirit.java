@@ -4,12 +4,8 @@
 package com.pwnion.legacycraft.items.enhancements.effects;
 
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.inventory.ItemStack;
 
-import com.pwnion.legacycraft.items.ItemType;
-import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.items.enhancements.MeleeEnhancement;
 
 /**

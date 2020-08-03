@@ -10,7 +10,6 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
-import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
 
 public class InventoryClose implements Listener {
@@ -22,7 +21,7 @@ public class InventoryClose implements Listener {
 		ItemStack cursorItem = inventoryView.getCursor();
 		
 		if(cursorItem.getType().equals(Material.IRON_HOE)) {
-			int swapSlot = (int) LegacyCraft.getPlayerData(playerUUID, PlayerData.SWAP_SLOT);
+			int swapSlot = PlayerData.getSwapSlot(playerUUID);
 			inventoryView.setItem(swapSlot, cursorItem);
 			p.setItemOnCursor(null);
 		}
