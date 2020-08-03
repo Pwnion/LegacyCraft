@@ -15,10 +15,60 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import com.pwnion.legacycraft.LegacyCraft;
+import com.pwnion.legacycraft.abilities.IHotbarActivatedAbility;
 import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 
-public class AquaVanguardProficiency1 {
+public class AquaVanguardProficiency1 implements IHotbarActivatedAbility {
+	
+	@Override
+	public final String activate(Player p) {
+		int time = 20 * 10;
+		int delay = 4;
+		
+		Location centre = p.getLocation().toBlockLocation();
+		World w = p.getWorld();
+		
+		//Player must have a solid block 1 block below them
+		if(!centre.clone().add(0, -1, 0).getBlock().getType().isSolid()) {
+			return ChatColor.RED + "Stand on Solid Ground!";
+		}
+		
+		//Player must have a 3x3 cube centred on their head non-solid
+		ArrayList<Block> safetyRectangularPrism = RectangularPrism.get(centre.getBlock(), 1, 3);
+		for(Block block : safetyRectangularPrism) {
+			if(block.getType().isSolid()) {
+				return ChatColor.RED + "Surrounding Area not Clear!";
+			}
+		}
+		
+		//Not finished
+		p.teleport(centre.toCenterLocation());
+		
+		//Creates iceblock
+		final ArrayList<HashMap<Location, Material>> iceBlockLists = getIceBlockLists(3);
+		HashSet<Block> changing = new HashSet<Block>();
+		for(int i = 0; i < iceBlockLists.size(); i++) {
+			if(iceBlockLists.get(i).size() > 0) {
+				changing.addAll(ChangeBlocksToIce(centre, iceBlockLists.get(i), delay * (i)));
+			}
+		}
+		
+		final HashSet<Block> changed = changing;
+		
+		//Sets the changed blocks back to air
+		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
+			public void run() {
+				for(Block block : changed) {
+					w.spawnParticle(Particle.BLOCK_DUST, block.getLocation(), 20, 1, 1, 1, 0, block.getBlockData(), true);
+		    		w.playSound(block.getLocation(), block.getSoundGroup().getBreakSound(), 0.05f, 1);
+					block.setType(Material.AIR);
+				}
+			}
+		}, time);
+		
+		return ChatColor.DARK_GREEN + "Casted Ice Block!";
+	}
 
 	//splits the iceblock file into the requested amount of HashMaps 
 	private static final ArrayList<HashMap<Location, Material>> getIceBlockLists(int num) {
@@ -68,54 +118,6 @@ public class AquaVanguardProficiency1 {
 		}
 		
 		return iceblockLists;
-	}
-	
-	public static final String activate(Player p) {
-		int time = 20 * 10;
-		int delay = 4;
-		
-		Location centre = p.getLocation().toBlockLocation();
-		World w = p.getWorld();
-		
-		//Player must have a solid block 1 block below them
-		if(!centre.clone().add(0, -1, 0).getBlock().getType().isSolid()) {
-			return ChatColor.RED + "Stand on Solid Ground!";
-		}
-		
-		//Player must have a 3x3 cube centred on their head non-solid
-		ArrayList<Block> safetyRectangularPrism = RectangularPrism.get(centre.getBlock(), 1, 3);
-		for(Block block : safetyRectangularPrism) {
-			if(block.getType().isSolid()) {
-				return ChatColor.RED + "Surrounding Area not Clear!";
-			}
-		}
-		
-		//Not finished
-		p.teleport(centre.toCenterLocation());
-		
-		//Creates iceblock
-		final ArrayList<HashMap<Location, Material>> iceBlockLists = getIceBlockLists(3);
-		HashSet<Block> changing = new HashSet<Block>();
-		for(int i = 0; i < iceBlockLists.size(); i++) {
-			if(iceBlockLists.get(i).size() > 0) {
-				changing.addAll(ChangeBlocksToIce(centre, iceBlockLists.get(i), delay * (i)));
-			}
-		}
-		
-		final HashSet<Block> changed = changing;
-		
-		//Sets the changed blocks back to air
-		Bukkit.getServer().getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
-			public void run() {
-				for(Block block : changed) {
-					w.spawnParticle(Particle.BLOCK_DUST, block.getLocation(), 20, 1, 1, 1, 0, block.getBlockData(), true);
-		    		w.playSound(block.getLocation(), block.getSoundGroup().getBreakSound(), 0.05f, 1);
-					block.setType(Material.AIR);
-				}
-			}
-		}, time);
-		
-		return ChatColor.DARK_GREEN + "Casted Ice Block!";
 	}
 	
 	private static final Set<Block> ChangeBlocksToIce(Location centre, HashMap<Location, Material> blocks, int delay) {

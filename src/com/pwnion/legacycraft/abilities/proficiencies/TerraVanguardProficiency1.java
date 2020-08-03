@@ -18,16 +18,23 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import com.pwnion.legacycraft.LegacyCraft;
+import com.pwnion.legacycraft.abilities.IHotbarActivatedAbility;
 import com.pwnion.legacycraft.abilities.Movement;
 import com.pwnion.legacycraft.abilities.Pathfinding;
 import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 import com.pwnion.legacycraft.abilities.areas.Square;
 
-public class TerraVanguardProficiency1 {
+public class TerraVanguardProficiency1 implements IHotbarActivatedAbility {
 	private static final int height = 10;
+	private static final int radius = 2;
+	
+	@Override
+	public final String activate(Player p) {
+		return this.activate(p, radius);
+	}
 	
 	//Initiates the first Terra Vanguard proficiency for a player
-	public static final String activate(Player p, int radius) {
+	public final String activate(Player p, int radius) {
 		Block startingBlock = p.getLocation().getBlock();
 		
 		ArrayList<Block> smallGroundBlocks = Square.get(p.getLocation().add(0D, -0.25D, 0D).getBlock(), 1);

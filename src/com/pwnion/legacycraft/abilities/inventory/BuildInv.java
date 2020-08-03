@@ -74,9 +74,9 @@ public class BuildInv extends Inv {
 			int slotOffset = (int) (Math.floor(clickedSlot / (aptitude ? 29 : 35))) + (aptitude ? 1 : 3);
 			int customModelData = -1;
 			Build builds[] = SkillTree.Build.values();
-			for(int i = 0; i < builds.length; i++) {
+			for(int i = 1; i < builds.length; i++) {
 				if(builds[i].equals(openedBuild)) {
-					customModelData = aptitude ? ((int) (Math.floor((i - 1) / 4)) + 1) * slotOffset : ((slotOffset - 2) * i) + 8;
+					customModelData = aptitude ? ((2 * (((int) (i - 1) / 4) + 1)) - (clickedSlot == 28 ? 1 : 0)) : (8 + (2 * i) - (clickedSlot == 34 ? 1 : 0));
 					break;
 				}
 			}

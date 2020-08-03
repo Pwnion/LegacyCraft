@@ -15,6 +15,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.pwnion.legacycraft.abilities.areas.Selection;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
@@ -169,12 +170,6 @@ public class OnCommand implements CommandExecutor {
 					case "reset":
 						//QuestManager.resetQuests(p, true);
 						break;
-					case "aquav":
-						AquaVanguardProficiency1.activate(p);
-						break;
-					case "terrav":
-						TerraVanguardProficiency1.activate(p, 2);
-						break;
 					default:
 						return false;
 					}
@@ -182,14 +177,19 @@ public class OnCommand implements CommandExecutor {
 			} else if(lbl.equals("test")) {
 				try {
 					
-					Util.br(((Experience) LegacyCraft.getPlayerData(playerUUID, PlayerData.EXPERIENCE)).getExperienceFromLevel(Integer.parseInt(args[0]), ExperienceType.PLAYER));
+					//Util.br(((Experience) LegacyCraft.getPlayerData(playerUUID, PlayerData.EXPERIENCE)).getExperienceFromLevel(Integer.parseInt(args[0]), ExperienceType.PLAYER));
 					
 					//QuestBook.open(p);
+					
+					ItemMeta itemMeta = p.getInventory().getItemInMainHand().getItemMeta();
+					Util.br(String.valueOf(itemMeta.hasCustomModelData()));
+					Util.br(itemMeta.getCustomModelData());
 					
 				} catch(Exception e) {
 					Util.print(e);
 				}
 			}
+			
 			return true;
 		} else {
 			p.sendMessage(deniedMsg);
