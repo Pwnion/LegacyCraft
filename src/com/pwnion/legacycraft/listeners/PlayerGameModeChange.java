@@ -24,7 +24,7 @@ public class PlayerGameModeChange implements Listener {
 		GameMode oldGameMode = p.getGameMode();
 		GameMode newGameMode = e.getNewGameMode();
 		
-		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
+		SkillTree skillTree = PlayerData.getSkillTree(playerUUID);
 		
 		//Handles switching between adventure mode and other game modes
 		if(!oldGameMode.equals(GameMode.ADVENTURE) && newGameMode.equals(GameMode.ADVENTURE)) {

@@ -3,9 +3,9 @@ package com.pwnion.legacycraft.items;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -16,26 +16,33 @@ import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 
 import net.md_5.bungee.api.ChatColor;
 
 public class ItemData {
-	
-	//TODO: Test and refine this value (/lc temp, in onCommand may be useful) 
-	//Any speed stats below this value are set to this value
-	private static final double MIN_SPEED = 0.2;
 
 	private String desc;
 	
-	private HashSet<ItemLoreFlag> flags = new HashSet<ItemLoreFlag>();
 	private ArrayList<Enhancement> enhancements = new ArrayList<Enhancement>();
 	private LinkedHashMap<ItemStat, Integer> stats = new LinkedHashMap<ItemStat, Integer>();
 	private HashMap<ItemStat, Double> statIncrement = new HashMap<ItemStat, Double>();
 	
 	private ItemStack lastItemStack;
 	
-	private ItemType type;
+	private ItemTier tier = ItemTier.NONE;
+	private ItemType type = ItemType.NONE;
+	
+	@Override
+	public String toString() {
+		return "[Description: " + desc +
+			  ", Stats: " + stats +
+			  ", StatIncrement: " + statIncrement +
+			  ", ItemTier: " + tier +
+			  ", ItemType: " + type +
+			  ", LastItemStack: " + lastItemStack + "]";
+	}
 	
 	/**
 	 * Used when activating an item from an inactive state
@@ -44,14 +51,15 @@ public class ItemData {
 	 * @param stats
 	 * @param item
 	 */
-	public ItemData(List<String> desc, @Nullable LinkedHashMap<ItemStat, Integer> stats, ItemStack item) {
-		this.desc = ChatColor.stripColor(String.join(" ", desc));
+	public ItemData(List<String> desc, ItemTier tier, ItemType type, @Nullable LinkedHashMap<ItemStat, Integer> stats, ItemStack item) {
+		setDesc(ChatColor.stripColor(String.join(" ", desc)));
 		this.lastItemStack = item;
+		
+		this.tier = tier;
+		this.type = type;
 		
 		if(stats != null) {
 			setStats(stats);
-		} else {
-			addFlags(ItemLoreFlag.STATS);
 		}
 	}
 	
@@ -60,12 +68,12 @@ public class ItemData {
 	 * 
 	 * @param desc
 	 * @param item
+	 * 
+	 * @throws IllegalArgumentException if desc contains " | "
 	 */
-	public ItemData(String desc, ItemStack item) {
-		this.desc = desc;
+	public ItemData(String desc, ItemStack item) throws IllegalArgumentException {
+		setDesc(desc);
 		this.lastItemStack = item;
-		
-		
 	}
 
 	/**
@@ -77,13 +85,36 @@ public class ItemData {
 
 	/**
 	 * @param desc
+	 * 
+	 * @throws IllegalArgumentException if desc contains " | "
 	 */
-	public void setDesc(String desc) {
+	public void setDesc(String desc) throws IllegalArgumentException {
+		if(desc.contains(" | ")) {
+			throw new IllegalArgumentException("description cannot contain \" | \"");
+		}
 		this.desc = desc;
+	}
+	
+	/**
+	 * Gets the first enhancement with the name <br>
+	 * Ignores caps, Ignores spaces.
+	 * 
+	 * @param name
+	 * @return
+	 * 
+	 * @Nullable if no enhancement with name
+	 */
+	public Enhancement getEnhancement(String name) {
+		for(Enhancement enh : enhancements) {
+			if(enh.getName().toLowerCase().replace(" ", "") == name.toLowerCase().replace(" ", "")) {
+				return enh;
+			}
+		}
+		return null;
 	}
 
 	/**
-	 * @return
+	 * @return Enhancements
 	 */
 	public ArrayList<Enhancement> getEnhancements() {
 		return enhancements;
@@ -102,11 +133,11 @@ public class ItemData {
 	 * @param enhancements
 	 * @param initial
 	 */
-	public void addEnhancements(ItemStack item, String uid, List<Enhancement> enhancements, boolean initial) {
+	public void addEnhancements(String uid, List<Enhancement> enhancements, boolean initial) {
 		for(Enhancement enh : enhancements) {
-			addEnhancement(item, enh, initial);
+			addEnhancement(enh, initial);
 		}
-		ItemManager.updateLore(item, uid);
+		ItemManager.updateLore(lastItemStack, uid);
 	}
 	
 	/**
@@ -115,8 +146,8 @@ public class ItemData {
 	 * @param item
 	 * @param enhancements
 	 */
-	public void addEnhancements(ItemStack item, Enhancement... enhancements) {
-		addEnhancements(item, ItemManager.getUID(item), Arrays.asList(enhancements), true);
+	public void addEnhancements(Enhancement... enhancements) {
+		addEnhancements(ItemManager.getUID(lastItemStack), Arrays.asList(enhancements), true);
 	}
 	
 	/**
@@ -124,13 +155,19 @@ public class ItemData {
 	 * @param enhancement
 	 * @param initial
 	 */
-	public void addEnhancement(ItemStack item, Enhancement enhancement, boolean initial) {
+	public boolean addEnhancement(Enhancement enhancement, boolean initial) {
+		if(!enhancement.getRestriction().equalsAny(type.category, type, null)) {
+			return false;
+		}
 		enhancements.add(enhancement);
-		lastItemStack = item;
-		enhancement.onEquip(item, initial);
+		enhancement.onEquip(lastItemStack, initial);
+		return true;
 	}
 	
 	/**
+	 * Removes an enhancement from an item
+	 * Get enhancement from getEnhancements()
+	 * 
 	 * @param enhancement
 	 */
 	public void removeEnhancement(Enhancement enhancement) {
@@ -140,6 +177,8 @@ public class ItemData {
 	}
 	
 	/**
+	 * Removes enhancements from an item.
+	 * 
 	 * @param enhancements
 	 */
 	public void removeEnhancements(ArrayList<Enhancement> enhancements) {
@@ -151,13 +190,11 @@ public class ItemData {
 	}
 	
 	/**
-	 * @return
+	 * Checks if the item has enhancements
+	 * 
+	 * @return if enhancements size > 0
 	 */
 	public boolean hasEnhancements() {
-		/* 
-		if(flags.contains(ItemLoreFlag.ENHANCEMENTS)) {
-			return false;
-		} //*/
 		return enhancements.size() > 0;
 	}
 	
@@ -167,16 +204,12 @@ public class ItemData {
 	 * @return if stats size is > 0
 	 */
 	public boolean hasStats() {
-		/*
-		if(flags.contains(ItemLoreFlag.STATS)) {
-			return false;
-		} //*/
 		return stats.size() > 0;
 	}
 
 	/**
-	 * Gets the last recorded itemStack associated to this set of Data.
-	 * itemStacks are recorded every time they are created, used, enhancements are added, and when players log in with them.
+	 * Gets the last recorded itemStack associated to this set of Data. <br>
+	 * itemStacks are recorded every time they are created, used, and when players log in with them.
 	 * 
 	 * @return 		The last itemStack associated to this set of Data
 	 */
@@ -194,32 +227,29 @@ public class ItemData {
 	}
 
 	/**
-	 * getStats().get(ItemStat.ATTACK)
-	 * getStats().get(ItemStat.SPEED)
-	 * getStats().get(ItemStat.RANGE)
+	 * Sets all stats <br>
+	 * Must include all stats <br>
 	 * 
-	 * @return	All the stats
-	 */
-	public LinkedHashMap<ItemStat, Integer> getStats() {
-		return stats;
-	}
-
-	/**
-	 * Sets all stats
-	 * Must include all stats
+	 * Values below minimum stats are raised
 	 * 
 	 * @param stats	An ordered HashMap of all stats
 	 */
 	public void setStats(LinkedHashMap<ItemStat, Integer> stats) {
+		for(ItemStat stat : stats.keySet()) {
+			if(stats.get(stat) < stat.getMin()) {
+				stats.put(stat, stat.getMin());
+			}
+		}
 		this.stats = stats;
 		updateStats();
 	}
 	
 	public void setStats(int attack, int speed, int range) {
+		LinkedHashMap<ItemStat, Integer> stats = new LinkedHashMap<ItemStat, Integer>();
 		stats.put(ItemStat.ATTACK, attack);
 		stats.put(ItemStat.SPEED, speed);
 		stats.put(ItemStat.RANGE, range);
-		updateStats();
+		setStats(stats);
 	}
 	
 	//Minimum speed as dictated by minecraft's speed stat 
@@ -230,15 +260,15 @@ public class ItemData {
 	private static final double SPEED_INCREMENT = 0.3; //How much each LegacyCraft speed stat should increment speed by
 	
 	public double calculateSpeed() {
-		double lcSpeed = stats.getOrDefault(ItemStat.SPEED, ItemManager.DEFAULT_STATS.get(ItemStat.SPEED)) - statIncrement.getOrDefault(ItemStat.SPEED, 0.0);
-		if(lcSpeed < MIN_SPEED) {
-			lcSpeed = MIN_SPEED;
+		double lcSpeed = stats.getOrDefault(ItemStat.SPEED, ItemStat.SPEED.getDefault()) - statIncrement.getOrDefault(ItemStat.SPEED, 0.0);
+		if(lcSpeed < ItemStat.SPEED.getAbsMin()) {
+			lcSpeed = ItemStat.SPEED.getAbsMin();
 		}
 		return lcSpeed * SPEED_INCREMENT + (_MIN_SPEED_MC - SPEED_INCREMENT);
 	}
 	
 	/**
-	 * Syncs LC speed stats to Minecraft's Speed Attribute
+	 * Syncs LC speed stats to Minecraft's Speed Attribute <br>
 	 * This allows the client to see correct attack speed.
 	 */
 	public void updateStats() {
@@ -252,13 +282,23 @@ public class ItemData {
 	}
 	
 	/**
-	 * Gets a stat
+	 * Gets a stat or returns default
 	 * 
 	 * @param stat	The stat to get
 	 * @return		The stat's value
 	 */
 	public int getStat(ItemStat stat) {
-		return stats.get(stat);
+		return stats.getOrDefault(stat, stat.getDefault());
+	}
+	
+	/**
+	 * Gets the stats attached to this item
+	 * 
+	 * @param stat	The stat to get
+	 * @return		The stat's value
+	 */
+	public Set<ItemStat> getStats() {
+		return stats.keySet();
 	}
 	
 	/**
@@ -268,10 +308,12 @@ public class ItemData {
 	 * @param val	The value to set the stat to
 	 * @return 		This
 	 */
-	public ItemData setStat(ItemStat stat, int val) {
+	public void setStat(ItemStat stat, int val) {
+		if(val < stat.getMin()) {
+			val = stat.getMin();
+		}
 		stats.put(stat, val);
 		updateStats();
-		return this;
 	}
 	
 	/**
@@ -281,15 +323,7 @@ public class ItemData {
 	 * @param val	The value to add to the stat
 	 */
 	public void addToStat(ItemStat stat, int val) {
-		stats.put(stat, stats.get(stat) + val);
-		updateStats();
-	}
-
-	/**
-	 * @param flags	The flags to add
-	 */
-	public void addFlags(ItemLoreFlag... flags) {
-		this.flags.addAll(Arrays.asList(flags));
+		setStat(stat, stats.get(stat) + val);
 	}
 
 	/**
@@ -306,9 +340,34 @@ public class ItemData {
 		this.type = type;
 	}
 	
+	public boolean hasType() {
+		return type != ItemType.NONE;
+	}
 	
 	/**
-	 * Add invisible stat increments
+	 * @return the tier
+	 */
+	public ItemTier getTier() {
+		return tier;
+	}
+
+	/**
+	 * @param tier the tier to set
+	 */
+	public void setTier(ItemTier tier) {
+		if(tier == null) {
+			tier = ItemTier.NONE;
+		}
+		this.tier = tier;
+	}
+	
+	public boolean hasTier() {
+		return tier != ItemTier.NONE;
+	}
+	
+	
+	/**
+	 * Add invisible stat increments <br>
 	 * 
 	 * Note that these increments are not permanent and are removed whenever a item is deactivated. (player logs off/server restarts)
 	 * 

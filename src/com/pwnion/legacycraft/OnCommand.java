@@ -10,6 +10,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
@@ -25,11 +26,15 @@ import com.pwnion.legacycraft.abilities.targets.Point;
 import com.pwnion.legacycraft.items.ItemData;
 import com.pwnion.legacycraft.items.ItemManager;
 import com.pwnion.legacycraft.items.ItemStat;
+import com.pwnion.legacycraft.items.ItemTier;
+import com.pwnion.legacycraft.items.ItemType;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.items.enhancements.effects.Puncture;
 import com.pwnion.legacycraft.items.enhancements.effects.Relentless;
 import com.pwnion.legacycraft.levelling.Experience;
 import com.pwnion.legacycraft.levelling.ExperienceType;
+import com.pwnion.legacycraft.mobs.LCEntity;
+import com.pwnion.legacycraft.mobs.LCEntity.LCEntityType;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
 import com.pwnion.legacycraft.quests.Quest;
 import com.pwnion.legacycraft.quests.QuestManager;
@@ -203,7 +208,11 @@ public class OnCommand implements CommandExecutor {
 					case "enhance":
 						try {
 							ItemStack hand = p.getInventory().getItemInMainHand();
-							ItemManager.getItemData(hand).addEnhancement(hand, Enhancement.fromName(args[1]), true);
+							String enh = "";
+							for(int i = 1; i < args.length; i++) {
+								enh += args[i] + " ";
+							}
+							ItemManager.getItemData(hand).addEnhancement(Enhancement.fromName(enh), true);
 							ItemManager.updateLore(hand);
 							p.sendMessage("Success");
 						} catch (Exception e) {
@@ -222,6 +231,46 @@ public class OnCommand implements CommandExecutor {
 							e.printStackTrace();
 						}
 						break;
+					case "settier":
+						try {
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							String tierStr = "";
+							for(int i = 1; i < args.length; i++) {
+								tierStr += args[i] + " ";
+							}
+							ItemTier tier = ItemTier.fromString(tierStr);
+							if(tier == null) {
+								p.sendMessage(ChatColor.RED + "Invalid Tier: please enter a valid tier");
+								return false;
+							}
+							ItemManager.getItemData(hand).setTier(tier);
+							ItemManager.updateLore(hand);
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc settier <tier>");
+							e.printStackTrace();
+						}
+						break;
+					case "settype":
+						try {
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							String typeStr = "";
+							for(int i = 1; i < args.length; i++) {
+								typeStr += args[i] + " ";
+							}
+							ItemType type = ItemType.fromString(typeStr);
+							if(type == null) {
+								p.sendMessage(ChatColor.RED + "Invalid Type: please enter a valid type");
+								return false;
+							}
+							ItemManager.getItemData(hand).setType(type);
+							ItemManager.updateLore(hand);
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc settype <tier>");
+							e.printStackTrace();
+						}
+						break;
 					case "desc":
 						try {
 							ItemStack hand = p.getInventory().getItemInMainHand();
@@ -237,12 +286,17 @@ public class OnCommand implements CommandExecutor {
 							e.printStackTrace();
 						}
 						break;
+					case "generate":
+						try {
+							Util.br(PlayerData.playerData);
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc generate <tier> <type>");
+							e.printStackTrace();
+						}
+						break;
 					case "temp":
 						try {
-							//ItemData.SPEED_INCREMENT = Double.parseDouble(args[1]);
-							ItemStack hand = p.getInventory().getItemInMainHand();
-							ItemManager.getItemData(hand).updateStats();
-							p.sendMessage("Success");
+							Util.br(PlayerData.playerData);
 						} catch (Exception e) {
 							p.sendMessage(ChatColor.RED + "Invalid Values: /lc temp <value>");
 							e.printStackTrace();
@@ -257,15 +311,17 @@ public class OnCommand implements CommandExecutor {
 				try {
 					
 					ItemStack item = p.getInventory().getItemInMainHand();
-					ItemData itemData = ItemManager.generateItem(item, "Some default description", 5, 5, 5);
-					itemData.addEnhancements(item, new Puncture(), new Relentless());
+					ItemData itemData = ItemManager.generateItem(item, ItemTier.STABLE, ItemType.SHORTSWORD);
+					ItemManager.updateLore(item);
 					
-					Experience playerExperience = (Experience) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.EXPERIENCE);
+					new LCEntity(p.getLocation(), LCEntityType.ZOMBIE);
+					
+					Experience playerExperience = PlayerData.getExperience(p.getUniqueId());
 					
 					Util.br("Experience: " + playerExperience.getAllExperience());
 					
 					if(args.length > 0) {
-						Util.br(((Experience) LegacyCraft.getPlayerData(playerUUID, PlayerData.EXPERIENCE)).getExperienceFromLevel(Integer.parseInt(args[0]), ExperienceType.PLAYER));
+						Util.br(PlayerData.getExperience(p.getUniqueId()).getExperienceFromLevel(Integer.parseInt(args[0]), ExperienceType.PLAYER));
 					}
 
 					//QuestBook.open(p);

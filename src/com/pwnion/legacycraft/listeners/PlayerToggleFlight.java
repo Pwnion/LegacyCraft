@@ -28,7 +28,7 @@ public class PlayerToggleFlight implements Listener {
 		Player p = e.getPlayer();
 		UUID playerUUID = p.getUniqueId();
 		
-		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
+		SkillTree skillTree = PlayerData.getSkillTree(playerUUID);
 
 		//Handle ability jumps
 		if(p.getGameMode().equals(GameMode.ADVENTURE)) {

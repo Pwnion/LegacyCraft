@@ -3,19 +3,18 @@
  */
 package com.pwnion.legacycraft.items.enhancements.effects;
 
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.items.ItemManager;
 import com.pwnion.legacycraft.items.ItemStat;
-import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.MeleeEnhancement;
 
 /**
  * Blade Dancer (you can reach further)
  * 
  * @author Zephreo
  */
-public class BladeDancer implements Enhancement {
+public class BladeDancer implements MeleeEnhancement {
 	
 	@Override
 	public String getName() {

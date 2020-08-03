@@ -29,7 +29,7 @@ public class PlayerInteract implements Listener {
 		
 		//Handle item range
 		if(e.getAction() == Action.LEFT_CLICK_AIR) {
-			int range = ItemManager.getStats(item).get(ItemStat.RANGE);
+			int range = ItemManager.getStat(item, ItemStat.RANGE);
 			if(range > 1) {
 				Entity target = p.getTargetEntity((int) Math.ceil(range * RANGE_INCREMENT + 3));
 				if(target instanceof LivingEntity) {

@@ -26,22 +26,7 @@ public class PlayerJoin implements Listener {
 		UUID playerUUID = p.getUniqueId();
 		
 		//Initialise variables and populate with default values to help track the player
-		LegacyCraft.setPlayerData(playerUUID, new HashMap<PlayerData, Object>() {
-			private static final long serialVersionUID = 1L;
-			{
-				put(PlayerData.SKILL_TREE, new SkillTree(p));
-				put(PlayerData.JUMP_COUNTER, 0);
-				put(PlayerData.FALL_DISTANCE, 0f);
-				put(PlayerData.CLASS_INVENTORY_OPEN, PlayerClass.NONE);
-				put(PlayerData.ASPECT_INVENTORY_OPEN, SkillTree.Aspect.NONE);
-				put(PlayerData.UNFINISHED_QUESTS, QuestManager.loadUnfinishedPlayerData(p.getUniqueId()));
-				put(PlayerData.FINISHED_QUESTS, QuestManager.loadFinishedPlayerData(p.getUniqueId()));
-				put(PlayerData.SWAP_SLOT, -1);
-				put(PlayerData.LAST_ATTACK, -1);
-			}
-		});
-		
-		LegacyCraft.addPlayerData(playerUUID, PlayerData.EXPERIENCE, new Experience(p)); //Outside as requires skill trees to be loaded
+		PlayerData.generate(p);
 		
 		//Activates all item abilities in inventory
 		for(ItemStack item : p.getInventory().getContents()) {

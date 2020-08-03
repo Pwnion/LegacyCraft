@@ -23,7 +23,7 @@ public class SelectAClassInv extends Inv {
 	//Loads the 'Select A Class' inventory for a player
 	public static void load(Player p) {
 		InventoryView inv = p.openInventory(DeserialiseInventory.get(InvName.SELECT_A_CLASS));
-		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.SKILL_TREE);
+		SkillTree skillTree = PlayerData.getSkillTree(p.getUniqueId());
 		
     	if(!skillTree.getPlayerClass().equals(PlayerClass.NONE)) {
 			ItemMeta itemMeta = inv.getItem(classToSlot.get(skillTree.getPlayerClass())).getItemMeta();
@@ -54,7 +54,7 @@ public class SelectAClassInv extends Inv {
 		case 13:
 		case 15:
 		case 17:
-			SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.SKILL_TREE);
+			SkillTree skillTree = PlayerData.getSkillTree(playerUUID);
 			PlayerClass clickedClass = PlayerClass.valueOf(clickedItem.getItemMeta().getDisplayName().toUpperCase());
 			
 			if(clickType.isLeftClick()) {
@@ -73,7 +73,7 @@ public class SelectAClassInv extends Inv {
 				
 				load(p);
 			} else if(clickType.isRightClick()) {
-				LegacyCraft.setPlayerData(playerUUID, PlayerData.CLASS_INVENTORY_OPEN, clickedClass);
+				PlayerData.setClassInventoryOpen(playerUUID, clickedClass);
 				
 				SelectAnAspectInv.load(p);
 			}

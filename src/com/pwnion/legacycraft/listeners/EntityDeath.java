@@ -43,7 +43,7 @@ public class EntityDeath implements Listener {
 				KillEntity.onPlayerKilledEntity(p, victim.getType());	//Quest integration
 				
 				//Experience integration
-				Experience playerExperience = (Experience) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.EXPERIENCE);
+				Experience playerExperience = PlayerData.getExperience(p.getUniqueId());
 				
 				playerExperience.addExperience(100, ExperienceType.PLAYER);
 				

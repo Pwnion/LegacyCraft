@@ -8,14 +8,16 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
+import com.pwnion.legacycraft.items.ItemType;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.MeleeEnhancement;
 
 /**
  * Indomitable Spirit (the more health you lose the more damage you do)
  * 
  * @author Zephreo
  */
-public class IndomitableSpirit implements Enhancement {
+public class IndomitableSpirit implements MeleeEnhancement {
 	
 	@Override
 	public String getName() {
@@ -30,11 +32,4 @@ public class IndomitableSpirit implements Enhancement {
 		double mod = (1 - (wielder.getHealth() / wielder.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())) / EVERY_VAL_PERCENT;
 		target.damage(damage * mod * DMG_INCREASE);
 	}
-
-	@Override
-	public void onEquip(ItemStack item, boolean initial) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

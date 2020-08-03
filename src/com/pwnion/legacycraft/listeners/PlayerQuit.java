@@ -22,14 +22,14 @@ public class PlayerQuit implements Listener {
 		Player p = e.getPlayer();
 		UUID playerUUID = p.getUniqueId();
 		
-		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
+		SkillTree skillTree = PlayerData.getSkillTree(playerUUID);
 		if(p.getGameMode().equals(GameMode.ADVENTURE)) {
 			skillTree.saveClass();
 		} else {
 			skillTree.saveOther();
 		}
 		
-		Experience experience = (Experience) LegacyCraft.getPlayerData(playerUUID, PlayerData.EXPERIENCE);
+		Experience experience = PlayerData.getExperience(playerUUID);
 		experience.save();
 		
 		QuestManager.savePlayerData(p);

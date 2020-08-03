@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -23,17 +24,8 @@ public class ItemManager {
 	
 	private static HashMap<String, ItemData> activeItems = new HashMap<String, ItemData>();
 	
-	//Access modifier is intentionally empty to be accessed by ItemData
-	//This can be changed out for getStats(null) in ItemData to have a private modifier
-	static final HashMap<ItemStat, Integer> DEFAULT_STATS;
-	static {
-		DEFAULT_STATS = new HashMap<ItemStat, Integer>();
-		DEFAULT_STATS.put(ItemStat.ATTACK, 1);
-		DEFAULT_STATS.put(ItemStat.SPEED, 1);
-		DEFAULT_STATS.put(ItemStat.RANGE, 1);
-	}
-	
 	private enum TitleType {
+		TIER_ITEMTYPE,
 		DESCRIPTION,
 		STATS,
 		ENHANCEMENTS,
@@ -46,17 +38,21 @@ public class ItemManager {
 	//uid sizes can change with no effect to old uids
 	
 	/**
-	 * Generates a UID with collision checking
-	 * 
-	 * preferredUID should not contain the strings "===" or "@"
-	 * Colour Codes and Spaces may be stripped from the preferredUID
+	 * Generates a UID with collision checking <br>
+	 *  <br>
+	 * Colour Codes and Spaces may be stripped from the preferredUID <br>
 	 * 
 	 * @param preferredUID	null if no preferred
 	 * @return				4-character alphanumeric string (or preferredUID)
 	 * 
+	 * @throws IllegalArgumentException if preferredUID contains the strings "===" or "@"
+	 * 
 	 * @NonNull
 	 */
-	private static String generateNewUID(@Nullable String preferredUID) {
+	private static String generateNewUID(@Nullable String preferredUID) throws IllegalArgumentException {
+		if(preferredUID != null && (preferredUID.contains("===") || preferredUID.contains("@"))) {
+			throw new IllegalArgumentException("uid cannont contain the strings '===' or '@'");
+		}
 		while (true) {
 			if(!activeItems.containsKey(preferredUID) && preferredUID != null) {
 				return preferredUID;
@@ -66,11 +62,12 @@ public class ItemManager {
 	}
 	
 	/**
-	 * Output:
-	 * Description
-	 * Stats
-	 * Enhancements
-	 * UID
+	 * Output: <br>
+	 * Rarity and ItemType <br>
+	 * Description <br>
+	 * Stats <br>
+	 * Enhancements <br>
+	 * UID <br>
 	 * 
 	 * @param item 	item to get lore from
 	 * @return		an arraylist of segments of lore split by title
@@ -80,6 +77,12 @@ public class ItemManager {
 		List<String> lore = item.getLore();
 		TitleType lastTitle = TitleType.DESCRIPTION;
 		int last = 0;
+		
+		if(lore.get(0).contains(" | ")) {
+			out.put(TitleType.TIER_ITEMTYPE, lore.subList(0, 1));
+			last = 1; //Description is one line down
+		}
+		
 		for(int i = 0; i < lore.size(); i++) {
 			if(lore.get(i).contains("===")) {
 				out.put(lastTitle, lore.subList(last, i - 1));
@@ -103,8 +106,8 @@ public class ItemManager {
 	}
 	
 	/**
-	 * Activates an inactive item.
-	 * If item was already active creates a new ItemData with a new UID.
+	 * Activates an inactive item. <br>
+	 * If item was already active creates a new ItemData with a new UID. <br>
 	 * 
 	 * @Nullable if item does not have a uid in lore
 	 * 
@@ -121,6 +124,15 @@ public class ItemManager {
 		HashMap<TitleType, List<String>> lore = stripTitles(item);
 		
 		Util.br(lore);
+		
+		ItemType type = ItemType.NONE;
+		ItemTier tier = ItemTier.NONE;
+		if(lore.containsKey(TitleType.TIER_ITEMTYPE)) {
+			// split("\\|") splits at every "|"
+			String spl[] = ChatColor.stripColor(lore.get(TitleType.TIER_ITEMTYPE).get(0)).split("\\|");
+			tier = ItemTier.fromString(spl[0]);
+			type = ItemType.fromString(spl[1]);
+		}
 		
 		LinkedHashMap<ItemStat, Integer> stats = new LinkedHashMap<ItemStat, Integer>();
 		for(String line : lore.getOrDefault(TitleType.STATS, Collections.emptyList())) {
@@ -139,9 +151,9 @@ public class ItemManager {
 			}
 		}
 		
-		ItemData data = new ItemData(lore.get(TitleType.DESCRIPTION), stats, item);
+		ItemData data = new ItemData(lore.get(TitleType.DESCRIPTION), tier, type, stats, item);
 		activeItems.put(uid, data);
-		data.addEnhancements(item, uid, enhancements, false);
+		data.addEnhancements(uid, enhancements, false);
 		
 		return data;
 	}
@@ -167,6 +179,50 @@ public class ItemManager {
 	}
 	
 	/**
+	 * Generates stats and a description for an item. Generates a random UID for the item.
+	 * 
+	 * @param item
+	 * @param tier
+	 * @param type
+	 * @return
+	 */
+	public static ItemData generateItem(ItemStack item, ItemTier tier, ItemType type) {
+		String uid = generateNewUID(null);
+		ItemData data = new ItemData("Some randomised description.", item);
+		
+		data.setTier(tier);
+		data.setType(type);
+		data.setStats(generateStats(tier, type, 2));
+		activeItems.put(uid, data);
+		item.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+		updateLore(item, uid);
+		return data;
+	}
+	
+	/**
+	 * Stats generated from tier base power + type modifiers +- range
+	 * 
+	 * @param tier
+	 * @param type
+	 * @param range		Range from the value to generate
+	 * @return
+	 */
+	private static LinkedHashMap<ItemStat,Integer> generateStats(ItemTier tier, ItemType type, int range) {
+		LinkedHashMap<ItemStat,Integer> out = new LinkedHashMap<ItemStat,Integer>();
+		Random rnd = new Random();
+		for(ItemStat stat : ItemStat.values()) {
+			int mid = tier.power + type.getMod(stat);
+			int gen = Util.randomInt(mid - range,  mid + range);
+			if(gen < stat.getMin()) {
+				gen = stat.getMin();
+			}
+			out.put(stat, gen);
+		}
+		out.put(ItemStat.RANGE, 1 + type.getMod(ItemStat.RANGE));
+		return out;
+	}
+	
+	/**
 	 *  Gets the item data for a uid. If inactive activates the item from the itemStack.
 	 * 
 	 * @param item
@@ -174,10 +230,8 @@ public class ItemManager {
 	 * @return
 	 * 
 	 * @Nullable if item is inactive and has no uid
-	 * 
-	 * @throws NullPointerException if uid is null
 	 */
-	public static ItemData getItemData(@Nullable ItemStack item, @Nonnull String uid) throws NullPointerException {
+	public static ItemData getItemData(@Nullable ItemStack item, String uid) {
 		if(activeItems.containsKey(uid)) {
 			return activeItems.get(uid);
 		}
@@ -206,7 +260,7 @@ public class ItemManager {
 	}
 	
 	/**
-	 * Checks if an ItemData instance has been created for this uid.
+	 * Checks if an ItemData instance has been created for this uid. <br>
 	 * If null returns false.
 	 * 
 	 * @param uid
@@ -230,7 +284,7 @@ public class ItemManager {
 	}
 	
 	/**
-	 * Gets the UID from the last line in the items lore.
+	 * Gets the UID from the last line in the items lore. <br>
 	 * The UID must be after an @ symbol
 	 * 
 	 * @param item		
@@ -250,7 +304,7 @@ public class ItemManager {
 	}
 	
 	/**
-	 * gets the UID of item or generates a new one.
+	 * gets the UID of item or generates a new one. <br>
 	 * 
 	 * If item is null generates a new UID
 	 * 
@@ -288,12 +342,12 @@ public class ItemManager {
 	 * @param item
 	 * @return
 	 */
-	public static HashMap<ItemStat, Integer> getStats(ItemStack item) {
+	public static int getStat(ItemStack item, ItemStat stat) {
 		ItemData data = getItemData(item);
 		if(data == null) {
-			return DEFAULT_STATS;
+			return stat.getDefault();
 		}
-		return data.getStats();
+		return data.getStat(stat);
 	}
 	
 	/**
@@ -309,16 +363,23 @@ public class ItemManager {
 		 
 		ArrayList<String> lore = new ArrayList<String>();
 		
-		//lore.add(ChatColor.BLUE + "Common | Shortsword");
+		Util.br(itemData);
 		
-		lore.add(ChatColor.GRAY.toString() + ChatColor.ITALIC + itemData.getDesc());
+		//Tier - Type
+		if(itemData.hasTier() && itemData.hasType()) {
+			lore.add(ChatColor.DARK_GRAY.toString() + itemData.getTier() + " | " + itemData.getType());
+		}
+		
+		//Description
+		if(true) {
+			lore.add(ChatColor.GRAY.toString() + ChatColor.ITALIC + itemData.getDesc());
+		}
 		lore.add("");
 		
 		if(itemData.hasStats()) {
 			lore.add(ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + " === STATS === ");
-			for(ItemStat stat : itemData.getStats().keySet()) {
-				String name = stat.toString().substring(0, 1) + stat.toString().substring(1).toLowerCase(); //First character upper case, rest is lower case
-				lore.add(ChatColor.GRAY + " " + name + ": " + itemData.getStat(stat));
+			for(ItemStat stat : itemData.getStats()) {
+				lore.add(ChatColor.GRAY + " " + stat + ": " + itemData.getStat(stat));
 			}
 			lore.add("");
 		}
@@ -326,8 +387,9 @@ public class ItemManager {
 		//Enhancements
 		if(itemData.hasEnhancements()) {
 			lore.add(ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + " === ENHANCEMENTS === ");
-			for(Enhancement e : itemData.getEnhancements()) {
-				lore.add(ChatColor.GRAY + " - " + e.getName());
+			Util.br(itemData.getEnhancements());
+			for(Enhancement enh : itemData.getEnhancements()) {
+				lore.add(ChatColor.GRAY + " - " + enh.getName());
 			}
 			lore.add("");
 		}
@@ -348,7 +410,7 @@ public class ItemManager {
 	}
 	
 	/**
-	 * Changes an items UID.
+	 * Changes an items UID. <br>
 	 * newUID must be unused, item must be active
 	 * 
 	 * @param item		the ItemStack to change

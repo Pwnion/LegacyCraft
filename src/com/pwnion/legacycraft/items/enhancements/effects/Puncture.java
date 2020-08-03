@@ -7,9 +7,11 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.LegacyCraft;
+import com.pwnion.legacycraft.items.ItemType;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.MeleeEnhancement;
 
-public class Puncture implements Enhancement {
+public class Puncture implements MeleeEnhancement {
 
 	@Override
 	public String getName() {

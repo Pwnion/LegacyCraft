@@ -23,7 +23,7 @@ public class Experience {
 	public Experience(Player p) {
 		this.p = p;
 		this.playerUUID = p.getUniqueId();
-		this.skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
+		this.skillTree = PlayerData.getSkillTree(playerUUID);
 		this.playerClass = skillTree.getPlayerClass();
 		this.allExperience = load();
 	}
@@ -52,7 +52,7 @@ public class Experience {
 		
 		final ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
 		final ConfigurationSection playerDataCS = playerDataConfig.getRoot();
-        SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
+        SkillTree skillTree = PlayerData.getSkillTree(playerUUID);
 		
         for(PlayerClass playerClass : SkillTree.PlayerClass.values()) {
         	//if(playerClass.equals(PlayerClass.NONE)) continue;
@@ -106,8 +106,10 @@ public class Experience {
 		
 		getAllExperience().put(experienceType, experience);
 		
-		p.setLevel(getLevel(experienceType));
-		p.setExp(getPercentExperience(experienceType));
+		if(experienceType.equals(ExperienceType.PLAYER)) {
+			p.setLevel(getLevel(experienceType));
+			p.setExp(getPercentExperience(experienceType));
+		}
 	}
 	
 	public void addExperience(int experience, ExperienceType experienceType) {
