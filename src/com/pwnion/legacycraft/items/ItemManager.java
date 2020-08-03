@@ -128,9 +128,8 @@ public class ItemManager {
 		ItemType type = ItemType.NONE;
 		ItemTier tier = ItemTier.NONE;
 		if(lore.containsKey(TitleType.TIER_ITEMTYPE)) {
-			String spl[] = ChatColor.stripColor(lore.get(TitleType.TIER_ITEMTYPE).get(0)).split(" | ");
-			String splstr = ChatColor.stripColor(lore.get(TitleType.TIER_ITEMTYPE).get(0));
-			Util.br(splstr);
+			// split("\\|") splits at every "|"
+			String spl[] = ChatColor.stripColor(lore.get(TitleType.TIER_ITEMTYPE).get(0)).split("\\|");
 			tier = ItemTier.fromString(spl[0]);
 			type = ItemType.fromString(spl[1]);
 		}

@@ -14,11 +14,7 @@ import com.pwnion.legacycraft.levelling.Experience;
 
 //All types of player data that is shared between classes
 public class PlayerData {
-	private static HashMap<UUID, HashMap<PlayerDataType, Object>> playerData = new HashMap<UUID, HashMap<PlayerDataType, Object>>();
- 	
- 	public static Object get(UUID playerUUID, PlayerDataType type) {
- 		return playerData.get(playerUUID).get(type);
- 	}
+	public static HashMap<UUID, HashMap<PlayerDataType, Object>> playerData = new HashMap<UUID, HashMap<PlayerDataType, Object>>();
  	
  	public static SkillTree getSkillTree(UUID playerUUID) {
 		return (SkillTree) playerData.get(playerUUID).get(PlayerDataType.SKILL_TREE);
@@ -99,25 +95,22 @@ public class PlayerData {
 	public static void setLastAttack(UUID playerUUID, int value) {
 		playerData.get(playerUUID).put(PlayerDataType.LAST_ATTACK, value);
 	}
-	
- 	public static HashMap<PlayerDataType, Object> get(UUID playerUUID) {
- 		return playerData.get(playerUUID);
- 	}
  	
  	public static void generate(Player p) {
  		UUID playerUUID = p.getUniqueId();
+ 		HashMap<PlayerDataType, Object> data = new HashMap<PlayerDataType, Object>();
  		for(PlayerDataType type : PlayerDataType.values()) {
- 			HashMap<PlayerDataType, Object> data = new HashMap<PlayerDataType, Object>();
  			data.put(type, type.getDefault());
- 			playerData.put(playerUUID, data);
+ 			
  		}
+ 		playerData.put(playerUUID, data);
  		setSkillTree(playerUUID, new SkillTree(p));
  		setUnfinishedQuests(playerUUID, QuestManager.loadUnfinishedPlayerData(playerUUID));
  		setFinishedQuests(playerUUID, QuestManager.loadFinishedPlayerData(playerUUID));
  		setExperience(playerUUID, new Experience(p));
  	}
  	
- 	public static enum PlayerDataType {
+ 	private static enum PlayerDataType {
  		SKILL_TREE(SkillTree.class),
  	    JUMP_COUNTER(0),
  		FALL_DISTANCE(0f),

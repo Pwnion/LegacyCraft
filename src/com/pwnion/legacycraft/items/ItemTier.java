@@ -24,12 +24,7 @@ public enum ItemTier {
 	 * @Nullable if none found
 	 */
 	public static ItemTier fromString(String name) {
-	    for (ItemTier enumValue : ItemTier.values()) {
-	        if (enumValue.toString().equalsIgnoreCase(name.replace(" ", "_"))) {
-	            return enumValue;
-	        }
-	    }
-	    return null;
+		return Util.getEnumFromString(ItemTier.class, name);
 	}
 	
 	@Override

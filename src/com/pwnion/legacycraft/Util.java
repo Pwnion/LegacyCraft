@@ -17,6 +17,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
 
+import com.pwnion.legacycraft.items.ItemTier;
+
 public class Util {
 	
 	public static void br(String message) {
@@ -39,6 +41,24 @@ public class Util {
 	    	Util.br(el.toString());
 	    }
 	    Util.br(e.toString());
+	}
+	
+	/**
+	 * gets the Enum from a string. IgnoresCase, Ignores Leading/Trailing whitespace, Spaces treated as '_'
+	 * 
+	 * @param name
+	 * @return
+	 * 
+	 * @Nullable if none found
+	 */
+	public static <T extends Enum<T>> T getEnumFromString(Class<T> c, String string) {
+		string = string.trim().replace(" ", "_");
+	    for (T enumValue : c.getEnumConstants()) {
+	        if (enumValue.name().equalsIgnoreCase(string)) {
+	            return enumValue;
+	        }
+	    }
+	    return null;
 	}
 	
 	/**

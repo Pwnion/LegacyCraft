@@ -37,12 +37,7 @@ public enum ItemType {
 	 * @Nullable if none found
 	 */
 	public static ItemType fromString(String name) {
-	    for (ItemType enumValue : ItemType.values()) {
-	        if (enumValue.toString().equalsIgnoreCase(name.trim().replace(" ", "_"))) {
-	            return enumValue;
-	        }
-	    }
-	    return null;
+		return Util.getEnumFromString(ItemType.class, name);
 	}
 	
 	@Override

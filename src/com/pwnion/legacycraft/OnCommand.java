@@ -17,7 +17,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
-import com.pwnion.legacycraft.PlayerData.PlayerDataType;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.ooc.Portal;
@@ -289,10 +288,7 @@ public class OnCommand implements CommandExecutor {
 						break;
 					case "temp":
 						try {
-							//ItemData.SPEED_INCREMENT = Double.parseDouble(args[1]);
-							ItemStack hand = p.getInventory().getItemInMainHand();
-							ItemManager.getItemData(hand).updateStats();
-							p.sendMessage("Success");
+							Util.br(PlayerData.playerData);
 						} catch (Exception e) {
 							p.sendMessage(ChatColor.RED + "Invalid Values: /lc temp <value>");
 							e.printStackTrace();
