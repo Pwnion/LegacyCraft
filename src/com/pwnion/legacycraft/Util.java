@@ -3,6 +3,8 @@ package com.pwnion.legacycraft;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Random;
+import java.util.regex.*;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -16,17 +18,23 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
 
+import com.pwnion.legacycraft.items.ItemTier;
+
 public class Util {
 	
-	public static final void br(String message) {
+	public static void br(String message) {
 		Bukkit.broadcastMessage("[C] " + message);
 	}
 	
-	public static final void br(Object message) {
-		br(message.toString());
+	public static void br(Object message) {
+		if(message.equals(null)) {
+			br("null");
+		} else {
+			br(message.toString());
+		}
 	}
 	
-	public static final void print(Exception e) {
+	public static void print(Exception e) {
 		e.printStackTrace();
 		StackTraceElement st[] = e.getStackTrace();
 	    for(int i = 8; i != 0; i--) {
@@ -36,7 +44,106 @@ public class Util {
 	    Util.br(e.toString());
 	}
 	
-	public static final void spawnBlocks(HashSet<Block> blocks) {
+	/**
+	 * gets the Enum from a string. IgnoresCase, Ignores Leading/Trailing whitespace, Spaces treated as '_'
+	 * 
+	 * @param name
+	 * @return
+	 * 
+	 * @Nullable if none found
+	 */
+	public static <T extends Enum<T>> T getEnumFromString(Class<T> c, String string) {
+		string = string.trim().replace(" ", "_");
+	    for (T enumValue : c.getEnumConstants()) {
+	        if (enumValue.name().equalsIgnoreCase(string)) {
+	            return enumValue;
+	        }
+	    }
+	    return null;
+	}
+	
+	/**
+	 * Random double between the given range [min,max)
+	 * 
+	 * @param min	minimum value inclusive
+	 * @param max	maximum value exclusive
+	 * @return		random double
+	 * 
+	 * @throws IllegalArgumentException when min >= max
+	 * 
+	 * @see Math.random()
+	 */
+	public static double random(double min, double max) throws IllegalArgumentException {
+		if(min >= max) {
+			throw new IllegalArgumentException("The maximum must be greater than the minimum!");
+		}
+		return min + (Math.random() * (max - min));
+	}
+	
+	/**
+	 * Random int between the given range [min,max]
+	 * 
+	 * @param min	minimum value inclusive
+	 * @param max	maximum value inclusive
+	 * @return
+	 * @throws IllegalArgumentException when min >= max
+	 */
+	public static int randomInt(int min, int max) throws IllegalArgumentException {
+		if(min >= max) {
+			throw new IllegalArgumentException("The maximum must be greater than the minimum!");
+		}
+		Random rnd = new Random();
+		return min + rnd.nextInt(max - min + 1);
+	}
+	
+	/**
+	 * Whole string is lowercase except those after spaces or underscores (including first character)
+	 * 
+	 * @param input
+	 * @return
+	 */
+	public static String toTitleCase(String input) {
+		String out = "";
+		for(String str : split(input, " |_")) {
+			out += str.toString().substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+		}
+		return out;
+	}
+	
+	/**
+     * Splits a String according to a regex, keeping the splitter at the end of each substring
+     * 
+     * @param input The input String
+     * @param regex The regular expression upon which to split the input
+     * @return An array of Strings
+     */
+	static String[] split(String input, String regex) {
+        ArrayList<String> res = new ArrayList<String>();
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(input);
+        int pos = 0;
+        while (m.find()) {
+            res.add(input.substring(pos, m.end()));
+            pos = m.end();
+        }
+        if(pos < input.length()) res.add(input.substring(pos));
+        return res.toArray(new String[res.size()]);
+    }
+	
+	private static final char[] posbChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+	
+	//Generates UID with 36^n combinations using alphanumeric characters
+	public static String generateUID(int length) {
+		Random rnd = new Random();
+		String out = "";
+	    for(int i = 0; i < length; i++) {
+	    	out += posbChars[rnd.nextInt(posbChars.length)];
+	    }
+	    return out;
+	}
+	
+	//TEMP, used for testing Areas
+	public static void spawnBlocks(HashSet<Block> blocks) {
 		for(Block block : blocks) {
 			block.setType(Material.STONE);
 		}
@@ -56,30 +163,6 @@ public class Util {
 			relativeArea.add(getRelativeVec(centre, loc));
 		}
 		return relativeArea;
-	}
-	
-	public static final Location getRelativeLoc(Location centre, Location pos) {
-		if(centre.getWorld() != pos.getWorld()) {
-			return null;
-		}
-
-		return new Location(pos.getWorld(), pos.getX() - centre.getX(), pos.getY() - centre.getY(), pos.getZ() - centre.getZ());
-	}
-	
-	public static final HashSet<Block> approxBlock(World world, Vector vector) {
-		HashSet<Block> output = new HashSet<Block>();
-		for(BlockVector blockVec : approxBlock(vector)) {
-			output.add(blockVec.toLocation(world).getBlock());
-		}
-		return output;
-	}
-	
-	public static final HashSet<Block> approxBlocks(World world, Collection<Vector> vectors) {
-		HashSet<Block> output = new HashSet<Block>();
-		for(Vector vector : vectors) {
-			output.addAll(approxBlock(world, vector));
-		}
-		return output;
 	}
 	
 	public static final HashSet<BlockVector> approxBlocks(Collection<Vector> vectors) {
@@ -189,13 +272,6 @@ public class Util {
 	public static final Vector vectorCalc(Entity e, double dist) {
 		return vectorCalc(e.getLocation().getYaw(), e.getLocation().getPitch(), dist);
 	}
-
-	public static final Vector vectorCalc(Location pos1, Location pos2) {
-		if(pos1.getWorld() != pos2.getWorld()) {
-			return null;
-		}
-		return new Vector(pos2.getX() - pos1.getX(), pos2.getY() - pos1.getY(), pos2.getZ() - pos1.getZ());
-	}
 	
 	public static final double getYaw(Vector vec) {
 		double yaw = 0;
@@ -209,10 +285,6 @@ public class Util {
 	
 	public static final double getPitch(Vector vec) {
 		return Math.toDegrees(vec.angle(new Vector(0, 1, 0))) - 90;
-	}
-
-	public static final Location addY(Location loc, double plusY) {
-		return loc.clone().add(0, plusY, 0);
 	}
 
 	public static final Vector addY(Vector vec, double plusY) {

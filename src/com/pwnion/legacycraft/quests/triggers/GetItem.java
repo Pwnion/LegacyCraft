@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.LegacyCraft;
@@ -14,15 +13,16 @@ import com.pwnion.legacycraft.quests.QuestManager;
 import com.pwnion.legacycraft.quests.Trigger;
 import com.pwnion.legacycraft.quests.TriggerType;
 
-public class GetItem implements Listener {
+public class GetItem {
 
-	//Called from InventoryClick, InventoryDrag, EntityPickupItem, and when a quest is given to a player
+	//Called from InventoryClick, InventoryDrag, EntityPickupItem, and when a quest is given to a player (QuestManager)
 	public static void updateItemQuests(Player p) {
 		Bukkit.getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 			@Override
 			public void run() {
 				
 				for(Quest quest : QuestManager.getActiveQuests(p)) {
+					//If quest requires items to be checked
 					if(quest.hasTrigger(TriggerType.ITEM)) {
 						ArrayList<Trigger> triggers = quest.getTriggers();
 						for(int i = 0; i < triggers.size(); i++) { //GET CHECKED

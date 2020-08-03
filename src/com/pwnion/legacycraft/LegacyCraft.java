@@ -15,12 +15,15 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import com.pwnion.legacycraft.listeners.EntityDamage;
+import com.pwnion.legacycraft.listeners.EntityDamageByEntity;
 import com.pwnion.legacycraft.listeners.EntityDeath;
 import com.pwnion.legacycraft.listeners.EntityPickupItem;
 import com.pwnion.legacycraft.listeners.InventoryClick;
 import com.pwnion.legacycraft.listeners.InventoryClose;
+import com.pwnion.legacycraft.listeners.PlayerSwapHandItems;
 import com.pwnion.legacycraft.listeners.PlayerDropItem;
 import com.pwnion.legacycraft.listeners.PlayerGameModeChange;
+import com.pwnion.legacycraft.listeners.PlayerInteract;
 import com.pwnion.legacycraft.listeners.PlayerItemHeld;
 import com.pwnion.legacycraft.listeners.PlayerJoin;
 import com.pwnion.legacycraft.listeners.PlayerMove;
@@ -91,6 +94,7 @@ public class LegacyCraft extends JavaPlugin {
 			new PlayerToggleFlight(),
 			new EntityDamage(),
 			new InventoryClick(),
+			new PlayerSwapHandItems(),
 			new PlayerGameModeChange(),
 			new PlayerQuit(),
 			new PlayerItemHeld(),
@@ -100,6 +104,8 @@ public class LegacyCraft extends JavaPlugin {
 			new EntityDeath(),
 			new InventoryDrag(),
 			new InventoryClose()
+			new EntityDamageByEntity(),
+			new PlayerInteract()
 		);
 		
 		//Register commands
@@ -118,14 +124,14 @@ public class LegacyCraft extends JavaPlugin {
             		//Handles instances where the player hadn't used all of their ability jumps,
             		//but still must take fall damage
             		if(p.isOnGround()) {
-            			float fallDistanceLastTick = (float) getPlayerData(playerUUID, PlayerData.FALL_DISTANCE);
+            			float fallDistanceLastTick = PlayerData.getFallDistance(playerUUID);
                 		float fallDistance = p.getFallDistance();
                 		
                 		if(fallDistanceLastTick > 10 && fallDistance == 0 && p.getAllowFlight()) {
                 			p.damage((fallDistanceLastTick - 3) / 4);
                 		}
             		}
-            		setPlayerData(playerUUID, PlayerData.FALL_DISTANCE, p.getFallDistance());
+            		PlayerData.setFallDistance(playerUUID, p.getFallDistance());
             	}
             	
             	try {

@@ -5,7 +5,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffectType;
 
-import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.abilities.SkillTree;
 import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
@@ -38,14 +37,18 @@ public class PlayerMove implements Listener {
 		Player p = e.getPlayer();
 		UUID playerUUID = p.getUniqueId();
 		
-		NearLocation.onPlayerMove(p);
+		try {
+			NearLocation.onPlayerMove(p);
+		} catch (NoClassDefFoundError e1) {
+			e1.printStackTrace();
+		}
 		
-		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
+		SkillTree skillTree = PlayerData.getSkillTree(playerUUID);
 		
 		//Resets jump ability usage every time a player touches the ground
 		if(p.isOnGround()) {
-			if((int) LegacyCraft.getPlayerData(playerUUID, PlayerData.JUMP_COUNTER) != 0) { 
-				LegacyCraft.setPlayerData(playerUUID, PlayerData.JUMP_COUNTER, 0);
+			if(PlayerData.getJumpCount(playerUUID) != 0) { 
+				PlayerData.setJumpCount(playerUUID, 0);
 				if(skillTree.getPlayerClass().equals(PlayerClass.SHAMAN)) {
 					p.removePotionEffect(PotionEffectType.SLOW_FALLING);
 				}

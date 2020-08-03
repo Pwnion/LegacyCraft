@@ -10,6 +10,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
@@ -23,11 +24,20 @@ import com.pwnion.legacycraft.abilities.ooc.Portal;
 import com.pwnion.legacycraft.abilities.proficiencies.AquaVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.proficiencies.TerraVanguardProficiency1;
 import com.pwnion.legacycraft.abilities.targets.Point;
+import com.pwnion.legacycraft.items.ItemData;
+import com.pwnion.legacycraft.items.ItemManager;
+import com.pwnion.legacycraft.items.ItemStat;
+import com.pwnion.legacycraft.items.ItemTier;
+import com.pwnion.legacycraft.items.ItemType;
+import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.effects.Puncture;
+import com.pwnion.legacycraft.items.enhancements.effects.Relentless;
 import com.pwnion.legacycraft.levelling.Experience;
 import com.pwnion.legacycraft.levelling.ExperienceType;
+import com.pwnion.legacycraft.mobs.LCEntity;
+import com.pwnion.legacycraft.mobs.LCEntity.LCEntityType;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
 import com.pwnion.legacycraft.quests.Quest;
-import com.pwnion.legacycraft.quests.QuestBook;
 import com.pwnion.legacycraft.quests.QuestManager;
 
 public class OnCommand implements CommandExecutor {
@@ -170,15 +180,139 @@ public class OnCommand implements CommandExecutor {
 					case "reset":
 						//QuestManager.resetQuests(p, true);
 						break;
+					case "uid":
+						ItemStack item = p.getInventory().getItemInMainHand();
+						String newUID = args[1];
+						if(newUID.length() > 0) {
+							if(ItemManager.changeUID(item, newUID)) {
+								p.sendMessage("Changed to " + newUID);
+							} else {
+								p.sendMessage(ChatColor.RED + "ID taken");
+							}
+						}
+						break;
+					case "uitem":
+						ItemManager.updateLore(p.getInventory().getItemInMainHand());
+						p.sendMessage("Updated");
+						break;
+					case "enhance":
+						try {
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							String enh = "";
+							for(int i = 1; i < args.length; i++) {
+								enh += args[i] + " ";
+							}
+							ItemManager.getItemData(hand).addEnhancement(Enhancement.fromName(enh), true);
+							ItemManager.updateLore(hand);
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Enhancement: /lc enhance <enhancement>");
+							e.printStackTrace();
+						}
+						break;
+					case "setstat":
+						try {
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							ItemManager.getItemData(hand).setStat(ItemStat.valueOf(args[1].toUpperCase()), Integer.parseInt(args[2]));
+							ItemManager.updateLore(hand);
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc setstat <stat> <value>");
+							e.printStackTrace();
+						}
+						break;
+					case "settier":
+						try {
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							String tierStr = "";
+							for(int i = 1; i < args.length; i++) {
+								tierStr += args[i] + " ";
+							}
+							ItemTier tier = ItemTier.fromString(tierStr);
+							if(tier == null) {
+								p.sendMessage(ChatColor.RED + "Invalid Tier: please enter a valid tier");
+								return false;
+							}
+							ItemManager.getItemData(hand).setTier(tier);
+							ItemManager.updateLore(hand);
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc settier <tier>");
+							e.printStackTrace();
+						}
+						break;
+					case "settype":
+						try {
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							String typeStr = "";
+							for(int i = 1; i < args.length; i++) {
+								typeStr += args[i] + " ";
+							}
+							ItemType type = ItemType.fromString(typeStr);
+							if(type == null) {
+								p.sendMessage(ChatColor.RED + "Invalid Type: please enter a valid type");
+								return false;
+							}
+							ItemManager.getItemData(hand).setType(type);
+							ItemManager.updateLore(hand);
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc settype <tier>");
+							e.printStackTrace();
+						}
+						break;
+					case "desc":
+						try {
+							ItemStack hand = p.getInventory().getItemInMainHand();
+							String desc = "";
+							for(int i = 1; i < args.length; i++) {
+								desc += args[i] + " ";
+							}
+							ItemManager.getItemData(hand).setDesc(desc);
+							ItemManager.updateLore(hand);
+							p.sendMessage("Success");
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc desc <description>");
+							e.printStackTrace();
+						}
+						break;
+					case "generate":
+						try {
+							Util.br(PlayerData.playerData);
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc generate <tier> <type>");
+							e.printStackTrace();
+						}
+						break;
+					case "temp":
+						try {
+							Util.br(PlayerData.playerData);
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc temp <value>");
+							e.printStackTrace();
+						}
+						break;
 					default:
+						p.sendMessage(ChatColor.RED + "Invalid Command");
 						return false;
 					}
 				}
 			} else if(lbl.equals("test")) {
 				try {
+					ItemStack item = p.getInventory().getItemInMainHand();
+					ItemData itemData = ItemManager.generateItem(item, ItemTier.STABLE, ItemType.SHORTSWORD);
+					ItemManager.updateLore(item);
 					
-					//Util.br(((Experience) LegacyCraft.getPlayerData(playerUUID, PlayerData.EXPERIENCE)).getExperienceFromLevel(Integer.parseInt(args[0]), ExperienceType.PLAYER));
+					new LCEntity(p.getLocation(), LCEntityType.ZOMBIE);
 					
+					Experience playerExperience = PlayerData.getExperience(p.getUniqueId());
+					
+					Util.br("Experience: " + playerExperience.getAllExperience());
+					
+					if(args.length > 0) {
+						Util.br(PlayerData.getExperience(p.getUniqueId()).getExperienceFromLevel(Integer.parseInt(args[0]), ExperienceType.PLAYER));
+					}
+
 					//QuestBook.open(p);
 					
 					ItemMeta itemMeta = p.getInventory().getItemInMainHand().getItemMeta();

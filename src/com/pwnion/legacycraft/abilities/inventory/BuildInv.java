@@ -30,9 +30,9 @@ public class BuildInv extends Inv {
 	public static void load(Player p) {
 		UUID playerUUID = p.getUniqueId();
 		
-		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.SKILL_TREE);
-		PlayerClass openedClass = (PlayerClass) LegacyCraft.getPlayerData(playerUUID, PlayerData.CLASS_INVENTORY_OPEN);
-		Aspect openedAspect = (Aspect) LegacyCraft.getPlayerData(playerUUID, PlayerData.ASPECT_INVENTORY_OPEN);
+		SkillTree skillTree = PlayerData.getSkillTree(playerUUID);
+		PlayerClass openedClass = PlayerData.getClassInventoryOpen(playerUUID);
+		Aspect openedAspect = PlayerData.getAspectInventoryOpen(playerUUID);
 		
 		InvName buildInvName = InvName.valueOf(skillTree.getBuild(openedClass, openedAspect).toString());
 		InventoryView inv = p.openInventory(DeserialiseInventory.get(buildInvName));
@@ -64,9 +64,9 @@ public class BuildInv extends Inv {
 		UUID playerUUID = p.getUniqueId();
 		int clickedSlot = e.getRawSlot();
 		
-		SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.SKILL_TREE);
-		PlayerClass openedClass = (PlayerClass) LegacyCraft.getPlayerData(playerUUID, PlayerData.CLASS_INVENTORY_OPEN);
-		Aspect openedAspect = (Aspect) LegacyCraft.getPlayerData(playerUUID, PlayerData.ASPECT_INVENTORY_OPEN);
+		SkillTree skillTree = PlayerData.getSkillTree(playerUUID);
+		PlayerClass openedClass = PlayerData.getClassInventoryOpen(playerUUID);
+		Aspect openedAspect = PlayerData.getAspectInventoryOpen(playerUUID);
 		
 		Consumer<Boolean> putAbilityInInv = (aptitude) -> {
 			Build openedBuild = skillTree.getBuild(openedClass, openedAspect);

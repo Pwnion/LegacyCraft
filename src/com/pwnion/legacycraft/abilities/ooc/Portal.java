@@ -71,7 +71,7 @@ public enum Portal {
 		spiral.trimToSize();
 		
 		final double rotPerStep = Math.toRadians(rotationSpiral / (stepsSpiral - 1));
-		final Vector pointer = Util.vectorCalc(centre, spiral.get(spiral.size() - 1));
+		final Vector pointer = Util.getRelativeVec(centre, spiral.get(spiral.size() - 1));
 		final Vector axis = Util.vectorCalc(centre.getYaw(), centre.getPitch(), 1);
 		final int killDelay = Math.round(stepsSpiral / 2) + 30 * 20;
 		
@@ -254,11 +254,11 @@ public enum Portal {
 										}
 									}
 								}
-							}
+							} //End of for
 						}
-					}
+					} //End of run (233)
 				}, 0, 1), killDelay - (stepsSpiral / 2));
-			}
+			} //End of run (199)
 		}, stepsSpiral / 2);
-	}
+	} //End of activate
 }

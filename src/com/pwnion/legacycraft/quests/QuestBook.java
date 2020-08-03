@@ -2,10 +2,8 @@ package com.pwnion.legacycraft.quests;
 
 import java.util.ArrayList;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.quests.Book.Builder;
 import com.pwnion.legacycraft.quests.Book.ClickAction;
 import com.pwnion.legacycraft.quests.Book.PageBuilder;

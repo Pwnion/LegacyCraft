@@ -40,12 +40,12 @@ public abstract class Jump {
 		p.getWorld().playSound(p.getLocation(), sound, SoundCategory.PLAYERS, volume, pitch);
 		
 		//Increment jump counter
-	    LegacyCraft.setPlayerData(playerUUID, PlayerData.JUMP_COUNTER, (Integer) LegacyCraft.getPlayerData(playerUUID, PlayerData.JUMP_COUNTER) + 1);
+	    PlayerData.setJumpCount(playerUUID, PlayerData.getJumpCount(playerUUID) + 1);
 	    
 	    //Set fall distance to 0 so ability jumps soften falls mid-air
 	    p.setFallDistance(0f);
 	
 	    //If a player reaches their max jumps, disable flight
-	    if((Integer) LegacyCraft.getPlayerData(playerUUID, PlayerData.JUMP_COUNTER) >= maxJumps) p.setAllowFlight(false);
+	    if(PlayerData.getJumpCount(playerUUID) >= maxJumps) p.setAllowFlight(false);
 	}
 }

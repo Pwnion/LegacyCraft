@@ -15,7 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -81,7 +80,7 @@ public class InventoryClick implements Listener {
         final int clickedSlot = e.getRawSlot();
         final ItemStack clickedItem = e.getCurrentItem();
         final ItemStack cursorItem = e.getCursor();
-        SkillTree skillTree = (SkillTree) LegacyCraft.getPlayerData(playerUUID, PlayerData.SKILL_TREE);
+        SkillTree skillTree = PlayerData.getSkillTree(playerUUID);
         
         //Handles Quest Updates for items in inventory
         GetItem.updateItemQuests(p);
@@ -119,18 +118,18 @@ public class InventoryClick implements Listener {
         	
     		if(clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.AIR)) {
 	        	//Picking up ability
-	        	LegacyCraft.getPlayerData(playerUUID).put(PlayerData.SWAP_SLOT, clickedSlot);
+    			PlayerData.setSwapSlot(playerUUID, clickedSlot);
 	        } else if((clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.IRON_HOE))) {
     			//Swapping abilities
 	        	Bukkit.getServer().getScheduler().runTask(LegacyCraft.getPlugin(), new Runnable() {
 	        		public void run() {
-	        			p.getOpenInventory().setItem((int) LegacyCraft.getPlayerData(playerUUID, PlayerData.SWAP_SLOT), p.getItemOnCursor());
+	        			p.getOpenInventory().setItem(PlayerData.getSwapSlot(playerUUID), p.getItemOnCursor());
 	    	        	p.setItemOnCursor(null);
 	        		}
 	        	});
 	        } else if (cursorItem.getType().equals(Material.IRON_HOE)) {
 	        	e.setCancelled(true);
-	        	p.getOpenInventory().setItem((int) LegacyCraft.getPlayerData(playerUUID, PlayerData.SWAP_SLOT), cursorItem);
+	        	p.getOpenInventory().setItem(PlayerData.getSwapSlot(playerUUID), cursorItem);
 	        	p.setItemOnCursor(null);
 	        } else {
 	        	e.setCancelled(true);
