@@ -29,8 +29,8 @@ import com.pwnion.legacycraft.items.ItemStat;
 import com.pwnion.legacycraft.items.ItemTier;
 import com.pwnion.legacycraft.items.ItemType;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
-import com.pwnion.legacycraft.items.enhancements.effects.melee.Puncture;
-import com.pwnion.legacycraft.items.enhancements.effects.melee.Relentless;
+import com.pwnion.legacycraft.items.enhancements.effects.Puncture;
+import com.pwnion.legacycraft.items.enhancements.effects.Relentless;
 import com.pwnion.legacycraft.levelling.Experience;
 import com.pwnion.legacycraft.levelling.ExperienceType;
 import com.pwnion.legacycraft.mobs.LCEntity;
@@ -283,6 +283,14 @@ public class OnCommand implements CommandExecutor {
 							p.sendMessage("Success");
 						} catch (Exception e) {
 							p.sendMessage(ChatColor.RED + "Invalid Values: /lc desc <description>");
+							e.printStackTrace();
+						}
+						break;
+					case "generate":
+						try {
+							Util.br(PlayerData.playerData);
+						} catch (Exception e) {
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc generate <tier> <type>");
 							e.printStackTrace();
 						}
 						break;

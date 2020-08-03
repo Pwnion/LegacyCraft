@@ -1,4 +1,4 @@
-package com.pwnion.legacycraft.items.enhancements.effects.melee;
+package com.pwnion.legacycraft.items.enhancements.effects;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
@@ -7,17 +7,13 @@ import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.items.ItemType;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.MeleeEnhancement;
 
-public class Relentless implements Enhancement {
+public class Relentless implements MeleeEnhancement {
 
 	@Override
 	public String getName() {
 		return "Relentless";
-	}
-	
-	@Override
-	public ItemType getRestriction() {
-		return ItemType.MELEE;
 	}
 	
 	private int lastHit = Bukkit.getCurrentTick();

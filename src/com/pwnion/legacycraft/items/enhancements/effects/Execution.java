@@ -1,13 +1,14 @@
 /**
  * 
  */
-package com.pwnion.legacycraft.items.enhancements.effects.melee;
+package com.pwnion.legacycraft.items.enhancements.effects;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.items.ItemType;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.MeleeEnhancement;
 
 /**
  * Execution (do more damage if attacking from behind) <br>
@@ -16,14 +17,9 @@ import com.pwnion.legacycraft.items.enhancements.Enhancement;
  * 
  * @author Zephreo
  */
-public class Execution implements Enhancement {
+public class Execution implements MeleeEnhancement {
 	
 	private static final double DMG_INCREASE = 0.5;
-	
-	@Override
-	public ItemType getRestriction() {
-		return ItemType.MELEE;
-	}
 
 	@Override
 	public void onHit(LivingEntity wielder, LivingEntity target, double damage) {

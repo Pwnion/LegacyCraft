@@ -1,4 +1,4 @@
-package com.pwnion.legacycraft.items.enhancements.effects.melee;
+package com.pwnion.legacycraft.items.enhancements.effects;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Damageable;
@@ -9,17 +9,13 @@ import org.bukkit.inventory.ItemStack;
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.items.ItemType;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.MeleeEnhancement;
 
-public class Puncture implements Enhancement {
+public class Puncture implements MeleeEnhancement {
 
 	@Override
 	public String getName() {
 		return "Puncture";
-	}
-	
-	@Override
-	public ItemType getRestriction() {
-		return ItemType.MELEE;
 	}
 	
 	private static final double PROC_RATE = 0.4; //Chance to trigger

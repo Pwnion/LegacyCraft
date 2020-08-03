@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.pwnion.legacycraft.items.enhancements.effects.melee;
+package com.pwnion.legacycraft.items.enhancements.effects;
 
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
@@ -10,22 +10,18 @@ import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.items.ItemType;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.MeleeEnhancement;
 
 /**
  * Indomitable Spirit (the more health you lose the more damage you do)
  * 
  * @author Zephreo
  */
-public class IndomitableSpirit implements Enhancement {
+public class IndomitableSpirit implements MeleeEnhancement {
 	
 	@Override
 	public String getName() {
 		return "Indomitable Spirit";
-	}
-	
-	@Override
-	public ItemType getRestriction() {
-		return ItemType.MELEE;
 	}
 	
 	private static final double EVERY_VAL_PERCENT = 0.1; //Every 10% health lost

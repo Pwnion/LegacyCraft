@@ -1,20 +1,16 @@
-package com.pwnion.legacycraft.items.enhancements.effects.ranged;
+package com.pwnion.legacycraft.items.enhancements.effects;
 
 import org.bukkit.entity.LivingEntity;
 
 import com.pwnion.legacycraft.items.ItemType;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.RangedEnhancement;
 
-public class DeadlyEye implements Enhancement {
+public class DeadlyEye implements RangedEnhancement {
 	
 	@Override
 	public String getName() {
 		return "Deadly Eye";
-	}
-
-	@Override
-	public ItemType getRestriction() {
-		return ItemType.RANGED;
 	}
 	
 	private static final double DMG_PERCENT_ADD = 0.1;

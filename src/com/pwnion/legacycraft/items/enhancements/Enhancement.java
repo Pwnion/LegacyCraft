@@ -38,7 +38,8 @@ public interface Enhancement {
 	 */
 	public static Enhancement fromName(String name) {
 		
-		name = Util.toTitleCase(name).replace(" ", "");
+		String input = name;
+		name = Util.toTitleCase(name).replace(" ", "").replace("_", "");
 		
 		/* Add name here (in title case) if name is not class name (ignoring spaces)
 		switch(name) {
@@ -56,6 +57,7 @@ public interface Enhancement {
 			//Maybe add a placeholder enhancement adder with the errored name to the players inventory
 			//Called from ItemManager.activate()
 			//Which is called from PlayerJoin which has player
+			Util.br("Input: \"" + input + "\"");
 			Util.br("Name: \"" + name + "\"");
 			e.printStackTrace();
 		}
