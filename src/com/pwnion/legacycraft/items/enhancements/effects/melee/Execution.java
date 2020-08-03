@@ -30,6 +30,7 @@ public class Execution implements Enhancement {
 		if(wielder.getFacing() == target.getFacing()) {
 			target.damage(damage * DMG_INCREASE);
 		}
+		
 	}
 
 	@Override

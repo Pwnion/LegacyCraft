@@ -201,7 +201,6 @@ public class ItemManager {
 	}
 	
 	/**
-	 * Generated stats may be negative. (ItemData handles this). <br>
 	 * Stats generated from tier base power + type modifiers +- range
 	 * 
 	 * @param tier
@@ -372,7 +371,9 @@ public class ItemManager {
 		}
 		
 		//Description
-		lore.add(ChatColor.GRAY.toString() + ChatColor.ITALIC + itemData.getDesc());
+		if(true) {
+			lore.add(ChatColor.GRAY.toString() + ChatColor.ITALIC + itemData.getDesc());
+		}
 		lore.add("");
 		
 		if(itemData.hasStats()) {

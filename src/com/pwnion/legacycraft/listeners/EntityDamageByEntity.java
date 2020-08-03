@@ -36,7 +36,7 @@ public class EntityDamageByEntity implements Listener {
 			 * Calculate attack cooldown (no weapon switching) 
 			 * {@link https://minecraft.gamepedia.com/Damage#Attack_cooldown}
 			 */
-			double t = Bukkit.getCurrentTick() - (int)LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.LAST_ATTACK);
+			double t = Bukkit.getCurrentTick() - (int) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.LAST_ATTACK);
 			double cooldown = 1 / itemData.calculateSpeed() * 20;
 			double dmgMul = 0.2 + Math.pow((t + 0.5) / cooldown, 2) * 0.8;
 			if(dmgMul > 1) dmgMul = 1;

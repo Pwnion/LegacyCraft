@@ -39,6 +39,7 @@ public class ItemData {
 		return "[Description: " + desc +
 			  ", Stats: " + stats +
 			  ", StatIncrement: " + statIncrement +
+			  ", ItemTier: " + tier +
 			  ", ItemType: " + type +
 			  ", LastItemStack: " + lastItemStack + "]";
 	}
@@ -155,7 +156,7 @@ public class ItemData {
 	 * @param initial
 	 */
 	public boolean addEnhancement(Enhancement enhancement, boolean initial) {
-		if(type.category != enhancement.getRestriction() && type != enhancement.getRestriction()) {
+		if(!enhancement.getRestriction().equalsAny(type.category, type, null)) {
 			return false;
 		}
 		enhancements.add(enhancement);

@@ -9,9 +9,9 @@ public enum ItemTier {
 	TOUGH(5), 
 	STRONG(7);
 	
-	public final int power;
+	final int power;
 	
-	ItemTier(int power) {
+	private ItemTier(int power) {
 		this.power = power;
 	}
 	

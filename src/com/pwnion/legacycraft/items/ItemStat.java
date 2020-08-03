@@ -11,21 +11,21 @@ public enum ItemStat {
 	private final int min;
 	private final int defaultt;
 	
-	ItemStat(double absMin, int min, int defaultt) {
+	private ItemStat(double absMin, int min, int defaultt) {
 		this.absMin = absMin;
 		this.min = min;
 		this.defaultt = defaultt;
 	}
 	
-	public double getAbsMin() {
+	double getAbsMin() {
 		return absMin;
 	}
 	
-	public int getMin() {
+	int getMin() {
 		return min;
 	}
 	
-	public int getDefault() {
+	int getDefault() {
 		return defaultt;
 	}
 	

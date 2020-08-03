@@ -3,6 +3,7 @@ package com.pwnion.legacycraft.items.enhancements.effects;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
+import com.pwnion.legacycraft.items.ItemTier;
 import com.pwnion.legacycraft.items.ItemType;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 
@@ -29,10 +30,12 @@ public class ExampleEffect implements Enhancement {
 
 	@Override
 	public void onSwing(LivingEntity wielder) {
+		
 	}
 
 	@Override
 	public void onRemove(ItemStack item) {
+		
 	}
 
 	@Override

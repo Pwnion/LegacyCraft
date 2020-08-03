@@ -10,12 +10,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
+import com.pwnion.legacycraft.PlayerData.PlayerDataType;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.ooc.Portal;
@@ -32,6 +34,8 @@ import com.pwnion.legacycraft.items.enhancements.effects.melee.Puncture;
 import com.pwnion.legacycraft.items.enhancements.effects.melee.Relentless;
 import com.pwnion.legacycraft.levelling.Experience;
 import com.pwnion.legacycraft.levelling.ExperienceType;
+import com.pwnion.legacycraft.mobs.LCEntity;
+import com.pwnion.legacycraft.mobs.LCEntity.LCEntityType;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
 import com.pwnion.legacycraft.quests.Quest;
 import com.pwnion.legacycraft.quests.QuestManager;
@@ -306,7 +310,9 @@ public class OnCommand implements CommandExecutor {
 					ItemData itemData = ItemManager.generateItem(item, ItemTier.STABLE, ItemType.SHORTSWORD);
 					ItemManager.updateLore(item);
 					
-					Experience playerExperience = (Experience) LegacyCraft.getPlayerData(p.getUniqueId(), PlayerData.EXPERIENCE);
+					new LCEntity(p.getLocation(), LCEntityType.ZOMBIE);
+					
+					Experience playerExperience = PlayerData.get(p.getUniqueId(), PlayerDataType.EXPERIENCE).get();
 					
 					Util.br("Experience: " + playerExperience.getAllExperience());
 					

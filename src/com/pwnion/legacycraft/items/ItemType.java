@@ -13,7 +13,7 @@ public enum ItemType {
 	BOW(RANGED, 0, 0, 0);
 	
 	ItemType category = null;
-	final HashMap<ItemStat, Integer> statMod = new HashMap<ItemStat, Integer>();
+	private final HashMap<ItemStat, Integer> statMod = new HashMap<ItemStat, Integer>();
 	
 	ItemType(ItemType category, int attack, int speed, int range) {
 		this.category = category;
@@ -48,5 +48,14 @@ public enum ItemType {
 	@Override
 	public String toString() {
 		return Util.toTitleCase(this.name().replace("_", " "));
+	}
+	
+	public boolean equalsAny(ItemType... types) {
+		for(ItemType type : types) {
+			if(type == this) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
