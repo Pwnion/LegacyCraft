@@ -106,8 +106,10 @@ public class Experience {
 		
 		getAllExperience().put(experienceType, experience);
 		
-		p.setLevel(getLevel(experienceType));
-		p.setExp(getPercentExperience(experienceType));
+		if(experienceType.equals(ExperienceType.PLAYER)) {
+			p.setLevel(getLevel(experienceType));
+			p.setExp(getPercentExperience(experienceType));
+		}
 	}
 	
 	public void addExperience(int experience, ExperienceType experienceType) {

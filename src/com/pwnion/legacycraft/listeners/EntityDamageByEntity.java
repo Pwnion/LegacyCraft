@@ -1,6 +1,7 @@
 package com.pwnion.legacycraft.listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -31,6 +32,10 @@ public class EntityDamageByEntity implements Listener {
 			LivingEntity attacked = (LivingEntity) e.getEntity();
 			ItemStack item = p.getInventory().getItemInMainHand();
 			ItemData itemData = ItemManager.getItemData(item);
+			if(itemData == null) {
+				return;
+			}
+			int range = ItemManager.getStat(item, ItemStat.RANGE);
 			
 			/**
 			 * Calculate attack cooldown (no weapon switching) 
@@ -54,6 +59,15 @@ public class EntityDamageByEntity implements Listener {
 			
 			if(damage > 0) {
 				
+				if(range > 1) {
+					if(dmgMul == 1) {
+						playSound(attacked, Sound.ENTITY_PLAYER_ATTACK_STRONG);
+						playSound(attacked, Sound.ENTITY_PLAYER_ATTACK_SWEEP);
+					} else {
+						playSound(attacked, Sound.ENTITY_PLAYER_ATTACK_WEAK);
+					}
+				}
+				
 				//Apply Experience
 				Experience playerExperience = PlayerData.getExperience(p.getUniqueId());
 				switch(itemData.getType()) {
@@ -72,9 +86,16 @@ public class EntityDamageByEntity implements Listener {
 				Enhancement.applyHit(p, attacked, item, damage);
 				PlayerData.setLastAttack(p.getUniqueId(), Bukkit.getCurrentTick());
 			} else {
+				if(range > 1) {
+					playSound(attacked, Sound.ENTITY_PLAYER_ATTACK_NODAMAGE);
+				}
 				Enhancement.applySwing(p, item);
 				e.setCancelled(true);
 			}
 		}
+	}
+	
+	private static void playSound(LivingEntity loc, Sound sound) {
+		loc.getWorld().playSound(loc.getLocation(), sound, 1, 1);
 	}
 }

@@ -211,13 +211,14 @@ public class ItemManager {
 		LinkedHashMap<ItemStat,Integer> out = new LinkedHashMap<ItemStat,Integer>();
 		Random rnd = new Random();
 		for(ItemStat stat : ItemStat.values()) {
-			int mid = tier.power + type.get(stat);
+			int mid = tier.power + type.getMod(stat);
 			int gen = Util.randomInt(mid - range,  mid + range);
 			if(gen < stat.getMin()) {
 				gen = stat.getMin();
 			}
 			out.put(stat, gen);
 		}
+		out.put(ItemStat.RANGE, 1 + type.getMod(ItemStat.RANGE));
 		return out;
 	}
 	

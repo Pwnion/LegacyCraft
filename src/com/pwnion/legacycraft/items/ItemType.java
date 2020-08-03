@@ -7,7 +7,7 @@ import com.pwnion.legacycraft.Util;
 public enum ItemType {
 	NONE,
 	MELEE,
-	SHORTSWORD(MELEE, 0, 1, -1),
+	SHORTSWORD(MELEE, 0, 1, 0),
 	LONGSWORD(MELEE, 1, -1, 1),
 	RANGED,
 	BOW(RANGED, 0, 0, 0);
@@ -24,7 +24,7 @@ public enum ItemType {
 	
 	ItemType() {}
 	
-	public int get(ItemStat stat) {
+	public int getMod(ItemStat stat) {
 		return statMod.getOrDefault(stat, 0);
 	}
 	
