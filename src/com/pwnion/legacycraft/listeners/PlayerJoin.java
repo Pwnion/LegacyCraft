@@ -1,6 +1,5 @@
 package com.pwnion.legacycraft.listeners;
 
-import java.util.HashMap;
 import java.util.UUID;
 
 import org.bukkit.Sound;
@@ -10,13 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.PlayerData;
-import com.pwnion.legacycraft.abilities.SkillTree;
-import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
 import com.pwnion.legacycraft.items.ItemManager;
-import com.pwnion.legacycraft.levelling.Experience;
-import com.pwnion.legacycraft.quests.QuestManager;
 
 public class PlayerJoin implements Listener {
 	

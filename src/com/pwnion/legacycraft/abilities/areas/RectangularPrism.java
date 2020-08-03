@@ -8,8 +8,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.util.BlockVector;
 
-import com.pwnion.legacycraft.Util;
-
 public class RectangularPrism {
 	//Returns a list of blocks that represent a rectangular prism
 	//Uses the Square class to generate the list of blocks

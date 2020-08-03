@@ -2,8 +2,6 @@ package com.pwnion.legacycraft.items.enhancements.effects;
 
 import org.bukkit.entity.LivingEntity;
 
-import com.pwnion.legacycraft.items.ItemType;
-import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.items.enhancements.RangedEnhancement;
 
 public class DeadlyEye implements RangedEnhancement {

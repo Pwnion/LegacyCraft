@@ -17,8 +17,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.pwnion.legacycraft.LegacyCraft;
+import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.abilities.IHotbarActivatedAbility;
-import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 
 public class AquaVanguardProficiency1 implements IHotbarActivatedAbility {
@@ -50,7 +50,7 @@ public class AquaVanguardProficiency1 implements IHotbarActivatedAbility {
 		p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, time, 2 /* Amplifier */, true /* Ambient */, false /* Particles */), true /* Forced */); //Regeneration 2 for 'time' ticks, no particles, forced.
 		
 		//Creates iceblock
-		final ArrayList<HashMap<Location, Material>> iceBlockLists = iceblockProcessed;
+		final ArrayList<HashMap<Location, Material>> iceBlockLists = getIceBlockLists(3);
 		HashSet<Block> changing = new HashSet<Block>();
 		for(int i = 0; i < iceBlockLists.size(); i++) {
 			Util.br("i = " + i);

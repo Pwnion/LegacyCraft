@@ -1,19 +1,10 @@
 package com.pwnion.legacycraft.items.enhancements.effects;
 
-import java.util.UUID;
-
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.attribute.AttributeModifier.Operation;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import com.pwnion.legacycraft.items.ItemManager;
 import com.pwnion.legacycraft.items.ItemStat;
-import com.pwnion.legacycraft.items.ItemType;
-import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.items.enhancements.MeleeEnhancement;
 
 public class Heavy implements MeleeEnhancement {

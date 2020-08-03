@@ -16,7 +16,6 @@ import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
 
 import net.md_5.bungee.api.ChatColor;

@@ -1,14 +1,10 @@
 package com.pwnion.legacycraft.items.enhancements.effects;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
 import com.pwnion.legacycraft.LegacyCraft;
-import com.pwnion.legacycraft.items.ItemType;
-import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.items.enhancements.MeleeEnhancement;
 
 public class Puncture implements MeleeEnhancement {
