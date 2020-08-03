@@ -157,11 +157,6 @@ public class InventoryClick implements Listener {
 	    			inv.setItem(0, hotbar[8]);
 	    		}
 	        }
-    		/*
-    		 * if (!(clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.IRON_HOE) || clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.AIR))) {
-	               e.setCancelled(true);
-	        } else 
-    		 */
         }
 	}
 }

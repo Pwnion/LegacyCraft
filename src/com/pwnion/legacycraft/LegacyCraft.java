@@ -19,6 +19,7 @@ import com.pwnion.legacycraft.listeners.EntityDamageByEntity;
 import com.pwnion.legacycraft.listeners.EntityDeath;
 import com.pwnion.legacycraft.listeners.EntityPickupItem;
 import com.pwnion.legacycraft.listeners.InventoryClick;
+import com.pwnion.legacycraft.listeners.InventoryClose;
 import com.pwnion.legacycraft.listeners.PlayerSwapHandItems;
 import com.pwnion.legacycraft.listeners.PlayerDropItem;
 import com.pwnion.legacycraft.listeners.PlayerGameModeChange;
@@ -102,6 +103,7 @@ public class LegacyCraft extends JavaPlugin {
 			new EntityPickupItem(),
 			new EntityDeath(),
 			new InventoryDrag(),
+			new InventoryClose()
 			new EntityDamageByEntity(),
 			new PlayerInteract()
 		);
