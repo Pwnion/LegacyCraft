@@ -1,5 +1,5 @@
-QuestName: 
-  id:
+quest-id: 
+  name:
   description:
   triggers:
     types:
