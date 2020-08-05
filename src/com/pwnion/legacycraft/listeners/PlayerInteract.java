@@ -40,7 +40,7 @@ public class PlayerInteract implements Listener {
 		
 		//Handle swing enhancements 
 		if(e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK) {
-			Enhancement.applySwing(p, item);
+			Enhancement.applySwing(item, p);
 			
 			//Possible Horizontal Enhancement
 			/*

@@ -82,13 +82,13 @@ public class EntityDamageByEntity implements Listener {
 				}
 				
 				//Apply Enhancements
-				Enhancement.applyHit(p, attacked, item, damage);
+				Enhancement.applyHit(item, p, attacked, damage);
 				PlayerData.setLastAttack(p.getUniqueId(), Bukkit.getCurrentTick());
 			} else {
 				if(range > 1) {
 					playSound(attacked, Sound.ENTITY_PLAYER_ATTACK_NODAMAGE);
 				}
-				Enhancement.applySwing(p, item);
+				Enhancement.applySwing(item, p);
 				e.setCancelled(true);
 			}
 		}

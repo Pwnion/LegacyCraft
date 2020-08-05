@@ -20,7 +20,7 @@ public class Puncture implements MeleeEnhancement {
 	private static final int DELAY = 20; //Delay between damages
 
 	@Override
-	public void onHit(LivingEntity wielder, LivingEntity target, double damage) {
+	public void onHit(ItemStack item, LivingEntity wielder, LivingEntity target, double damage) {
 		if (Math.random() < PROC_RATE) {
 			wielder.sendMessage("Opponent is bleeding"); // TODO: Choose colour and text
 			int count = 1;

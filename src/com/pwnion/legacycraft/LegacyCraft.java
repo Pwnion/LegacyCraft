@@ -14,6 +14,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
+import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.effects.BladeDancer;
+import com.pwnion.legacycraft.items.enhancements.effects.DeadlyEye;
+import com.pwnion.legacycraft.items.enhancements.effects.ExampleEffect;
+import com.pwnion.legacycraft.items.enhancements.effects.Execution;
+import com.pwnion.legacycraft.items.enhancements.effects.Heavy;
+import com.pwnion.legacycraft.items.enhancements.effects.IndomitableSpirit;
+import com.pwnion.legacycraft.items.enhancements.effects.Puncture;
+import com.pwnion.legacycraft.items.enhancements.effects.Relentless;
 import com.pwnion.legacycraft.listeners.EntityDamage;
 import com.pwnion.legacycraft.listeners.EntityDamageByEntity;
 import com.pwnion.legacycraft.listeners.EntityDeath;
@@ -112,6 +121,18 @@ public class LegacyCraft extends JavaPlugin {
 		registerCommands(
 		    "legacycraft",
 		    "test"
+		);
+		
+		//Register enhancements
+		Enhancement.register(
+			new BladeDancer(),
+			new DeadlyEye(),
+			new ExampleEffect(),
+			new Execution(),
+			new Heavy(),
+			new IndomitableSpirit(),
+			new Puncture(),
+			new Relentless()
 		);
 		
 		//Runs the run() method once per game tick

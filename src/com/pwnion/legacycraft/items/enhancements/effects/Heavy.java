@@ -13,7 +13,7 @@ public class Heavy implements MeleeEnhancement {
 	private static final double SPEED_REDUCE = 0.7;
 
 	@Override
-	public void onHit(LivingEntity wielder, LivingEntity target, double damage) {
+	public void onHit(ItemStack item, LivingEntity wielder, LivingEntity target, double damage) {
 		target.damage(damage * DMG_PERCENT_ADD);
 	}
 	

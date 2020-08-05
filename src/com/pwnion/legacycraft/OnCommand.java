@@ -197,7 +197,7 @@ public class OnCommand implements CommandExecutor {
 							for(int i = 1; i < args.length; i++) {
 								enh += args[i] + " ";
 							}
-							ItemManager.getItemData(hand).addEnhancement(Enhancement.fromName(enh), true);
+							ItemManager.getItemData(hand).addEnhancement(enh, true);
 							ItemManager.updateLore(hand);
 							p.sendMessage("Success");
 						} catch (Exception e) {
@@ -212,7 +212,7 @@ public class OnCommand implements CommandExecutor {
 							ItemManager.updateLore(hand);
 							p.sendMessage("Success");
 						} catch (Exception e) {
-							p.sendMessage(ChatColor.RED + "Invalid Values: /lc setstat <stat> <value>");
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc setstat <" + Util.join("/", ItemStat.values()).toLowerCase() + "> <value>");
 							e.printStackTrace();
 						}
 						break;
@@ -224,15 +224,11 @@ public class OnCommand implements CommandExecutor {
 								tierStr += args[i] + " ";
 							}
 							ItemTier tier = ItemTier.fromString(tierStr);
-							if(tier == null) {
-								p.sendMessage(ChatColor.RED + "Invalid Tier: please enter a valid tier");
-								return false;
-							}
 							ItemManager.getItemData(hand).setTier(tier);
 							ItemManager.updateLore(hand);
 							p.sendMessage("Success");
 						} catch (Exception e) {
-							p.sendMessage(ChatColor.RED + "Invalid Values: /lc settier <tier>");
+							p.sendMessage(ChatColor.RED + "Invalid Tier: /lc settier <" + Util.join("/", ItemTier.values()).toLowerCase() + ">");
 							e.printStackTrace();
 						}
 						break;
@@ -244,15 +240,11 @@ public class OnCommand implements CommandExecutor {
 								typeStr += args[i] + " ";
 							}
 							ItemType type = ItemType.fromString(typeStr);
-							if(type == null) {
-								p.sendMessage(ChatColor.RED + "Invalid Type: please enter a valid type");
-								return false;
-							}
 							ItemManager.getItemData(hand).setType(type);
 							ItemManager.updateLore(hand);
 							p.sendMessage("Success");
 						} catch (Exception e) {
-							p.sendMessage(ChatColor.RED + "Invalid Values: /lc settype <tier>");
+							p.sendMessage(ChatColor.RED + "Invalid Type: /lc settype <" + Util.join("/", ItemType.values()).toLowerCase() + ">");
 							e.printStackTrace();
 						}
 						break;

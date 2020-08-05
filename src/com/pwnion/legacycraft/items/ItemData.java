@@ -164,6 +164,15 @@ public class ItemData {
 	}
 	
 	/**
+	 * @param item
+	 * @param enhancementName
+	 * @param initial
+	 */
+	public boolean addEnhancement(String enhancementName, boolean initial) {
+		return addEnhancement(Enhancement.fromName(enhancementName), initial);
+	}
+	
+	/**
 	 * Removes an enhancement from an item
 	 * Get enhancement from getEnhancements()
 	 * 
