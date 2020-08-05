@@ -110,6 +110,10 @@ public class PlayerData {
  		setExperience(playerUUID, new Experience(p));
  	}
  	
+ 	public static void remove(UUID playerUUID) {
+ 		playerData.remove(playerUUID);
+ 	}
+ 	
  	private static enum PlayerDataType {
  		SKILL_TREE(SkillTree.class),
  	    JUMP_COUNTER(0),

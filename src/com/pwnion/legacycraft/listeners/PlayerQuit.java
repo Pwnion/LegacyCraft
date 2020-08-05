@@ -37,6 +37,6 @@ public class PlayerQuit implements Listener {
 		ItemManager.deactivate(p);
 		
 		//Remove the player data for the player that left the server
-		LegacyCraft.removePlayerData(playerUUID);
+		PlayerData.remove(playerUUID);
 	}
 }

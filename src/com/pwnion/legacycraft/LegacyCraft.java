@@ -53,7 +53,6 @@ public class LegacyCraft extends JavaPlugin {
 
 	//Declare lots of variables that can be accessed by this classes getter and setter methods
 	//These variables facilitate the storing of values used to track players actions
-	private static final HashMap<UUID, HashMap<PlayerData, Object>> playerData = new HashMap<UUID, HashMap<PlayerData, Object>>();
 	private static final HashMap<BukkitTask, Integer> tasksToBeCancelled = new HashMap<BukkitTask, Integer>();
 	private static Plugin plugin;
 	
@@ -198,30 +197,6 @@ public class LegacyCraft extends JavaPlugin {
 	
 	public static final Plugin getPlugin() {
 		return plugin;
-	}
-	
-	public static final HashMap<PlayerData, Object> getPlayerData(UUID playerUUID) {
-		return playerData.get(playerUUID);
-	}
-	
-	public static final Object getPlayerData(UUID playerUUID, PlayerData data) {
-		return playerData.get(playerUUID).get(data);
-	}
-	
-	public static final void setPlayerData(UUID playerUUID, HashMap<PlayerData, Object> data) {
-		playerData.put(playerUUID, data);
-	}
-	
-	public static final void addPlayerData(UUID playerUUID, PlayerData playerData, Object data) {
-		getPlayerData(playerUUID).put(playerData, data);
-	}
-	
-	public static final void setPlayerData(UUID playerUUID, PlayerData data, Object obj) {
-		playerData.get(playerUUID).put(data, obj);
-	}
-	
-	public static final void removePlayerData(UUID playerUUID) {
-		playerData.remove(playerUUID);
 	}
 	
 	public static final void addTaskToBeCancelled(BukkitTask task, int ticksUntilCancellation) {
