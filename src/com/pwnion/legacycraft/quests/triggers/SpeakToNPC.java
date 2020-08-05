@@ -28,19 +28,16 @@ public class SpeakToNPC {
 					if(name.equalsIgnoreCase(npcName)) {
 						//Check if this is a submit to npc quest
 						if(trigger.getNPCData().get(name)) {
+							Trigger itemTrigger = quest.getTriggers(TriggerType.ITEM).get(0);
 							//Remove from player inventory
-							Material mat = quest.getTriggers(TriggerType.ITEM).get(0).getItem();
-							int count = 0;
-							if(p.getInventory().contains(mat)) {
-								for(ItemStack items : p.getInventory().all(mat).values()) {
-									count += items.getAmount();
-								}
-							}
-							
-							if(count < triggers.get(i - 1).getFinishCondition()) {
+							Material mat = itemTrigger.getItem();
+							int amount = itemTrigger.getFinishCondition();
+							if(p.getInventory().contains(mat, amount)) {
+								p.getInventory().removeItem(new ItemStack(mat, amount));
+							} else {
 								p.sendMessage(ChatColor.RED + "You do not have enough '" + mat.toString() + "' to progress in the quest '" + quest.getName() + "'");
 								break;
-							} 
+							}
 						}
 						QuestManager.addProgress(p, quest, i);
 					}
