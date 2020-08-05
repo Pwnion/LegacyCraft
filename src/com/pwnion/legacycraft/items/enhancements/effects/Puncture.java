@@ -9,11 +9,6 @@ import com.pwnion.legacycraft.items.enhancements.MeleeEnhancement;
 
 public class Puncture implements MeleeEnhancement {
 
-	@Override
-	public String getName() {
-		return "Puncture";
-	}
-	
 	private static final double PROC_RATE = 0.4; //Chance to trigger
 	private static final double CONT_RATE = 0.8; //Chance to continue
 	private static final int DAMAGE = 1; //Damage dealt

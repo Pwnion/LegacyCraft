@@ -16,11 +16,6 @@ import com.pwnion.legacycraft.items.enhancements.MeleeEnhancement;
  */
 public class IndomitableSpirit implements MeleeEnhancement {
 	
-	@Override
-	public String getName() {
-		return "Indomitable Spirit";
-	}
-	
 	private static final double EVERY_VAL_PERCENT = 0.1; //Every 10% health lost
 	private static final double DMG_INCREASE = 0.1; //Give 10% Damage Boost
 

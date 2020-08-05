@@ -21,6 +21,7 @@ public class Quest {
 		this.triggers = triggers;
 	}
 
+	//private String id;
 	private String name;
 	private String desc;
 	private String nextQuest;

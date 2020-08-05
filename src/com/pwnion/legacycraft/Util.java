@@ -28,7 +28,7 @@ public class Util {
 	}
 	
 	public static void br(Object message) {
-		if(message.equals(null)) {
+		if(message == null) {
 			br("null");
 		} else {
 			br(message.toString());
@@ -127,7 +127,9 @@ public class Util {
             res.add(input.substring(pos, m.end()));
             pos = m.end();
         }
-        if(pos < input.length()) res.add(input.substring(pos));
+        if(pos < input.length()) {
+        	res.add(input.substring(pos));
+        }
         return res.toArray(new String[res.size()]);
     }
 	

@@ -15,11 +15,6 @@ import com.pwnion.legacycraft.items.enhancements.MeleeEnhancement;
  * @author Zephreo
  */
 public class BladeDancer implements MeleeEnhancement {
-	
-	@Override
-	public String getName() {
-		return "Blade Dancer";
-	}
 
 	@Override
 	public void onEquip(ItemStack item, boolean initial) {

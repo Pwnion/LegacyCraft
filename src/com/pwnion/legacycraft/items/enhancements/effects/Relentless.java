@@ -7,11 +7,6 @@ import org.bukkit.inventory.ItemStack;
 import com.pwnion.legacycraft.items.enhancements.MeleeEnhancement;
 
 public class Relentless implements MeleeEnhancement {
-
-	@Override
-	public String getName() {
-		return "Relentless";
-	}
 	
 	private int lastHit = Bukkit.getCurrentTick();
 	private int consecHits = 0; //Consecutive hits

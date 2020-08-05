@@ -2,6 +2,7 @@ package com.pwnion.legacycraft.quests;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,20 +20,21 @@ import com.pwnion.legacycraft.quests.triggers.GetItem;
 public class QuestManager {
 
 	//TEMP PUBLIC CHANGE TO PRIVATE?
-	public static ArrayList<Quest> quests = new ArrayList<Quest>();
+	public static HashMap<String, Quest> quests = new HashMap<String, Quest>();
 	
 	public static void loadQuests() {
 		final ConfigAccessor questDataConfig = new ConfigAccessor("quest-data.yml");
 		final ConfigurationSection questDataCS = questDataConfig.getRoot();
 
-		questDataCS.getKeys(false).forEach((name) -> {
-			String desc = questDataCS.getString(name + ".description");
+		questDataCS.getKeys(false).forEach((id) -> {
+			String name = questDataCS.getString(id + ".name");
+			String desc = questDataCS.getString(id + ".description");
 
 			ArrayList<Trigger> triggers = new ArrayList<Trigger>();
 			ArrayList<TriggerType> triggerTypes = new ArrayList<TriggerType>();
 			ArrayList<String> triggerData = new ArrayList<String>();
 			ArrayList<Integer> triggerFinishConditions = new ArrayList<Integer>();
-			String nodePrefix = name + ".triggers.";
+			String nodePrefix = id + ".triggers.";
 
 			questDataCS.getList(nodePrefix + "types").forEach((trigger) -> {
 				triggerTypes.add(TriggerType.valueOf((String) trigger));
@@ -50,20 +52,20 @@ public class QuestManager {
 				triggers.add(new Trigger(triggerTypes.get(i), triggerData.get(i), triggerFinishConditions.get(i)));
 			}
 			
-			String nextQuest = questDataCS.getString(name + ".next-quest");
+			String nextQuest = questDataCS.getString(id + ".next-quest");
 
-			quests.add(new Quest(name, desc, triggers, nextQuest));
+			quests.put(id, new Quest(name, desc, triggers, nextQuest));
 		});
 		
 		
 		//TEMP
-		quests.add(new Quest("Get 64 Diamonds", "desc", new Trigger(TriggerType.ITEM, Material.DIAMOND, 64)));
-		quests.add(new Quest("Get 64 Oak Logs", "desc", new Trigger(TriggerType.ITEM, Material.OAK_LOG, 64)));
-		quests.add(new Quest("Get 1 Diamond Horse Armour", "desc", new Trigger(TriggerType.ITEM, Material.DIAMOND_HORSE_ARMOR, 64)));
+		quests.put("getDiamonds64", new Quest("Get 64 Diamonds", "desc", new Trigger(TriggerType.ITEM, Material.DIAMOND, 64)));
+		quests.put("geLog64", new Quest("Get 64 Oak Logs", "desc", new Trigger(TriggerType.ITEM, Material.OAK_LOG, 64)));
+		quests.put("getDiamondHorseArmour", new Quest("Get 1 Diamond Horse Armour", "desc", new Trigger(TriggerType.ITEM, Material.DIAMOND_HORSE_ARMOR, 64)));
 	
-		quests.add(new Quest("Kill 16 Zombies", "desc", new Trigger(TriggerType.KILL_ENTITY, EntityType.ZOMBIE, 16)));
-		quests.add(new Quest("Kill 16 Skeletons", "desc", new Trigger(TriggerType.KILL_ENTITY, EntityType.SKELETON, 16)));
-		quests.add(new Quest("Kill 16 Pigs", "desc", new Trigger(TriggerType.KILL_ENTITY, EntityType.PIG, 16)));
+		quests.put("killZombie16", new Quest("Kill 16 Zombies", "desc", new Trigger(TriggerType.KILL_ENTITY, EntityType.ZOMBIE, 16)));
+		quests.put("killSkeleton16", new Quest("Kill 16 Skeletons", "desc", new Trigger(TriggerType.KILL_ENTITY, EntityType.SKELETON, 16)));
+		quests.put("killPig16", new Quest("Kill 16 Pigs", "desc", new Trigger(TriggerType.KILL_ENTITY, EntityType.PIG, 16)));
 	}
 	
 	//Gets unfinished quests from player data
@@ -163,18 +165,15 @@ public class QuestManager {
     }
 
 	/**
-	 * Linearly searches through an arraylist of all quest for a quest that has the given name
+	 * Gets the quest with that name
 	 * 
 	 * @param name 	Name of quest
-	 * @return 		first Quest with given name
+	 * @return 		Quest
+	 * 
+	 * @Nullable if no quest with name
 	 */
 	public static Quest getQuest(String name) {
-		for(Quest quest : quests) {
-			if(quest.getName() == name) {
-				return quest;
-			}
-		}
-		return null;
+		return quests.get(name);
 	}
 	
 	/**

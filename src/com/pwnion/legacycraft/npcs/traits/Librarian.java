@@ -71,8 +71,8 @@ public class Librarian extends Trait {
 			//If close to work do work related stuff
 			//Else do other stuff
 			
-			for(Quest quest : QuestManager.quests) {
-				QuestManager.giveQuest(p, quest);
+			for(String questId : QuestManager.quests.keySet()) {
+				QuestManager.giveQuest(p, QuestManager.quests.get(questId));
 			}
 
 			//TODO: Add Speech Lines
