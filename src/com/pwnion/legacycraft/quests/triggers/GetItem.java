@@ -25,15 +25,14 @@ public class GetItem {
 					//If quest requires items to be checked
 					if(quest.hasTrigger(TriggerType.ITEM)) {
 						ArrayList<Trigger> triggers = quest.getTriggers(TriggerType.ITEM);
-						for(int i = 0; i < triggers.size(); i++) {
-							Trigger trigger = triggers.get(i);
+						for(Trigger trigger : triggers) {
 							Material mat = trigger.getItem();
 							if(p.getInventory().contains(mat)) {
 								int count = 0;
 								for(ItemStack items : p.getInventory().all(mat).values()) {
 									count += items.getAmount();
 								}
-								QuestManager.setProgress(p, quest, i, count);
+								QuestManager.setProgress(p, quest, trigger, count);
 							}
 						}
 					}

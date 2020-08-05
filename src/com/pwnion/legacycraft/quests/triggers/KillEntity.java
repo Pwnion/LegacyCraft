@@ -20,9 +20,9 @@ public class KillEntity {
 			for (Quest quest : QuestManager.getActiveQuests(p)) {
 				if (quest.hasTrigger(TriggerType.KILL_ENTITY)) {
 					ArrayList<Trigger> triggers = quest.getTriggers(TriggerType.KILL_ENTITY);
-					for (int i = 0; i < triggers.size(); i++) {
-						if (triggers.get(i).getKillEntity() == dead) {
-							QuestManager.addProgress(p, quest, i);
+					for (Trigger trigger : triggers) {
+						if (trigger.getKillEntity() == dead) {
+							QuestManager.addProgress(p, quest, trigger);
 						}
 					}
 				}

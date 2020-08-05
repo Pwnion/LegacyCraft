@@ -24,11 +24,10 @@ public class NearLocation {
 			for(Quest quest : QuestManager.getActiveQuests(p)) {
 				if(quest.hasTrigger(TriggerType.LOCATION)) {
 					ArrayList<Trigger> triggers = quest.getTriggers(TriggerType.LOCATION);	
-					for(int i = 0; i < triggers.size(); i++) {
-						Trigger trigger = triggers.get(i);
+					for(Trigger trigger : triggers) {
 						LocationData locationData = trigger.getLocationData();
 						if(locationData.isPlayerHere(p)) {
-							QuestManager.addProgress(p, quest, i);
+							QuestManager.addProgress(p, quest, trigger);
 							break;
 						}
 					}

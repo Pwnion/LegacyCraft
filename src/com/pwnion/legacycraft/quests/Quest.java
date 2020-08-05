@@ -89,12 +89,7 @@ public class Quest {
 	 * @return
 	 */
 	public int getIndex(Trigger trigger) {
-		for(int i = 0; i < triggers.size(); i++) {
-			if(trigger.equals(triggers.get(i))) {
-				return i;
-			}
-		}
-		return -1;
+		return triggers.indexOf(trigger);
 	}
 
 	/**

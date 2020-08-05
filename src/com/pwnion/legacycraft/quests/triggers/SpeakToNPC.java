@@ -22,8 +22,7 @@ public class SpeakToNPC {
 		for(Quest quest : QuestManager.getActiveQuests(p)) {
 			if(quest.hasTrigger(TriggerType.NPC)) {
 				ArrayList<Trigger> triggers = quest.getTriggers(TriggerType.NPC);
-				for(int i = 0; i < triggers.size(); i++) {
-					Trigger trigger = triggers.get(i);
+				for(Trigger trigger : triggers) {
 					String name = trigger.getNPCName();
 					if(name.equalsIgnoreCase(npcName)) {
 						//Check if this is a submit to npc quest
@@ -39,7 +38,7 @@ public class SpeakToNPC {
 								break;
 							}
 						}
-						QuestManager.addProgress(p, quest, i);
+						QuestManager.addProgress(p, quest, trigger);
 					}
 				}
 			}

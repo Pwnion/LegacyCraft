@@ -248,9 +248,15 @@ public class QuestManager {
 
 	public static void setProgress(Player p, Quest quest, int index, int value) {
 		ArrayList<Integer> progress = getProgress(p, quest);
+		int finishCondition = quest.getCondition(index);
+		if(value > finishCondition) {
+			value = finishCondition;
+		}
+		
 		progress.set(index, value);
 		PlayerData.getUnfinishedQuests(p.getUniqueId()).put(quest, progress);
-		if(getPercentOverall(p, quest) >= 100) {
+		
+		if(value == finishCondition && getPercentOverall(p, quest) >= 100) {
 
 			//TODO Give Quest Rewards?
 
