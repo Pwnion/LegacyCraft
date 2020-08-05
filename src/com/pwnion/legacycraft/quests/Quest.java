@@ -4,15 +4,17 @@ import java.util.ArrayList;
 
 public class Quest {
 
-	public Quest(String name, String desc, ArrayList<Trigger> triggers, String nextQuest) {
+	public Quest(String id, String name, String desc, ArrayList<Trigger> triggers, String nextQuestId) {
+		this.id = id;
 		this.name = name;
 		this.desc = desc;
-		this.nextQuest = nextQuest;
+		this.nextQuest = nextQuestId;
 		this.triggers = triggers;
 	}
 	
 	//TEMP
-	public Quest(String name, String desc, Trigger trigger) {
+	public Quest(String id, String name, String desc, Trigger trigger) {
+		this.id = id;
 		this.name = name;
 		this.desc = desc;
 		this.nextQuest = null;
@@ -21,13 +23,18 @@ public class Quest {
 		this.triggers = triggers;
 	}
 
-	//private String id;
-	private String name;
-	private String desc;
-	private String nextQuest;
+	private final String id;
+	private final String name;
+	private final String desc;
+	private final String nextQuest;
+	private final ArrayList<Trigger> triggers;
 	
 	//Possible reward system
 	//private ArrayList<ItemStack> rewards = new ArrayList<ItemStack>();
+	
+	public String getID() {
+		return id;
+	}
 	
 	public String getName() {
 		return name;
@@ -41,24 +48,48 @@ public class Quest {
 		return nextQuest;
 	}
 
-	ArrayList<Trigger> triggers = new ArrayList<Trigger>();
-
+	/**
+	 * Gets a list of all the triggers attached to this quest.
+	 * 
+	 * @return
+	 */
 	public ArrayList<Trigger> getTriggers() {
 		return triggers;
 	}
+	
+	/**
+	 * Gets the amount of triggers attached to this quest
+	 * 
+	 * @return
+	 */
+	public int getTriggerCount() {
+		return triggers.size();
+	}
 
-	public ArrayList<Trigger> getTriggers(TriggerType name) {
+	/**
+	 * Gets a list of all the triggers of the given type attached to this quest
+	 * 
+	 * @param type
+	 * @return
+	 */
+	public ArrayList<Trigger> getTriggers(TriggerType type) {
 		ArrayList<Trigger> output = new ArrayList<Trigger>();
 		for(Trigger trigger : triggers) {
-			if(trigger.type == name) {
+			if(trigger.getType() == type) {
 				output.add(trigger);
 			}
 		}
 		return output;
 	}
 
+	/**
+	 * gets the index of a trigger or -1;
+	 * 
+	 * @param trigger
+	 * @return
+	 */
 	public int getIndex(Trigger trigger) {
-		for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
+		for(int i = 0; i < triggers.size(); i++) {
 			if(trigger.equals(triggers.get(i))) {
 				return i;
 			}
@@ -66,10 +97,22 @@ public class Quest {
 		return -1;
 	}
 
+	/**
+	 * Gets the finish condition of the trigger at the given index
+	 * 
+	 * @param index
+	 * @return
+	 */
 	public int getCondition(int index) {
 		return triggers.get(index).getFinishCondition();
 	}
 	
+	/**
+	 * Gets the progress required to complete all triggers.
+	 * The sum of all trigger's finish condition.
+	 * 
+	 * @return
+	 */
 	public int getConditionOverall() {
 		int out = 0;
 		for(Trigger trigger : triggers) {
@@ -78,13 +121,18 @@ public class Quest {
 		return out;
 	}
 
-	public boolean hasTrigger(TriggerType item) {
+	/**
+	 * Checks if a Trigger of the given type is attached to this quest.
+	 * 
+	 * @param type
+	 * @return
+	 */
+	public boolean hasTrigger(TriggerType type) {
 		for(Trigger trigger : triggers) {
-			if(trigger.getName() == item) {
+			if(trigger.getType() == type) {
 				return true;
 			}
 		}
-
 		return false;
 	}
 

@@ -23,15 +23,13 @@ public class NearLocation {
 		//if(activePlayers.contains(p.getUniqueId())) {
 			for(Quest quest : QuestManager.getActiveQuests(p)) {
 				if(quest.hasTrigger(TriggerType.LOCATION)) {
-					ArrayList<Trigger> triggers = quest.getTriggers();	
-					for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
+					ArrayList<Trigger> triggers = quest.getTriggers(TriggerType.LOCATION);	
+					for(int i = 0; i < triggers.size(); i++) {
 						Trigger trigger = triggers.get(i);
-						if(trigger.getName() == TriggerType.LOCATION) {
-							LocationData LocationData = trigger.getLocationData();
-							if(LocationData.isPlayerHere(p)) {
-								QuestManager.addProgress(p, quest, i);
-								break;
-							}
+						LocationData locationData = trigger.getLocationData();
+						if(locationData.isPlayerHere(p)) {
+							QuestManager.addProgress(p, quest, i);
+							break;
 						}
 					}
 				}

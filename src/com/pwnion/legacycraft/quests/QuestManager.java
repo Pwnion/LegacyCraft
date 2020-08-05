@@ -54,28 +54,18 @@ public class QuestManager {
 			
 			String nextQuest = questDataCS.getString(id + ".next-quest");
 
-			quests.put(id, new Quest(name, desc, triggers, nextQuest));
+			quests.put(id, new Quest(id, name, desc, triggers, nextQuest));
 		});
 		
 		
 		//TEMP
-		quests.put("getDiamonds64", new Quest("Get 64 Diamonds", "desc", new Trigger(TriggerType.ITEM, Material.DIAMOND, 64)));
-		quests.put("geLog64", new Quest("Get 64 Oak Logs", "desc", new Trigger(TriggerType.ITEM, Material.OAK_LOG, 64)));
-		quests.put("getDiamondHorseArmour", new Quest("Get 1 Diamond Horse Armour", "desc", new Trigger(TriggerType.ITEM, Material.DIAMOND_HORSE_ARMOR, 64)));
+		quests.put("getDiamonds64", new Quest("getDiamonds64", "Get 64 Diamonds", "desc", new Trigger(TriggerType.ITEM, Material.DIAMOND, 64)));
+		quests.put("getLog64", new Quest("getLog64", "Get 64 Oak Logs", "desc", new Trigger(TriggerType.ITEM, Material.OAK_LOG, 64)));
+		quests.put("getDiamondHorseArmour", new Quest("getDiamondHorseArmour", "Get 1 Diamond Horse Armour", "desc", new Trigger(TriggerType.ITEM, Material.DIAMOND_HORSE_ARMOR, 64)));
 	
-		quests.put("killZombie16", new Quest("Kill 16 Zombies", "desc", new Trigger(TriggerType.KILL_ENTITY, EntityType.ZOMBIE, 16)));
-		quests.put("killSkeleton16", new Quest("Kill 16 Skeletons", "desc", new Trigger(TriggerType.KILL_ENTITY, EntityType.SKELETON, 16)));
-		quests.put("killPig16", new Quest("Kill 16 Pigs", "desc", new Trigger(TriggerType.KILL_ENTITY, EntityType.PIG, 16)));
-	}
-	
-	//Gets unfinished quests from player data
-	public static HashMap<Quest, ArrayList<Integer>> getUnfinishedPlayerData(UUID playerUUID) {
-		return PlayerData.getUnfinishedQuests(playerUUID);
-	}
-	
-	//Gets finished quests from player data
-	public static ArrayList<Quest> getFinishedPlayerData(UUID playerUUID) {
-		return PlayerData.getFinishedQuests(playerUUID);
+		quests.put("killZombie16", new Quest("killZombie16", "Kill 16 Zombies", "desc", new Trigger(TriggerType.KILL_ENTITY, EntityType.ZOMBIE, 16)));
+		quests.put("killSkeleton16", new Quest("killSkeleton16", "Kill 16 Skeletons", "desc", new Trigger(TriggerType.KILL_ENTITY, EntityType.SKELETON, 16)));
+		quests.put("killPig16", new Quest("killPig16", "Kill 16 Pigs", "desc", new Trigger(TriggerType.KILL_ENTITY, EntityType.PIG, 16)));
 	}
 
 	//Saves player data to config called on player log off (PlayerQuit)
@@ -153,11 +143,11 @@ public class QuestManager {
 	//For new quests
 	//Gives quest to player
 	public static void giveQuest(Player p, Quest quest) {
-        ArrayList<Integer> progress = new ArrayList<Integer>(quest.triggers.size());
-        for(int i = 0; i < quest.triggers.size(); i++) { 
+        ArrayList<Integer> progress = new ArrayList<Integer>(quest.getTriggerCount());
+        for(int i = 0; i < quest.getTriggerCount(); i++) { 
             progress.add(0);
         }
-        getUnfinishedPlayerData(p.getUniqueId()).put(quest, progress);
+        PlayerData.getUnfinishedQuests(p.getUniqueId()).put(quest, progress);
         p.sendMessage(ChatColor.GRAY + "You have recieved the '" + quest.getName() + "' quest");
         
         //Update item quests with initial items in inventory
@@ -167,13 +157,13 @@ public class QuestManager {
 	/**
 	 * Gets the quest with that name
 	 * 
-	 * @param name 	Name of quest
+	 * @param id 	Id of quest
 	 * @return 		Quest
 	 * 
 	 * @Nullable if no quest with name
 	 */
-	public static Quest getQuest(String name) {
-		return quests.get(name);
+	public static Quest getQuest(String id) {
+		return quests.get(id);
 	}
 	
 	/**
@@ -185,14 +175,14 @@ public class QuestManager {
 	 */
 	public static ArrayList<Quest> getActiveQuests(UUID playerUUID) {
 		ArrayList<Quest> output = new ArrayList<Quest>();
-		for(Quest quest : getUnfinishedPlayerData(playerUUID).keySet()) {
+		for(Quest quest : PlayerData.getUnfinishedQuests(playerUUID).keySet()) {
 			output.add(quest);
 		}
 		return output;
 	}
 
 	public static ArrayList<Quest> getCompletedQuests(UUID playerUUID) {
-		return getFinishedPlayerData(playerUUID);
+		return PlayerData.getFinishedQuests(playerUUID);
 	}
 	
 	/**
@@ -213,7 +203,7 @@ public class QuestManager {
 	}
 	
 	public static double getActiveQuestCount(Player p) {
-		return getUnfinishedPlayerData(p.getUniqueId()).size();
+		return PlayerData.getUnfinishedQuests(p.getUniqueId()).size();
 	}
 
 	public static ArrayList<Quest> getCompletedQuests(Player p) {
@@ -221,17 +211,17 @@ public class QuestManager {
 	}
 	
 	public static double getCompletedQuestCount(Player p) {
-		return getFinishedPlayerData(p.getUniqueId()).size();
+		return PlayerData.getFinishedQuests(p.getUniqueId()).size();
 	}
 
 	public static ArrayList<Quest> getQuests(Player p) {
 		return getQuests(p.getUniqueId());
 	}
 
-	public static boolean hasActiveTrigger(UUID playerUUID, TriggerType name) {
+	public static boolean hasActiveTrigger(UUID playerUUID, TriggerType type) {
 		for(Quest quest : getActiveQuests(playerUUID)) {
 			for(Trigger trigger : quest.getTriggers()) {
-				if(trigger.getName() == name) {
+				if(trigger.getType() == type) {
 					return true;
 				}
 			}
@@ -259,14 +249,14 @@ public class QuestManager {
 	public static void setProgress(Player p, Quest quest, int index, int value) {
 		ArrayList<Integer> progress = getProgress(p, quest);
 		progress.set(index, value);
-		getUnfinishedPlayerData(p.getUniqueId()).put(quest, progress);
+		PlayerData.getUnfinishedQuests(p.getUniqueId()).put(quest, progress);
 		if(getPercentOverall(p, quest) >= 100) {
 
 			//TODO Give Quest Rewards?
 
 			//Remove player as active quest Holder and move to finished list
-			getFinishedPlayerData(p.getUniqueId()).add(quest);
-			getUnfinishedPlayerData(p.getUniqueId()).remove(quest);
+			PlayerData.getFinishedQuests(p.getUniqueId()).add(quest);
+			PlayerData.getUnfinishedQuests(p.getUniqueId()).remove(quest);
 
 			FinishQuest.onFinishQuest(p, quest);
 			return;
@@ -279,8 +269,8 @@ public class QuestManager {
 
 	//For debugging
 	public static void forceComplete(Player p, Quest quest) {
-		for(Trigger trigger : quest.triggers) {
-			setProgress(p, quest, trigger, trigger.finishCondition);
+		for(Trigger trigger : quest.getTriggers()) {
+			setProgress(p, quest, trigger, trigger.getFinishCondition());
 		}
 	}
 
@@ -290,16 +280,16 @@ public class QuestManager {
 
 	public static ArrayList<Integer> getProgress(Player p, Quest quest) {
 		if(hasQuestActive(p, quest)) {
-			return getUnfinishedPlayerData(p.getUniqueId()).get(quest);
+			return PlayerData.getUnfinishedQuests(p.getUniqueId()).get(quest);
 		} else if(hasQuestFinished(p, quest)) {
 			ArrayList<Integer> finishValues = new ArrayList<Integer>();
-			for(Trigger trigger : quest.triggers) {
+			for(Trigger trigger : quest.getTriggers()) {
 				finishValues.add(trigger.getFinishCondition());
 			}
 			return finishValues;
 		}
 		ArrayList<Integer> output = new ArrayList<Integer>();
-		for(int i = 0; i < quest.triggers.size(); i++) {
+		for(int i = 0; i < quest.getTriggerCount(); i++) {
 			output.add(0);
 		}
 		return output;
@@ -313,24 +303,45 @@ public class QuestManager {
 		return out;
 	}
 
-	//Returns percent as value between 0-100
+	/**
+	 * Returns the percentage completion of a quest's trigger.
+	 * Returns percent as value between 0-100.
+	 * 
+	 * @param p
+	 * @param quest		
+	 * @param index		index of the trigger
+	 * @return
+	 */
 	public static double getPercent(Player p, Quest quest, int index) {
 		return ((double) getProgress(p, quest, index) / (double) quest.getCondition(index)) * 100;
 	}
 
-	//Returns percent as value between 0-100
+	/**
+	 * Returns the percentage completion of a quest based on all of its triggers.
+	 * Returns percent as value between 0-100.
+	 * 
+	 * @param p
+	 * @param quest
+	 * @return
+	 */
 	public static double getPercentOverall(Player p, Quest quest) {
 		ArrayList<Integer> progress = getProgress(p, quest);
 		double progressTotal = 0;
 		double finalTotal = 0;
-		for(int i = 0; i < quest.triggers.size(); i++) {
+		for(int i = 0; i < quest.getTriggerCount(); i++) {
 			progressTotal += progress.get(i);
 			finalTotal += quest.getCondition(i);
 		}
 		return (progressTotal / finalTotal) * 100;
 	}
 	
-	//Returns a human readable string of progress as a fraction
+	/**
+	 * Returns a human readable string of progress as a fraction
+	 * 
+	 * @param p			
+	 * @param quest		
+	 * @return
+	 */
 	public static String getProgressString(Player p, Quest quest) {
 		return getProgressOverall(p, quest) + " / " + quest.getConditionOverall();
 	}
@@ -340,17 +351,42 @@ public class QuestManager {
 	}
 
 	public static boolean hasQuestActive(UUID playerUUID, Quest quest) {
-		return getUnfinishedPlayerData(playerUUID).containsKey(quest);
+		return PlayerData.getUnfinishedQuests(playerUUID).containsKey(quest);
 	}
 
+	/**
+	 * Checks if the player has finished this quest.
+	 * Checks if this quest is under the finished quest section of a players player data.
+	 * Player must be online.
+	 * 
+	 * @param playerUUID
+	 * @param quest
+	 * @return
+	 */
 	public static boolean hasQuestFinished(Player p, Quest quest) {
 		return hasQuestFinished(p.getUniqueId(), quest);
 	}
-
+	
+	/**
+	 * Checks if the player has finished this quest.
+	 * Checks if this quest is under the finished quest section of a players player data.
+	 * Player must be online.
+	 * 
+	 * @param playerUUID
+	 * @param quest
+	 * @return
+	 */
 	public static boolean hasQuestFinished(UUID playerUUID, Quest quest) {
-		return getFinishedPlayerData(playerUUID).contains(quest);
+		return PlayerData.getFinishedQuests(playerUUID).contains(quest);
 	}
 
+	/**
+	 * Checks if a player has received this quest before.
+	 * 
+	 * @param p
+	 * @param quest
+	 * @return
+	 */
 	public static boolean gotQuest(Player p, Quest quest) {
 		return hasQuestActive(p, quest) || hasQuestFinished(p, quest);
 	}

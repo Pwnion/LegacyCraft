@@ -21,30 +21,28 @@ public class SpeakToNPC {
 		
 		for(Quest quest : QuestManager.getActiveQuests(p)) {
 			if(quest.hasTrigger(TriggerType.NPC)) {
-				ArrayList<Trigger> triggers = quest.getTriggers();
-				for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
+				ArrayList<Trigger> triggers = quest.getTriggers(TriggerType.NPC);
+				for(int i = 0; i < triggers.size(); i++) {
 					Trigger trigger = triggers.get(i);
-					if(trigger.getName() == TriggerType.NPC) {
-						String name = trigger.getNPCName();
-						if(name.equalsIgnoreCase(npcName)) {
-							//Check if this is a submit to npc quest
-							if(trigger.getNPCData().get(name)) {
-								//Remove from player inventory
-								Material mat = triggers.get(i - 1).getItem();
-								int count = 0;
-								if(p.getInventory().contains(mat)) {
-									for(ItemStack items : p.getInventory().all(mat).values()) {
-										count += items.getAmount();
-									}
+					String name = trigger.getNPCName();
+					if(name.equalsIgnoreCase(npcName)) {
+						//Check if this is a submit to npc quest
+						if(trigger.getNPCData().get(name)) {
+							//Remove from player inventory
+							Material mat = quest.getTriggers(TriggerType.ITEM).get(0).getItem();
+							int count = 0;
+							if(p.getInventory().contains(mat)) {
+								for(ItemStack items : p.getInventory().all(mat).values()) {
+									count += items.getAmount();
 								}
-								
-								if(count < triggers.get(i - 1).getFinishCondition()) {
-									p.sendMessage(ChatColor.RED + "You do not have enough '" + mat.toString() + "' to progress in the quest '" + quest.getName() + "'");
-									break;
-								} 
 							}
-							QuestManager.addProgress(p, quest, i);
+							
+							if(count < triggers.get(i - 1).getFinishCondition()) {
+								p.sendMessage(ChatColor.RED + "You do not have enough '" + mat.toString() + "' to progress in the quest '" + quest.getName() + "'");
+								break;
+							} 
 						}
+						QuestManager.addProgress(p, quest, i);
 					}
 				}
 			}

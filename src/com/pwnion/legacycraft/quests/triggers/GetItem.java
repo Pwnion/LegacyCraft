@@ -24,18 +24,16 @@ public class GetItem {
 				for(Quest quest : QuestManager.getActiveQuests(p)) {
 					//If quest requires items to be checked
 					if(quest.hasTrigger(TriggerType.ITEM)) {
-						ArrayList<Trigger> triggers = quest.getTriggers();
-						for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
+						ArrayList<Trigger> triggers = quest.getTriggers(TriggerType.ITEM);
+						for(int i = 0; i < triggers.size(); i++) {
 							Trigger trigger = triggers.get(i);
-							if(trigger.getName() == TriggerType.ITEM) {
-								Material mat = trigger.getItem();
-								if(p.getInventory().contains(mat)) {
-									int count = 0;
-									for(ItemStack items : p.getInventory().all(mat).values()) {
-										count += items.getAmount();
-									}
-									QuestManager.setProgress(p, quest, i, count);
+							Material mat = trigger.getItem();
+							if(p.getInventory().contains(mat)) {
+								int count = 0;
+								for(ItemStack items : p.getInventory().all(mat).values()) {
+									count += items.getAmount();
 								}
+								QuestManager.setProgress(p, quest, i, count);
 							}
 						}
 					}

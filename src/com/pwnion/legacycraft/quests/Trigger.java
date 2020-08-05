@@ -7,33 +7,29 @@ import org.bukkit.entity.EntityType;
 
 public class Trigger {
 	
-	TriggerType type;
-	Object data;
-	int finishCondition;
+	final TriggerType type;
+	private final Object data;
+	private final int finishCondition;
 
-	public Trigger(TriggerType name, String data, int finishCondition) {
-		this.type = name;
+	public Trigger(TriggerType type, String data, int finishCondition) {
+		this.type = type;
 		this.data = deserialise(data);
 		this.finishCondition = finishCondition;
 	}
 	
 	//TEMP
-	public Trigger(TriggerType name, Object data, int finishCondition) {
-		this.type = name;
+	public Trigger(TriggerType type, Object data, int finishCondition) {
+		this.type = type;
 		this.data = (data);
 		this.finishCondition = finishCondition;
 	}
 	
-	public TriggerType getName() {
+	public TriggerType getType() {
 		return type;
 	}
 	
 	public int getFinishCondition() {
 		return finishCondition;
-	}
-	
-	public void setFinishCondition(int value) {
-		finishCondition = value;
 	}
 	
 	public Material getItem() {
