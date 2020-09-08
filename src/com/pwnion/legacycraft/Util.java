@@ -311,7 +311,7 @@ public class Util {
 		return output;
 	}
 	
-	public static final HashSet<Location> getLocations(Collection<Block> area) {
+	public static HashSet<Location> getLocations(Collection<Block> area) {
 		HashSet<Location> output = new HashSet<Location>();
 		for(Block loc : area) {
 			output.add(loc.getLocation());
@@ -319,7 +319,7 @@ public class Util {
 		return output;
 	}
 
-	public static final Vector vectorCalc(double pitch, double yaw, double dist) {
+	public static Vector vectorCalc(double pitch, double yaw, double dist) {
 		pitch = Math.toRadians(pitch + 90);
 		yaw  = Math.toRadians(yaw + 90);
 		double x = Math.sin(pitch) * Math.cos(yaw);
@@ -329,12 +329,39 @@ public class Util {
 		vector.multiply(dist);
 		return vector;
 	}
+	
+	public static Vector vectorCalc(Location loc, double dist) {
+		return vectorCalc(loc.getPitch(), loc.getYaw(), dist);
+	}
 
-	public static final Vector vectorCalc(Entity e, double dist) {
+	public static Vector vectorCalc(Entity e, double dist) {
 		return vectorCalc(e.getLocation().getPitch(), e.getLocation().getYaw(), dist);
 	}
 	
-	public static final double getYaw(Vector vec) {
+	/**
+	 * Returns a new location that adds the vector the location is facing (pitch, yaw) by the distance
+	 * 
+	 * @param loc
+	 * @param dist
+	 * @return
+	 */
+	public static Location locationCalc(Location loc, double dist) {
+		return loc.clone().add(vectorCalc(loc, dist));
+	}
+	
+	/**
+	 * Returns a new location that adds the vector the location is facing (yaw only) by the distance plus the yMod
+	 * 
+	 * @param loc
+	 * @param dist
+	 * @param yMod
+	 * @return
+	 */
+	public static Location locationCalc(Location loc, double dist, double yMod) {
+		return loc.clone().add(vectorCalc(0, loc.getYaw(), dist).setY(yMod));
+	}
+	
+	public static double getYaw(Vector vec) {
 		double yaw = 0;
 		if(vec.getX() > 0) {
 			yaw = Math.toDegrees(vec.angle(new Vector(0, 0, -1))) + 180;

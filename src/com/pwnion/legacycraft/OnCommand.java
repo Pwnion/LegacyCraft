@@ -20,13 +20,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.ooc.Portal;
-import com.pwnion.legacycraft.abilities.targets.Point;
 import com.pwnion.legacycraft.items.ItemData;
 import com.pwnion.legacycraft.items.ItemManager;
 import com.pwnion.legacycraft.items.ItemStat;
 import com.pwnion.legacycraft.items.ItemTier;
 import com.pwnion.legacycraft.items.ItemType;
-import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.levelling.Experience;
 import com.pwnion.legacycraft.levelling.ExperienceType;
 import com.pwnion.legacycraft.mobs.LCEntity;
@@ -43,7 +41,7 @@ public class OnCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender cs, Command cmd, String lbl, String[] args) {
 		Player p;
 		UUID playerUUID;
-		Point ep;
+		
 		//Ensure the command sender is a player
 		if(cs instanceof Player) {
 			p = (Player) cs;

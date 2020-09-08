@@ -23,7 +23,6 @@ import org.bukkit.util.Vector;
 import com.destroystokyo.paper.ParticleBuilder;
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.Util;
-import com.pwnion.legacycraft.abilities.targets.Point;
 
 //Out of Combat
 
@@ -56,7 +55,7 @@ public enum Portal {
 	
 	public final void activate(Player p) {
 		float pitch = p.getLocation().getPitch();
-		float fixedPitch = pitch + (pitch < 0 ? 90 : -90);
+		double fixedPitch = Math.toRadians(pitch + (pitch < 0 ? 90 : -90));
 		float yaw = p.getLocation().getYaw();
 		
 		int stepsSpiral = 240;
@@ -72,29 +71,34 @@ public enum Portal {
 		
 		final double rotPerStep = Math.toRadians(rotationSpiral / (stepsSpiral - 1));
 		final Vector pointer = Util.getRelativeVec(centre, spiral.get(spiral.size() - 1));
-		final Vector axis = Util.vectorCalc(centre.getPitch(), centre.getYaw(), 1);
+		final Vector axis = Util.vectorCalc(pitch, yaw, 1);
 		final int killDelay = Math.round(stepsSpiral / 2) + 30 * 20;
 		
-		final double yawMod = -0.26953 * Math.cos(Math.toRadians(Math.abs(pitch))) + 0.75 * Math.cos(Math.toRadians(Math.abs(fixedPitch)));
-		final double vertMod = 0.26953 * Math.sin(Math.toRadians(Math.abs(pitch))) + 0.75 * Math.sin(Math.toRadians(Math.abs(fixedPitch)));
+		final double yawMod = -0.26953 * Math.cos(Math.toRadians(Math.abs(pitch))) + 0.75 * Math.cos(Math.abs(fixedPitch));
+		final double vertMod = 0.26953 * Math.sin(Math.toRadians(Math.abs(pitch))) + 0.75 * Math.sin(Math.abs(fixedPitch));
 		
 		ArrayList<Location> points = new ArrayList<Location>(16);
 		ArrayList<Location> portalMidSectionPoints = new ArrayList<Location>(8);
 		int counter = 0;
 		for(float vertical = 0.9375f; vertical >= -0.9375f; vertical = vertical - 0.625f) {
 			for(float horizontal = -0.9375f; horizontal <= 0.9375; horizontal = horizontal + 0.625f) {
-				Location point = Point.fromLocationInYawDir(centre, (vertical / 0.625) * 0.625 * (pitch < 0 ? -1 : 1) * (Math.cos(Math.toRadians(fixedPitch))), vertical);
+				//Location point = Point.fromLocationInYawDir(centre, (vertical / 0.625) * 0.625 * (pitch < 0 ? -1 : 1) * (Math.cos(Math.toRadians(fixedPitch))), vertical);
+				Location point = Util.locationCalc(centre, 
+						vertical * Math.abs(Math.cos(fixedPitch)), //Distance
+						vertical * Math.abs(Math.sin(fixedPitch))); //Y value from centre
 				
-				point.setYaw(point.getYaw() < 270 ? point.getYaw() + 90 : point.getYaw() - 270);
+				point.setYaw(centre.getYaw() < 270 ? centre.getYaw() + 90 : centre.getYaw() - 270);
 				
-				point = Point.fromLocationInYawDir(point, horizontal, -(vertical / 0.625) * 0.625 * (1 - Math.abs(Math.sin(Math.toRadians(fixedPitch)))));
+				point = Util.locationCalc(point, horizontal, 0);
+				//point = Point.fromLocationInYawDir(point, horizontal, -(vertical / 0.625) * 0.625 * (1 - Math.abs(Math.sin(Math.toRadians(fixedPitch)))));
 				
 				points.add(point);
 				
 				if(counter >= 4 && counter <= 11) {
 					Location portalMidSectionPoint = point.clone().add(0, 1.5, 0);
 					portalMidSectionPoint.setYaw(pitch < 0 ? (yaw < 180 ? yaw + 180 : yaw - 180) : yaw);
-					portalMidSectionPoints.add(Point.fromLocationInYawDir(portalMidSectionPoint, yawMod, vertMod));
+					//portalMidSectionPoints.add(Point.fromLocationInYawDir(portalMidSectionPoint, yawMod, vertMod));
+					portalMidSectionPoints.add(Util.locationCalc(portalMidSectionPoint, yawMod, vertMod));
 				}
 				
 				counter++;
