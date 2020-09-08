@@ -10,7 +10,6 @@ import com.pwnion.legacycraft.quests.Book.HoverAction;
 import com.pwnion.legacycraft.quests.Book.PageBuilder;
 
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
 

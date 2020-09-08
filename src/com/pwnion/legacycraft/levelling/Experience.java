@@ -13,17 +13,15 @@ import com.pwnion.legacycraft.abilities.SkillTree;
 import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
 
 public class Experience {
-	private Player p;
-	private UUID playerUUID;
-	private SkillTree skillTree;
-	private PlayerClass playerClass;
-	private HashMap<PlayerClass, HashMap<ExperienceType, Integer>> allExperience;
+	private final Player p;
+	private final UUID playerUUID;
+	private final SkillTree skillTree;
+	private final HashMap<PlayerClass, HashMap<ExperienceType, Integer>> allExperience;
 	
 	public Experience(Player p) {
 		this.p = p;
 		this.playerUUID = p.getUniqueId();
 		this.skillTree = PlayerData.getSkillTree(playerUUID);
-		this.playerClass = skillTree.getPlayerClass();
 		this.allExperience = load();
 	}
 	
@@ -77,7 +75,7 @@ public class Experience {
 	
 	//Gets the total experience for all experience types
 	public HashMap<ExperienceType, Integer> getAllExperience() {
-		return allExperience.get(playerClass);
+		return getAllExperience(skillTree.getPlayerClass());
 	}
 	
 	public HashMap<ExperienceType, Integer> getAllExperience(PlayerClass playerClass) {

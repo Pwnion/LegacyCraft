@@ -319,7 +319,7 @@ public class Util {
 		return output;
 	}
 
-	public static final Vector vectorCalc(double yaw, double pitch, double dist) {
+	public static final Vector vectorCalc(double pitch, double yaw, double dist) {
 		pitch = Math.toRadians(pitch + 90);
 		yaw  = Math.toRadians(yaw + 90);
 		double x = Math.sin(pitch) * Math.cos(yaw);
@@ -331,7 +331,7 @@ public class Util {
 	}
 
 	public static final Vector vectorCalc(Entity e, double dist) {
-		return vectorCalc(e.getLocation().getYaw(), e.getLocation().getPitch(), dist);
+		return vectorCalc(e.getLocation().getPitch(), e.getLocation().getYaw(), dist);
 	}
 	
 	public static final double getYaw(Vector vec) {
@@ -357,7 +357,7 @@ public class Util {
 		double radiusPerStep = radius / (steps - 1);
 		double rotPerStep = Math.toRadians(rotation / (steps - 1));
 
-		Vector axis = vectorCalc(centre.getYaw(), centre.getPitch(), 1);
+		Vector axis = vectorCalc(centre.getPitch(), centre.getYaw(), 1);
 		Vector up = new Vector(0, 1, 0);
 		Vector cross = axis.clone().crossProduct(up);
 		if(cross.length() == 0) {
@@ -384,7 +384,7 @@ public class Util {
 
 		double rotPerStep = Math.toRadians(rotation / (steps - 1));
 
-		Vector axis = vectorCalc(centre.getYaw(), centre.getPitch(), 1);
+		Vector axis = vectorCalc(centre.getPitch(), centre.getYaw(), 1);
 
 		for(int i = 0; i<= steps; i++) {
 			Vector pointerClone = pointer.clone();

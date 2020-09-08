@@ -65,14 +65,14 @@ public enum Portal {
 		
 		double distFromPlayer = 1.1;
 		Location centre = p.getEyeLocation();
-		centre.add(Util.vectorCalc(centre.getYaw(), centre.getPitch(), distFromPlayer));
+		centre.add(Util.vectorCalc(centre.getPitch(), centre.getYaw(), distFromPlayer));
 		
 		ArrayList<Location> spiral = Util.spiral(centre, radius, rotationSpiral, stepsSpiral);
 		spiral.trimToSize();
 		
 		final double rotPerStep = Math.toRadians(rotationSpiral / (stepsSpiral - 1));
 		final Vector pointer = Util.getRelativeVec(centre, spiral.get(spiral.size() - 1));
-		final Vector axis = Util.vectorCalc(centre.getYaw(), centre.getPitch(), 1);
+		final Vector axis = Util.vectorCalc(centre.getPitch(), centre.getYaw(), 1);
 		final int killDelay = Math.round(stepsSpiral / 2) + 30 * 20;
 		
 		final double yawMod = -0.26953 * Math.cos(Math.toRadians(Math.abs(pitch))) + 0.75 * Math.cos(Math.toRadians(Math.abs(fixedPitch)));

@@ -50,13 +50,13 @@ public class ItemManager {
 	 */
 	private static String generateNewUID(@Nullable String preferredUID) throws IllegalArgumentException {
 		if(preferredUID != null && (preferredUID.contains("===") || preferredUID.contains("@"))) {
-			throw new IllegalArgumentException("uid cannont contain the strings '===' or '@'");
+			throw new IllegalArgumentException("uid cannot contain the strings '===' or '@'");
 		}
 		while (true) {
 			if(!activeItems.containsKey(preferredUID) && preferredUID != null) {
 				return preferredUID;
 			}
-			preferredUID = Util.generateUID(4); //1.6 million
+			preferredUID = Util.generateUID(4); //36^4: 1.6 million
 		}
 	}
 	

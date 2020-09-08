@@ -17,6 +17,8 @@ public class Speech {
 	
 	private static HashMap<String, ArrayList<String>> lines = new HashMap<String, ArrayList<String>>();
 	
+	private static final Random rnd = new Random();
+	
 	public static void loadFiles() {
 		final ConfigAccessor npcDataConfig = new ConfigAccessor("npc-data.yml");
 		final ConfigurationSection npcDataCS = npcDataConfig.getRoot();
@@ -38,9 +40,8 @@ public class Speech {
 	}
 	
 	public static String getRnd(NPC npc, String traitName, Player p) {
-		Random rand = new Random(); 
 		ArrayList<String> list = lines.get(traitName.toLowerCase());
-		String line = list.get(rand.nextInt(list.size()));
+		String line = list.get(rnd.nextInt(list.size()));
 		line = line.replace("[PLAYER]", p.getName());
 		line = line.replace("[NPC]", npc.getName());
 		return line;

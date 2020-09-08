@@ -13,14 +13,14 @@ import net.citizensnpcs.api.npc.NPC;
 public class GoPlaces {
 	
 	private static BukkitTask allGoPlaces = null;
-	private static HashMap<NPC, HashMap<Integer, Location>> data = new HashMap<NPC, HashMap<Integer, Location>>();
+	private static final HashMap<NPC, HashMap<Integer, Location>> data = new HashMap<NPC, HashMap<Integer, Location>>();
 	
-	private final static int roundingConstant = 1;
+	private final static int ROUNDING_CONSTANT = 1;
 
 	private static HashMap<Integer, Location> format(HashMap<Integer, Location> placesToGo) {
 		HashMap<Integer, Location> formatted = new HashMap<Integer, Location>();
 		for(int time : placesToGo.keySet()) {
-			formatted.put(Math.round(time / roundingConstant), placesToGo.get(time));
+			formatted.put(Math.round(time / ROUNDING_CONSTANT), placesToGo.get(time));
 		}
 		return formatted;
 	}
@@ -30,8 +30,8 @@ public class GoPlaces {
 			public void run() {
 				for(NPC npc : data.keySet()) {
 					HashMap<Integer, Location> placesToGo = data.get(npc);
-					if(placesToGo.containsKey(Math.round(npc.getEntity().getWorld().getTime() / roundingConstant))) {
-						int time = Math.round(npc.getEntity().getWorld().getTime() / roundingConstant);
+					if(placesToGo.containsKey(Math.round(npc.getEntity().getWorld().getTime() / ROUNDING_CONSTANT))) {
+						int time = Math.round(npc.getEntity().getWorld().getTime() / ROUNDING_CONSTANT);
 						Util.br("Moving NPC '" + npc.getName() + "' to " + placesToGo.get(time) + " time is " + npc.getEntity().getWorld().getTime());
 						
 						//npc.getDefaultGoalController().addGoal(new MoveToGoal(npc, placesToGo.get(time)), 2);

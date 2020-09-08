@@ -66,6 +66,7 @@ public interface Enhancement {
 		return null; //*/
 	}
 	
+	//Unused
 	public static Set<String> allNames() {
 		return registeredEnhancements.keySet();
 	}
