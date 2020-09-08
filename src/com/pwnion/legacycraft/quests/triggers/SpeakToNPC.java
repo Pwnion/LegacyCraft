@@ -33,6 +33,7 @@ public class SpeakToNPC {
 							int amount = itemTrigger.getFinishCondition();
 							if(p.getInventory().contains(mat, amount)) {
 								p.getInventory().removeItem(new ItemStack(mat, amount));
+								p.updateInventory();
 							} else {
 								p.sendMessage(ChatColor.RED + "You do not have enough '" + mat.toString() + "' to progress in the quest '" + quest.getName() + "'");
 								break;

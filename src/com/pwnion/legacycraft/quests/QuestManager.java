@@ -2,7 +2,6 @@ package com.pwnion.legacycraft.quests;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -185,16 +184,23 @@ public class QuestManager {
 		return PlayerData.getFinishedQuests(playerUUID);
 	}
 	
+	
 	/**
-	 * Gets an arraylist of both active and completed quests
+	 * Gets a hashmap with quests and a boolean for if the quest has been completed.
+	 * 
+	 * TODO: UNUSED
 	 * 
 	 * @param playerUUID
 	 * @return
 	 */
-	public static ArrayList<Quest> getQuests(UUID playerUUID) {
-		ArrayList<Quest> output = new ArrayList<Quest>();
-		output.addAll(getActiveQuests(playerUUID));
-		output.addAll(getCompletedQuests(playerUUID));
+	public static HashMap<Quest, Boolean> getQuests(UUID playerUUID) {
+		HashMap<Quest, Boolean> output = new HashMap<Quest, Boolean>();
+		for(Quest quest : getActiveQuests(playerUUID)) {
+			output.put(quest, false);
+		}
+		for(Quest quest : getCompletedQuests(playerUUID)) {
+			output.put(quest, true);
+		}
 		return output;
 	}
 
@@ -214,7 +220,8 @@ public class QuestManager {
 		return PlayerData.getFinishedQuests(p.getUniqueId()).size();
 	}
 
-	public static ArrayList<Quest> getQuests(Player p) {
+	//TODO: Unused
+	public static HashMap<Quest, Boolean> getQuests(Player p) {
 		return getQuests(p.getUniqueId());
 	}
 
@@ -249,24 +256,23 @@ public class QuestManager {
 	public static void setProgress(Player p, Quest quest, int index, int value) {
 		ArrayList<Integer> progress = getProgress(p, quest);
 		int finishCondition = quest.getCondition(index);
-		if(value > finishCondition) {
+		if(value >= finishCondition) {
+			if(getPercentOverall(p, quest) >= 100) {
+
+				//TODO Give Quest Rewards?
+
+				//Remove player as active quest Holder and move to finished list
+				PlayerData.getFinishedQuests(p.getUniqueId()).add(quest);
+				PlayerData.getUnfinishedQuests(p.getUniqueId()).remove(quest);
+
+				FinishQuest.onFinishQuest(p, quest);
+				return;
+			}
 			value = finishCondition;
 		}
 		
 		progress.set(index, value);
 		PlayerData.getUnfinishedQuests(p.getUniqueId()).put(quest, progress);
-		
-		if(value == finishCondition && getPercentOverall(p, quest) >= 100) {
-
-			//TODO Give Quest Rewards?
-
-			//Remove player as active quest Holder and move to finished list
-			PlayerData.getFinishedQuests(p.getUniqueId()).add(quest);
-			PlayerData.getUnfinishedQuests(p.getUniqueId()).remove(quest);
-
-			FinishQuest.onFinishQuest(p, quest);
-			return;
-		}
 	}
 
 	public static void setProgress(Player p, Quest quest, Trigger trigger, int value) {

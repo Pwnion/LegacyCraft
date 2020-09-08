@@ -19,12 +19,15 @@ import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
+/**
+ * Maximum 50 pages with 256 characters per page.
+ */
 public class Book {
 
 	    private String title;
 	    private String author;
-	    private BookMeta meta = (BookMeta) Bukkit.getItemFactory().getItemMeta(Material.WRITTEN_BOOK);
-	    private ArrayList<BaseComponent[]> pages = new ArrayList<BaseComponent[]>();
+	    private final BookMeta meta = (BookMeta) Bukkit.getItemFactory().getItemMeta(Material.WRITTEN_BOOK);
+	    private final ArrayList<BaseComponent[]> pages = new ArrayList<BaseComponent[]>();
 	  
 	    public Book(String title, String author) {
 	        this.title = title;
@@ -67,11 +70,11 @@ public class Book {
 	    }
 	  
 	    public final class PageBuilder {
+	    	private final Book book;
 	        private ArrayList<BaseComponent> page = new ArrayList<BaseComponent>();
-	        private Book book;
-	        private int index;
+	        private final int index;
 	      
-	        public PageBuilder(Book book) { 
+	        private PageBuilder(Book book) { 
 	        	this.book = book; 
 	        	index = book.pages.size();
 	        	book.pages.add(null);
@@ -90,12 +93,15 @@ public class Book {
 	    }
 	    
 	    public final class Builder {
-	    	private PageBuilder page;
+	    	private final PageBuilder page;
 	    	private TextComponent message = new TextComponent();
 	    	
-	    	public Builder(PageBuilder page) { this.page = page; }
+	    	private Builder(PageBuilder page) { this.page = page; }
 	    	
-	    	public Builder setText(String message) { this.message.setText(message); return this; }
+	    	public Builder setText(String message) { 
+	    		this.message.setText(message); 
+	    		return this; 
+	    	}
 	    	
 	    	public Builder setColor(ChatColor color) {
 	    		message.setColor(color);
@@ -107,8 +113,17 @@ public class Book {
 	    		return this; 
 	    	}
 	    	
+	    	public Builder clickEvent(ClickAction action, int value) {
+	    		return clickEvent(action, value + "");
+	    	}
+	    	
 	    	public Builder hoverEvent(HoverAction action, String value) { 
 	    		this.message.setHoverEvent(new HoverEvent(action.value, new ComponentBuilder(value).create())); 
+	    		return this; 
+	    	}
+	    	
+	    	public Builder hoverEvent(HoverAction action, TextComponent[] value) { 
+	    		this.message.setHoverEvent(new HoverEvent(action.value, value)); 
 	    		return this; 
 	    	}
 	    	
@@ -129,7 +144,7 @@ public class Book {
 	        OPEN_URL(ClickEvent.Action.OPEN_URL), 
 	        CHANGE_PAGE(ClickEvent.Action.CHANGE_PAGE);
 	      
-	        public ClickEvent.Action value = null;
+	        private ClickEvent.Action value = null;
 	        private ClickAction(ClickEvent.Action value) { this.value = value; }
 	    }
 	  
@@ -139,7 +154,7 @@ public class Book {
 	    	SHOW_ENTITY(HoverEvent.Action.SHOW_ENTITY), 
 	    	SHOW_ACHIEVEMENT(HoverEvent.Action.SHOW_ACHIEVEMENT);
 	      
-	        public HoverEvent.Action value = null;
+	        private HoverEvent.Action value = null;
 	        private HoverAction(HoverEvent.Action value) { this.value = value; }
 	    }
 }

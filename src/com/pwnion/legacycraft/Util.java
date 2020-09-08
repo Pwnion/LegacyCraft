@@ -23,10 +23,20 @@ import com.pwnion.legacycraft.items.ItemStat;
 
 public class Util {
 	
+	/**
+	 * Broadcasts a message to chat
+	 * 
+	 * @param message
+	 */
 	public static void br(String message) {
 		Bukkit.broadcastMessage("[C] " + message);
 	}
 	
+	/**
+	 * Broadcasts a message to chat
+	 * 
+	 * @param message
+	 */
 	public static void br(Object message) {
 		if(message == null) {
 			br("null");
@@ -35,6 +45,11 @@ public class Util {
 		}
 	}
 	
+	/**
+	 * Prints an exception to chat
+	 * 
+	 * @param e
+	 */
 	public static void print(Exception e) {
 		e.printStackTrace();
 		StackTraceElement st[] = e.getStackTrace();
@@ -87,6 +102,7 @@ public class Util {
 	 * @param min	minimum value inclusive
 	 * @param max	maximum value inclusive
 	 * @return
+	 * 
 	 * @throws IllegalArgumentException when min >= max
 	 */
 	public static int randomInt(int min, int max) throws IllegalArgumentException {
@@ -167,6 +183,13 @@ public class Util {
 		}
 	}
 	
+	/**
+	 * Gets the vector that points from 'centre' to 'pos'
+	 * 
+	 * @param centre
+	 * @param pos
+	 * @return
+	 */
 	public static final Vector getRelativeVec(Location centre, Location pos) {
 		if(centre.getWorld() != pos.getWorld()) {
 			return null;
@@ -175,6 +198,14 @@ public class Util {
 		return new Vector(pos.getX() - centre.getX(), pos.getY() - centre.getY(), pos.getZ() - centre.getZ());
 	}
 	
+	/**
+	 * Gets a set of each of the vectors that point from 'centre' to each location in the area. <br>
+	 * Subtracts the centre location from each point in area, returns results as vectors.
+	 * 
+	 * @param centre
+	 * @param pos
+	 * @return
+	 */
 	public static final HashSet<Vector> getRelativeVecArea(Location centre, Collection<Location> area) {
 		HashSet<Vector> relativeArea = new HashSet<Vector>();
 		for(Location loc : area) {
@@ -183,6 +214,12 @@ public class Util {
 		return relativeArea;
 	}
 	
+	/**
+	 * Checks if each vector is pointing to a location close to the edge of a block. If so also returns the block next to that edge.
+	 * 
+	 * @param vector
+	 * @return
+	 */
 	public static final HashSet<BlockVector> approxBlocks(Collection<Vector> vectors) {
 		HashSet<BlockVector> output = new HashSet<BlockVector>();
 		for(Vector vector : vectors) {
@@ -191,10 +228,16 @@ public class Util {
 		return output;
 	}
 	
+	/**
+	 * When the vector is pointing to a location close to the edge of a block also returns the block next to that edge.
+	 * 
+	 * @param vector
+	 * @return
+	 */
 	public static final HashSet<BlockVector> approxBlock(Vector vector) {
 		HashSet<BlockVector> output = new HashSet<BlockVector>();
 		
-		double overlapAmount = 0.2;
+		final double overlapAmount = 0.2;
 		
 		double x = vector.getX();
 		double y = vector.getY();

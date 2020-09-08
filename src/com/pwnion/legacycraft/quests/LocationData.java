@@ -75,7 +75,7 @@ public class LocationData {
 		String dataSplit[] = data.split(",");
 		ArrayList<ArrayList<Object>> output = new ArrayList<ArrayList<Object>>(dataSplit.length - 1);
 		for(String locationStr : dataSplit) {
-			String locSplit[] = locationStr.split("|");
+			String locSplit[] = locationStr.split("\\|");
 			ArrayList<Object> location = new ArrayList<Object>();
 			location.add(Bukkit.getWorld(locSplit[0]));
 			location.add(Integer.parseInt(locSplit[1]));
