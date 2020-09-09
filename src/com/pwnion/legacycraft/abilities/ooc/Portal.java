@@ -55,7 +55,7 @@ public enum Portal {
 	
 	public final void activate(Player p) {
 		float pitch = p.getLocation().getPitch();
-		double fixedPitch = Math.toRadians(pitch + (pitch < 0 ? 90 : -90));
+		double fixedPitch = pitch + (pitch < 0 ? 90 : -90);
 		float yaw = p.getLocation().getYaw();
 		
 		int stepsSpiral = 240;
@@ -74,8 +74,8 @@ public enum Portal {
 		final Vector axis = Util.vectorCalc(pitch, yaw, 1);
 		final int killDelay = Math.round(stepsSpiral / 2) + 30 * 20;
 		
-		final double yawMod = -0.26953 * Math.cos(Math.toRadians(Math.abs(pitch))) + 0.75 * Math.cos(Math.abs(fixedPitch));
-		final double vertMod = 0.26953 * Math.sin(Math.toRadians(Math.abs(pitch))) + 0.75 * Math.sin(Math.abs(fixedPitch));
+		final double yawMod = -0.26953 * Math.cos(Math.toRadians(Math.abs(pitch))) + 0.75 * Math.cos(Math.abs(Math.toRadians(fixedPitch)));
+		final double vertMod = 0.26953 * Math.sin(Math.toRadians(Math.abs(pitch))) + 0.75 * Math.sin(Math.abs(Math.toRadians(fixedPitch)));
 		
 		ArrayList<Location> points = new ArrayList<Location>(16);
 		ArrayList<Location> portalMidSectionPoints = new ArrayList<Location>(8);
@@ -84,8 +84,8 @@ public enum Portal {
 			for(float horizontal = -0.9375f; horizontal <= 0.9375; horizontal = horizontal + 0.625f) {
 				//Location point = Point.fromLocationInYawDir(centre, (vertical / 0.625) * 0.625 * (pitch < 0 ? -1 : 1) * (Math.cos(Math.toRadians(fixedPitch))), vertical);
 				Location point = Util.locationCalc(centre, 
-						vertical * Math.abs(Math.cos(fixedPitch)), //Distance
-						vertical * Math.abs(Math.sin(fixedPitch))); //Y value from centre
+						vertical * (pitch < 0 ? -1 : 1) * Math.cos(Math.toRadians(fixedPitch)), //Distance
+						vertical * Math.abs(Math.sin(Math.toRadians(fixedPitch)))); //Y value from centre
 				
 				point.setYaw(centre.getYaw() < 270 ? centre.getYaw() + 90 : centre.getYaw() - 270);
 				
@@ -115,10 +115,31 @@ public enum Portal {
 			armourStands.add(p.getWorld().spawn(point.add(portalMod), ArmorStand.class, (e) -> {
 				e.setGravity(false);
 				e.setVisible(false);
-				e.setInvulnerable(true);
 				e.setSilent(true);
-				//e.setMarker(true);
-				//e.setFireTicks(killDelay);
+				
+				//Cannot be set on fire if Invulnerable?
+				//e.setInvulnerable(true);
+				
+				/*
+				   NoDamage Ticks:
+				    	Decrease noDamageTicks by 1 per tick (until it hits 0)
+						Upon receiving damage, if noDamageTicks is larger than the half of maxNoDamageTicks:
+							cancel the damage if the current damage is smaller than the last damage received
+							otherwise, damage the entity by the difference of the current damage and last damage
+						If damage was applied, set noDamageTicks to maxNoDamageTicks
+				 */
+				
+				//Invulnerable given damage does not exceed last damage
+				e.setLastDamage(Double.MAX_VALUE);
+				e.setMaximumNoDamageTicks(killDelay * 2);
+				e.setNoDamageTicks(killDelay * 2);
+				
+				//Setting the AS on fire stops the AS from going black when inside a block (Cannot be used with Invulnerable?)
+				e.setFireTicks(killDelay);
+				
+				//Marker stops punching and allows interaction through the portal
+				e.setMarker(true);
+				
 				e.setDisabledSlots(EquipmentSlot.values());
 				e.setRotation(pitch < 0 ? (yaw < 180 ? yaw + 180 : yaw - 180) : yaw, 0);
 				e.setHeadPose(new EulerAngle((pitch < 0 ? -1 : 1) * Math.toRadians(pitch), 0, 0));
@@ -166,13 +187,11 @@ public enum Portal {
 					}
 
 					if(i >= spiral.size() - 4) {
-						Vector pointerClone = pointer.clone();
 						
-						pointerClone.rotateAroundAxis(axis, rotPerStep * i);
-						spawnParticles.accept(centre.clone().add(pointerClone), true);
-						
-						pointerClone.rotateAroundAxis(axis, rotPerStep);
-						spawnParticles.accept(centre.clone().add(pointerClone), true);
+						for(int j = 0; j < 2; j++) {
+							pointer.rotateAroundAxis(axis, rotPerStep);
+							spawnParticles.accept(centre.clone().add(pointer), true);
+						}
 						
 						Util.playSoundWithoutConflict(centre, Sound.AMBIENT_UNDERWATER_LOOP_ADDITIONS_ULTRA_RARE, 0.5f, 0.1f);
 					}
@@ -258,11 +277,11 @@ public enum Portal {
 										}
 									}
 								}
-							} //End of for
+							}
 						}
-					} //End of run (233)
+					}
 				}, 0, 1), killDelay - (stepsSpiral / 2));
-			} //End of run (199)
+			}
 		}, stepsSpiral / 2);
-	} //End of activate
+	}
 }

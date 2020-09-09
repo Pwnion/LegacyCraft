@@ -23,6 +23,7 @@ public class Puncture implements MeleeEnhancement {
 
 			LegacyCraft.addTaskToBeCancelled(Bukkit.getServer().getScheduler().runTaskTimer(LegacyCraft.getPlugin(), new Runnable() {
 				public void run() {
+					//Puncture does not effect NoDamageTicks Invincibility but is still affected by it.
 					int prev = target.getNoDamageTicks();
 					target.damage(DAMAGE);
 					target.setNoDamageTicks(prev);
