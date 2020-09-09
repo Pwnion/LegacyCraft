@@ -138,6 +138,7 @@ public enum Portal {
 				e.setFireTicks(killDelay);
 				
 				//Marker stops punching and allows interaction through the portal
+				//Creates Render Bug https://bugs.mojang.com/browse/MC-98146
 				e.setMarker(true);
 				
 				e.setDisabledSlots(EquipmentSlot.values());
