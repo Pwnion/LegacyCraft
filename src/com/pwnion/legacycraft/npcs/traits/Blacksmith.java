@@ -81,7 +81,6 @@ public class Blacksmith extends Trait {
 			Player p = event.getClicker();
 			SpeakToNPC.onSpeakToNPC(p, npc.getName());
 			
-			
 			//TODO add a blacksmith gui
 			p.sendMessage(ChatColor.GRAY + "REPAIR ITEMS?");
 			

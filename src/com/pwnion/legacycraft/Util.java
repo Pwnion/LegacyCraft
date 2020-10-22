@@ -152,14 +152,44 @@ public class Util {
 	/**
 	 * Returns a new String composed of copies of the Object elements as strings joined together with a copy of the specified delimiter. 
 	 * 
-	 * @param delimiter
 	 * @param elements
+	 * @param delimiter
+	 * 
 	 * @return
 	 */
-	public static String join(String delimiter, Object[] elements) {
+	public static String join(Object[] elements, String delimiter) {
+		return join(elements, delimiter, 0, elements.length);
+	}
+	
+	/**
+	 * Returns a new String composed of copies of the Object elements as strings joined together with a copy of the specified delimiter. <br>
+	 * Only elements that occur after 'fromIndex' (inclusive) are included
+	 * 
+	 * @param elements
+	 * @param delimiter
+	 * @param fromIndex
+	 * 
+	 * @return
+	 */
+	public static String join(Object[] elements, String delimiter, int fromIndex) {
+		return join(elements, delimiter, fromIndex, elements.length);
+	}
+	
+	/**
+	 * Returns a new String composed of copies of the Object elements as strings joined together with a copy of the specified delimiter. <br>
+	 * Only elements that occur after 'fromIndex' (inclusive) and before 'toIndex' (exclusive) are included
+	 * 
+	 * @param elements
+	 * @param delimiter
+	 * @param fromIndex
+	 * @param toIndex
+	 * 
+	 * @return
+	 */
+	public static String join(Object[] elements, String delimiter, int fromIndex, int toIndex) {
 		String out = "";
-		for (Object obj : elements) {
-			out += obj.toString() + delimiter;
+		for (int i = fromIndex; i < toIndex; i++) {
+			out += elements[i].toString() + delimiter;
 		}
 		return out.substring(0, out.length() - delimiter.length());
 	}

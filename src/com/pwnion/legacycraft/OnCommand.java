@@ -93,6 +93,8 @@ public class OnCommand implements CommandExecutor {
 
 						switch(args[1]) {
 						case "config.yml":
+							//TODO: String meaningfulName = args[2].toUpperCase(); inventory name?
+							
 							p.sendMessage(ChatColor.GOLD + "You have 10 seconds to open the inventory that will be saved!");
 							try {
 								Bukkit.getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
@@ -116,6 +118,7 @@ public class OnCommand implements CommandExecutor {
 							break;
 						case "player-data-template.yml":
 							try {
+								//TODO: String meaningfulName = args[2].toUpperCase();
 								ItemStack contents[] = p.getInventory().getContents();
 								csSave.set(args[2].toUpperCase() + ".save.inventory", contents);
 								configSave.saveCustomConfig();
@@ -124,7 +127,6 @@ public class OnCommand implements CommandExecutor {
 							} catch(Exception ex) {
 								p.sendMessage(ChatColor.RED + "Invalid command!");
 							}
-
 							break;
 						}
 
@@ -135,6 +137,7 @@ public class OnCommand implements CommandExecutor {
 
 						switch(args[1]) {
 						case "config.yml":
+							//TODO: String meaningfulName = args[2].toUpperCase();
 							String title = csLoad.getString(args[2].toUpperCase() + ".title");
 							int size = csLoad.getInt(args[2].toUpperCase() + ".size");
 							ItemStack contents[] = csLoad.getList(args[2].toUpperCase() + ".contents").toArray(new ItemStack[0]);
@@ -152,6 +155,7 @@ public class OnCommand implements CommandExecutor {
 
 							break;
 						case "player-data-template.yml":
+							//TODO: String meaningfulName = args[2].toUpperCase();
 							ItemStack inv[] = csLoad.getList(args[2].toUpperCase() + ".save.inventory").toArray(new ItemStack[0]);
 							p.getInventory().setContents(inv);
 
@@ -170,10 +174,11 @@ public class OnCommand implements CommandExecutor {
 							QuestManager.forceComplete(p, quest);
 						}
 						break;
+						/*
 					case "reset":
-						//QuestManager.resetQuests(p, true);
-						break;
-					case "uid":
+						QuestManager.resetQuests(p, true);
+						break; //*/
+					case "uid": 
 						ItemStack item = p.getInventory().getItemInMainHand();
 						String newUID = args[1];
 						if(newUID.length() > 0) {
@@ -184,17 +189,14 @@ public class OnCommand implements CommandExecutor {
 							}
 						}
 						break;
-					case "uitem":
+					case "uitem": //update item
 						ItemManager.updateLore(p.getInventory().getItemInMainHand());
 						p.sendMessage("Updated");
 						break;
 					case "enhance":
 						try {
 							ItemStack hand = p.getInventory().getItemInMainHand();
-							String enh = "";
-							for(int i = 1; i < args.length; i++) {
-								enh += args[i] + " ";
-							}
+							String enh = Util.join(args, " ", 1);
 							ItemManager.getItemData(hand).addEnhancement(enh, true);
 							ItemManager.updateLore(hand);
 							p.sendMessage("Success");
@@ -205,54 +207,48 @@ public class OnCommand implements CommandExecutor {
 						break;
 					case "setstat":
 						try {
+							ItemStat stat = ItemStat.valueOf(args[1].toUpperCase());
+							int value = Integer.parseInt(args[2]);
+							
 							ItemStack hand = p.getInventory().getItemInMainHand();
-							ItemManager.getItemData(hand).setStat(ItemStat.valueOf(args[1].toUpperCase()), Integer.parseInt(args[2]));
+							ItemManager.getItemData(hand).setStat(stat, value);
 							ItemManager.updateLore(hand);
 							p.sendMessage("Success");
 						} catch (Exception e) {
-							p.sendMessage(ChatColor.RED + "Invalid Values: /lc setstat <" + Util.join("/", ItemStat.values()).toLowerCase() + "> <value>");
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc setstat <" + Util.join(ItemStat.values(), "/").toLowerCase() + "> <value>");
 							e.printStackTrace();
 						}
 						break;
 					case "settier":
 						try {
 							ItemStack hand = p.getInventory().getItemInMainHand();
-							String tierStr = "";
-							for(int i = 1; i < args.length; i++) {
-								tierStr += args[i] + " ";
-							}
-							ItemTier tier = ItemTier.fromString(tierStr);
+							String tierName = Util.join(args, " ", 1);
+							ItemTier tier = ItemTier.fromString(tierName);
 							ItemManager.getItemData(hand).setTier(tier);
 							ItemManager.updateLore(hand);
 							p.sendMessage("Success");
 						} catch (Exception e) {
-							p.sendMessage(ChatColor.RED + "Invalid Tier: /lc settier <" + Util.join("/", ItemTier.values()).toLowerCase() + ">");
+							p.sendMessage(ChatColor.RED + "Invalid Tier: /lc settier <" + Util.join(ItemTier.values(), "/").toLowerCase() + ">");
 							e.printStackTrace();
 						}
 						break;
 					case "settype":
 						try {
 							ItemStack hand = p.getInventory().getItemInMainHand();
-							String typeStr = "";
-							for(int i = 1; i < args.length; i++) {
-								typeStr += args[i] + " ";
-							}
-							ItemType type = ItemType.fromString(typeStr);
+							String typeName = Util.join(args, " ", 1);
+							ItemType type = ItemType.fromString(typeName);
 							ItemManager.getItemData(hand).setType(type);
 							ItemManager.updateLore(hand);
 							p.sendMessage("Success");
 						} catch (Exception e) {
-							p.sendMessage(ChatColor.RED + "Invalid Type: /lc settype <" + Util.join("/", ItemType.values()).toLowerCase() + ">");
+							p.sendMessage(ChatColor.RED + "Invalid Type: /lc settype <" + Util.join(ItemType.values(), "/").toLowerCase() + ">");
 							e.printStackTrace();
 						}
 						break;
 					case "desc":
 						try {
 							ItemStack hand = p.getInventory().getItemInMainHand();
-							String desc = "";
-							for(int i = 1; i < args.length; i++) {
-								desc += args[i] + " ";
-							}
+							String desc = Util.join(args, " ", 1);
 							ItemManager.getItemData(hand).setDesc(desc);
 							ItemManager.updateLore(hand);
 							p.sendMessage("Success");
