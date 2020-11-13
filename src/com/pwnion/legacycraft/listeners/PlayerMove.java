@@ -8,12 +8,14 @@ import org.bukkit.potion.PotionEffectType;
 import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.abilities.SkillTree;
 import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
+import com.pwnion.legacycraft.mobs.LCEntity;
 import com.pwnion.legacycraft.quests.triggers.NearLocation;
 
 import java.util.UUID;
 
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 public class PlayerMove implements Listener {
@@ -31,6 +33,8 @@ public class PlayerMove implements Listener {
 			counter++;
 		}
 	}
+	
+	private static final int MOB_RANGE = 32;
 	
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent e) {

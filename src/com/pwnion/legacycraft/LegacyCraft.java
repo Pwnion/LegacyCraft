@@ -15,31 +15,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
-import com.pwnion.legacycraft.items.enhancements.effects.BladeDancer;
-import com.pwnion.legacycraft.items.enhancements.effects.DeadlyEye;
-import com.pwnion.legacycraft.items.enhancements.effects.ExampleEffect;
-import com.pwnion.legacycraft.items.enhancements.effects.Execution;
-import com.pwnion.legacycraft.items.enhancements.effects.Heavy;
-import com.pwnion.legacycraft.items.enhancements.effects.IndomitableSpirit;
-import com.pwnion.legacycraft.items.enhancements.effects.Puncture;
-import com.pwnion.legacycraft.items.enhancements.effects.Relentless;
-import com.pwnion.legacycraft.listeners.EntityDamage;
-import com.pwnion.legacycraft.listeners.EntityDamageByEntity;
-import com.pwnion.legacycraft.listeners.EntityDeath;
-import com.pwnion.legacycraft.listeners.EntityPickupItem;
-import com.pwnion.legacycraft.listeners.InventoryClick;
-import com.pwnion.legacycraft.listeners.InventoryClose;
-import com.pwnion.legacycraft.listeners.PlayerSwapHandItems;
-import com.pwnion.legacycraft.listeners.PlayerDropItem;
-import com.pwnion.legacycraft.listeners.PlayerGameModeChange;
-import com.pwnion.legacycraft.listeners.PlayerInteract;
-import com.pwnion.legacycraft.listeners.PlayerItemHeld;
-import com.pwnion.legacycraft.listeners.PlayerJoin;
-import com.pwnion.legacycraft.listeners.PlayerMove;
-import com.pwnion.legacycraft.listeners.PlayerQuit;
-import com.pwnion.legacycraft.listeners.PlayerResourcePackStatus;
-import com.pwnion.legacycraft.listeners.PlayerToggleFlight;
-import com.pwnion.legacycraft.listeners.InventoryDrag;
+import com.pwnion.legacycraft.items.enhancements.effects.*;
+import com.pwnion.legacycraft.listeners.*;
+import com.pwnion.legacycraft.mobs.LCEntity;
 import com.pwnion.legacycraft.npcs.Speech;
 import com.pwnion.legacycraft.npcs.traits.Blacksmith;
 import com.pwnion.legacycraft.npcs.traits.Librarian;
@@ -113,7 +91,8 @@ public class LegacyCraft extends JavaPlugin {
 			new InventoryDrag(),
 			new InventoryClose(),
 			new EntityDamageByEntity(),
-			new PlayerInteract()
+			new PlayerInteract(),
+			new EntityTarget()
 		);
 		
 		//Register commands
@@ -153,6 +132,8 @@ public class LegacyCraft extends JavaPlugin {
             		}
             		PlayerData.setFallDistance(playerUUID, p.getFallDistance());
             	}
+            	
+            	LCEntity.calculateAttacks();
             	
             	try {
             		for(BukkitTask task : tasksToBeCancelled.keySet()) {

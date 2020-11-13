@@ -247,7 +247,7 @@ public class Util {
 	/**
 	 * Checks if each vector is pointing to a location close to the edge of a block. If so also returns the block next to that edge.
 	 * 
-	 * @param vector
+	 * @param vectors
 	 * @return
 	 */
 	public static final HashSet<BlockVector> approxBlocks(Collection<Vector> vectors) {
@@ -355,8 +355,7 @@ public class Util {
 		double x = Math.sin(pitch) * Math.cos(yaw);
 		double y = Math.cos(pitch);
 		double z = Math.sin(pitch) * Math.sin(yaw);
-		Vector vector = new Vector(x, y, z);
-		vector.multiply(dist);
+		Vector vector = new Vector(x * dist, y * dist, z * dist);
 		return vector;
 	}
 	

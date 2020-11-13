@@ -259,17 +259,19 @@ public class OnCommand implements CommandExecutor {
 						break;
 					case "generate":
 						try {
-							Util.br(PlayerData.playerData);
+							ItemStack itemLC = p.getInventory().getItemInMainHand();
+							ItemData itemData = ItemManager.generateItem(itemLC, ItemTier.fromString(args[1]), ItemType.fromString(args[2]));
+							ItemManager.updateLore(itemLC);
 						} catch (Exception e) {
-							p.sendMessage(ChatColor.RED + "Invalid Values: /lc generate <tier> <type>");
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc generate <tier: " + Util.join(ItemTier.values(), "/").toLowerCase() + "> <type: " + Util.join(ItemType.values(), "/").toLowerCase() + ">");
 							e.printStackTrace();
 						}
 						break;
-					case "temp":
+					case "summon":
 						try {
-							Util.br(PlayerData.playerData);
+							new LCEntity(p.getLocation(), LCEntityType.FIRE_ELEMENTAL);
 						} catch (Exception e) {
-							p.sendMessage(ChatColor.RED + "Invalid Values: /lc temp <value>");
+							p.sendMessage(ChatColor.RED + "Invalid Values: /lc summon <value>");
 							e.printStackTrace();
 						}
 						break;
@@ -280,11 +282,10 @@ public class OnCommand implements CommandExecutor {
 				}
 			} else if(lbl.equals("test")) {
 				try {
+					/*
 					ItemStack item = p.getInventory().getItemInMainHand();
 					ItemData itemData = ItemManager.generateItem(item, ItemTier.STABLE, ItemType.SHORTSWORD);
 					ItemManager.updateLore(item);
-					
-					new LCEntity(p.getLocation(), LCEntityType.ZOMBIE);
 					
 					Experience playerExperience = PlayerData.getExperience(p.getUniqueId());
 					
@@ -298,7 +299,7 @@ public class OnCommand implements CommandExecutor {
 					
 					ItemMeta itemMeta = p.getInventory().getItemInMainHand().getItemMeta();
 					Util.br(String.valueOf(itemMeta.hasCustomModelData()));
-					Util.br(itemMeta.getCustomModelData());
+					Util.br(itemMeta.getCustomModelData()); //*/
 					
 				} catch(Exception e) {
 					Util.print(e);

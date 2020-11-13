@@ -13,6 +13,7 @@ import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.levelling.Experience;
 import com.pwnion.legacycraft.levelling.ExperienceType;
+import com.pwnion.legacycraft.mobs.LCEntity;
 import com.pwnion.legacycraft.quests.triggers.KillEntity;
 
 public class EntityDeath implements Listener {
@@ -30,6 +31,7 @@ public class EntityDeath implements Listener {
 	public void onEntityDeath(EntityDeathEvent e) {
 		try {
 			Entity victim = e.getEntity(); //The killed entity
+			LCEntity.remove(victim);
 			
 			// === MODIFY DROPS ===
 			e.setDroppedExp(0); //Mobs don't drop vanilla exp
