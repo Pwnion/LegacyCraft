@@ -1,7 +1,10 @@
 package com.pwnion.legacycraft.mobs.attacks;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+
+import com.pwnion.legacycraft.mobs.LCEntity;
 
 public abstract class Attack {
 	
@@ -25,7 +28,7 @@ public abstract class Attack {
 	 * @param self
 	 * @param target
 	 */
-	public abstract void target(LivingEntity self, Location target);
+	public abstract void makeAttack(LivingEntity self, Location target);
 	
 	/**
 	 * Gets the target to attack or null if attack cannot be made.
@@ -33,6 +36,14 @@ public abstract class Attack {
 	 * @param self
 	 * @return
 	 */
-	public abstract Location isValid(LivingEntity self);
+	public Location getValidTarget(LivingEntity self) {
+		LCEntity lce = LCEntity.get(self);
+		if (lce == null) {
+			return null;
+		}
+		return getValidTarget(lce, LCEntity.getAttacking(self));
+	}
+	
+	public abstract Location getValidTarget(LCEntity self, Entity target);
 
 }

@@ -25,6 +25,7 @@ import com.pwnion.legacycraft.items.ItemManager;
 import com.pwnion.legacycraft.items.ItemStat;
 import com.pwnion.legacycraft.items.ItemTier;
 import com.pwnion.legacycraft.items.ItemType;
+import com.pwnion.legacycraft.items.enhancements.Enhancement;
 import com.pwnion.legacycraft.levelling.Experience;
 import com.pwnion.legacycraft.levelling.ExperienceType;
 import com.pwnion.legacycraft.mobs.LCEntity;
@@ -195,6 +196,10 @@ public class OnCommand implements CommandExecutor {
 						break;
 					case "enhance":
 						try {
+							if (args[1].trim().equalsIgnoreCase("list")) {
+								Util.br(args[1]);
+								break;
+							}
 							ItemStack hand = p.getInventory().getItemInMainHand();
 							String enh = Util.join(args, " ", 1);
 							ItemManager.getItemData(hand).addEnhancement(enh, true);
@@ -202,6 +207,7 @@ public class OnCommand implements CommandExecutor {
 							p.sendMessage("Success");
 						} catch (Exception e) {
 							p.sendMessage(ChatColor.RED + "Invalid Enhancement: /lc enhance <enhancement>");
+							p.sendMessage(ChatColor.GRAY + "Enhancements: " + Util.join(Enhancement.allNames().toArray(), ", "));
 							e.printStackTrace();
 						}
 						break;

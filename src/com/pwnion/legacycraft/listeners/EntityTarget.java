@@ -13,13 +13,14 @@ public class EntityTarget implements Listener {
 	@EventHandler
 	public void onEntityTarget(EntityTargetEvent e) {
 		Entity entity = e.getEntity();
+		Entity target = e.getTarget();
 		
 		Util.br("Entity Target");
 		
 		switch (e.getReason()) {
 		case FORGOT_TARGET:
 		case TARGET_DIED:
-			LCEntity.removeAttack(entity);
+			LCEntity.removeAttacking(entity);
 			break;
 		case CLOSEST_PLAYER:
 		case COLLISION:
@@ -30,7 +31,7 @@ public class EntityTarget implements Listener {
 		case TARGET_ATTACKED_ENTITY:
 		case TARGET_ATTACKED_NEARBY_ENTITY:
 		case TARGET_ATTACKED_OWNER:
-			LCEntity.addAttack(entity);
+			LCEntity.addAttacking(entity, target);
 			break;
 		}
 	}

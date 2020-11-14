@@ -29,7 +29,7 @@ public class Util {
 	 * @param message
 	 */
 	public static void br(String message) {
-		Bukkit.broadcastMessage("[C] " + message);
+		Bukkit.broadcastMessage("[LegacyCraft] " + message);
 	}
 	
 	/**
