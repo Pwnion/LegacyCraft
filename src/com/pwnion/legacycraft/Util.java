@@ -1,6 +1,7 @@
 package com.pwnion.legacycraft;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -125,6 +126,10 @@ public class Util {
 			out += str.toString().substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
 		}
 		return out;
+	}
+	
+	public static String[] toString(Object[] elements) {
+		return Arrays.stream(elements).map(Object::toString).toArray(String[]::new);
 	}
 	
 	/**

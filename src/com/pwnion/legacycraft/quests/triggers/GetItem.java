@@ -14,24 +14,26 @@ import com.pwnion.legacycraft.quests.Trigger;
 import com.pwnion.legacycraft.quests.TriggerType;
 
 public class GetItem {
-	
-	private GetItem() {}
 
-	//Called from InventoryClick, InventoryDrag, EntityPickupItem, and when a quest is given to a player (QuestManager)
+	private GetItem() {
+	}
+
+	// Called from InventoryClick, InventoryDrag, EntityPickupItem, and when a quest
+	// is given to a player (QuestManager)
 	public static void updateItemQuests(Player p) {
 		Bukkit.getScheduler().runTaskLater(LegacyCraft.getPlugin(), new Runnable() {
 			@Override
 			public void run() {
-				
-				for(Quest quest : QuestManager.getActiveQuests(p)) {
-					//If quest requires items to be checked
-					if(quest.hasTrigger(TriggerType.ITEM)) {
+
+				for (Quest quest : QuestManager.getActiveQuests(p)) {
+					// If quest requires items to be checked
+					if (quest.hasTrigger(TriggerType.ITEM)) {
 						ArrayList<Trigger> triggers = quest.getTriggers(TriggerType.ITEM);
-						for(Trigger trigger : triggers) {
+						for (Trigger trigger : triggers) {
 							Material mat = trigger.getItem();
-							if(p.getInventory().contains(mat)) {
+							if (p.getInventory().contains(mat)) {
 								int count = 0;
-								for(ItemStack items : p.getInventory().all(mat).values()) {
+								for (ItemStack items : p.getInventory().all(mat).values()) {
 									count += items.getAmount();
 								}
 								QuestManager.setProgress(p, quest, trigger, count);

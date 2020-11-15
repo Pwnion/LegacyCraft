@@ -1,6 +1,9 @@
 package com.pwnion.legacycraft;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -9,6 +12,7 @@ import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -17,6 +21,7 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.pwnion.legacycraft.OnCommand.Tree.Node;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.ooc.Portal;
@@ -40,7 +45,7 @@ public class OnCommand implements CommandExecutor {
 	private static final HashMap<UUID, Selection> playerToSelection = new HashMap<UUID, Selection>();
 
 	@Override
-	public boolean onCommand(CommandSender cs, Command cmd, String lbl, String[] args) {
+	public boolean onCommand(CommandSender cs, Command cmd, String lbl, String[] args) {		
 		Player p;
 		UUID playerUUID;
 		
@@ -268,6 +273,7 @@ public class OnCommand implements CommandExecutor {
 							e.printStackTrace();
 						}
 						break;
+					case "gen":
 					case "generate":
 						try {
 							ItemStack itemLC = p.getInventory().getItemInMainHand();
@@ -322,5 +328,135 @@ public class OnCommand implements CommandExecutor {
 			p.sendMessage(deniedMsg);
 			return false;
 		}
+		
+		
+	}
+	
+	public static class Tree<T> {
+		Node<T> root;
+
+	    public Tree(T rootData) {
+	        root = new Node<T>(null, rootData);
+	    }
+	    
+	    public Node<T> get(T[] args) {
+	    	Node<T> curNode = root;
+	    	for (T arg : args) {
+	    		curNode = curNode.getChild(arg);
+	    	}
+	    	return curNode;
+	    }
+	    
+	    public Node<T> get(T[] args, int fromIndex, int toIndex) {
+	    	Node<T> curNode = root;
+	    	for (int i = fromIndex; i < toIndex && curNode != null; i++) {
+	    		curNode = curNode.getChild(args[i]);
+	    	}
+	    	return curNode;
+	    }
+
+	    public static class Node<T> {
+	    	private T data;
+	    	private Node<T> parent;
+	    	public ArrayList<Node<T>> children = new ArrayList<Node<T>>();
+	    	
+	    	public Node(Node<T> parent, T data) {
+	    		this.parent = parent;
+				this.data = data;
+			}
+	    	
+	    	public ArrayList<T> getChildren() {
+	    		ArrayList<T> childrenData = new ArrayList<>(children.size());
+	    		for (Node<T> child : children) {
+	    			childrenData.add(child.data);
+	    		}
+	    		return childrenData;
+	    	}
+	    	
+	    	public void linkSiblingNodes() {
+	    		for (Node<T> sibling : parent.children) {
+	    			sibling.children = children;
+	    		}
+	    	}
+	    	
+	    	public Node<T> getChild(T data) {
+	    		for (Node<T> child : children) {
+	    			if (child.data.equals(data)) {
+	    				return child;
+	    			}
+	    		}
+	    		return null;
+	    	}
+
+			public Node<T> up() {
+	    		return parent;
+	    	}
+	    	
+	    	public Node<T> down(T data) {
+	    		Node<T> node = new Node<T>(this, data);
+	    		children.add(node);
+	    		return node;
+	    	}
+	    	
+	    	public ArrayList<Node<T>> end(T... data) {
+	    		for (T d : data) {
+	    			down(d);
+	    		}
+	    		return children;
+	    	}
+	    	
+	    	public ArrayList<Node<T>> end(Collection<T> data) {
+	    		for (T d : data) {
+	    			down(d);
+	    		}
+	    		return children;
+	    	}
+	    }
+	}
+	
+	static Tree<String> tree = new Tree<>("lc");
+	static {
+		tree.root.end("class", "pos1", "pos2", "export", "save", "load", "home", "work", "quest", "quests", "complete", "uid", "uitem", "setstat", "desc");
+		tree.root.down("portal").end(Util.toString(Portal.values()));
+		tree.root.down("summon").end(Util.toString(LCEntityType.values()));
+		tree.root.down("settype").end(Util.toString(ItemType.values()));
+		tree.root.down("settier").end(Util.toString(ItemTier.values()));
+		tree.root.down("enhance").end(Enhancement.allNames());
+		
+		tree.root.down("generate").end(Util.toString(ItemTier.values())).get(0).end(Util.toString(ItemType.values())).get(0).up().linkSiblingNodes();
+	}
+	
+	public static class LCTabCompleter implements TabCompleter {
+		
+		@Override
+		public List<String> onTabComplete(CommandSender cs, Command cmd, String lbl, String[] args) {
+			Player p;
+			UUID playerUUID;
+			
+			//Ensure the command sender is a player
+			if(cs instanceof Player) {
+				p = (Player) cs;
+				playerUUID = p.getUniqueId();
+			} else {
+				return null;
+			}
+
+			if(p.hasPermission("legacycraft.op")) {
+				if(lbl.equals("legacycraft") || cmd.getAliases().contains(lbl)) {
+					Node<String> curNode = tree.get(args, 0, args.length - 1);
+					if (curNode != null) {
+						ArrayList<String> childrenData = new ArrayList<>(curNode.children.size());
+			    		for (Node<String> child : curNode.children) {
+			    			if (child.data.startsWith(args[args.length - 1])) {
+			    				childrenData.add(child.data);
+			    			}
+			    		}
+			    		return childrenData;
+					}
+				}
+			}
+			return null;
+		}
+		
 	}
 }

@@ -45,6 +45,7 @@ public class LegacyCraft extends JavaPlugin {
 	private void registerCommands(String... commands) {
 		for(String command : commands) {
 			this.getCommand(command).setExecutor((CommandExecutor) new OnCommand());
+			this.getCommand(command).setTabCompleter(new OnCommand.LCTabCompleter());
 		}
 	}
 	

@@ -12,13 +12,15 @@ import com.pwnion.legacycraft.quests.Trigger;
 import com.pwnion.legacycraft.quests.TriggerType;
 
 public class KillEntity {
-	
-	private KillEntity() {}
+
+	private KillEntity() {
+	}
 
 	// Called from EntityDeath in Listeners
 	public static void onPlayerKilledEntity(Player p, EntityType dead) {
 		try {
-			// Util.br(p.getName() + " has called onPlayerKilledEntity for " +  dead.toString());
+			// Util.br(p.getName() + " has called onPlayerKilledEntity for " +
+			// dead.toString());
 			for (Quest quest : QuestManager.getActiveQuests(p)) {
 				if (quest.hasTrigger(TriggerType.KILL_ENTITY)) {
 					ArrayList<Trigger> triggers = quest.getTriggers(TriggerType.KILL_ENTITY);
