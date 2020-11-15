@@ -39,7 +39,9 @@ public class LCEntity {
 	}
 
 	public enum LCEntityType {
-		FIRE_ELEMENTAL(EntityType.ZOMBIE, 20, 20 * 2, new Dash(1, 20 * 5, 1), new Projectile(3, 20, prebuilt[0], 1, 5, 10, -0.5, null, 0.5, 5, 5), new Wave(3, 20, prebuilt[0], 1, 5, 10, 0.5, null, 0.5, 5, 5, 360, 10));
+		FIRE_ELEMENTAL(EntityType.ZOMBIE, 20, 20 * 2, new Dash(1, 20 * 5, 1), 
+				new Projectile(3, 20, prebuilt[0], 1, 5, 10, -0.5, null, 0.5, 5, 5), 
+				new Wave(3, 20, prebuilt[0], 1, 5, 10, 0.5, null, 0.5, 5, 5, 360, 10));
 
 		final EntityType model;
 		final int health;
@@ -160,11 +162,9 @@ public class LCEntity {
 		for (Attack a : possibleMoves) {
 			totalWeight += a.weight;
 		}
-		int i = 0;
 		Attack att = null;
-		for (int random = rnd.nextInt(totalWeight) + 1; random > 0; i++) {
+		for (int random = rnd.nextInt(totalWeight) + 1; random > 0; random -= att.weight) {
 			att = posbMovesItr.next();
-			random -= att.weight;
 		}
 		return att;
 	}

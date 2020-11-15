@@ -90,8 +90,8 @@ public class Trigger {
 		case KILL_ENTITY: //Format: ZOMBIE
 			return EntityType.valueOf(data);
 		case NPC: //Format: NpcName|submit EG: blacksmith|false
-			String npcArray[] = data.split("|");
-			HashMap<String, Boolean> npcData = new HashMap<String, Boolean>();
+			String[] npcArray = data.split("|");
+			HashMap<String, Boolean> npcData = new HashMap<>();
 			npcData.put(npcArray[0], Boolean.valueOf(npcArray[1]));
 			return npcData;
 		}

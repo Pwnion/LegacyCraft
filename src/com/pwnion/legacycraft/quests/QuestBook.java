@@ -15,11 +15,13 @@ import net.md_5.bungee.api.chat.TextComponent;
 
 public class QuestBook {
 	
+	private QuestBook() {}
+	
 	public static void open(Player p) {
 		create(p).open(p);
 	}
 
-	final static int LINKS_PER_PAGE = 15;
+	static final int LINKS_PER_PAGE = 15;
 	private static Book create(Player p) {
 		//Books 14 rows
 		//<= 19 columns
@@ -28,14 +30,15 @@ public class QuestBook {
 		
 		int linkPageCount = (int) (((QuestManager.getActiveQuestCount(p) + QuestManager.getCompletedQuestCount(p)) / LINKS_PER_PAGE) + 1);
 
-		ArrayList<PageBuilder> linkPages = new ArrayList<PageBuilder>(linkPageCount);
+		ArrayList<PageBuilder> linkPages = new ArrayList<>(linkPageCount);
 		
 		for(int i = 0; i < linkPageCount; i++) {
 			linkPages.add(questBook.addPage());
 		}
 		
 		PageBuilder currentPage = linkPages.get(0);
-		int i = 1; int pageNum = 0;
+		int i = 1; 
+		int pageNum = 0;
 		
 		for(Quest quest : QuestManager.getActiveQuests(p)) {
 			buildQuest(p, questBook, quest, currentPage, false);
@@ -93,7 +96,7 @@ public class QuestBook {
 			questText.setColor(ChatColor.DARK_BLUE);
 		}
 		
-		TextComponent hover[] = {
+		TextComponent[] hover = {
 				new TextComponent(quest.getName() + "\n"), 
 				new TextComponent(quest.getDesc() + 
 						   "\n" + QuestManager.getProgressString(p, quest))};

@@ -1,11 +1,8 @@
 package com.pwnion.legacycraft.mobs.attacks;
 
-import java.util.Collection;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import com.pwnion.legacycraft.Util;

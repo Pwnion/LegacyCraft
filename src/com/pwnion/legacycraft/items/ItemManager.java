@@ -21,7 +21,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class ItemManager {
 	
-	private static HashMap<String, ItemData> activeItems = new HashMap<String, ItemData>();
+	private static HashMap<String, ItemData> activeItems = new HashMap<>();
 	
 	private enum TitleType {
 		TIER_ITEMTYPE,
@@ -48,7 +48,7 @@ public class ItemManager {
 	 * 
 	 * @NonNull
 	 */
-	private static String generateNewUID(@Nullable String preferredUID) throws IllegalArgumentException {
+	private static String generateNewUID(@Nullable String preferredUID) {
 		if(preferredUID != null && (preferredUID.contains("===") || preferredUID.contains("@"))) {
 			throw new IllegalArgumentException("uid cannot contain the strings '===' or '@'");
 		}
@@ -72,7 +72,7 @@ public class ItemManager {
 	 * @return		an arraylist of segments of lore split by title
 	 */
 	private static LinkedHashMap<TitleType, List<String>> stripTitles(ItemStack item) {
-		LinkedHashMap<TitleType, List<String>> out = new LinkedHashMap<TitleType, List<String>>();
+		LinkedHashMap<TitleType, List<String>> out = new LinkedHashMap<>();
 		List<String> lore = item.getLore();
 		TitleType lastTitle = TitleType.DESCRIPTION;
 		int last = 0;
@@ -128,12 +128,12 @@ public class ItemManager {
 		ItemTier tier = ItemTier.NONE;
 		if(lore.containsKey(TitleType.TIER_ITEMTYPE)) {
 			// split("\\|") splits at every "|"
-			String spl[] = ChatColor.stripColor(lore.get(TitleType.TIER_ITEMTYPE).get(0)).split("\\|");
+			String[] spl = ChatColor.stripColor(lore.get(TitleType.TIER_ITEMTYPE).get(0)).split("\\|");
 			tier = ItemTier.fromString(spl[0]);
 			type = ItemType.fromString(spl[1]);
 		}
 		
-		LinkedHashMap<ItemStat, Integer> stats = new LinkedHashMap<ItemStat, Integer>();
+		LinkedHashMap<ItemStat, Integer> stats = new LinkedHashMap<>();
 		for(String line : lore.getOrDefault(TitleType.STATS, Collections.emptyList())) {
 			String[] statLine = ChatColor.stripColor(line).replace(" ", "").split(":");
 			ItemStat stat = ItemStat.valueOf(statLine[0].toUpperCase());
@@ -142,7 +142,7 @@ public class ItemManager {
 			}
 		}
 		
-		ArrayList<Enhancement> enhancements = new ArrayList<Enhancement>();
+		ArrayList<Enhancement> enhancements = new ArrayList<>();
 		for(String line : lore.getOrDefault(TitleType.ENHANCEMENTS, Collections.emptyList())) {
 			Enhancement enh = Enhancement.fromName(ChatColor.stripColor(line).replace(" - ", ""));
 			if(enh != null) {
@@ -198,6 +198,8 @@ public class ItemManager {
 		return data;
 	}
 	
+	static final Random rnd = new Random();
+	
 	/**
 	 * Stats generated from tier base power + type modifiers +- range
 	 * 
@@ -207,8 +209,7 @@ public class ItemManager {
 	 * @return
 	 */
 	private static LinkedHashMap<ItemStat,Integer> generateStats(ItemTier tier, ItemType type, int range) {
-		LinkedHashMap<ItemStat,Integer> out = new LinkedHashMap<ItemStat,Integer>();
-		Random rnd = new Random();
+		LinkedHashMap<ItemStat,Integer> out = new LinkedHashMap<>();
 		for(ItemStat stat : ItemStat.values()) {
 			int mid = tier.power + type.getMod(stat);
 			int gen = Util.randomInt(mid - range,  mid + range);
@@ -294,7 +295,7 @@ public class ItemManager {
 	 * 
 	 * @Nullable If item is null or has a lore size less than 3
 	 */
-	public static String getUID(ItemStack item) throws IndexOutOfBoundsException {
+	public static String getUID(ItemStack item) {
 		if(item == null || item.getLore() == null || item.getLore().size() < 3) {
 			return null;
 		}
@@ -330,7 +331,7 @@ public class ItemManager {
 	public static ArrayList<Enhancement> getEnhancements(ItemStack item) {
 		ItemData data = getItemData(item);
 		if(data == null) {
-			return new ArrayList<Enhancement>(0);
+			return new ArrayList<>(0);
 		}
 		return data.getEnhancements();
 	}
@@ -357,10 +358,14 @@ public class ItemManager {
 	 * 
 	 * @throws NullPointerException if uid is null
 	 */
-	public static void updateLore(ItemStack item, @NonNull String uid) throws NullPointerException {
+	public static void updateLore(ItemStack item, @NonNull String uid) {
 		ItemData itemData = getItemData(item, uid);
 		 
-		ArrayList<String> lore = new ArrayList<String>();
+		ArrayList<String> lore = new ArrayList<>();
+		
+		if(itemData == null) {
+			return;
+		}
 		
 		Util.br(itemData);
 		
@@ -416,7 +421,7 @@ public class ItemManager {
 	 * @param newUID	the uid to change to
 	 * @return			if item successfully changed uid
 	 */
-	public static boolean changeUID(ItemStack item, String newUID) {
+	public static boolean changeUID(ItemStack item, @NonNull String newUID) {
 		if(isActive(newUID) || !isActive(item)) {
 			return false;
 		}

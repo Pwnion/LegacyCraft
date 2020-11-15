@@ -27,7 +27,7 @@ public class Book {
 	    private String title;
 	    private String author;
 	    private final BookMeta meta = (BookMeta) Bukkit.getItemFactory().getItemMeta(Material.WRITTEN_BOOK);
-	    private final ArrayList<BaseComponent[]> pages = new ArrayList<BaseComponent[]>();
+	    private final ArrayList<BaseComponent[]> pages = new ArrayList<>();
 	  
 	    public Book(String title, String author) {
 	        this.title = title;
@@ -71,7 +71,7 @@ public class Book {
 	  
 	    public final class PageBuilder {
 	    	private final Book book;
-	        private ArrayList<BaseComponent> page = new ArrayList<BaseComponent>();
+	        private ArrayList<BaseComponent> page = new ArrayList<>();
 	        private final int index;
 	      
 	        private PageBuilder(Book book) { 
@@ -138,7 +138,7 @@ public class Book {
 	    	}
 	    }
 	    
-	    public static enum ClickAction {
+	    public enum ClickAction {
 	    	RUN_COMMAND(ClickEvent.Action.RUN_COMMAND), 
 	    	SUGGEST_COMMAND(ClickEvent.Action.SUGGEST_COMMAND), 
 	        OPEN_URL(ClickEvent.Action.OPEN_URL), 
@@ -148,7 +148,7 @@ public class Book {
 	        private ClickAction(ClickEvent.Action value) { this.value = value; }
 	    }
 	  
-	    public static enum HoverAction {
+	    public enum HoverAction {
 	    	SHOW_TEXT(HoverEvent.Action.SHOW_TEXT), 
 	    	SHOW_ITEM(HoverEvent.Action.SHOW_ITEM), 
 	    	SHOW_ENTITY(HoverEvent.Action.SHOW_ENTITY), 

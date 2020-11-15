@@ -8,6 +8,8 @@ import com.pwnion.legacycraft.quests.QuestManager;
 import net.md_5.bungee.api.ChatColor;
 
 public class FinishQuest {
+	
+	private FinishQuest() {}
 
 	//This is called after the player gets a quest marked as finished
 	public static void onFinishQuest(Player p, Quest quest) {

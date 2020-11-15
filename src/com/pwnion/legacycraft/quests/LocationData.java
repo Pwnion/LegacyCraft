@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 public class LocationData {
 	
-	ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
+	ArrayList<ArrayList<Object>> data = new ArrayList<>();
 	
 	LocationData(World world, Integer x, Integer y, Integer z, int radius) {
 		data.add(newArray(world, x, y, z, radius));
@@ -19,7 +19,7 @@ public class LocationData {
 	}
 	
 	public static ArrayList<Object> newArray(World world, Integer x, Integer y, Integer z, int radius) {
-		ArrayList<Object> array = new ArrayList<Object>(4);
+		ArrayList<Object> array = new ArrayList<>(4);
 		array.add(world);
 		array.add(x);
 		array.add(y);
@@ -58,7 +58,7 @@ public class LocationData {
 	
 	//Not used
 	public String serialise() {
-		String output = "";
+		StringBuilder output = new StringBuilder();
 		for(ArrayList<Object> location : data) {
 			World world = (World) location.get(0);
 			Integer x = (Integer) location.get(1);
@@ -66,17 +66,17 @@ public class LocationData {
 			Integer z = (Integer) location.get(3);
 			int radius = (int) location.get(4);
 			
-			output = output + world.getName() + "|" + x + "|" + y + "|" + z + "|" + radius + ",";
+			output.append(world.getName() + "|" + x + "|" + y + "|" + z + "|" + radius + ",");
 		}
-		return output.substring(0, output.length() - 2);
+		return output.toString().substring(0, output.length() - 2);
 	}
 	
 	public static ArrayList<ArrayList<Object>> deserialise(String data) {
-		String dataSplit[] = data.split(",");
-		ArrayList<ArrayList<Object>> output = new ArrayList<ArrayList<Object>>(dataSplit.length - 1);
+		String[] dataSplit = data.split(",");
+		ArrayList<ArrayList<Object>> output = new ArrayList<>(dataSplit.length - 1);
 		for(String locationStr : dataSplit) {
-			String locSplit[] = locationStr.split("\\|");
-			ArrayList<Object> location = new ArrayList<Object>();
+			String[] locSplit = locationStr.split("\\|");
+			ArrayList<Object> location = new ArrayList<>();
 			location.add(Bukkit.getWorld(locSplit[0]));
 			location.add(Integer.parseInt(locSplit[1]));
 			location.add(Integer.parseInt(locSplit[2]));

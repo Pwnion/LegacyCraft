@@ -15,6 +15,8 @@ import com.pwnion.legacycraft.quests.TriggerType;
 
 public class SpeakToNPC {
 	
+	private SpeakToNPC() {}
+	
 	//Called manually when a player speaks to an npc
 	public static void onSpeakToNPC(Player p, String npcName) {
 		Util.br(p.getName() + " has called onSpeakToNPC for NPC " + npcName);

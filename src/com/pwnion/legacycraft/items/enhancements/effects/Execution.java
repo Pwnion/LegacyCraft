@@ -26,10 +26,4 @@ public class Execution implements MeleeEnhancement {
 		}
 		
 	}
-
-	@Override
-	public void onEquip(ItemStack item, boolean initial) {
-
-	}
-
 }

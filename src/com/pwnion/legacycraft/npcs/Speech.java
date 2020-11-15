@@ -15,7 +15,7 @@ import net.citizensnpcs.api.npc.NPC;
 
 public class Speech {
 	
-	private static HashMap<String, ArrayList<String>> lines = new HashMap<String, ArrayList<String>>();
+	private static HashMap<String, ArrayList<String>> lines = new HashMap<>();
 	
 	private static final Random rnd = new Random();
 	
@@ -25,7 +25,7 @@ public class Speech {
 		String nodePrefix = "lines.";
 		
 		npcDataCS.getConfigurationSection("lines").getKeys(false).forEach((traitName) -> {
-			ArrayList<String> traitLines = new ArrayList<String>();
+			ArrayList<String> traitLines = new ArrayList<>();
 			
 			npcDataCS.getList(nodePrefix + traitName).forEach((line) -> {
 				traitLines.add((String) line);

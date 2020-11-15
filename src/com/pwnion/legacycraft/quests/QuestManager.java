@@ -17,9 +17,11 @@ import com.pwnion.legacycraft.quests.triggers.FinishQuest;
 import com.pwnion.legacycraft.quests.triggers.GetItem;
 
 public class QuestManager {
+	
+	private QuestManager() {}
 
 	//TEMP PUBLIC CHANGE TO PRIVATE?
-	public static HashMap<String, Quest> quests = new HashMap<String, Quest>();
+	public static HashMap<String, Quest> quests = new HashMap<>();
 	
 	public static void loadQuests() {
 		final ConfigAccessor questDataConfig = new ConfigAccessor("quest-data.yml");
@@ -29,10 +31,10 @@ public class QuestManager {
 			String name = questDataCS.getString(id + ".name");
 			String desc = questDataCS.getString(id + ".description");
 
-			ArrayList<Trigger> triggers = new ArrayList<Trigger>();
-			ArrayList<TriggerType> triggerTypes = new ArrayList<TriggerType>();
-			ArrayList<String> triggerData = new ArrayList<String>();
-			ArrayList<Integer> triggerFinishConditions = new ArrayList<Integer>();
+			ArrayList<Trigger> triggers = new ArrayList<>();
+			ArrayList<TriggerType> triggerTypes = new ArrayList<>();
+			ArrayList<String> triggerData = new ArrayList<>();
+			ArrayList<Integer> triggerFinishConditions = new ArrayList<>();
 			String nodePrefix = id + ".triggers.";
 
 			questDataCS.getList(nodePrefix + "types").forEach((trigger) -> {
@@ -90,7 +92,7 @@ public class QuestManager {
 	 * @return 				Hashmap of quests to an arraylist of quest progress
 	 */
 	public static HashMap<Quest, ArrayList<Integer>> loadUnfinishedPlayerData(UUID playerUUID) {
-		HashMap<Quest, ArrayList<Integer>> questProgressFromFile = new HashMap<Quest, ArrayList<Integer>>();
+		HashMap<Quest, ArrayList<Integer>> questProgressFromFile = new HashMap<>();
 		
 		final ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
 		final ConfigurationSection playerDataCS = playerDataConfig.getRoot();
@@ -100,7 +102,7 @@ public class QuestManager {
 		if(unfinishedCS == null) return questProgressFromFile;
 		
 		unfinishedCS.getKeys(false).forEach((quest) -> {
-			ArrayList<Integer> progress = new ArrayList<Integer>();
+			ArrayList<Integer> progress = new ArrayList<>();
 			playerDataCS.getList(nodePrefix + "unfinished." + quest).forEach((num) -> {
 				progress.add((int) num);
 			});
@@ -123,7 +125,7 @@ public class QuestManager {
 	
 	//Retrieves finished quests for player from configs
 	public static ArrayList<Quest> loadFinishedPlayerData(UUID playerUUID) {
-		ArrayList<Quest> finishedQuestsFromFile = new ArrayList<Quest>();
+		ArrayList<Quest> finishedQuestsFromFile = new ArrayList<>();
 		
 		final ConfigAccessor playerDataConfig = new ConfigAccessor("player-data.yml");
 		final ConfigurationSection playerDataCS = playerDataConfig.getRoot();
@@ -142,7 +144,7 @@ public class QuestManager {
 	//For new quests
 	//Gives quest to player
 	public static void giveQuest(Player p, Quest quest) {
-        ArrayList<Integer> progress = new ArrayList<Integer>(quest.getTriggerCount());
+        ArrayList<Integer> progress = new ArrayList<>(quest.getTriggerCount());
         for(int i = 0; i < quest.getTriggerCount(); i++) { 
             progress.add(0);
         }
@@ -173,7 +175,7 @@ public class QuestManager {
 	 * @return
 	 */
 	public static ArrayList<Quest> getActiveQuests(UUID playerUUID) {
-		ArrayList<Quest> output = new ArrayList<Quest>();
+		ArrayList<Quest> output = new ArrayList<>();
 		for(Quest quest : PlayerData.getUnfinishedQuests(playerUUID).keySet()) {
 			output.add(quest);
 		}
@@ -194,7 +196,7 @@ public class QuestManager {
 	 * @return
 	 */
 	public static HashMap<Quest, Boolean> getQuests(UUID playerUUID) {
-		HashMap<Quest, Boolean> output = new HashMap<Quest, Boolean>();
+		HashMap<Quest, Boolean> output = new HashMap<>();
 		for(Quest quest : getActiveQuests(playerUUID)) {
 			output.put(quest, false);
 		}
@@ -294,13 +296,13 @@ public class QuestManager {
 		if(hasQuestActive(p, quest)) {
 			return PlayerData.getUnfinishedQuests(p.getUniqueId()).get(quest);
 		} else if(hasQuestFinished(p, quest)) {
-			ArrayList<Integer> finishValues = new ArrayList<Integer>();
+			ArrayList<Integer> finishValues = new ArrayList<>();
 			for(Trigger trigger : quest.getTriggers()) {
 				finishValues.add(trigger.getFinishCondition());
 			}
 			return finishValues;
 		}
-		ArrayList<Integer> output = new ArrayList<Integer>();
+		ArrayList<Integer> output = new ArrayList<>();
 		for(int i = 0; i < quest.getTriggerCount(); i++) {
 			output.add(0);
 		}

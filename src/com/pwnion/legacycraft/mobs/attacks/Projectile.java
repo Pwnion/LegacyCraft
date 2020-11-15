@@ -73,7 +73,7 @@ public class Projectile extends Attack {
 		createProjectile(self, target, particle, speed, delay, amount, spacing, offset, damageRadius, damage, distance);
 	}
 	
-	static void createProjectile(LivingEntity self, Location target, ParticleBuilder particle, double speed, int delay, int amount, double spacing, @Nullable Vector offset, double damageRadius, double damage, double distance) {
+	static void createProjectile(LivingEntity self, Location target, ParticleBuilder particle, double speed, int delay, int amount, double spacing, Vector offset, double damageRadius, double damage, double distance) {
 		Location origin = self.getEyeLocation().add(offset);
 		
 		Vector targetVec = Util.getRelativeVec(origin, target);
@@ -146,12 +146,12 @@ public class Projectile extends Attack {
 
 	@Override
 	public Location getValidTarget(LCEntity self, Entity attacking) {
-		if(attacking == null || !(attacking instanceof LivingEntity)) {
-			return null;
+		if(attacking instanceof LivingEntity) {
+			Location origin = self.entity.getEyeLocation().add(offset);
+			Location targetLocation = ((LivingEntity) attacking).getEyeLocation();
+			Vector attVec = Util.getRelativeVec(origin, targetLocation).normalize().multiply(distance);
+			return origin.add(attVec);
 		}
-		Location origin = self.entity.getEyeLocation().add(offset);
-		Location targetLocation = ((LivingEntity) attacking).getEyeLocation();
-		Vector attVec = Util.getRelativeVec(origin, targetLocation).normalize().multiply(distance);
-		return origin.add(attVec);
+		return null;
 	}
 }

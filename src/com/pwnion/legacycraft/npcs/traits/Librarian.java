@@ -44,12 +44,14 @@ public class Librarian extends Trait {
     // This does NOT get called when applying the trait for the first time, only loading onto an existing npc at server start.
     // This is called AFTER onAttach so you can load defaults in onAttach and they will be overridden here.
     // This is called BEFORE onSpawn, npc.getBukkitEntity() will return null.
+	@Override
 	public void load(DataKey key) {
 		Util.br("NPC '" + npc.getName() + "' is loading for trait " + this.getName());
 		//first = false;
 	}
 
 	// Save settings for this NPC (optional). These values will be persisted to the Citizens saves file
+	@Override
 	public void save(DataKey key) {
 		Util.br("NPC '" + npc.getName() + "' is saving for trait " + this.getName());
 	}

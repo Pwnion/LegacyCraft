@@ -32,6 +32,7 @@ import com.pwnion.legacycraft.mobs.LCEntity;
 import com.pwnion.legacycraft.mobs.LCEntity.LCEntityType;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
 import com.pwnion.legacycraft.quests.Quest;
+import com.pwnion.legacycraft.quests.QuestBook;
 import com.pwnion.legacycraft.quests.QuestManager;
 
 public class OnCommand implements CommandExecutor {
@@ -169,6 +170,10 @@ public class OnCommand implements CommandExecutor {
 						break;
 					case "work": //TODO not working
 						p.sendMessage(NPCHomeWork.setWork(p, p.getLocation()));
+						break;
+					case "quest":
+					case "quests":
+						QuestBook.open(p);
 						break;
 					case "complete":
 						for(Quest quest : QuestManager.getActiveQuests(p)) {

@@ -14,6 +14,8 @@ import com.pwnion.legacycraft.quests.Trigger;
 import com.pwnion.legacycraft.quests.TriggerType;
 
 public class GetItem {
+	
+	private GetItem() {}
 
 	//Called from InventoryClick, InventoryDrag, EntityPickupItem, and when a quest is given to a player (QuestManager)
 	public static void updateItemQuests(Player p) {

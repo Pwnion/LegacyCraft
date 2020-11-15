@@ -12,6 +12,8 @@ import com.pwnion.legacycraft.quests.Trigger;
 import com.pwnion.legacycraft.quests.TriggerType;
 
 public class KillEntity {
+	
+	private KillEntity() {}
 
 	// Called from EntityDeath in Listeners
 	public static void onPlayerKilledEntity(Player p, EntityType dead) {

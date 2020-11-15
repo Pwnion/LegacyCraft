@@ -49,12 +49,12 @@ public class Wave extends Projectile {
 	
 	@Override
 	public Location getValidTarget(LCEntity self, Entity attacking) {
-		if(attacking == null || !(attacking instanceof LivingEntity)) {
-			return null;
+		if(attacking instanceof LivingEntity) {
+			Location origin = self.entity.getEyeLocation().add(offset);
+			Location targetLocation = ((LivingEntity) attacking).getEyeLocation();
+			Vector attVec = Util.getRelativeVec(origin, targetLocation).setY(0).normalize().multiply(distance);
+			return origin.add(attVec);
 		}
-		Location origin = self.entity.getEyeLocation().add(offset);
-		Location targetLocation = ((LivingEntity) attacking).getEyeLocation();
-		Vector attVec = Util.getRelativeVec(origin, targetLocation).setY(0).normalize().multiply(distance);
-		return origin.add(attVec);
+		return null;
 	}
 }

@@ -18,7 +18,7 @@ public class Quest {
 		this.name = name;
 		this.desc = desc;
 		this.nextQuest = null;
-		ArrayList<Trigger> triggers = new ArrayList<Trigger>();
+		ArrayList<Trigger> triggers = new ArrayList<>();
 		triggers.add(trigger);
 		this.triggers = triggers;
 	}
@@ -73,7 +73,7 @@ public class Quest {
 	 * @return
 	 */
 	public ArrayList<Trigger> getTriggers(TriggerType type) {
-		ArrayList<Trigger> output = new ArrayList<Trigger>();
+		ArrayList<Trigger> output = new ArrayList<>();
 		for(Trigger trigger : triggers) {
 			if(trigger.getType() == type) {
 				output.add(trigger);

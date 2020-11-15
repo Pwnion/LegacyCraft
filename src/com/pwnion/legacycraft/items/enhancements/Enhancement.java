@@ -28,7 +28,7 @@ import com.pwnion.legacycraft.items.ItemType;
  */
 public interface Enhancement {
 	
-	static final HashMap<String, Enhancement> registeredEnhancements = new HashMap<String, Enhancement>();
+	static final HashMap<String, Enhancement> registeredEnhancements = new HashMap<>();
 	
 	public static void register(Enhancement... enhancements) {
 		for(Enhancement enh : enhancements) {
@@ -48,7 +48,7 @@ public interface Enhancement {
 	 */
 	public static Enhancement fromName(String name) {
 		
-		String input = name;
+		// String input = name;
 		name = name.replace("_", " ").toLowerCase().trim();
 		
 		return registeredEnhancements.get(name);

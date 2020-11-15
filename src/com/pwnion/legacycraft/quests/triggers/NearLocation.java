@@ -13,6 +13,8 @@ import com.pwnion.legacycraft.quests.TriggerType;
 
 
 public class NearLocation {
+	
+	private NearLocation() {}
 
 	//static HashSet<UUID> activePlayers = new HashSet<UUID>();
 	
