@@ -379,6 +379,18 @@ public class OnCommand implements CommandExecutor {
 	    		}
 	    	}
 	    	
+	    	/**
+	    	 * The given node must be a sibling of this one. 
+	    	 * 
+	    	 * @param data The data of the node to link from.
+	    	 */
+	    	public void linkNodes(T data) {
+	    		Node<T> child = parent.getChild(data);
+	    		if (child != null) {
+	    			children = child.children;
+	    		}
+	    	}
+	    	
 	    	public Node<T> getChild(T data) {
 	    		for (Node<T> child : children) {
 	    			if (child.data.equals(data)) {
@@ -391,6 +403,10 @@ public class OnCommand implements CommandExecutor {
 			public Node<T> up() {
 	    		return parent;
 	    	}
+			
+			public Node<T> down(int index) {
+				return children.get(index);
+			}
 	    	
 	    	public Node<T> down(T data) {
 	    		Node<T> node = new Node<T>(this, data);
@@ -398,32 +414,38 @@ public class OnCommand implements CommandExecutor {
 	    		return node;
 	    	}
 	    	
-	    	public ArrayList<Node<T>> end(T... data) {
+	    	public Node<T> end(T... data) {
 	    		for (T d : data) {
 	    			down(d);
 	    		}
-	    		return children;
+	    		return this;
 	    	}
 	    	
-	    	public ArrayList<Node<T>> end(Collection<T> data) {
+	    	public Node<T> end(Collection<T> data) {
 	    		for (T d : data) {
 	    			down(d);
 	    		}
-	    		return children;
+	    		return this;
 	    	}
 	    }
 	}
 	
 	static Tree<String> tree = new Tree<>("lc");
 	static {
-		tree.root.end("class", "pos1", "pos2", "export", "save", "load", "home", "work", "quest", "quests", "complete", "uid", "uitem", "setstat", "desc");
-		tree.root.down("portal").end(Util.toString(Portal.values()));
-		tree.root.down("summon").end(Util.toString(LCEntityType.values()));
-		tree.root.down("settype").end(Util.toString(ItemType.values()));
-		tree.root.down("settier").end(Util.toString(ItemTier.values()));
+		tree.root.end("class", "pos1", "pos2", "export", "home", "work", "quest", "quests", "complete", "uid", "uitem", "desc");
+		tree.root.down("portal").end(Util.toStringLowerCase(Portal.values()));
+		tree.root.down("summon").end(Util.toStringLowerCase(LCEntityType.values()));
+		tree.root.down("settype").end(Util.toStringLowerCase(ItemType.values()));
+		tree.root.down("settier").end(Util.toStringLowerCase(ItemTier.values()));
 		tree.root.down("enhance").end(Enhancement.allNames());
 		
-		tree.root.down("generate").end(Util.toString(ItemTier.values())).get(0).end(Util.toString(ItemType.values())).get(0).up().linkSiblingNodes();
+		tree.root.down("generate").end(Util.toStringLowerCase(ItemTier.values())).down(0).end(Util.toStringLowerCase(ItemType.values())).linkSiblingNodes();
+		tree.root.down("gen").linkNodes("generate");
+		
+		tree.root.down("setstat").end(Util.toStringLowerCase(ItemStat.values())).down(0).end("<value>").linkSiblingNodes();
+		
+		tree.root.down("save").end("config.yml", "player-data-template.yml").down(0).end("<name>").linkSiblingNodes();
+		tree.root.down("load").linkNodes("save");
 	}
 	
 	public static class LCTabCompleter implements TabCompleter {
@@ -431,12 +453,10 @@ public class OnCommand implements CommandExecutor {
 		@Override
 		public List<String> onTabComplete(CommandSender cs, Command cmd, String lbl, String[] args) {
 			Player p;
-			UUID playerUUID;
 			
 			//Ensure the command sender is a player
 			if(cs instanceof Player) {
 				p = (Player) cs;
-				playerUUID = p.getUniqueId();
 			} else {
 				return null;
 			}
@@ -444,10 +464,11 @@ public class OnCommand implements CommandExecutor {
 			if(p.hasPermission("legacycraft.op")) {
 				if(lbl.equals("legacycraft") || cmd.getAliases().contains(lbl)) {
 					Node<String> curNode = tree.get(args, 0, args.length - 1);
-					if (curNode != null) {
+					if(curNode != null) {
 						ArrayList<String> childrenData = new ArrayList<>(curNode.children.size());
-			    		for (Node<String> child : curNode.children) {
-			    			if (child.data.startsWith(args[args.length - 1])) {
+			    		for(Node<String> child : curNode.children) {
+			    			String curArg = args[args.length - 1];
+			    			if(child.data.startsWith(curArg)) {
 			    				childrenData.add(child.data);
 			    			}
 			    		}

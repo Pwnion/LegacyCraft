@@ -80,6 +80,22 @@ public class Util {
 	}
 	
 	/**
+	 * Gets the sequence of integers from begin (inclusive) to end (inclusive)
+	 * e.g. 1, 5 returns 1, 2, 3, 4, 5
+	 * 
+	 * @param begin the number to start adding from
+	 * @param end	the number to end adding at
+	 * @return		the sequence
+	 */
+	public static ArrayList<Integer> getSequence(int begin, int end) {
+		ArrayList<Integer> out = new ArrayList<>(end - begin + 1);
+		  for (int i = begin; i <= end; i++) {
+		    out.add(i);
+		  }
+		  return out; 
+	}
+	
+	/**
 	 * Random double between the given range [min,max)
 	 * 
 	 * @param min	minimum value inclusive
@@ -130,6 +146,14 @@ public class Util {
 	
 	public static String[] toString(Object[] elements) {
 		return Arrays.stream(elements).map(Object::toString).toArray(String[]::new);
+	}
+	
+	public static <T> String[] toString(Collection<T> elements) {
+		return Arrays.stream(elements.toArray()).map(Object::toString).toArray(String[]::new);
+	}
+	
+	public static String[] toStringLowerCase(Object[] elements) {
+		return Arrays.stream(elements).map(Object::toString).map(String::toLowerCase).toArray(String[]::new);
 	}
 	
 	/**

@@ -96,12 +96,6 @@ public class LegacyCraft extends JavaPlugin {
 			new EntityTarget()
 		);
 		
-		//Register commands
-		registerCommands(
-		    "legacycraft",
-		    "test"
-		);
-		
 		//Register enhancements
 		Enhancement.register(
 			new BladeDancer(),
@@ -112,6 +106,12 @@ public class LegacyCraft extends JavaPlugin {
 			new IndomitableSpirit(),
 			new Puncture(),
 			new Relentless()
+		);
+		
+		//Register commands
+		registerCommands(
+		    "legacycraft",
+		    "test"
 		);
 		
 		//Runs the run() method once per game tick
