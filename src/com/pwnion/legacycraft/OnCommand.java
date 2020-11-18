@@ -21,16 +21,11 @@ import com.pwnion.legacycraft.abilities.areas.Selection;
 import com.pwnion.legacycraft.abilities.inventory.CharacterBuildMenuInv;
 import com.pwnion.legacycraft.abilities.ooc.Portal;
 import com.pwnion.legacycraft.abilities.targets.Point;
-import com.pwnion.legacycraft.items.ItemData;
 import com.pwnion.legacycraft.items.ItemManager;
 import com.pwnion.legacycraft.items.ItemStat;
 import com.pwnion.legacycraft.items.ItemTier;
 import com.pwnion.legacycraft.items.ItemType;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
-import com.pwnion.legacycraft.levelling.Experience;
-import com.pwnion.legacycraft.levelling.ExperienceType;
-import com.pwnion.legacycraft.mobs.LCEntity;
-import com.pwnion.legacycraft.mobs.LCEntity.LCEntityType;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;
 import com.pwnion.legacycraft.quests.Quest;
 import com.pwnion.legacycraft.quests.QuestManager;
@@ -294,6 +289,7 @@ public class OnCommand implements CommandExecutor {
 				}
 			} else if(lbl.equals("test")) {
 				try {
+					/*
 					ItemStack item = p.getInventory().getItemInMainHand();
 					ItemData itemData = ItemManager.generateItem(item, ItemTier.STABLE, ItemType.SHORTSWORD);
 					ItemManager.updateLore(item);
@@ -309,11 +305,11 @@ public class OnCommand implements CommandExecutor {
 					}
 
 					//QuestBook.open(p);
+					*/
 					
 					ItemMeta itemMeta = p.getInventory().getItemInMainHand().getItemMeta();
 					Util.br(String.valueOf(itemMeta.hasCustomModelData()));
 					Util.br(itemMeta.getCustomModelData());
-					
 				} catch(Exception e) {
 					Util.print(e);
 				}
