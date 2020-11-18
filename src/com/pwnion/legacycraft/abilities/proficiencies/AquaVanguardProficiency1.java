@@ -18,10 +18,10 @@ import org.bukkit.potion.PotionEffectType;
 
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.Util;
-import com.pwnion.legacycraft.abilities.IHotbarActivatedAbility;
+import com.pwnion.legacycraft.abilities.HotbarAbility;
 import com.pwnion.legacycraft.abilities.areas.Selection;
 
-public class AquaVanguardProficiency1 implements IHotbarActivatedAbility {
+public class AquaVanguardProficiency1 extends HotbarAbility {
 	
 	@Override
 	public final String activate(Player p) {
@@ -74,6 +74,7 @@ public class AquaVanguardProficiency1 implements IHotbarActivatedAbility {
 			}
 		}, time);
 		
+		cooldown(p, HotbarAbility.Type.PROFICIENCY1, 40);
 		return ChatColor.DARK_GREEN + "Casted Ice Block!";
 	}
 
@@ -165,5 +166,4 @@ private static Set<Block> ChangeBlocksToIce(Location centre, HashMap<Location, M
 	private static double distance(Location loc1, int x2, int y2, int z2) {
 		return distance(loc1, new Location(null, x2, y2, z2));
 	}
-
 }

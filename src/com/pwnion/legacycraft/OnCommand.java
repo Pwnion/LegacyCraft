@@ -310,11 +310,11 @@ public class OnCommand implements CommandExecutor {
 					}
 
 					//QuestBook.open(p);
+					*/
 					
 					ItemMeta itemMeta = p.getInventory().getItemInMainHand().getItemMeta();
 					Util.br(String.valueOf(itemMeta.hasCustomModelData()));
-					Util.br(itemMeta.getCustomModelData()); //*/
-					
+					Util.br(itemMeta.getCustomModelData());
 				} catch(Exception e) {
 					Util.print(e);
 				}

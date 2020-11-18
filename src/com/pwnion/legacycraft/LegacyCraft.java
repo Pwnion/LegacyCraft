@@ -26,7 +26,7 @@ import com.pwnion.legacycraft.quests.QuestManager;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.trait.Trait;
 import net.citizensnpcs.api.trait.TraitInfo;
- 
+
 public class LegacyCraft extends JavaPlugin {
 
 	//Declare lots of variables that can be accessed by this classes getter and setter methods

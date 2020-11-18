@@ -28,6 +28,7 @@ import com.pwnion.legacycraft.abilities.inventory.SelectAnAspectInv;
 import com.pwnion.legacycraft.abilities.inventory.WarpGatesInv;
 import com.pwnion.legacycraft.abilities.inventory.WeaponEnhancementsInv;
 import com.pwnion.legacycraft.quests.triggers.GetItem;
+import com.pwnion.legacycraft.abilities.HotbarAbility;
 import com.pwnion.legacycraft.abilities.SkillTree;
 import com.pwnion.legacycraft.abilities.SkillTree.Aspect;
 import com.pwnion.legacycraft.abilities.SkillTree.PlayerClass;
@@ -116,10 +117,10 @@ public class InventoryClick implements Listener {
         		return;
         	}
         	
-    		if(clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.AIR)) {
+    		if(HotbarAbility.Type.getMaterials().contains(clickedItem.getType()) && cursorItem.getType().equals(Material.AIR)) {
 	        	//Picking up ability
     			PlayerData.setSwapSlot(playerUUID, clickedSlot);
-	        } else if((clickedItem.getType().equals(Material.IRON_HOE) && cursorItem.getType().equals(Material.IRON_HOE))) {
+	        } else if((HotbarAbility.Type.getMaterials().contains(clickedItem.getType()) && HotbarAbility.Type.getMaterials().contains(cursorItem.getType()))) {
     			//Swapping abilities
 	        	Bukkit.getServer().getScheduler().runTask(LegacyCraft.getPlugin(), new Runnable() {
 	        		public void run() {
@@ -127,7 +128,7 @@ public class InventoryClick implements Listener {
 	    	        	p.setItemOnCursor(null);
 	        		}
 	        	});
-	        } else if (cursorItem.getType().equals(Material.IRON_HOE)) {
+	        } else if (HotbarAbility.Type.getMaterials().contains(cursorItem.getType())) {
 	        	e.setCancelled(true);
 	        	p.getOpenInventory().setItem(PlayerData.getSwapSlot(playerUUID), cursorItem);
 	        	p.setItemOnCursor(null);

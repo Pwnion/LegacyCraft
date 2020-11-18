@@ -3,7 +3,9 @@ package com.pwnion.legacycraft.abilities.proficiencies;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class AerRogueProficiency1 {
+import com.pwnion.legacycraft.abilities.HotbarAbility;
+
+public class AerRogueProficiency1 extends HotbarAbility {
 	//Template
 	
 	/*
@@ -27,10 +29,11 @@ public class AerRogueProficiency1 {
 	 * @param p Player to activate for
 	 * @return Message shown to player
 	 */
-	public static String activate(Player p) {
-		
-		//Code
-		
+	
+	@Override
+	public String activate(Player p) {
+		//pass
+		cooldown(p, HotbarAbility.Type.PROFICIENCY1, 40);
 		return ChatColor.DARK_GREEN + "Casted Smoke Screen!";
 	}
 }

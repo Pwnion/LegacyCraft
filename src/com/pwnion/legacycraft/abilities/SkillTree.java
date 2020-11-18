@@ -148,8 +148,11 @@ public class SkillTree {
 		String savePath;
 		ItemStack inv[];
 		if(classNotOther) {
-			savePath = nodePrefix + playerClass.toString() + ".save.";
 			inv = getInventory(playerClass);
+			
+			savePath = nodePrefix + playerClass.toString() + ".save.";
+			Location loc = (Location) playerDataCS.get(savePath + "location");
+			p.teleport(loc);
 		} else {
 			savePath = nodePrefix + ".save.";
 			inv = getInventory();
@@ -157,14 +160,13 @@ public class SkillTree {
 		
 		if(inv.length == 0) return;
 		
-		Location loc = (Location) playerDataCS.get(savePath + "location");
+		
 		double health = playerDataCS.getDouble(savePath + "health");
 		int hunger = playerDataCS.getInt(savePath + "hunger");
 		
         p.getInventory().setContents(inv);
         p.setHealth(health);
         p.setFoodLevel(hunger);
-        p.teleport(loc);
 	}
 	
 	public final void setInventory(PlayerClass playerClass, ItemStack[] inv) {
