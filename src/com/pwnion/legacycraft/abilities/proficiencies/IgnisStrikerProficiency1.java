@@ -3,7 +3,9 @@ package com.pwnion.legacycraft.abilities.proficiencies;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class IgnisStrikerProficiency1 {
+import com.pwnion.legacycraft.abilities.HotbarAbility;
+
+public class IgnisStrikerProficiency1 extends HotbarAbility {
 	
 	
 	/*
@@ -29,11 +31,11 @@ public class IgnisStrikerProficiency1 {
 	 * @param p Player to activate for
 	 * @return Message shown to player
 	 */
-	public static String activate(Player p) {
-		
-		//Code
-		
-		
+	
+	@Override
+	public String activate(Player p) {
+		//pass
+		cooldown(p, HotbarAbility.Type.PROFICIENCY1, 40);
 		return ChatColor.DARK_GREEN + "Casted Magma Wave!";
 	}
 }

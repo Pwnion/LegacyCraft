@@ -18,13 +18,13 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import com.pwnion.legacycraft.LegacyCraft;
-import com.pwnion.legacycraft.abilities.IHotbarActivatedAbility;
+import com.pwnion.legacycraft.abilities.HotbarAbility;
 import com.pwnion.legacycraft.abilities.Movement;
 import com.pwnion.legacycraft.abilities.Pathfinding;
 import com.pwnion.legacycraft.abilities.areas.RectangularPrism;
 import com.pwnion.legacycraft.abilities.areas.Square;
 
-public class TerraVanguardProficiency1 implements IHotbarActivatedAbility {
+public class TerraVanguardProficiency1 extends HotbarAbility {
 	private static final int height = 10;
 	private static final int radius = 2;
 	
@@ -163,6 +163,7 @@ public class TerraVanguardProficiency1 implements IHotbarActivatedAbility {
 			}, 20 + (iThread + 1) * 2);
 		}
 		
+		cooldown(p, HotbarAbility.Type.PROFICIENCY1, 40);
 		return ChatColor.DARK_GREEN + "Casted Earth Pillar!";
 	}
 }

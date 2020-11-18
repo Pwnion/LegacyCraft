@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.pwnion.legacycraft.PlayerData;
+import com.pwnion.legacycraft.abilities.HotbarAbility;
 import com.pwnion.legacycraft.abilities.SkillTree;
 import com.pwnion.legacycraft.abilities.SkillTree.Aptitude;
 import com.pwnion.legacycraft.abilities.SkillTree.Aspect;
@@ -67,20 +68,20 @@ public class BuildInv extends Inv {
 		PlayerClass openedClass = PlayerData.getClassInventoryOpen(playerUUID);
 		Aspect openedAspect = PlayerData.getAspectInventoryOpen(playerUUID);
 		
-		Consumer<Boolean> putAbilityInInv = (aptitude) -> {
+		Consumer<HotbarAbility.Type> putAbilityInInv = (hotbarAbilityType) -> {
 			Build openedBuild = skillTree.getBuild(openedClass, openedAspect);
+			boolean aptitude = hotbarAbilityType == HotbarAbility.Type.APTITUDE1 || hotbarAbilityType == HotbarAbility.Type.APTITUDE2;
 			
-			int slotOffset = (int) (Math.floor(clickedSlot / (aptitude ? 29 : 35))) + (aptitude ? 1 : 3);
 			int customModelData = -1;
 			Build builds[] = SkillTree.Build.values();
 			for(int i = 1; i < builds.length; i++) {
 				if(builds[i].equals(openedBuild)) {
-					customModelData = aptitude ? ((2 * (((int) (i - 1) / 4) + 1)) - (clickedSlot == 28 ? 1 : 0)) : (8 + (2 * i) - (clickedSlot == 34 ? 1 : 0));
+					customModelData = aptitude ? ((int) ((i - 1) / 4)) + 1 : i;
 					break;
 				}
 			}
 			
-			ItemStack ability = new ItemStack(Material.IRON_HOE);
+			ItemStack ability = new ItemStack(hotbarAbilityType.getMaterial());
 			ItemMeta abilityItemMeta = ability.getItemMeta();
 			abilityItemMeta.setDisplayName("Placeholder");
 			abilityItemMeta.setCustomModelData(customModelData);
@@ -95,6 +96,7 @@ public class BuildInv extends Inv {
 				return null;
 			};
 			
+			int slotOffset = (int) (Math.floor(clickedSlot / (aptitude ? 29 : 35))) + (aptitude ? 1 : 3);
 			Function<ItemStack[], ItemStack[]> editInv = (invToEdit) -> {
 				ItemStack temp[] = invToEdit;
 				int hotbarIndex = calcFirstBarrierIndex.apply(invToEdit) + slotOffset;
@@ -171,7 +173,7 @@ public class BuildInv extends Inv {
 				skillTree.setEquippedAptitude(openedClass, clickedAptitude);
 				inv.getItem(clickedSlot).setType(Material.ENCHANTED_BOOK);
 
-				putAbilityInInv.accept(true);
+				putAbilityInInv.accept(clickedSlot == 28 ? HotbarAbility.Type.APTITUDE1 : HotbarAbility.Type.APTITUDE2);
 				
 				click(p);
 				//Fancy particle effects and stuff
@@ -217,7 +219,7 @@ public class BuildInv extends Inv {
 				skillTree.setEquippedProficiency(build, clickedProficiency);
 				inv.getItem(clickedSlot).setType(Material.ENCHANTED_BOOK);
 				
-				putAbilityInInv.accept(false);
+				putAbilityInInv.accept(clickedSlot == 34 ? HotbarAbility.Type.PROFICIENCY1 : HotbarAbility.Type.PROFICIENCY2);
 				
 				click(p);
 				
