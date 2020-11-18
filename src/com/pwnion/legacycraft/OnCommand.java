@@ -19,7 +19,6 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import com.pwnion.legacycraft.OnCommand.Tree.Node;
 import com.pwnion.legacycraft.abilities.areas.Selection;
@@ -31,8 +30,6 @@ import com.pwnion.legacycraft.items.ItemStat;
 import com.pwnion.legacycraft.items.ItemTier;
 import com.pwnion.legacycraft.items.ItemType;
 import com.pwnion.legacycraft.items.enhancements.Enhancement;
-import com.pwnion.legacycraft.levelling.Experience;
-import com.pwnion.legacycraft.levelling.ExperienceType;
 import com.pwnion.legacycraft.mobs.LCEntity;
 import com.pwnion.legacycraft.mobs.LCEntity.LCEntityType;
 import com.pwnion.legacycraft.npcs.NPCHomeWork;

@@ -1,8 +1,5 @@
 package com.pwnion.legacycraft.mobs.attacks;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import javax.annotation.Nullable;
 
 import org.bukkit.Bukkit;
@@ -15,7 +12,6 @@ import org.bukkit.util.Vector;
 import com.destroystokyo.paper.ParticleBuilder;
 import com.pwnion.legacycraft.LegacyCraft;
 import com.pwnion.legacycraft.Util;
-import com.pwnion.legacycraft.abilities.areas.Line;
 import com.pwnion.legacycraft.mobs.LCEntity;
 
 /**

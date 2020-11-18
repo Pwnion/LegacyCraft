@@ -33,6 +33,8 @@ public class EntityTarget implements Listener {
 		case TARGET_ATTACKED_OWNER:
 			LCEntity.addAttacking(entity, target);
 			break;
+		default:
+			break;
 		}
 	}
 

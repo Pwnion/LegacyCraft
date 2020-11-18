@@ -5,7 +5,6 @@ import java.util.UUID;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 
 import com.pwnion.legacycraft.PlayerData;
 import com.pwnion.legacycraft.Util;

@@ -5,7 +5,6 @@ import org.bukkit.event.EventHandler;
 
 import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.npcs.GoPlaces;
-import com.pwnion.legacycraft.quests.Quest;
 import com.pwnion.legacycraft.quests.QuestManager;
 import com.pwnion.legacycraft.quests.triggers.SpeakToNPC;
 

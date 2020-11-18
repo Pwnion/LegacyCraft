@@ -1,7 +1,6 @@
 package com.pwnion.legacycraft.items;
 
 import java.util.EnumMap;
-import java.util.HashMap;
 
 import com.pwnion.legacycraft.Util;
 
