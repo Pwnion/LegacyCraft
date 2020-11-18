@@ -9,18 +9,13 @@ import com.pwnion.legacycraft.items.enhancements.MeleeEnhancement;
 
 public class Puncture implements MeleeEnhancement {
 
-	@Override
-	public String getName() {
-		return "Puncture";
-	}
-	
 	private static final double PROC_RATE = 0.4; //Chance to trigger
 	private static final double CONT_RATE = 0.8; //Chance to continue
 	private static final int DAMAGE = 1; //Damage dealt
 	private static final int DELAY = 20; //Delay between damages
 
 	@Override
-	public void onHit(LivingEntity wielder, LivingEntity target, double damage) {
+	public void onHit(ItemStack item, LivingEntity wielder, LivingEntity target, double damage) {
 		if (Math.random() < PROC_RATE) {
 			wielder.sendMessage("Opponent is bleeding"); // TODO: Choose colour and text
 			int count = 1;
@@ -28,6 +23,7 @@ public class Puncture implements MeleeEnhancement {
 
 			LegacyCraft.addTaskToBeCancelled(Bukkit.getServer().getScheduler().runTaskTimer(LegacyCraft.getPlugin(), new Runnable() {
 				public void run() {
+					//Puncture does not effect NoDamageTicks Invincibility but is still affected by it.
 					int prev = target.getNoDamageTicks();
 					target.damage(DAMAGE);
 					target.setNoDamageTicks(prev);

@@ -15,7 +15,9 @@ import net.citizensnpcs.api.npc.NPC;
 
 public class Speech {
 	
-	private static HashMap<String, ArrayList<String>> lines = new HashMap<String, ArrayList<String>>();
+	private static HashMap<String, ArrayList<String>> lines = new HashMap<>();
+	
+	private static final Random rnd = new Random();
 	
 	public static void loadFiles() {
 		final ConfigAccessor npcDataConfig = new ConfigAccessor("npc-data.yml");
@@ -23,7 +25,7 @@ public class Speech {
 		String nodePrefix = "lines.";
 		
 		npcDataCS.getConfigurationSection("lines").getKeys(false).forEach((traitName) -> {
-			ArrayList<String> traitLines = new ArrayList<String>();
+			ArrayList<String> traitLines = new ArrayList<>();
 			
 			npcDataCS.getList(nodePrefix + traitName).forEach((line) -> {
 				traitLines.add((String) line);
@@ -38,9 +40,8 @@ public class Speech {
 	}
 	
 	public static String getRnd(NPC npc, String traitName, Player p) {
-		Random rand = new Random(); 
 		ArrayList<String> list = lines.get(traitName.toLowerCase());
-		String line = list.get(rand.nextInt(list.size()));
+		String line = list.get(rnd.nextInt(list.size()));
 		line = line.replace("[PLAYER]", p.getName());
 		line = line.replace("[NPC]", npc.getName());
 		return line;

@@ -2,14 +2,11 @@ package com.pwnion.legacycraft.items.enhancements.effects;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.ItemStack;
+
 import com.pwnion.legacycraft.items.enhancements.MeleeEnhancement;
 
 public class Relentless implements MeleeEnhancement {
-
-	@Override
-	public String getName() {
-		return "Relentless";
-	}
 	
 	private int lastHit = Bukkit.getCurrentTick();
 	private int consecHits = 0; //Consecutive hits
@@ -18,7 +15,7 @@ public class Relentless implements MeleeEnhancement {
 	private static final int MAX_DELAY = 40; //max delay allowed between damages
 
 	@Override
-	public void onHit(LivingEntity wielder, LivingEntity target, double damage) {
+	public void onHit(ItemStack item, LivingEntity wielder, LivingEntity target, double damage) {
 		int curTime = Bukkit.getCurrentTick();
 		if(curTime - lastHit <= MAX_DELAY) {
 			consecHits++;

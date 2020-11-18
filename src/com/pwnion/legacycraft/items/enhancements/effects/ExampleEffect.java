@@ -23,12 +23,12 @@ public class ExampleEffect implements Enhancement {
 	}
 	
 	@Override
-	public void onHit(LivingEntity wielder, LivingEntity target, double damage) {
+	public void onHit(ItemStack item, LivingEntity wielder, LivingEntity target, double damage) {
 		target.damage(5);
 	}
 
 	@Override
-	public void onSwing(LivingEntity wielder) {
+	public void onSwing(ItemStack item, LivingEntity wielder) {
 		
 	}
 

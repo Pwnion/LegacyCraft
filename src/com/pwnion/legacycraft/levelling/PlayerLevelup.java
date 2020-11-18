@@ -8,7 +8,6 @@ public class PlayerLevelup {
 	
 	//This is an event class that would be called when a player levels up in an experience type
 	
-	
 	//Occurs before experience is saved
 	public static void onPlayerLevelup(Player p, Experience experience, ExperienceType experienceType, int newExperience) {
 		int newLevel = experience.getLevel(newExperience, experienceType);

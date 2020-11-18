@@ -95,19 +95,34 @@ public class PlayerData {
 	public static void setLastAttack(UUID playerUUID, int value) {
 		playerData.get(playerUUID).put(PlayerDataType.LAST_ATTACK, value);
 	}
+	
+	public static <T> T get(PlayerDataType type, UUID playerUUID) throws ClassCastException {
+		return (T) playerData.get(playerUUID).get(type);
+	}
+
+	//Not tested
+	public static <T> void set(PlayerDataType type, UUID playerUUID, T value) throws Exception {
+		if(type.clazz != value.getClass()) {
+			throw new Exception();
+		}
+		playerData.get(playerUUID).put(type, value);
+	}
  	
  	public static void generate(Player p) {
  		UUID playerUUID = p.getUniqueId();
  		HashMap<PlayerDataType, Object> data = new HashMap<PlayerDataType, Object>();
  		for(PlayerDataType type : PlayerDataType.values()) {
  			data.put(type, type.getDefault());
- 			
  		}
  		playerData.put(playerUUID, data);
  		setSkillTree(playerUUID, new SkillTree(p));
  		setUnfinishedQuests(playerUUID, QuestManager.loadUnfinishedPlayerData(playerUUID));
  		setFinishedQuests(playerUUID, QuestManager.loadFinishedPlayerData(playerUUID));
  		setExperience(playerUUID, new Experience(p));
+ 	}
+ 	
+ 	public static void remove(UUID playerUUID) {
+ 		playerData.remove(playerUUID);
  	}
  	
  	private static enum PlayerDataType {
@@ -122,13 +137,16 @@ public class PlayerData {
  		EXPERIENCE(Experience.class),
  		LAST_ATTACK(-1);
 
+ 		private final Class<?> clazz;
  		private final Object defaultt;
  	 
- 		PlayerDataType(Class<?> classOfDefault) {
+ 		<T> PlayerDataType(Class<T> classOfDefault) {
+ 			this.clazz = classOfDefault;
  	 		this.defaultt = null;
  	 	}
  		
- 	 	PlayerDataType(Object defaultt) {
+ 		<T> PlayerDataType(T defaultt) {
+ 			clazz = (Class<T>) defaultt.getClass();
  	 		this.defaultt = defaultt;
  	 	}
 

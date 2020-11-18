@@ -26,23 +26,24 @@ public class Line {
 		return line;
 	}
 	
-	public static final ArrayList<Vector> get(Vector vector) {
-		int length = (int) Math.ceil(vector.length());
+	public static final ArrayList<Vector> get(Vector vector, double spacing) {
+		double length = vector.length();
+		vector.normalize();
 		ArrayList<Vector> line = new ArrayList<Vector>();
-		for(int i = length; i >= 0; i -= 1) {
-   			line.add(vector.clone().normalize().multiply(i));
+		for(double i = 0; i <= length; i += spacing) {
+   			line.add(vector.clone().multiply(i));
     	}
     	return line;
 	}
 	
 	public static final HashSet<BlockVector> getBlockVectors(Vector vector) {
-		return Util.approxBlocks(get(vector));
+		return Util.approxBlocks(get(vector, 1));
 	}
 	
 	public static final ArrayList<Block> get(Location centre, Vector vector) {
 		ArrayList<Block> line = new ArrayList<Block>();
 		
-		for(Vector pointOnLine : get(vector)) {
+		for(Vector pointOnLine : get(vector, 1)) {
 			line.add(centre.clone().add(pointOnLine).getBlock());
 		}
 		

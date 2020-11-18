@@ -11,47 +11,46 @@ import com.pwnion.legacycraft.quests.QuestManager;
 import com.pwnion.legacycraft.quests.Trigger;
 import com.pwnion.legacycraft.quests.TriggerType;
 
-
 public class NearLocation {
 
-	//static HashSet<UUID> activePlayers = new HashSet<UUID>();
-	
-	//Called from onMove in Listeners
+	private NearLocation() {
+	}
+
+	// static HashSet<UUID> activePlayers = new HashSet<UUID>();
+
+	// Called from onMove in Listeners
 	public static void onPlayerMove(Player p) {
-		
+
 		try {
-		//if(activePlayers.contains(p.getUniqueId())) {
-			for(Quest quest : QuestManager.getActiveQuests(p)) {
-				if(quest.hasTrigger(TriggerType.LOCATION)) {
-					ArrayList<Trigger> triggers = quest.getTriggers();	
-					for(int i = 0; i < triggers.size(); i++) { //GET CHECKED
-						Trigger trigger = triggers.get(i);
-						if(trigger.getName() == TriggerType.LOCATION) {
-							LocationData LocationData = trigger.getLocationData();
-							if(LocationData.isPlayerHere(p)) {
-								QuestManager.addProgress(p, quest, i);
-								break;
-							}
+			// if(activePlayers.contains(p.getUniqueId())) {
+			for (Quest quest : QuestManager.getActiveQuests(p)) {
+				if (quest.hasTrigger(TriggerType.LOCATION)) {
+					ArrayList<Trigger> triggers = quest.getTriggers(TriggerType.LOCATION);
+					for (Trigger trigger : triggers) {
+						LocationData locationData = trigger.getLocationData();
+						if (locationData.isPlayerHere(p)) {
+							QuestManager.addProgress(p, quest, trigger);
+							break;
 						}
 					}
 				}
 			}
-		//}
-		} catch(Exception ex) {
+			// }
+		} catch (Exception ex) {
 			Util.print(ex);
 		}
 	}
-	
-	//Possible resource / speed improvement methods
+
+	// Possible resource / speed improvement methods
 	public static void playerJoin(UUID playerUUID) {
-		//if(QuestManager.hasActiveTrigger(playerUUID, TriggerType.LOCATION)) {
-		//	activePlayers.add(playerUUID);
-		//}
+		// if(QuestManager.hasActiveTrigger(playerUUID, TriggerType.LOCATION)) {
+		// activePlayers.add(playerUUID);
+		// }
 	}
-	
+
 	public static void playerQuit(UUID playerUUID) {
-		//if(QuestManager.hasActiveTrigger(playerUUID, TriggerType.LOCATION)) {
-		//	activePlayers.remove(playerUUID);
-		//}
+		// if(QuestManager.hasActiveTrigger(playerUUID, TriggerType.LOCATION)) {
+		// activePlayers.remove(playerUUID);
+		// }
 	}
 }

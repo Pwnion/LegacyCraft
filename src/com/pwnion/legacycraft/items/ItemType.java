@@ -1,6 +1,6 @@
 package com.pwnion.legacycraft.items;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 
 import com.pwnion.legacycraft.Util;
 
@@ -13,7 +13,7 @@ public enum ItemType {
 	BOW(RANGED, 0, 0, 0);
 	
 	ItemType category = null;
-	private final HashMap<ItemStat, Integer> statMod = new HashMap<ItemStat, Integer>();
+	private final EnumMap<ItemStat, Integer> statMod = new EnumMap<>(ItemStat.class);
 	
 	ItemType(ItemType category, int attack, int speed, int range) {
 		this.category = category;

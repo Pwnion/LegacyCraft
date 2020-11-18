@@ -14,23 +14,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-import com.pwnion.legacycraft.listeners.EntityDamage;
-import com.pwnion.legacycraft.listeners.EntityDamageByEntity;
-import com.pwnion.legacycraft.listeners.EntityDeath;
-import com.pwnion.legacycraft.listeners.EntityPickupItem;
-import com.pwnion.legacycraft.listeners.InventoryClick;
-import com.pwnion.legacycraft.listeners.InventoryClose;
-import com.pwnion.legacycraft.listeners.PlayerSwapHandItems;
-import com.pwnion.legacycraft.listeners.PlayerDropItem;
-import com.pwnion.legacycraft.listeners.PlayerGameModeChange;
-import com.pwnion.legacycraft.listeners.PlayerInteract;
-import com.pwnion.legacycraft.listeners.PlayerItemHeld;
-import com.pwnion.legacycraft.listeners.PlayerJoin;
-import com.pwnion.legacycraft.listeners.PlayerMove;
-import com.pwnion.legacycraft.listeners.PlayerQuit;
-import com.pwnion.legacycraft.listeners.PlayerResourcePackStatus;
-import com.pwnion.legacycraft.listeners.PlayerToggleFlight;
-import com.pwnion.legacycraft.listeners.InventoryDrag;
+import com.pwnion.legacycraft.items.enhancements.Enhancement;
+import com.pwnion.legacycraft.items.enhancements.effects.*;
+import com.pwnion.legacycraft.listeners.*;
+import com.pwnion.legacycraft.mobs.LCEntity;
 import com.pwnion.legacycraft.npcs.Speech;
 import com.pwnion.legacycraft.npcs.traits.Blacksmith;
 import com.pwnion.legacycraft.npcs.traits.Librarian;
@@ -44,7 +31,6 @@ public class LegacyCraft extends JavaPlugin {
 
 	//Declare lots of variables that can be accessed by this classes getter and setter methods
 	//These variables facilitate the storing of values used to track players actions
-	private static final HashMap<UUID, HashMap<PlayerData, Object>> playerData = new HashMap<UUID, HashMap<PlayerData, Object>>();
 	private static final HashMap<BukkitTask, Integer> tasksToBeCancelled = new HashMap<BukkitTask, Integer>();
 	private static Plugin plugin;
 	
@@ -59,6 +45,7 @@ public class LegacyCraft extends JavaPlugin {
 	private void registerCommands(String... commands) {
 		for(String command : commands) {
 			this.getCommand(command).setExecutor((CommandExecutor) new OnCommand());
+			this.getCommand(command).setTabCompleter(new OnCommand.LCTabCompleter());
 		}
 	}
 	
@@ -105,7 +92,20 @@ public class LegacyCraft extends JavaPlugin {
 			new InventoryDrag(),
 			new InventoryClose(),
 			new EntityDamageByEntity(),
-			new PlayerInteract()
+			new PlayerInteract(),
+			new EntityTarget()
+		);
+		
+		//Register enhancements
+		Enhancement.register(
+			new BladeDancer(),
+			new DeadlyEye(),
+			new ExampleEffect(),
+			new Execution(),
+			new Heavy(),
+			new IndomitableSpirit(),
+			new Puncture(),
+			new Relentless()
 		);
 		
 		//Register commands
@@ -133,6 +133,8 @@ public class LegacyCraft extends JavaPlugin {
             		}
             		PlayerData.setFallDistance(playerUUID, p.getFallDistance());
             	}
+            	
+            	LCEntity.calculateAttacks();
             	
             	try {
             		for(BukkitTask task : tasksToBeCancelled.keySet()) {
@@ -177,30 +179,6 @@ public class LegacyCraft extends JavaPlugin {
 	
 	public static final Plugin getPlugin() {
 		return plugin;
-	}
-	
-	public static final HashMap<PlayerData, Object> getPlayerData(UUID playerUUID) {
-		return playerData.get(playerUUID);
-	}
-	
-	public static final Object getPlayerData(UUID playerUUID, PlayerData data) {
-		return playerData.get(playerUUID).get(data);
-	}
-	
-	public static final void setPlayerData(UUID playerUUID, HashMap<PlayerData, Object> data) {
-		playerData.put(playerUUID, data);
-	}
-	
-	public static final void addPlayerData(UUID playerUUID, PlayerData playerData, Object data) {
-		getPlayerData(playerUUID).put(playerData, data);
-	}
-	
-	public static final void setPlayerData(UUID playerUUID, PlayerData data, Object obj) {
-		playerData.get(playerUUID).put(data, obj);
-	}
-	
-	public static final void removePlayerData(UUID playerUUID) {
-		playerData.remove(playerUUID);
 	}
 	
 	public static final void addTaskToBeCancelled(BukkitTask task, int ticksUntilCancellation) {

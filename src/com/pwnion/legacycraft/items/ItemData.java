@@ -2,7 +2,7 @@ package com.pwnion.legacycraft.items;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
@@ -24,9 +24,9 @@ public class ItemData {
 
 	private String desc;
 	
-	private ArrayList<Enhancement> enhancements = new ArrayList<Enhancement>();
-	private LinkedHashMap<ItemStat, Integer> stats = new LinkedHashMap<ItemStat, Integer>();
-	private HashMap<ItemStat, Double> statIncrement = new HashMap<ItemStat, Double>();
+	private ArrayList<Enhancement> enhancements = new ArrayList<>();
+	private LinkedHashMap<ItemStat, Integer> stats = new LinkedHashMap<>();
+	private EnumMap<ItemStat, Double> statIncrement = new EnumMap<>(ItemStat.class);
 	
 	private ItemStack lastItemStack;
 	
@@ -70,7 +70,7 @@ public class ItemData {
 	 * 
 	 * @throws IllegalArgumentException if desc contains " | "
 	 */
-	public ItemData(String desc, ItemStack item) throws IllegalArgumentException {
+	public ItemData(String desc, ItemStack item) {
 		setDesc(desc);
 		this.lastItemStack = item;
 	}
@@ -87,7 +87,7 @@ public class ItemData {
 	 * 
 	 * @throws IllegalArgumentException if desc contains " | "
 	 */
-	public void setDesc(String desc) throws IllegalArgumentException {
+	public void setDesc(String desc) {
 		if(desc.contains(" | ")) {
 			throw new IllegalArgumentException("description cannot contain \" | \"");
 		}
@@ -105,7 +105,7 @@ public class ItemData {
 	 */
 	public Enhancement getEnhancement(String name) {
 		for(Enhancement enh : enhancements) {
-			if(enh.getName().toLowerCase().replace(" ", "") == name.toLowerCase().replace(" ", "")) {
+			if(enh.getName().replace(" ", "").equalsIgnoreCase(name.replace(" ", ""))) {
 				return enh;
 			}
 		}
@@ -164,6 +164,15 @@ public class ItemData {
 	}
 	
 	/**
+	 * @param item
+	 * @param enhancementName
+	 * @param initial
+	 */
+	public boolean addEnhancement(String enhancementName, boolean initial) {
+		return addEnhancement(Enhancement.fromName(enhancementName), initial);
+	}
+	
+	/**
 	 * Removes an enhancement from an item
 	 * Get enhancement from getEnhancements()
 	 * 
@@ -194,7 +203,7 @@ public class ItemData {
 	 * @return if enhancements size > 0
 	 */
 	public boolean hasEnhancements() {
-		return enhancements.size() > 0;
+		return enhancements.isEmpty();
 	}
 	
 	/**
@@ -244,7 +253,7 @@ public class ItemData {
 	}
 	
 	public void setStats(int attack, int speed, int range) {
-		LinkedHashMap<ItemStat, Integer> stats = new LinkedHashMap<ItemStat, Integer>();
+		LinkedHashMap<ItemStat, Integer> stats = new LinkedHashMap<>();
 		stats.put(ItemStat.ATTACK, attack);
 		stats.put(ItemStat.SPEED, speed);
 		stats.put(ItemStat.RANGE, range);

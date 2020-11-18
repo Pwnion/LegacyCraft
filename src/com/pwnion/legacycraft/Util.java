@@ -1,6 +1,7 @@
 package com.pwnion.legacycraft;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Random;
@@ -19,18 +20,33 @@ import org.bukkit.util.Vector;
 
 public class Util {
 	
+	/**
+	 * Broadcasts a message to chat
+	 * 
+	 * @param message
+	 */
 	public static void br(String message) {
-		Bukkit.broadcastMessage("[C] " + message);
+		Bukkit.broadcastMessage("[LegacyCraft] " + message);
 	}
 	
+	/**
+	 * Broadcasts a message to chat
+	 * 
+	 * @param message
+	 */
 	public static void br(Object message) {
-		if(message.equals(null)) {
+		if(message == null) {
 			br("null");
 		} else {
 			br(message.toString());
 		}
 	}
 	
+	/**
+	 * Prints an exception to chat
+	 * 
+	 * @param e
+	 */
 	public static void print(Exception e) {
 		e.printStackTrace();
 		StackTraceElement st[] = e.getStackTrace();
@@ -60,6 +76,22 @@ public class Util {
 	}
 	
 	/**
+	 * Gets the sequence of integers from begin (inclusive) to end (inclusive)
+	 * e.g. 1, 5 returns 1, 2, 3, 4, 5
+	 * 
+	 * @param begin the number to start adding from
+	 * @param end	the number to end adding at
+	 * @return		the sequence
+	 */
+	public static ArrayList<Integer> getSequence(int begin, int end) {
+		ArrayList<Integer> out = new ArrayList<>(end - begin + 1);
+		  for (int i = begin; i <= end; i++) {
+		    out.add(i);
+		  }
+		  return out; 
+	}
+	
+	/**
 	 * Random double between the given range [min,max)
 	 * 
 	 * @param min	minimum value inclusive
@@ -83,6 +115,7 @@ public class Util {
 	 * @param min	minimum value inclusive
 	 * @param max	maximum value inclusive
 	 * @return
+	 * 
 	 * @throws IllegalArgumentException when min >= max
 	 */
 	public static int randomInt(int min, int max) throws IllegalArgumentException {
@@ -107,6 +140,18 @@ public class Util {
 		return out;
 	}
 	
+	public static String[] toString(Object[] elements) {
+		return Arrays.stream(elements).map(Object::toString).toArray(String[]::new);
+	}
+	
+	public static <T> String[] toString(Collection<T> elements) {
+		return Arrays.stream(elements.toArray()).map(Object::toString).toArray(String[]::new);
+	}
+	
+	public static String[] toStringLowerCase(Object[] elements) {
+		return Arrays.stream(elements).map(Object::toString).map(String::toLowerCase).toArray(String[]::new);
+	}
+	
 	/**
      * Splits a String according to a regex, keeping the splitter at the end of each substring
      * 
@@ -114,7 +159,7 @@ public class Util {
      * @param regex The regular expression upon which to split the input
      * @return An array of Strings
      */
-	static String[] split(String input, String regex) {
+	public static String[] split(String input, String regex) {
         ArrayList<String> res = new ArrayList<String>();
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(input);
@@ -123,9 +168,56 @@ public class Util {
             res.add(input.substring(pos, m.end()));
             pos = m.end();
         }
-        if(pos < input.length()) res.add(input.substring(pos));
+        if(pos < input.length()) {
+        	res.add(input.substring(pos));
+        }
         return res.toArray(new String[res.size()]);
     }
+	
+	/**
+	 * Returns a new String composed of copies of the Object elements as strings joined together with a copy of the specified delimiter. 
+	 * 
+	 * @param elements
+	 * @param delimiter
+	 * 
+	 * @return
+	 */
+	public static String join(Object[] elements, String delimiter) {
+		return join(elements, delimiter, 0, elements.length);
+	}
+	
+	/**
+	 * Returns a new String composed of copies of the Object elements as strings joined together with a copy of the specified delimiter. <br>
+	 * Only elements that occur after 'fromIndex' (inclusive) are included
+	 * 
+	 * @param elements
+	 * @param delimiter
+	 * @param fromIndex
+	 * 
+	 * @return
+	 */
+	public static String join(Object[] elements, String delimiter, int fromIndex) {
+		return join(elements, delimiter, fromIndex, elements.length);
+	}
+	
+	/**
+	 * Returns a new String composed of copies of the Object elements as strings joined together with a copy of the specified delimiter. <br>
+	 * Only elements that occur after 'fromIndex' (inclusive) and before 'toIndex' (exclusive) are included
+	 * 
+	 * @param elements
+	 * @param delimiter
+	 * @param fromIndex
+	 * @param toIndex
+	 * 
+	 * @return
+	 */
+	public static String join(Object[] elements, String delimiter, int fromIndex, int toIndex) {
+		String out = "";
+		for (int i = fromIndex; i < toIndex; i++) {
+			out += elements[i].toString() + delimiter;
+		}
+		return out.substring(0, out.length() - delimiter.length());
+	}
 	
 	private static final char[] posbChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 	
@@ -146,6 +238,13 @@ public class Util {
 		}
 	}
 	
+	/**
+	 * Gets the vector that points from 'centre' to 'pos'
+	 * 
+	 * @param centre
+	 * @param pos
+	 * @return
+	 */
 	public static final Vector getRelativeVec(Location centre, Location pos) {
 		if(centre.getWorld() != pos.getWorld()) {
 			return null;
@@ -154,6 +253,14 @@ public class Util {
 		return new Vector(pos.getX() - centre.getX(), pos.getY() - centre.getY(), pos.getZ() - centre.getZ());
 	}
 	
+	/**
+	 * Gets a set of each of the vectors that point from 'centre' to each location in the area. <br>
+	 * Subtracts the centre location from each point in area, returns results as vectors.
+	 * 
+	 * @param centre
+	 * @param pos
+	 * @return
+	 */
 	public static final HashSet<Vector> getRelativeVecArea(Location centre, Collection<Location> area) {
 		HashSet<Vector> relativeArea = new HashSet<Vector>();
 		for(Location loc : area) {
@@ -162,6 +269,12 @@ public class Util {
 		return relativeArea;
 	}
 	
+	/**
+	 * Checks if each vector is pointing to a location close to the edge of a block. If so also returns the block next to that edge.
+	 * 
+	 * @param vectors
+	 * @return
+	 */
 	public static final HashSet<BlockVector> approxBlocks(Collection<Vector> vectors) {
 		HashSet<BlockVector> output = new HashSet<BlockVector>();
 		for(Vector vector : vectors) {
@@ -170,10 +283,16 @@ public class Util {
 		return output;
 	}
 	
+	/**
+	 * When the vector is pointing to a location close to the edge of a block also returns the block next to that edge.
+	 * 
+	 * @param vector
+	 * @return
+	 */
 	public static final HashSet<BlockVector> approxBlock(Vector vector) {
 		HashSet<BlockVector> output = new HashSet<BlockVector>();
 		
-		double overlapAmount = 0.2;
+		final double overlapAmount = 0.2;
 		
 		double x = vector.getX();
 		double y = vector.getY();
@@ -247,7 +366,7 @@ public class Util {
 		return output;
 	}
 	
-	public static final HashSet<Location> getLocations(Collection<Block> area) {
+	public static HashSet<Location> getLocations(Collection<Block> area) {
 		HashSet<Location> output = new HashSet<Location>();
 		for(Block loc : area) {
 			output.add(loc.getLocation());
@@ -255,22 +374,48 @@ public class Util {
 		return output;
 	}
 
-	public static final Vector vectorCalc(double yaw, double pitch, double dist) {
+	public static Vector vectorCalc(double pitch, double yaw, double dist) {
 		pitch = Math.toRadians(pitch + 90);
 		yaw  = Math.toRadians(yaw + 90);
 		double x = Math.sin(pitch) * Math.cos(yaw);
 		double y = Math.cos(pitch);
 		double z = Math.sin(pitch) * Math.sin(yaw);
-		Vector vector = new Vector(x, y, z);
-		vector.multiply(dist);
+		Vector vector = new Vector(x * dist, y * dist, z * dist);
 		return vector;
 	}
+	
+	public static Vector vectorCalc(Location loc, double dist) {
+		return vectorCalc(loc.getPitch(), loc.getYaw(), dist);
+	}
 
-	public static final Vector vectorCalc(Entity e, double dist) {
-		return vectorCalc(e.getLocation().getYaw(), e.getLocation().getPitch(), dist);
+	public static Vector vectorCalc(Entity e, double dist) {
+		return vectorCalc(e.getLocation().getPitch(), e.getLocation().getYaw(), dist);
 	}
 	
-	public static final double getYaw(Vector vec) {
+	/**
+	 * Returns a new location that adds the vector the location is facing (pitch, yaw) by the distance
+	 * 
+	 * @param loc
+	 * @param dist
+	 * @return
+	 */
+	public static Location locationCalc(Location loc, double dist) {
+		return loc.clone().add(vectorCalc(loc, dist));
+	}
+	
+	/**
+	 * Returns a new location that adds the vector the location is facing (yaw only) by the distance plus the yMod
+	 * 
+	 * @param loc
+	 * @param dist
+	 * @param yMod
+	 * @return
+	 */
+	public static Location locationCalc(Location loc, double dist, double yMod) {
+		return loc.clone().add(vectorCalc(0, loc.getYaw(), dist).setY(yMod));
+	}
+	
+	public static double getYaw(Vector vec) {
 		double yaw = 0;
 		if(vec.getX() > 0) {
 			yaw = Math.toDegrees(vec.angle(new Vector(0, 0, -1))) + 180;
@@ -293,7 +438,7 @@ public class Util {
 		double radiusPerStep = radius / (steps - 1);
 		double rotPerStep = Math.toRadians(rotation / (steps - 1));
 
-		Vector axis = vectorCalc(centre.getYaw(), centre.getPitch(), 1);
+		Vector axis = vectorCalc(centre.getPitch(), centre.getYaw(), 1);
 		Vector up = new Vector(0, 1, 0);
 		Vector cross = axis.clone().crossProduct(up);
 		if(cross.length() == 0) {
@@ -320,7 +465,7 @@ public class Util {
 
 		double rotPerStep = Math.toRadians(rotation / (steps - 1));
 
-		Vector axis = vectorCalc(centre.getYaw(), centre.getPitch(), 1);
+		Vector axis = vectorCalc(centre.getPitch(), centre.getYaw(), 1);
 
 		for(int i = 0; i<= steps; i++) {
 			Vector pointerClone = pointer.clone();
@@ -364,4 +509,6 @@ public class Util {
 	public static final void stopSurroundingSound(Location centre, Sound sound) {
 		stopSurroundingSound(sound, SoundCategory.PLAYERS, centre, 16);
 	}
+
+	
 }

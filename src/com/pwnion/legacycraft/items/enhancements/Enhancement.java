@@ -1,9 +1,12 @@
 package com.pwnion.legacycraft.items.enhancements;
 
+import java.util.HashMap;
+import java.util.Set;
+
+import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
-import com.pwnion.legacycraft.Util;
 import com.pwnion.legacycraft.items.ItemManager;
 import com.pwnion.legacycraft.items.ItemType;
 
@@ -15,61 +18,66 @@ import com.pwnion.legacycraft.items.ItemType;
  *  Player removes enhancement		(onRemove()) <br>
  *  Player joins server with enhanced item in inventory (onEquip(), initial = false) <br>
  *  <br>
- *  This allows storing of data in memory (but not files)
+ *  This allows storing of data in memory (but not files) <p>
+ *  
+ *  Enhancements are effectively static as only one instance should be stored at once.
+ *  To keep track of item specific values use {@code ItemManager.getUID(item)}
  * 
  * @author Zephreo
  *
  */
 public interface Enhancement {
 	
-	/**
-	 * Multi-word enhancement names must have spaces <p>
-	 * 
-	 * Example Effect is ok, <br>
-	 * but ExampleEffect is not, <br>
-	 * EXAMPLE EFFECT is ok, <p>
-	 * 
-	 * leading/trailing spaces are ignored
-	 * 
-	 * @param name	Name of enhancement
-	 * @return 		New instance of respective enhancement class
-	 */
-	public static Enhancement fromName(String name) {
-		
-		String input = name;
-		name = Util.toTitleCase(name).replace(" ", "").replace("_", "");
-		
-		/* Add name here (in title case) if name is not class name (ignoring spaces)
-		switch(name) {
-		case "ExampleEff":
-			return new ExampleEffect();
-			break;
-		} //*/
-		
-		try {
-			return (Enhancement) Class.forName("com.pwnion.legacycraft.items.enhancements.effects." + name).newInstance();
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			//ERROR: No enhancement found
-			//Log error and warn player and admin
-			
-			//Maybe add a placeholder enhancement adder with the errored name to the players inventory
-			//Called from ItemManager.activate()
-			//Which is called from PlayerJoin which has player
-			Util.br("Input: \"" + input + "\"");
-			Util.br("Name: \"" + name + "\"");
-			e.printStackTrace();
+	static final HashMap<String, Enhancement> registeredEnhancements = new HashMap<>();
+	
+	public static void register(Enhancement... enhancements) {
+		for(Enhancement enh : enhancements) {
+			Enhancement overridden = registeredEnhancements.put(enh.getName().toLowerCase(), enh);
+			if(overridden != null) {
+				Bukkit.getLogger().warning("Enhancement '" + overridden.getName() + "' was overidden by another enhancement of the same name!");
+			}
 		}
-		return null;
 	}
 	
 	/**
-	 * IMPORTANT: Names must be their class name or name with spaces added otherwise an exception must be added to Enhancement.fromName() <br>
-	 * by default returns Class Name (Simple)
+	 * Gets the enhancement with the same name or null. <br>
+	 * Ignores Case, Underscores "_" treated as spaces.
+	 * 
+	 * @param name	Name of enhancement
+	 * @return 		The enhancement classes instance
+	 */
+	public static Enhancement fromName(String name) {
+		
+		// String input = name;
+		name = name.replace("_", " ").toLowerCase().trim();
+		
+		return registeredEnhancements.get(name);
+		
+		/*
+		//ERROR: No enhancement found
+		//Log error and warn player and admin
+		
+		//Maybe add a placeholder enhancement adder with the errored name to the players inventory
+		//Called from ItemManager.activate()
+		//Which is called from PlayerJoin which has player
+		Util.br("Input: \"" + input + "\"");
+		Util.br("Name: \"" + name + "\"");
+		
+		return null; //*/
+	}
+	
+	//Unused
+	public static Set<String> allNames() {
+		return registeredEnhancements.keySet();
+	}
+
+	/**
+	 * by default returns Class Name (Simple) with spaces before capital letters and numbers
 	 * 
 	 * @return	name
 	 */
 	public default String getName() {
-		return this.getClass().getSimpleName();
+		return this.getClass().getSimpleName().replaceAll("(.)([A-Z0-9]\\w)", "$1 $2");
 	}
 	
 	/**
@@ -81,45 +89,43 @@ public interface Enhancement {
 	
 	/**
 	 * Sends onHit (unofficial) events to each enhancement on the item
-	 * 
+	 * @param item
 	 * @param wielder
 	 * @param target
-	 * @param item
 	 * @param damage
 	 */
-	public static void applyHit(LivingEntity wielder, LivingEntity target, ItemStack item, double damage) {
+	public static void applyHit(ItemStack item, LivingEntity wielder, LivingEntity target, double damage) {
 		for(Enhancement enhancement : ItemManager.getEnhancements(item)) {
-			enhancement.onHit(wielder, target, damage);
+			enhancement.onHit(item, wielder, target, damage);
 		}
 	}
 	
 	/**
 	 * Sends onSwing (unofficial) events to each enhancement on the item
-	 * 
-	 * @param wielder
 	 * @param item
+	 * @param wielder
 	 */
-	public static void applySwing(LivingEntity wielder, ItemStack item) {
+	public static void applySwing(ItemStack item, LivingEntity wielder) {
 		for(Enhancement enhancement : ItemManager.getEnhancements(item)) {
-			enhancement.onSwing(wielder);
+			enhancement.onSwing(item, wielder);
 		}
 	}
 	
 	/**
 	 * Calls whenever the weapon hits an enemy
-	 * 
+	 * @param item 		The item used to hit
 	 * @param wielder	Who is holding this weapon
 	 * @param target	Who got hit
 	 * @param damage	Damage dealt to enemy
 	 */
-	public default void onHit(LivingEntity wielder, LivingEntity target, double damage) {}
+	public default void onHit(ItemStack item, LivingEntity wielder, LivingEntity target, double damage) {}
 	
 	/**
 	 * Calls whenever the weapon is swung/left-clicked
-	 * 
+	 * @param item 		The item swung
 	 * @param wielder	Who is holding this weapon
 	 */
-	public default void onSwing(LivingEntity wielder) {}
+	public default void onSwing(ItemStack item, LivingEntity wielder) {}
 	
 	/**
 	 * Called when the enhancement is equipped and when the item is activated 

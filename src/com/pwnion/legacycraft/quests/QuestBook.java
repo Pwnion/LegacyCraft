@@ -6,64 +6,68 @@ import org.bukkit.entity.Player;
 
 import com.pwnion.legacycraft.quests.Book.Builder;
 import com.pwnion.legacycraft.quests.Book.ClickAction;
+import com.pwnion.legacycraft.quests.Book.HoverAction;
 import com.pwnion.legacycraft.quests.Book.PageBuilder;
 
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
 
 public class QuestBook {
 	
+	private QuestBook() {}
+	
 	public static void open(Player p) {
 		create(p).open(p);
 	}
 
-	final static int LinksPerPage = 15;
+	static final int LINKS_PER_PAGE = 15;
 	private static Book create(Player p) {
 		//Books 14 rows
 		//<= 19 columns
 		
 		Book questBook = new Book();
 		
-		int LinkPageCount = (int) (((QuestManager.getActiveQuestCount(p) + QuestManager.getCompletedQuestCount(p)) / LinksPerPage) + 1);
+		int linkPageCount = (int) (((QuestManager.getActiveQuestCount(p) + QuestManager.getCompletedQuestCount(p)) / LINKS_PER_PAGE) + 1);
 
-		ArrayList<PageBuilder> LinkPages = new ArrayList<PageBuilder>(LinkPageCount);
+		ArrayList<PageBuilder> linkPages = new ArrayList<>(linkPageCount);
 		
-		for(int i = 0; i < LinkPageCount; i++) {
-			LinkPages.add(questBook.addPage());
+		for(int i = 0; i < linkPageCount; i++) {
+			linkPages.add(questBook.addPage());
 		}
 		
-		PageBuilder currentPage = LinkPages.get(0);
-		int i = 1; int pageNum = 0;
-		for(Quest quest : QuestManager.getActiveQuests(p)) { //*/
-			
+		PageBuilder currentPage = linkPages.get(0);
+		int i = 1; 
+		int pageNum = 0;
+		
+		for(Quest quest : QuestManager.getActiveQuests(p)) {
 			buildQuest(p, questBook, quest, currentPage, false);
 			
-			if(i == LinksPerPage) {
+			if(i == LINKS_PER_PAGE) {
 				currentPage.build(); 
 				i = 1;
 				pageNum++;
-				currentPage = LinkPages.get(pageNum);
+				currentPage = linkPages.get(pageNum);
 			}
 			i++;
-		} //*/
+		}
 		
-		for(Quest quest : QuestManager.getCompletedQuests(p)) { //*/
-			
+		for(Quest quest : QuestManager.getCompletedQuests(p)) {
 			buildQuest(p, questBook, quest, currentPage, true);
 			
-			if(i == LinksPerPage) {
+			if(i == LINKS_PER_PAGE) {
 				currentPage.build(); 
 				i = 1;
 				pageNum++;
-				currentPage = LinkPages.get(pageNum);
+				currentPage = linkPages.get(pageNum);
 			}
 			i++;
-		} //*/
+		}
 		currentPage.build(); 
 		return questBook;
 	}
+	
+	
 	
 	private static void buildQuest(Player p, Book questBook, Quest quest, PageBuilder currentPage, boolean finished) {
 		
@@ -84,27 +88,24 @@ public class QuestBook {
 		
 		Builder questText = currentPage.add(questName);
 		
-		//questText.hoverEvent(HoverAction.SHOW_TEXT, quest.getName());
-		
-		questText.clickEvent(ClickAction.CHANGE_PAGE, questPage.getPageNumber() + "");
-		
-		TextComponent text = questText.getComplex();
+		questText.clickEvent(ClickAction.CHANGE_PAGE, questPage.getPageNumber());
 		
 		if(finished) {
-			text.setColor(ChatColor.GRAY);
+			questText.setColor(ChatColor.GRAY);
 		} else {
-			text.setColor(ChatColor.DARK_BLUE);
+			questText.setColor(ChatColor.DARK_BLUE);
 		}
 		
-		TextComponent hover[] = {
-				new TextComponent(quest.getName()), 
-				new TextComponent("\n" + quest.getDesc() + "\n" + QuestManager.getProgressString(p, quest))};
+		TextComponent[] hover = {
+				new TextComponent(quest.getName() + "\n"), 
+				new TextComponent(quest.getDesc() + 
+						   "\n" + QuestManager.getProgressString(p, quest))};
 		hover[0].setBold(true);
 		//hover[0].setColor(ChatColor.RED);
 		hover[1].setBold(false);
 		
-		text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover));
-
+		questText.hoverEvent(HoverAction.SHOW_TEXT, hover);
+		
 		questText.build();
 		questPage.build();
 	}
