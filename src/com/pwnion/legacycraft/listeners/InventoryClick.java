@@ -17,6 +17,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.pwnion.legacycraft.ConfigAccessor;
@@ -145,7 +146,7 @@ public class InventoryClick implements Listener {
 	    		} else if(itemMaterial.equals(Material.STICK) && itemMeta.getCustomModelData() == 1 && cursorItem.getType().equals(Material.AIR)) {
 	    			if(skillTree.getAspect().equals(Aspect.NONE)) return;
 	     			
-	    			Inventory inv = p.getInventory();
+	    			PlayerInventory inv = p.getInventory();
 	    			
 	    			ItemStack hotbar[] = new ItemStack[9];
 	    			for(int i = 0; i < 9; i++) {
@@ -156,6 +157,10 @@ public class InventoryClick implements Listener {
 	    				inv.setItem(i + 1, hotbar[i]);
 	    			}
 	    			inv.setItem(0, hotbar[8]);
+	    			
+	    			int oldSlot = inv.getHeldItemSlot();
+	    			int newSlot = oldSlot < 8 ? oldSlot + 1 : 0;
+	    			inv.setHeldItemSlot(newSlot);
 	    		}
 	        }
         }
