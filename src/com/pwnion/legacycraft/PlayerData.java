@@ -95,14 +95,22 @@ public class PlayerData {
 	public static void setLastAttack(UUID playerUUID, int value) {
 		playerData.get(playerUUID).put(PlayerDataType.LAST_ATTACK, value);
 	}
+	
+	public static boolean getShamanFalling(UUID playerUUID) {
+		return (boolean) playerData.get(playerUUID).get(PlayerDataType.IN_SHAMAN_JUMP);
+	}
+	
+	public static void setShamanFalling(UUID playerUUID, boolean value) {
+		playerData.get(playerUUID).put(PlayerDataType.IN_SHAMAN_JUMP, value);
+	}
  	
  	public static void generate(Player p) {
  		UUID playerUUID = p.getUniqueId();
  		HashMap<PlayerDataType, Object> data = new HashMap<PlayerDataType, Object>();
  		for(PlayerDataType type : PlayerDataType.values()) {
  			data.put(type, type.getDefault());
- 			
  		}
+ 		
  		playerData.put(playerUUID, data);
  		setSkillTree(playerUUID, new SkillTree(p));
  		setUnfinishedQuests(playerUUID, QuestManager.loadUnfinishedPlayerData(playerUUID));
@@ -120,7 +128,8 @@ public class PlayerData {
  		FINISHED_QUESTS(new ArrayList<Quest>()),
  		SWAP_SLOT(-1),
  		EXPERIENCE(Experience.class),
- 		LAST_ATTACK(-1);
+ 		LAST_ATTACK(-1),
+ 		IN_SHAMAN_JUMP(false);
 
  		private final Object defaultt;
  	 

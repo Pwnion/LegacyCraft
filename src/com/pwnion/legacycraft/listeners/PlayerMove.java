@@ -3,6 +3,7 @@ package com.pwnion.legacycraft.listeners;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.pwnion.legacycraft.PlayerData;
@@ -47,13 +48,22 @@ public class PlayerMove implements Listener {
 		
 		//Resets jump ability usage every time a player touches the ground
 		if(p.isOnGround()) {
-			if(PlayerData.getJumpCount(playerUUID) != 0) { 
+			if(PlayerData.getJumpCount(playerUUID) != 0) {
 				PlayerData.setJumpCount(playerUUID, 0);
 				if(skillTree.getPlayerClass().equals(PlayerClass.SHAMAN)) {
 					p.removePotionEffect(PotionEffectType.SLOW_FALLING);
 				}
+				PlayerData.setShamanFalling(playerUUID, false);
 			}
 			if(p.getGameMode().equals(GameMode.ADVENTURE) && !p.getAllowFlight() && !skillTree.getPlayerClass().equals(PlayerClass.NONE)) p.setAllowFlight(true);
+		}
+		
+		if(PlayerData.getShamanFalling(playerUUID)) {
+			if(p.isSneaking()) {
+				p.removePotionEffect(PotionEffectType.SLOW_FALLING);
+			} else {
+				p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 120, 3, false, false, false), true);
+			}
 		}
 	}
 }
